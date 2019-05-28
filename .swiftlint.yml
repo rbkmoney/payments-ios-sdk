@@ -1,0 +1,68 @@
+included:
+  - RBKmoneyPaymentsSDK/Sources
+
+disabled_rules:
+  - force_cast
+
+opt_in_rules:
+  - empty_count
+  - conditional_returns_on_newline
+  - explicit_init
+  - closure_spacing
+  - overridden_super_call
+  - redundant_nil_coalescing
+  - private_outlet
+  - nimble_operator
+  - attributes
+  - joined_default_parameter
+  - operator_usage_whitespace
+  - first_where
+  - sorted_imports
+  - number_separator
+  - prohibited_super_call
+  - fatal_error_message
+  - vertical_parameter_alignment_on_call
+  - let_var_whitespace
+  - unneeded_parentheses_in_closure_argument
+  - extension_access_modifier
+  - pattern_matching_keywords
+  - multiline_parameters
+  - switch_case_on_newline
+  - function_default_parameter_at_end
+  - yoda_condition
+  - modifier_order
+  - multiline_arguments
+  - closure_end_indentation
+  - collection_alignment
+  - contains_over_first_not_nil
+  - convenience_type
+  - discouraged_object_literal
+  - empty_string
+  - identical_operands
+  - last_where
+  - legacy_random
+  - literal_expression_end_indentation
+  - multiline_function_chains
+  - multiline_literal_brackets
+  - sorted_first_last
+  - unused_import
+  - unused_private_declaration
+  - vertical_whitespace_closing_braces
+
+identifier_name:
+  excluded:
+    - id
+
+line_length: 144
+
+type_name:
+  max_length:
+    warning: 50
+    error: 60
+
+number_separator:
+  minimum_length: 5
+
+nesting:
+  type_level:
+    warning: 2

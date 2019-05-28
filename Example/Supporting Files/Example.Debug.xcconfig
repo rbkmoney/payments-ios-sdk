@@ -1,0 +1,11 @@
+//
+//  Example.Debug.xcconfig
+//  Example
+//
+
+PRODUCT_BUNDLE_IDENTIFIER = your.app.bundle.id
+APPLE_PAY_MERCHANT_IDENTIFIER = your.merchant.id
+
+#include? "Private/Private.Example.Debug.xcconfig"
+
+#include "../../Pods/Target Support Files/Pods-Example/Pods-Example.debug.xcconfig"

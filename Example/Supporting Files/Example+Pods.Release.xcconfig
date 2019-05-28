@@ -1,0 +1,11 @@
+//
+//  Example+Pods.Release.xcconfig
+//  Example
+//
+
+PRODUCT_BUNDLE_IDENTIFIER = your.app.bundle.id
+APPLE_PAY_MERCHANT_IDENTIFIER = your.merchant.id
+
+#include? "Private/Private.Example.Release.xcconfig"
+
+#include "../../Pods/Target Support Files/Pods-Example+Pods/Pods-Example+Pods.release.xcconfig"
