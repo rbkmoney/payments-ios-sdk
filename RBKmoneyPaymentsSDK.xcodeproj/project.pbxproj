@@ -13,6 +13,16 @@
 		C1044EB022A3BD4500A8065B /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EAF22A3BD4500A8065B /* Router.swift */; };
 		C1044EB222A3BE8E00A8065B /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EB122A3BE8E00A8065B /* Route.swift */; };
 		C1044EB422A3D2DD00A8065B /* AnyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EB322A3D2DD00A8065B /* AnyRouter.swift */; };
+		C1044EB622A475F300A8065B /* UIView+LayerProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EB522A475F300A8065B /* UIView+LayerProperties.swift */; };
+		C1044EB722A475F300A8065B /* UIView+LayerProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EB522A475F300A8065B /* UIView+LayerProperties.swift */; };
+		C1044EB922A4899800A8065B /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EB822A4899800A8065B /* ActivityIndicatorView.swift */; };
+		C1044EBA22A4899800A8065B /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EB822A4899800A8065B /* ActivityIndicatorView.swift */; };
+		C1044EBC22A48C9C00A8065B /* InvoiceTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EBB22A48C9C00A8065B /* InvoiceTemplate.swift */; };
+		C1044EBD22A48C9C00A8065B /* InvoiceTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EBB22A48C9C00A8065B /* InvoiceTemplate.swift */; };
+		C1044EBF22A48D8100A8065B /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EBE22A48D8100A8065B /* Invoice.swift */; };
+		C1044EC022A48D8100A8065B /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EBE22A48D8100A8065B /* Invoice.swift */; };
+		C1044EC222A48E6500A8065B /* InvoiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EC122A48E6500A8065B /* InvoiceFactory.swift */; };
+		C1044EC322A48E6500A8065B /* InvoiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EC122A48E6500A8065B /* InvoiceFactory.swift */; };
 		C19789C4229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C5229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C6229FD05800C7F966 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C3229FD05800C7F966 /* AppDelegate.swift */; };
@@ -83,6 +93,11 @@
 		C1044EAF22A3BD4500A8065B /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		C1044EB122A3BE8E00A8065B /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		C1044EB322A3D2DD00A8065B /* AnyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyRouter.swift; sourceTree = "<group>"; };
+		C1044EB522A475F300A8065B /* UIView+LayerProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+LayerProperties.swift"; sourceTree = "<group>"; };
+		C1044EB822A4899800A8065B /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		C1044EBB22A48C9C00A8065B /* InvoiceTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceTemplate.swift; sourceTree = "<group>"; };
+		C1044EBE22A48D8100A8065B /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
+		C1044EC122A48E6500A8065B /* InvoiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceFactory.swift; sourceTree = "<group>"; };
 		C1978990229FCA0900C7F966 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789A6229FCE1900C7F966 /* Example+Pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example+Pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789B9229FCF8B00C7F966 /* Example+Pods.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Example+Pods.Release.xcconfig"; sourceTree = "<group>"; };
@@ -211,6 +226,11 @@
 			children = (
 				C19789C3229FD05800C7F966 /* AppDelegate.swift */,
 				C19789C2229FD05800C7F966 /* ViewController.swift */,
+				C1044EB522A475F300A8065B /* UIView+LayerProperties.swift */,
+				C1044EB822A4899800A8065B /* ActivityIndicatorView.swift */,
+				C1044EBB22A48C9C00A8065B /* InvoiceTemplate.swift */,
+				C1044EBE22A48D8100A8065B /* Invoice.swift */,
+				C1044EC122A48E6500A8065B /* InvoiceFactory.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -709,8 +729,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1044EBC22A48C9C00A8065B /* InvoiceTemplate.swift in Sources */,
+				C1044EBF22A48D8100A8065B /* Invoice.swift in Sources */,
+				C1044EB622A475F300A8065B /* UIView+LayerProperties.swift in Sources */,
 				C19789C6229FD05800C7F966 /* AppDelegate.swift in Sources */,
 				C19789C4229FD05800C7F966 /* ViewController.swift in Sources */,
+				C1044EC222A48E6500A8065B /* InvoiceFactory.swift in Sources */,
+				C1044EB922A4899800A8065B /* ActivityIndicatorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -718,8 +743,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1044EBD22A48C9C00A8065B /* InvoiceTemplate.swift in Sources */,
+				C1044EC022A48D8100A8065B /* Invoice.swift in Sources */,
+				C1044EB722A475F300A8065B /* UIView+LayerProperties.swift in Sources */,
 				C19789C7229FD05800C7F966 /* AppDelegate.swift in Sources */,
 				C19789C5229FD05800C7F966 /* ViewController.swift in Sources */,
+				C1044EC322A48E6500A8065B /* InvoiceFactory.swift in Sources */,
+				C1044EBA22A4899800A8065B /* ActivityIndicatorView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
