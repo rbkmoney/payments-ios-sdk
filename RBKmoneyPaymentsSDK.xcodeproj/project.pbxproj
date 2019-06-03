@@ -23,6 +23,10 @@
 		C1044EC022A48D8100A8065B /* Invoice.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EBE22A48D8100A8065B /* Invoice.swift */; };
 		C1044EC222A48E6500A8065B /* InvoiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EC122A48E6500A8065B /* InvoiceFactory.swift */; };
 		C1044EC322A48E6500A8065B /* InvoiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EC122A48E6500A8065B /* InvoiceFactory.swift */; };
+		C1044EC522A5372200A8065B /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EC422A5372200A8065B /* Currency.swift */; };
+		C1044EC622A5372800A8065B /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EC422A5372200A8065B /* Currency.swift */; };
+		C1044EC822A5377300A8065B /* Cost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EC722A5377300A8065B /* Cost.swift */; };
+		C1044EC922A5377300A8065B /* Cost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EC722A5377300A8065B /* Cost.swift */; };
 		C19789C4229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C5229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C6229FD05800C7F966 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C3229FD05800C7F966 /* AppDelegate.swift */; };
@@ -98,6 +102,8 @@
 		C1044EBB22A48C9C00A8065B /* InvoiceTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceTemplate.swift; sourceTree = "<group>"; };
 		C1044EBE22A48D8100A8065B /* Invoice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invoice.swift; sourceTree = "<group>"; };
 		C1044EC122A48E6500A8065B /* InvoiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceFactory.swift; sourceTree = "<group>"; };
+		C1044EC422A5372200A8065B /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
+		C1044EC722A5377300A8065B /* Cost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cost.swift; sourceTree = "<group>"; };
 		C1978990229FCA0900C7F966 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789A6229FCE1900C7F966 /* Example+Pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example+Pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789B9229FCF8B00C7F966 /* Example+Pods.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Example+Pods.Release.xcconfig"; sourceTree = "<group>"; };
@@ -177,6 +183,49 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		C1044ECA22A537E400A8065B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C1044EBB22A48C9C00A8065B /* InvoiceTemplate.swift */,
+				C1044EBE22A48D8100A8065B /* Invoice.swift */,
+				C1044EC422A5372200A8065B /* Currency.swift */,
+				C1044EC722A5377300A8065B /* Cost.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C1044ECB22A537E400A8065B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C1044EB822A4899800A8065B /* ActivityIndicatorView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C1044ECC22A537E400A8065B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C1044EB522A475F300A8065B /* UIView+LayerProperties.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C1044ECD22A5384500A8065B /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				C1044EC122A48E6500A8065B /* InvoiceFactory.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		C1044ECE22A5389000A8065B /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				C19789C2229FD05800C7F966 /* ViewController.swift */,
+			);
+			path = MainScreen;
+			sourceTree = "<group>";
+		};
 		C197896E229FC91400C7F966 = {
 			isa = PBXGroup;
 			children = (
@@ -225,12 +274,11 @@
 			isa = PBXGroup;
 			children = (
 				C19789C3229FD05800C7F966 /* AppDelegate.swift */,
-				C19789C2229FD05800C7F966 /* ViewController.swift */,
-				C1044EB522A475F300A8065B /* UIView+LayerProperties.swift */,
-				C1044EB822A4899800A8065B /* ActivityIndicatorView.swift */,
-				C1044EBB22A48C9C00A8065B /* InvoiceTemplate.swift */,
-				C1044EBE22A48D8100A8065B /* Invoice.swift */,
-				C1044EC122A48E6500A8065B /* InvoiceFactory.swift */,
+				C1044ECE22A5389000A8065B /* MainScreen */,
+				C1044ECC22A537E400A8065B /* Extensions */,
+				C1044ECA22A537E400A8065B /* Models */,
+				C1044ECB22A537E400A8065B /* Views */,
+				C1044ECD22A5384500A8065B /* Services */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -731,8 +779,10 @@
 			files = (
 				C1044EBC22A48C9C00A8065B /* InvoiceTemplate.swift in Sources */,
 				C1044EBF22A48D8100A8065B /* Invoice.swift in Sources */,
+				C1044EC822A5377300A8065B /* Cost.swift in Sources */,
 				C1044EB622A475F300A8065B /* UIView+LayerProperties.swift in Sources */,
 				C19789C6229FD05800C7F966 /* AppDelegate.swift in Sources */,
+				C1044EC522A5372200A8065B /* Currency.swift in Sources */,
 				C19789C4229FD05800C7F966 /* ViewController.swift in Sources */,
 				C1044EC222A48E6500A8065B /* InvoiceFactory.swift in Sources */,
 				C1044EB922A4899800A8065B /* ActivityIndicatorView.swift in Sources */,
@@ -745,8 +795,10 @@
 			files = (
 				C1044EBD22A48C9C00A8065B /* InvoiceTemplate.swift in Sources */,
 				C1044EC022A48D8100A8065B /* Invoice.swift in Sources */,
+				C1044EC922A5377300A8065B /* Cost.swift in Sources */,
 				C1044EB722A475F300A8065B /* UIView+LayerProperties.swift in Sources */,
 				C19789C7229FD05800C7F966 /* AppDelegate.swift in Sources */,
+				C1044EC622A5372800A8065B /* Currency.swift in Sources */,
 				C19789C5229FD05800C7F966 /* ViewController.swift in Sources */,
 				C1044EC322A48E6500A8065B /* InvoiceFactory.swift in Sources */,
 				C1044EBA22A4899800A8065B /* ActivityIndicatorView.swift in Sources */,
@@ -986,10 +1038,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 367BECECDBC6146C592103C9 /* Pods-RBKmoneyPaymentsSDK.debug.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1002,6 +1054,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = rbk.money.payments.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1014,10 +1067,10 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AEBE8FE10ECA6ECA364316BD /* Pods-RBKmoneyPaymentsSDK.release.xcconfig */;
 			buildSettings = {
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1030,6 +1083,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = rbk.money.payments.sdk;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
