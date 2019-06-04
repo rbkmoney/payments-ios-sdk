@@ -27,6 +27,25 @@
 		C1044EC622A5372800A8065B /* Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EC422A5372200A8065B /* Currency.swift */; };
 		C1044EC822A5377300A8065B /* Cost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EC722A5377300A8065B /* Cost.swift */; };
 		C1044EC922A5377300A8065B /* Cost.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EC722A5377300A8065B /* Cost.swift */; };
+		C1044EE022A5C50500A8065B /* PaletteAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EDC22A5C50500A8065B /* PaletteAssembly.swift */; };
+		C1044EE222A5C50500A8065B /* Palette.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EDE22A5C50500A8065B /* Palette.swift */; };
+		C1044EE522A5C54A00A8065B /* ColorsPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EE422A5C54A00A8065B /* ColorsPalette.swift */; };
+		C1044EE722A5C55D00A8065B /* FontsPalette.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EE622A5C55D00A8065B /* FontsPalette.swift */; };
+		C1044EEC22A5D33E00A8065B /* PaymentRouterAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EE822A5D33E00A8065B /* PaymentRouterAssembly.swift */; };
+		C1044EEE22A5D33E00A8065B /* PaymentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EEA22A5D33E00A8065B /* PaymentRouter.swift */; };
+		C1044EF522A5D48E00A8065B /* PaymentRouterDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EF122A5D48E00A8065B /* PaymentRouterDependencies.swift */; };
+		C1044EF722A5D48E00A8065B /* PaymentRouterDependenciesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EF322A5D48E00A8065B /* PaymentRouterDependenciesExtensions.swift */; };
+		C1044EFB22A5DC7900A8065B /* PaymentInputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EFA22A5DC7900A8065B /* PaymentInputData.swift */; };
+		C1044EFD22A5DD9C00A8065B /* PaymentDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EFC22A5DD9C00A8065B /* PaymentDelegate.swift */; };
+		C1044EFF22A5DEFA00A8065B /* PaymentMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EFE22A5DEFA00A8065B /* PaymentMethod.swift */; };
+		C1044F0622A5EB9C00A8065B /* PaymentMethodAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F0022A5EB9C00A8065B /* PaymentMethodAssembly.swift */; };
+		C1044F0722A5EB9C00A8065B /* PaymentMethodViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F0122A5EB9C00A8065B /* PaymentMethodViewModel.swift */; };
+		C1044F0822A5EB9C00A8065B /* PaymentMethodDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F0222A5EB9C00A8065B /* PaymentMethodDependencies.swift */; };
+		C1044F0922A5EB9C00A8065B /* PaymentMethod.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C1044F0322A5EB9C00A8065B /* PaymentMethod.storyboard */; };
+		C1044F0A22A5EB9C00A8065B /* PaymentMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F0422A5EB9C00A8065B /* PaymentMethodViewController.swift */; };
+		C1044F0B22A5EB9C00A8065B /* PaymentMethodDependenciesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F0522A5EB9C00A8065B /* PaymentMethodDependenciesExtensions.swift */; };
+		C1044F1022A5F1C200A8065B /* PaymentRootViewControllerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F0C22A5F1C200A8065B /* PaymentRootViewControllerAssembly.swift */; };
+		C1044F1222A5F1C200A8065B /* PaymentRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F0E22A5F1C200A8065B /* PaymentRootViewController.swift */; };
 		C19789C4229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C5229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C6229FD05800C7F966 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C3229FD05800C7F966 /* AppDelegate.swift */; };
@@ -104,6 +123,25 @@
 		C1044EC122A48E6500A8065B /* InvoiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceFactory.swift; sourceTree = "<group>"; };
 		C1044EC422A5372200A8065B /* Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Currency.swift; sourceTree = "<group>"; };
 		C1044EC722A5377300A8065B /* Cost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cost.swift; sourceTree = "<group>"; };
+		C1044EDC22A5C50500A8065B /* PaletteAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaletteAssembly.swift; sourceTree = "<group>"; };
+		C1044EDE22A5C50500A8065B /* Palette.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Palette.swift; sourceTree = "<group>"; };
+		C1044EE422A5C54A00A8065B /* ColorsPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorsPalette.swift; sourceTree = "<group>"; };
+		C1044EE622A5C55D00A8065B /* FontsPalette.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FontsPalette.swift; sourceTree = "<group>"; };
+		C1044EE822A5D33E00A8065B /* PaymentRouterAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRouterAssembly.swift; sourceTree = "<group>"; };
+		C1044EEA22A5D33E00A8065B /* PaymentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRouter.swift; sourceTree = "<group>"; };
+		C1044EF122A5D48E00A8065B /* PaymentRouterDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRouterDependencies.swift; sourceTree = "<group>"; };
+		C1044EF322A5D48E00A8065B /* PaymentRouterDependenciesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRouterDependenciesExtensions.swift; sourceTree = "<group>"; };
+		C1044EFA22A5DC7900A8065B /* PaymentInputData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentInputData.swift; sourceTree = "<group>"; };
+		C1044EFC22A5DD9C00A8065B /* PaymentDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentDelegate.swift; sourceTree = "<group>"; };
+		C1044EFE22A5DEFA00A8065B /* PaymentMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethod.swift; sourceTree = "<group>"; };
+		C1044F0022A5EB9C00A8065B /* PaymentMethodAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodAssembly.swift; sourceTree = "<group>"; };
+		C1044F0122A5EB9C00A8065B /* PaymentMethodViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodViewModel.swift; sourceTree = "<group>"; };
+		C1044F0222A5EB9C00A8065B /* PaymentMethodDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodDependencies.swift; sourceTree = "<group>"; };
+		C1044F0322A5EB9C00A8065B /* PaymentMethod.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PaymentMethod.storyboard; sourceTree = "<group>"; };
+		C1044F0422A5EB9C00A8065B /* PaymentMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodViewController.swift; sourceTree = "<group>"; };
+		C1044F0522A5EB9C00A8065B /* PaymentMethodDependenciesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodDependenciesExtensions.swift; sourceTree = "<group>"; };
+		C1044F0C22A5F1C200A8065B /* PaymentRootViewControllerAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRootViewControllerAssembly.swift; sourceTree = "<group>"; };
+		C1044F0E22A5F1C200A8065B /* PaymentRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRootViewController.swift; sourceTree = "<group>"; };
 		C1978990229FCA0900C7F966 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789A6229FCE1900C7F966 /* Example+Pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example+Pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789B9229FCF8B00C7F966 /* Example+Pods.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Example+Pods.Release.xcconfig"; sourceTree = "<group>"; };
@@ -226,6 +264,128 @@
 			path = MainScreen;
 			sourceTree = "<group>";
 		};
+		C1044ECF22A5C24E00A8065B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				C1044ED022A5C24E00A8065B /* Components */,
+				C1044ED422A5C24E00A8065B /* Scenarios */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		C1044ED022A5C24E00A8065B /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C1044ED122A5C24E00A8065B /* Palette */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		C1044ED122A5C24E00A8065B /* Palette */ = {
+			isa = PBXGroup;
+			children = (
+				C1044ED222A5C24E00A8065B /* Colors */,
+				C1044ED322A5C24E00A8065B /* Fonts */,
+				C1044EDE22A5C50500A8065B /* Palette.swift */,
+				C1044EDC22A5C50500A8065B /* PaletteAssembly.swift */,
+			);
+			path = Palette;
+			sourceTree = "<group>";
+		};
+		C1044ED222A5C24E00A8065B /* Colors */ = {
+			isa = PBXGroup;
+			children = (
+				C1044EE422A5C54A00A8065B /* ColorsPalette.swift */,
+			);
+			path = Colors;
+			sourceTree = "<group>";
+		};
+		C1044ED322A5C24E00A8065B /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				C1044EE622A5C55D00A8065B /* FontsPalette.swift */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		C1044ED422A5C24E00A8065B /* Scenarios */ = {
+			isa = PBXGroup;
+			children = (
+				C1044ED522A5C24E00A8065B /* Payment */,
+			);
+			path = Scenarios;
+			sourceTree = "<group>";
+		};
+		C1044ED522A5C24E00A8065B /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				C1044EDB22A5C2C600A8065B /* Models */,
+				C1044EDA22A5C2C600A8065B /* Protocols */,
+				C1044ED622A5C24E00A8065B /* Root */,
+				C1044ED922A5C24E00A8065B /* Router */,
+				C1044ED722A5C24E00A8065B /* Modules */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		C1044ED622A5C24E00A8065B /* Root */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F0E22A5F1C200A8065B /* PaymentRootViewController.swift */,
+				C1044F0C22A5F1C200A8065B /* PaymentRootViewControllerAssembly.swift */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		C1044ED722A5C24E00A8065B /* Modules */ = {
+			isa = PBXGroup;
+			children = (
+				C1044ED822A5C24E00A8065B /* PaymentMethod */,
+			);
+			path = Modules;
+			sourceTree = "<group>";
+		};
+		C1044ED822A5C24E00A8065B /* PaymentMethod */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F0422A5EB9C00A8065B /* PaymentMethodViewController.swift */,
+				C1044F0122A5EB9C00A8065B /* PaymentMethodViewModel.swift */,
+				C1044F0322A5EB9C00A8065B /* PaymentMethod.storyboard */,
+				C1044F0022A5EB9C00A8065B /* PaymentMethodAssembly.swift */,
+				C1044F0222A5EB9C00A8065B /* PaymentMethodDependencies.swift */,
+				C1044F0522A5EB9C00A8065B /* PaymentMethodDependenciesExtensions.swift */,
+			);
+			path = PaymentMethod;
+			sourceTree = "<group>";
+		};
+		C1044ED922A5C24E00A8065B /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				C1044EEA22A5D33E00A8065B /* PaymentRouter.swift */,
+				C1044EE822A5D33E00A8065B /* PaymentRouterAssembly.swift */,
+				C1044EF122A5D48E00A8065B /* PaymentRouterDependencies.swift */,
+				C1044EF322A5D48E00A8065B /* PaymentRouterDependenciesExtensions.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		C1044EDA22A5C2C600A8065B /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C1044EFC22A5DD9C00A8065B /* PaymentDelegate.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		C1044EDB22A5C2C600A8065B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C1044EFA22A5DC7900A8065B /* PaymentInputData.swift */,
+				C1044EFE22A5DEFA00A8065B /* PaymentMethod.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		C197896E229FC91400C7F966 = {
 			isa = PBXGroup;
 			children = (
@@ -319,6 +479,7 @@
 				C1978A1022A0073300C7F966 /* Architecture */,
 				C1978A1D22A00A3100C7F966 /* Helpers */,
 				C1978A2222A00A3700C7F966 /* Extensions */,
+				C1044ECF22A5C24E00A8065B /* UI */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -626,6 +787,7 @@
 			files = (
 				C19789F1229FD83C00C7F966 /* Localizable.strings in Resources */,
 				C19789F3229FD83C00C7F966 /* Assets.xcassets in Resources */,
+				C1044F0922A5EB9C00A8065B /* PaymentMethod.storyboard in Resources */,
 				C19789F2229FD83C00C7F966 /* Localizable.stringsdict in Resources */,
 				C19789F4229FD83C00C7F966 /* Cards.json in Resources */,
 			);
@@ -810,20 +972,38 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1978A3222A00A3700C7F966 /* NSRecursiveLock+Extensions.swift in Sources */,
+				C1044EE222A5C50500A8065B /* Palette.swift in Sources */,
+				C1044F0B22A5EB9C00A8065B /* PaymentMethodDependenciesExtensions.swift in Sources */,
+				C1044EE722A5C55D00A8065B /* FontsPalette.swift in Sources */,
+				C1044F0A22A5EB9C00A8065B /* PaymentMethodViewController.swift in Sources */,
+				C1044EFF22A5DEFA00A8065B /* PaymentMethod.swift in Sources */,
 				C1978A3122A00A3700C7F966 /* UIViewController+Rx.swift in Sources */,
+				C1044EE522A5C54A00A8065B /* ColorsPalette.swift in Sources */,
 				C1978A1922A0073300C7F966 /* ModuleViewModel.swift in Sources */,
+				C1044EE022A5C50500A8065B /* PaletteAssembly.swift in Sources */,
 				C1978A3522A00A3700C7F966 /* ObservableType+AdditionalOperators.swift in Sources */,
 				C1978A1A22A0073300C7F966 /* ViewAssembly.swift in Sources */,
 				C1978A2122A00A3100C7F966 /* ActivityTracker.swift in Sources */,
 				C1978A2022A00A3100C7F966 /* Routines.swift in Sources */,
+				C1044EEE22A5D33E00A8065B /* PaymentRouter.swift in Sources */,
 				C1978A3322A00A3700C7F966 /* SharedSequence+AdditionalOperators.swift in Sources */,
 				C1978A1B22A0073300C7F966 /* ViewControllerAssembly.swift in Sources */,
+				C1044EEC22A5D33E00A8065B /* PaymentRouterAssembly.swift in Sources */,
 				C1044EB222A3BE8E00A8065B /* Route.swift in Sources */,
 				C1978A2F22A00A3700C7F966 /* UIView+LayerProperties.swift in Sources */,
+				C1044EFD22A5DD9C00A8065B /* PaymentDelegate.swift in Sources */,
+				C1044EFB22A5DC7900A8065B /* PaymentInputData.swift in Sources */,
 				C1044EB022A3BD4500A8065B /* Router.swift in Sources */,
+				C1044F0622A5EB9C00A8065B /* PaymentMethodAssembly.swift in Sources */,
+				C1044F0822A5EB9C00A8065B /* PaymentMethodDependencies.swift in Sources */,
+				C1044F0722A5EB9C00A8065B /* PaymentMethodViewModel.swift in Sources */,
 				C1978A1C22A0073300C7F966 /* ModuleView.swift in Sources */,
+				C1044EF522A5D48E00A8065B /* PaymentRouterDependencies.swift in Sources */,
+				C1044F1222A5F1C200A8065B /* PaymentRootViewController.swift in Sources */,
+				C1044EF722A5D48E00A8065B /* PaymentRouterDependenciesExtensions.swift in Sources */,
 				C1978A3722A00A3700C7F966 /* PrimitiveSequence+AdditionalOperators.swift in Sources */,
 				C1978A3622A00A3700C7F966 /* Disposable+DisposedWith.swift in Sources */,
+				C1044F1022A5F1C200A8065B /* PaymentRootViewControllerAssembly.swift in Sources */,
 				C1044EB422A3D2DD00A8065B /* AnyRouter.swift in Sources */,
 				C1978A3422A00A3700C7F966 /* ObservableType+Errors.swift in Sources */,
 				C1978A3022A00A3700C7F966 /* UIColor+Extensions.swift in Sources */,

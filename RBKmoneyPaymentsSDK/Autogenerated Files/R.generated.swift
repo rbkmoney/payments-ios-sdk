@@ -5,6 +5,7 @@
 
 import Foundation
 import Rswift
+import UIKit
 
 /// This `R` struct is generated and contains references to static resources.
 struct R: Rswift.Validatable {
@@ -24,6 +25,19 @@ struct R: Rswift.Validatable {
     static func cardsJson(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.cardsJson
       return fileResource.bundle.url(forResource: fileResource)
+    }
+    
+    fileprivate init() {}
+  }
+  
+  /// This `R.storyboard` struct is generated, and contains static references to 1 storyboards.
+  struct storyboard {
+    /// Storyboard `PaymentMethod`.
+    static let paymentMethod = _R.storyboard.paymentMethod()
+    
+    /// `UIStoryboard(name: "PaymentMethod", bundle: ...)`
+    static func paymentMethod(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.paymentMethod)
     }
     
     fileprivate init() {}
@@ -49,7 +63,7 @@ struct R: Rswift.Validatable {
   
   fileprivate struct intern: Rswift.Validatable {
     fileprivate static func validate() throws {
-      // There are no resources to validate
+      try _R.validate()
     }
     
     fileprivate init() {}
@@ -60,6 +74,38 @@ struct R: Rswift.Validatable {
   fileprivate init() {}
 }
 
-struct _R {
+struct _R: Rswift.Validatable {
+  static func validate() throws {
+    try storyboard.validate()
+  }
+  
+  struct storyboard: Rswift.Validatable {
+    static func validate() throws {
+      try paymentMethod.validate()
+    }
+    
+    struct paymentMethod: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = PaymentMethodViewController
+      
+      let bundle = R.hostingBundle
+      let initial = StoryboardViewControllerResource<PaymentMethodViewController>(identifier: "Initial")
+      let name = "PaymentMethod"
+      
+      func initial(_: Void = ()) -> PaymentMethodViewController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: initial)
+      }
+      
+      static func validate() throws {
+        if #available(iOS 11.0, *) {
+        }
+        if _R.storyboard.paymentMethod().initial() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'initial' could not be loaded from storyboard 'PaymentMethod' as 'PaymentMethodViewController'.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    fileprivate init() {}
+  }
+  
   fileprivate init() {}
 }

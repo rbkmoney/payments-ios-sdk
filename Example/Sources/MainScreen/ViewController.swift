@@ -38,7 +38,18 @@ final class ViewController: UIViewController {
                     return
                 }
 
-                this.showAlert(title: "Success", message: "Cool! We have got an invoice with identifier \(invoice.identifier)")
+                let paymentInputData = PaymentInputData(
+                    invoiceIdentifier: invoice.identifier,
+                    invoiceAccessToken: invoice.accessToken,
+                    applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String
+                )
+
+                let viewController = PaymentRootViewControllerAssembly.makeViewController(
+                    paymentInputData: paymentInputData,
+                    paymentDelegate: this
+                )
+
+                this.present(viewController, animated: true)
             }
         }
     }
@@ -48,6 +59,19 @@ final class ViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "OK", style: .default))
 
         present(alert, animated: true)
+    }
+}
+
+extension ViewController: PaymentDelegate {
+
+    func paymentCancelled(invoiceIdentifier: String) {
+        print("Payment cancelled, invoice identifier: \(invoiceIdentifier)")
+        dismiss(animated: true)
+    }
+
+    func paymentFinished(invoiceIdentifier: String, paymentMethod: PaymentMethod) {
+        print("Payment finished, invoice identifier: \(invoiceIdentifier), payment method: \(paymentMethod)")
+        dismiss(animated: true)
     }
 }
 
