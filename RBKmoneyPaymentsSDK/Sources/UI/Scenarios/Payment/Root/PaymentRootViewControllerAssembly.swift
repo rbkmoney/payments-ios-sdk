@@ -20,6 +20,10 @@ public enum PaymentRootViewControllerAssembly {
     public static func makeViewController(paymentInputData: PaymentInputData, paymentDelegate: PaymentDelegate) -> UIViewController {
         let viewController = PaymentRootViewController()
 
+        viewController.systemInfoProvider = SystemInfoAssembly.makeSystemInfo()
+
+        viewController.configure()
+
         let router = PaymentRouterAssembly.makeRouter(
             rootViewController: viewController,
             paymentInputData: paymentInputData,

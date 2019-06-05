@@ -37,9 +37,8 @@ final class PaymentRouter: Router {
     func trigger(route: PaymentRoute) {
         switch route {
         case .paymentMethod:
-            rootViewControllerProvider.rootViewController?.viewControllers = [
-                paymentMethodAssembly.makeViewController(router: anyRouter, paymentInputData: paymentInputData)
-            ]
+            let module = paymentMethodAssembly.makeViewController(router: anyRouter, paymentInputData: paymentInputData)
+            rootViewControllerProvider.rootViewController?.viewControllers = [module]
         case .cancel:
             paymentDelegate.paymentCancelled(invoiceIdentifier: paymentInputData.invoiceIdentifier)
         case let .finish(paymentMethod):
