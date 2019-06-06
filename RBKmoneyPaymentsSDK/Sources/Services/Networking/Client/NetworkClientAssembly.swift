@@ -14,16 +14,15 @@
 
 import Foundation
 
-enum PaletteAssembly {
+enum NetworkClientAssembly {
 
     // MARK: - Internal
-    static func makePalette() -> Palette {
-        return paletteInstance
-    }
+    static func makeClient(baseURL: URL) -> NetworkClient {
+        let object = NetworkClient()
 
-    // MARK: - Private
-    private static let paletteInstance = with(Palette()) {
-        $0.colors = ColorsPalette()
-        $0.fonts = FontsPalette()
+        object.taskFactory = NetworkTaskFactoryAssembly.makeTaskFactory(baseURL: baseURL)
+        object.responseMapper = NetworkResponseMapperAssembly.makeMapper()
+
+        return object
     }
 }

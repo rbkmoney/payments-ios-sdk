@@ -12,34 +12,53 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import Foundation
 import UIKit
 
 final class SystemInfo {
 
     // MARK: - Internal
+    var sdkVersion: String {
+        guard let value = Bundle(for: SystemInfo.self).infoDictionary?["CFBundleShortVersionString"] as? String else {
+            assertionFailure("SDK Info.plist has no 'CFBundleShortVersionString' field")
+            return "Unknown"
+        }
+        return value
+    }
+
     var appVersion: String {
         guard let value = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String else {
-            assertionFailure("Info.plist has no 'app version' field")
-            return ""
+            assertionFailure("App Info.plist has no 'CFBundleShortVersionString' field")
+            return "Unknown"
         }
         return value
     }
 
     var appBundleVersion: String {
         guard let value = Bundle.main.infoDictionary?["CFBundleVersion"] as? String else {
-            assertionFailure("Info.plist has no 'app bundle version' field")
-            return ""
+            assertionFailure("App Info.plist has no 'CFBundleVersion' field")
+            return "Unknown"
         }
         return value
     }
 
     var appBundleIdentifier: String {
         guard let value = Bundle.main.bundleIdentifier else {
-            assertionFailure("Unable to get app bundle identifier")
-            return ""
+            assertionFailure("Unable to get bundle identifier")
+            return "Unknown"
         }
         return value
+    }
+
+    var appExecutableName: String {
+        guard let value = Bundle.main.infoDictionary?["CFBundleExecutable"] as? String else {
+            assertionFailure("App Info.plist has no 'CFBundleExecutable' field")
+            return "Unknown"
+        }
+        return value
+    }
+
+    var osName: String {
+        return UIDevice.current.systemName
     }
 
     var osVersion: String {
@@ -52,6 +71,10 @@ final class SystemInfo {
             return UUID()
         }
         return value
+    }
+
+    var deviceModel: String {
+        return UIDevice.current.model
     }
 
     var deviceScreenSize: CGSize {

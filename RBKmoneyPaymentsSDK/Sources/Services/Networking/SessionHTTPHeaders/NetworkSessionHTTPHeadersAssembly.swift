@@ -14,16 +14,15 @@
 
 import Foundation
 
-enum PaletteAssembly {
+enum NetworkSessionHTTPHeadersAssembly {
 
     // MARK: - Internal
-    static func makePalette() -> Palette {
-        return paletteInstance
+    static func makeSessionHTTPHeaders() -> NetworkSessionHTTPHeaders {
+        return sessionHTTPHeadersInstance
     }
 
     // MARK: - Private
-    private static let paletteInstance = with(Palette()) {
-        $0.colors = ColorsPalette()
-        $0.fonts = FontsPalette()
+    private static let sessionHTTPHeadersInstance = with(NetworkSessionHTTPHeaders()) {
+        $0.systemInfoProvider = SystemInfoAssembly.makeSystemInfo()
     }
 }

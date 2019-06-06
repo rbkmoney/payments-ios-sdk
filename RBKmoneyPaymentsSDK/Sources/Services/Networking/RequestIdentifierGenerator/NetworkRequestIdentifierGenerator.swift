@@ -14,16 +14,10 @@
 
 import Foundation
 
-enum PaletteAssembly {
+struct NetworkRequestIdentifierGenerator {
 
     // MARK: - Internal
-    static func makePalette() -> Palette {
-        return paletteInstance
-    }
-
-    // MARK: - Private
-    private static let paletteInstance = with(Palette()) {
-        $0.colors = ColorsPalette()
-        $0.fonts = FontsPalette()
+    func generateIdentifier() -> String {
+        return UUID().uuidString.replacingOccurrences(of: "-", with: "")
     }
 }

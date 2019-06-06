@@ -14,16 +14,12 @@
 
 import Foundation
 
-enum PaletteAssembly {
+protocol NetworkTaskFactoryRequestIdentifierGenerator {
 
-    // MARK: - Internal
-    static func makePalette() -> Palette {
-        return paletteInstance
-    }
+    func generateIdentifier() -> String
+}
 
-    // MARK: - Private
-    private static let paletteInstance = with(Palette()) {
-        $0.colors = ColorsPalette()
-        $0.fonts = FontsPalette()
-    }
+protocol NetworkTaskFactorySessionHTTPHeadersProvider {
+
+    var headers: [String: String] { get }
 }

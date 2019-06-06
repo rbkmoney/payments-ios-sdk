@@ -14,16 +14,22 @@
 
 import Foundation
 
-enum PaletteAssembly {
+struct NetworkResponseMapper {
 
     // MARK: - Internal
-    static func makePalette() -> Palette {
-        return paletteInstance
-    }
+    func map<ResponseType: NetworkResponse>(input: NetworkResponseMapperInput) -> NetworkResponseMapperOutput<ResponseType> {
+        if let error = input.error {
+            if let errorResponse = ErrorNetworkResponse(rawData: input.data) {
+                return .error(NetworkError(.serverError(errorResponse.payload), underlyingError: error))
+            } else {
+                return .error(error)
+            }
+        }
 
-    // MARK: - Private
-    private static let paletteInstance = with(Palette()) {
-        $0.colors = ColorsPalette()
-        $0.fonts = FontsPalette()
+        guard let response = ResponseType(rawData: input.data) else {
+            return .error(NetworkError(.cannotMapResponse))
+        }
+
+        return .success(response)
     }
 }

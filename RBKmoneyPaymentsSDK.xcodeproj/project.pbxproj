@@ -50,6 +50,32 @@
 		C1044F1D22A7F32100A8065B /* SystemInfoAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F1922A7F32100A8065B /* SystemInfoAssembly.swift */; };
 		C1044F2322A7F8B100A8065B /* PaymentRootViewControllerDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F1F22A7F8B100A8065B /* PaymentRootViewControllerDependencies.swift */; };
 		C1044F2522A7F8B100A8065B /* PaymentRootViewControllerDependenciesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F2122A7F8B100A8065B /* PaymentRootViewControllerDependenciesExtensions.swift */; };
+		C1044F3222A8110B00A8065B /* NetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F3122A8110B00A8065B /* NetworkRequest.swift */; };
+		C1044F3622A8163000A8065B /* DecodableNetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F3422A8163000A8065B /* DecodableNetworkResponse.swift */; };
+		C1044F3722A8163000A8065B /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F3522A8163000A8065B /* NetworkResponse.swift */; };
+		C1044F3D22A81DBD00A8065B /* NetworkTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F3C22A81DBD00A8065B /* NetworkTask.swift */; };
+		C1044F4022A8539C00A8065B /* NetworkRequestPerformer.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F3F22A8539C00A8065B /* NetworkRequestPerformer.swift */; };
+		C1044F4322A853EC00A8065B /* NetworkResponse+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F4222A853EC00A8065B /* NetworkResponse+Rx.swift */; };
+		C1044F4722A8549900A8065B /* ErrorNetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F4522A8549900A8065B /* ErrorNetworkResponse.swift */; };
+		C1044F4822A8549900A8065B /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F4622A8549900A8065B /* NetworkError.swift */; };
+		C1044F4E22A866D300A8065B /* NetworkResponseMapperInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F4B22A866D300A8065B /* NetworkResponseMapperInput.swift */; };
+		C1044F4F22A866D300A8065B /* NetworkResponseMapperOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F4C22A866D300A8065B /* NetworkResponseMapperOutput.swift */; };
+		C1044F5022A866D300A8065B /* NetworkResponseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F4D22A866D300A8065B /* NetworkResponseMapper.swift */; };
+		C1044F5522A86F8500A8065B /* NetworkResponseMapperAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F5122A86F8500A8065B /* NetworkResponseMapperAssembly.swift */; };
+		C1044F5E22A870B100A8065B /* NetworkRequestIdentifierGeneratorAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F5A22A870B100A8065B /* NetworkRequestIdentifierGeneratorAssembly.swift */; };
+		C1044F6022A870B100A8065B /* NetworkRequestIdentifierGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F5C22A870B100A8065B /* NetworkRequestIdentifierGenerator.swift */; };
+		C1044F6722A8770B00A8065B /* NetworkSessionHTTPHeadersAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F6322A8770B00A8065B /* NetworkSessionHTTPHeadersAssembly.swift */; };
+		C1044F6822A8770B00A8065B /* NetworkSessionHTTPHeadersDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F6422A8770B00A8065B /* NetworkSessionHTTPHeadersDependencies.swift */; };
+		C1044F6922A8770B00A8065B /* NetworkSessionHTTPHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F6522A8770B00A8065B /* NetworkSessionHTTPHeaders.swift */; };
+		C1044F6A22A8770B00A8065B /* NetworkSessionHTTPHeadersDependenciesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F6622A8770B00A8065B /* NetworkSessionHTTPHeadersDependenciesExtensions.swift */; };
+		C1044F7022A88D6D00A8065B /* NetworkTaskFactoryAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F6C22A88D6D00A8065B /* NetworkTaskFactoryAssembly.swift */; };
+		C1044F7122A88D6D00A8065B /* NetworkTaskFactoryDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F6D22A88D6D00A8065B /* NetworkTaskFactoryDependencies.swift */; };
+		C1044F7222A88D6D00A8065B /* NetworkTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F6E22A88D6D00A8065B /* NetworkTaskFactory.swift */; };
+		C1044F7322A88D6D00A8065B /* NetworkTaskFactoryDependenciesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F6F22A88D6D00A8065B /* NetworkTaskFactoryDependenciesExtensions.swift */; };
+		C1044F7922A8B06300A8065B /* NetworkClientAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F7522A8B06300A8065B /* NetworkClientAssembly.swift */; };
+		C1044F7A22A8B06300A8065B /* NetworkClientDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F7622A8B06300A8065B /* NetworkClientDependencies.swift */; };
+		C1044F7B22A8B06300A8065B /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F7722A8B06300A8065B /* NetworkClient.swift */; };
+		C1044F7C22A8B06300A8065B /* NetworkClientDependenciesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F7822A8B06300A8065B /* NetworkClientDependenciesExtensions.swift */; };
 		C19789C4229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C5229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C6229FD05800C7F966 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C3229FD05800C7F966 /* AppDelegate.swift */; };
@@ -150,6 +176,32 @@
 		C1044F1922A7F32100A8065B /* SystemInfoAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SystemInfoAssembly.swift; sourceTree = "<group>"; };
 		C1044F1F22A7F8B100A8065B /* PaymentRootViewControllerDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRootViewControllerDependencies.swift; sourceTree = "<group>"; };
 		C1044F2122A7F8B100A8065B /* PaymentRootViewControllerDependenciesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRootViewControllerDependenciesExtensions.swift; sourceTree = "<group>"; };
+		C1044F3122A8110B00A8065B /* NetworkRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequest.swift; sourceTree = "<group>"; };
+		C1044F3422A8163000A8065B /* DecodableNetworkResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodableNetworkResponse.swift; sourceTree = "<group>"; };
+		C1044F3522A8163000A8065B /* NetworkResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
+		C1044F3C22A81DBD00A8065B /* NetworkTask.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkTask.swift; sourceTree = "<group>"; };
+		C1044F3F22A8539C00A8065B /* NetworkRequestPerformer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkRequestPerformer.swift; sourceTree = "<group>"; };
+		C1044F4222A853EC00A8065B /* NetworkResponse+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NetworkResponse+Rx.swift"; sourceTree = "<group>"; };
+		C1044F4522A8549900A8065B /* ErrorNetworkResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorNetworkResponse.swift; sourceTree = "<group>"; };
+		C1044F4622A8549900A8065B /* NetworkError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkError.swift; sourceTree = "<group>"; };
+		C1044F4B22A866D300A8065B /* NetworkResponseMapperInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkResponseMapperInput.swift; sourceTree = "<group>"; };
+		C1044F4C22A866D300A8065B /* NetworkResponseMapperOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkResponseMapperOutput.swift; sourceTree = "<group>"; };
+		C1044F4D22A866D300A8065B /* NetworkResponseMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkResponseMapper.swift; sourceTree = "<group>"; };
+		C1044F5122A86F8500A8065B /* NetworkResponseMapperAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponseMapperAssembly.swift; sourceTree = "<group>"; };
+		C1044F5A22A870B100A8065B /* NetworkRequestIdentifierGeneratorAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestIdentifierGeneratorAssembly.swift; sourceTree = "<group>"; };
+		C1044F5C22A870B100A8065B /* NetworkRequestIdentifierGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestIdentifierGenerator.swift; sourceTree = "<group>"; };
+		C1044F6322A8770B00A8065B /* NetworkSessionHTTPHeadersAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionHTTPHeadersAssembly.swift; sourceTree = "<group>"; };
+		C1044F6422A8770B00A8065B /* NetworkSessionHTTPHeadersDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionHTTPHeadersDependencies.swift; sourceTree = "<group>"; };
+		C1044F6522A8770B00A8065B /* NetworkSessionHTTPHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionHTTPHeaders.swift; sourceTree = "<group>"; };
+		C1044F6622A8770B00A8065B /* NetworkSessionHTTPHeadersDependenciesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionHTTPHeadersDependenciesExtensions.swift; sourceTree = "<group>"; };
+		C1044F6C22A88D6D00A8065B /* NetworkTaskFactoryAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTaskFactoryAssembly.swift; sourceTree = "<group>"; };
+		C1044F6D22A88D6D00A8065B /* NetworkTaskFactoryDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTaskFactoryDependencies.swift; sourceTree = "<group>"; };
+		C1044F6E22A88D6D00A8065B /* NetworkTaskFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTaskFactory.swift; sourceTree = "<group>"; };
+		C1044F6F22A88D6D00A8065B /* NetworkTaskFactoryDependenciesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTaskFactoryDependenciesExtensions.swift; sourceTree = "<group>"; };
+		C1044F7522A8B06300A8065B /* NetworkClientAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientAssembly.swift; sourceTree = "<group>"; };
+		C1044F7622A8B06300A8065B /* NetworkClientDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientDependencies.swift; sourceTree = "<group>"; };
+		C1044F7722A8B06300A8065B /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		C1044F7822A8B06300A8065B /* NetworkClientDependenciesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientDependenciesExtensions.swift; sourceTree = "<group>"; };
 		C1978990229FCA0900C7F966 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789A6229FCE1900C7F966 /* Example+Pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example+Pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789B9229FCF8B00C7F966 /* Example+Pods.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Example+Pods.Release.xcconfig"; sourceTree = "<group>"; };
@@ -400,6 +452,7 @@
 			isa = PBXGroup;
 			children = (
 				C1044F1522A7F32100A8065B /* SystemInfo */,
+				C1044F2E22A7FF0F00A8065B /* Networking */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -411,6 +464,143 @@
 				C1044F1922A7F32100A8065B /* SystemInfoAssembly.swift */,
 			);
 			path = SystemInfo;
+			sourceTree = "<group>";
+		};
+		C1044F2E22A7FF0F00A8065B /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F2F22A7FFF600A8065B /* Models */,
+				C1044F3E22A8539C00A8065B /* Protocols */,
+				C1044F4122A853EC00A8065B /* Extensions */,
+				C1044F4422A8549900A8065B /* Errors */,
+				C1044F4922A866D300A8065B /* ResponseMapper */,
+				C1044F5922A8708000A8065B /* RequestIdentifierGenerator */,
+				C1044F6222A876EB00A8065B /* SessionHTTPHeaders */,
+				C1044F6B22A88D5E00A8065B /* TaskFactory */,
+				C1044F7422A8B05600A8065B /* Client */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		C1044F2F22A7FFF600A8065B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F3022A8110B00A8065B /* Requests */,
+				C1044F3322A8163000A8065B /* Responses */,
+				C1044F3B22A81DBD00A8065B /* Task */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C1044F3022A8110B00A8065B /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F3122A8110B00A8065B /* NetworkRequest.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		C1044F3322A8163000A8065B /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F3522A8163000A8065B /* NetworkResponse.swift */,
+				C1044F3422A8163000A8065B /* DecodableNetworkResponse.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		C1044F3B22A81DBD00A8065B /* Task */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F3C22A81DBD00A8065B /* NetworkTask.swift */,
+			);
+			path = Task;
+			sourceTree = "<group>";
+		};
+		C1044F3E22A8539C00A8065B /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F3F22A8539C00A8065B /* NetworkRequestPerformer.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		C1044F4122A853EC00A8065B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F4222A853EC00A8065B /* NetworkResponse+Rx.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		C1044F4422A8549900A8065B /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F4622A8549900A8065B /* NetworkError.swift */,
+				C1044F4522A8549900A8065B /* ErrorNetworkResponse.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		C1044F4922A866D300A8065B /* ResponseMapper */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F4A22A866D300A8065B /* Models */,
+				C1044F4D22A866D300A8065B /* NetworkResponseMapper.swift */,
+				C1044F5122A86F8500A8065B /* NetworkResponseMapperAssembly.swift */,
+			);
+			path = ResponseMapper;
+			sourceTree = "<group>";
+		};
+		C1044F4A22A866D300A8065B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F4B22A866D300A8065B /* NetworkResponseMapperInput.swift */,
+				C1044F4C22A866D300A8065B /* NetworkResponseMapperOutput.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C1044F5922A8708000A8065B /* RequestIdentifierGenerator */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F5C22A870B100A8065B /* NetworkRequestIdentifierGenerator.swift */,
+				C1044F5A22A870B100A8065B /* NetworkRequestIdentifierGeneratorAssembly.swift */,
+			);
+			path = RequestIdentifierGenerator;
+			sourceTree = "<group>";
+		};
+		C1044F6222A876EB00A8065B /* SessionHTTPHeaders */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F6522A8770B00A8065B /* NetworkSessionHTTPHeaders.swift */,
+				C1044F6322A8770B00A8065B /* NetworkSessionHTTPHeadersAssembly.swift */,
+				C1044F6422A8770B00A8065B /* NetworkSessionHTTPHeadersDependencies.swift */,
+				C1044F6622A8770B00A8065B /* NetworkSessionHTTPHeadersDependenciesExtensions.swift */,
+			);
+			path = SessionHTTPHeaders;
+			sourceTree = "<group>";
+		};
+		C1044F6B22A88D5E00A8065B /* TaskFactory */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F6E22A88D6D00A8065B /* NetworkTaskFactory.swift */,
+				C1044F6C22A88D6D00A8065B /* NetworkTaskFactoryAssembly.swift */,
+				C1044F6D22A88D6D00A8065B /* NetworkTaskFactoryDependencies.swift */,
+				C1044F6F22A88D6D00A8065B /* NetworkTaskFactoryDependenciesExtensions.swift */,
+			);
+			path = TaskFactory;
+			sourceTree = "<group>";
+		};
+		C1044F7422A8B05600A8065B /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F7722A8B06300A8065B /* NetworkClient.swift */,
+				C1044F7522A8B06300A8065B /* NetworkClientAssembly.swift */,
+				C1044F7622A8B06300A8065B /* NetworkClientDependencies.swift */,
+				C1044F7822A8B06300A8065B /* NetworkClientDependenciesExtensions.swift */,
+			);
+			path = Client;
 			sourceTree = "<group>";
 		};
 		C197896E229FC91400C7F966 = {
@@ -1005,41 +1195,67 @@
 				C1044EE722A5C55D00A8065B /* FontsPalette.swift in Sources */,
 				C1044F0A22A5EB9C00A8065B /* PaymentMethodViewController.swift in Sources */,
 				C1044F1D22A7F32100A8065B /* SystemInfoAssembly.swift in Sources */,
+				C1044F4F22A866D300A8065B /* NetworkResponseMapperOutput.swift in Sources */,
 				C1044EFF22A5DEFA00A8065B /* PaymentMethod.swift in Sources */,
+				C1044F6822A8770B00A8065B /* NetworkSessionHTTPHeadersDependencies.swift in Sources */,
 				C1978A3122A00A3700C7F966 /* UIViewController+Rx.swift in Sources */,
+				C1044F4722A8549900A8065B /* ErrorNetworkResponse.swift in Sources */,
 				C1044EE522A5C54A00A8065B /* ColorsPalette.swift in Sources */,
 				C1044F2322A7F8B100A8065B /* PaymentRootViewControllerDependencies.swift in Sources */,
 				C1978A1922A0073300C7F966 /* ModuleViewModel.swift in Sources */,
+				C1044F4022A8539C00A8065B /* NetworkRequestPerformer.swift in Sources */,
 				C1044EE022A5C50500A8065B /* PaletteAssembly.swift in Sources */,
 				C1978A3522A00A3700C7F966 /* ObservableType+AdditionalOperators.swift in Sources */,
 				C1978A1A22A0073300C7F966 /* ViewAssembly.swift in Sources */,
+				C1044F5522A86F8500A8065B /* NetworkResponseMapperAssembly.swift in Sources */,
 				C1978A2122A00A3100C7F966 /* ActivityTracker.swift in Sources */,
 				C1978A2022A00A3100C7F966 /* Routines.swift in Sources */,
+				C1044F6722A8770B00A8065B /* NetworkSessionHTTPHeadersAssembly.swift in Sources */,
 				C1044EEE22A5D33E00A8065B /* PaymentRouter.swift in Sources */,
 				C1978A3322A00A3700C7F966 /* SharedSequence+AdditionalOperators.swift in Sources */,
 				C1978A1B22A0073300C7F966 /* ViewControllerAssembly.swift in Sources */,
+				C1044F3622A8163000A8065B /* DecodableNetworkResponse.swift in Sources */,
+				C1044F7222A88D6D00A8065B /* NetworkTaskFactory.swift in Sources */,
+				C1044F4822A8549900A8065B /* NetworkError.swift in Sources */,
 				C1044EEC22A5D33E00A8065B /* PaymentRouterAssembly.swift in Sources */,
+				C1044F7122A88D6D00A8065B /* NetworkTaskFactoryDependencies.swift in Sources */,
 				C1044EB222A3BE8E00A8065B /* Route.swift in Sources */,
 				C1978A2F22A00A3700C7F966 /* UIView+LayerProperties.swift in Sources */,
 				C1044F1A22A7F32100A8065B /* SystemInfo.swift in Sources */,
 				C1044EFD22A5DD9C00A8065B /* PaymentDelegate.swift in Sources */,
 				C1044EFB22A5DC7900A8065B /* PaymentInputData.swift in Sources */,
+				C1044F6022A870B100A8065B /* NetworkRequestIdentifierGenerator.swift in Sources */,
+				C1044F5E22A870B100A8065B /* NetworkRequestIdentifierGeneratorAssembly.swift in Sources */,
 				C1044EB022A3BD4500A8065B /* Router.swift in Sources */,
 				C1044F0622A5EB9C00A8065B /* PaymentMethodAssembly.swift in Sources */,
+				C1044F7A22A8B06300A8065B /* NetworkClientDependencies.swift in Sources */,
+				C1044F7C22A8B06300A8065B /* NetworkClientDependenciesExtensions.swift in Sources */,
+				C1044F5022A866D300A8065B /* NetworkResponseMapper.swift in Sources */,
 				C1044F0822A5EB9C00A8065B /* PaymentMethodDependencies.swift in Sources */,
+				C1044F3222A8110B00A8065B /* NetworkRequest.swift in Sources */,
+				C1044F4322A853EC00A8065B /* NetworkResponse+Rx.swift in Sources */,
 				C1044F0722A5EB9C00A8065B /* PaymentMethodViewModel.swift in Sources */,
+				C1044F3D22A81DBD00A8065B /* NetworkTask.swift in Sources */,
 				C1978A1C22A0073300C7F966 /* ModuleView.swift in Sources */,
+				C1044F7B22A8B06300A8065B /* NetworkClient.swift in Sources */,
+				C1044F7022A88D6D00A8065B /* NetworkTaskFactoryAssembly.swift in Sources */,
+				C1044F6922A8770B00A8065B /* NetworkSessionHTTPHeaders.swift in Sources */,
 				C1044F2522A7F8B100A8065B /* PaymentRootViewControllerDependenciesExtensions.swift in Sources */,
 				C1044EF522A5D48E00A8065B /* PaymentRouterDependencies.swift in Sources */,
+				C1044F7322A88D6D00A8065B /* NetworkTaskFactoryDependenciesExtensions.swift in Sources */,
 				C1044F1222A5F1C200A8065B /* PaymentRootViewController.swift in Sources */,
+				C1044F4E22A866D300A8065B /* NetworkResponseMapperInput.swift in Sources */,
 				C1044EF722A5D48E00A8065B /* PaymentRouterDependenciesExtensions.swift in Sources */,
 				C1978A3722A00A3700C7F966 /* PrimitiveSequence+AdditionalOperators.swift in Sources */,
 				C1978A3622A00A3700C7F966 /* Disposable+DisposedWith.swift in Sources */,
 				C1044F1022A5F1C200A8065B /* PaymentRootViewControllerAssembly.swift in Sources */,
+				C1044F6A22A8770B00A8065B /* NetworkSessionHTTPHeadersDependenciesExtensions.swift in Sources */,
 				C1044EB422A3D2DD00A8065B /* AnyRouter.swift in Sources */,
 				C1978A3422A00A3700C7F966 /* ObservableType+Errors.swift in Sources */,
+				C1044F3722A8163000A8065B /* NetworkResponse.swift in Sources */,
 				C1978A3022A00A3700C7F966 /* UIColor+Extensions.swift in Sources */,
 				C19789F7229FD86600C7F966 /* R.generated.swift in Sources */,
+				C1044F7922A8B06300A8065B /* NetworkClientAssembly.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

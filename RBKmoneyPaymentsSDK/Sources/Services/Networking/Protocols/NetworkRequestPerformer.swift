@@ -12,18 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import Foundation
+import RxSwift
 
-enum PaletteAssembly {
+protocol NetworkRequestPerformer {
 
-    // MARK: - Internal
-    static func makePalette() -> Palette {
-        return paletteInstance
-    }
-
-    // MARK: - Private
-    private static let paletteInstance = with(Palette()) {
-        $0.colors = ColorsPalette()
-        $0.fonts = FontsPalette()
-    }
+    func performRequest<ResponseType: NetworkResponse>(_ request: NetworkRequest) -> Single<ResponseType>
 }

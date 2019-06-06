@@ -12,18 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import Foundation
+import RxSwift
 
-enum PaletteAssembly {
+extension ObservableType {
 
-    // MARK: - Internal
-    static func makePalette() -> Palette {
-        return paletteInstance
+    func payload<T>() -> Observable<T> where Element == DecodableNetworkResponse<T> {
+        return map { $0.payload }
     }
+}
 
-    // MARK: - Private
-    private static let paletteInstance = with(Palette()) {
-        $0.colors = ColorsPalette()
-        $0.fonts = FontsPalette()
+extension PrimitiveSequenceType where Trait == SingleTrait {
+
+    func payload<T>() -> Single<T> where Element == DecodableNetworkResponse<T> {
+        return map { $0.payload }
     }
 }

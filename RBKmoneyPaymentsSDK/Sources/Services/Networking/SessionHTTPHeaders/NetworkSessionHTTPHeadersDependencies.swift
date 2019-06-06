@@ -14,16 +14,14 @@
 
 import Foundation
 
-enum PaletteAssembly {
+protocol NetworkSessionHTTPHeadersSystemInfoProvider {
 
-    // MARK: - Internal
-    static func makePalette() -> Palette {
-        return paletteInstance
-    }
-
-    // MARK: - Private
-    private static let paletteInstance = with(Palette()) {
-        $0.colors = ColorsPalette()
-        $0.fonts = FontsPalette()
-    }
+    var sdkVersion: String { get }
+    var appVersion: String { get }
+    var appBundleVersion: String { get }
+    var appBundleIdentifier: String { get }
+    var appExecutableName: String { get }
+    var osName: String { get }
+    var osVersion: String { get }
+    var deviceModel: String { get }
 }

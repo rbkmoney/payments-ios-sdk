@@ -14,16 +14,21 @@
 
 import Foundation
 
-enum PaletteAssembly {
+struct NetworkError: Error {
 
-    // MARK: - Internal
-    static func makePalette() -> Palette {
-        return paletteInstance
+    enum Code {
+        case cannotEncodeRequest
+        case cannotMapResponse
+        case serverError(ServerErrorDTO)
+        case unacceptableResponseStatusCode(Int)
+        case wrongResponseType
     }
 
-    // MARK: - Private
-    private static let paletteInstance = with(Palette()) {
-        $0.colors = ColorsPalette()
-        $0.fonts = FontsPalette()
+    let code: Code
+    let underlyingError: Error?
+
+    init(_ code: Code, underlyingError: Error? = nil) {
+        self.code = code
+        self.underlyingError = underlyingError
     }
 }

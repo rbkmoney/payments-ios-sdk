@@ -14,16 +14,13 @@
 
 import Foundation
 
-enum PaletteAssembly {
+enum NetworkResponseMapperAssembly {
 
     // MARK: - Internal
-    static func makePalette() -> Palette {
-        return paletteInstance
+    static func makeMapper() -> NetworkResponseMapper {
+        return mapperInstance
     }
 
     // MARK: - Private
-    private static let paletteInstance = with(Palette()) {
-        $0.colors = ColorsPalette()
-        $0.fonts = FontsPalette()
-    }
+    private static let mapperInstance = NetworkResponseMapper()
 }

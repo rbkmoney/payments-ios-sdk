@@ -14,16 +14,38 @@
 
 import Foundation
 
-enum PaletteAssembly {
+enum NetworkRequestHTTPMethod: String {
 
-    // MARK: - Internal
-    static func makePalette() -> Palette {
-        return paletteInstance
-    }
+    case get
+    case post
+    case put
+    case patch
+    case delete
+}
 
-    // MARK: - Private
-    private static let paletteInstance = with(Palette()) {
-        $0.colors = ColorsPalette()
-        $0.fonts = FontsPalette()
+enum NetworkRequestPath {
+
+    case absolute(String)
+    case relative(String)
+}
+
+protocol NetworkRequest {
+
+    var httpMethod: NetworkRequestHTTPMethod { get }
+
+    var path: NetworkRequestPath { get }
+
+    // Request-specific headers
+    var httpHeaders: [String: String] { get }
+
+    var parameters: [String: Any]? { get }
+
+    var authorizationToken: String? { get }
+}
+
+extension NetworkRequest {
+
+    var httpHeaders: [String: String] {
+        return [:]
     }
 }

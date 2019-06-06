@@ -14,16 +14,13 @@
 
 import Foundation
 
-enum PaletteAssembly {
+typealias NetworkTaskCompletion = (_ data: Data?, _ error: Error?) -> Void
 
-    // MARK: - Internal
-    static func makePalette() -> Palette {
-        return paletteInstance
-    }
+protocol NetworkTask {
 
-    // MARK: - Private
-    private static let paletteInstance = with(Palette()) {
-        $0.colors = ColorsPalette()
-        $0.fonts = FontsPalette()
-    }
+    func resume()
+    func cancel()
+
+    func response(queue: DispatchQueue, completionHandler: @escaping NetworkTaskCompletion) -> Self
+    func validate() -> Self
 }

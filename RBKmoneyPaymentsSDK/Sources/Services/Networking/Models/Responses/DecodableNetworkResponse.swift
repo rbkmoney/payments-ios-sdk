@@ -14,16 +14,24 @@
 
 import Foundation
 
-enum PaletteAssembly {
+struct DecodableNetworkResponse<Payload: Decodable> {
 
-    // MARK: - Internal
-    static func makePalette() -> Palette {
-        return paletteInstance
-    }
+    let payload: Payload
+}
 
-    // MARK: - Private
-    private static let paletteInstance = with(Palette()) {
-        $0.colors = ColorsPalette()
-        $0.fonts = FontsPalette()
+extension DecodableNetworkResponse: NetworkResponse {
+
+    init?(rawData: Data?) {
+        guard let data = rawData, data.isEmpty == false else {
+            return nil
+        }
+
+        do {
+            let payload = try JSONDecoder().decode(Payload.self, from: data)
+            self.init(payload: payload)
+        } catch {
+            assertionFailure("Failed to decode '\(Payload.self)' with error: \(error)")
+            return nil
+        }
     }
 }

@@ -14,16 +14,7 @@
 
 import Foundation
 
-enum PaletteAssembly {
+protocol NetworkResponse {
 
-    // MARK: - Internal
-    static func makePalette() -> Palette {
-        return paletteInstance
-    }
-
-    // MARK: - Private
-    private static let paletteInstance = with(Palette()) {
-        $0.colors = ColorsPalette()
-        $0.fonts = FontsPalette()
-    }
+    init?(rawData: Data?)
 }
