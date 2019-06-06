@@ -15,4 +15,8 @@
 import UIKit
 
 class FontsPalette {
+
+    var screenTitle: UIFont {
+        return .systemFont(ofSize: 16, weight: .medium)
+    }
 }

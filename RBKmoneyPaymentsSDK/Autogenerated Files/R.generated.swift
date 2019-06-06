@@ -30,6 +30,31 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
+  /// This `R.image` struct is generated, and contains static references to 0 images.
+  struct image {
+    /// This `R.image.common` struct is generated, and contains static references to 2 images.
+    struct common {
+      /// Image `back`.
+      static let back = Rswift.ImageResource(bundle: R.hostingBundle, name: "Common/back")
+      /// Image `close`.
+      static let close = Rswift.ImageResource(bundle: R.hostingBundle, name: "Common/close")
+      
+      /// `UIImage(named: "back", bundle: ..., traitCollection: ...)`
+      static func back(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.common.back, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "close", bundle: ..., traitCollection: ...)`
+      static func close(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.common.close, compatibleWith: traitCollection)
+      }
+      
+      fileprivate init() {}
+    }
+    
+    fileprivate init() {}
+  }
+  
   /// This `R.storyboard` struct is generated, and contains static references to 1 storyboards.
   struct storyboard {
     /// Storyboard `PaymentMethod`.
@@ -96,6 +121,7 @@ struct _R: Rswift.Validatable {
       }
       
       static func validate() throws {
+        if UIKit.UIImage(named: "Common/close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Common/close' is used in storyboard 'PaymentMethod', but couldn't be loaded.") }
         if #available(iOS 11.0, *) {
         }
         if _R.storyboard.paymentMethod().initial() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'initial' could not be loaded from storyboard 'PaymentMethod' as 'PaymentMethodViewController'.") }

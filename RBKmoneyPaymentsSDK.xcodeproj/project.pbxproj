@@ -46,6 +46,7 @@
 		C1044F0B22A5EB9C00A8065B /* PaymentMethodDependenciesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F0522A5EB9C00A8065B /* PaymentMethodDependenciesExtensions.swift */; };
 		C1044F1022A5F1C200A8065B /* PaymentRootViewControllerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F0C22A5F1C200A8065B /* PaymentRootViewControllerAssembly.swift */; };
 		C1044F1222A5F1C200A8065B /* PaymentRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F0E22A5F1C200A8065B /* PaymentRootViewController.swift */; };
+		C1044F8D22A997CD00A8065B /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F8C22A997CD00A8065B /* UIImage+Extensions.swift */; };
 		C19789C4229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C5229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C6229FD05800C7F966 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C3229FD05800C7F966 /* AppDelegate.swift */; };
@@ -142,6 +143,7 @@
 		C1044F0522A5EB9C00A8065B /* PaymentMethodDependenciesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodDependenciesExtensions.swift; sourceTree = "<group>"; };
 		C1044F0C22A5F1C200A8065B /* PaymentRootViewControllerAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRootViewControllerAssembly.swift; sourceTree = "<group>"; };
 		C1044F0E22A5F1C200A8065B /* PaymentRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRootViewController.swift; sourceTree = "<group>"; };
+		C1044F8C22A997CD00A8065B /* UIImage+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		C1978990229FCA0900C7F966 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789A6229FCE1900C7F966 /* Example+Pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example+Pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789B9229FCF8B00C7F966 /* Example+Pods.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Example+Pods.Release.xcconfig"; sourceTree = "<group>"; };
@@ -585,6 +587,7 @@
 		C1978A2322A00A3700C7F966 /* UI */ = {
 			isa = PBXGroup;
 			children = (
+				C1044F8C22A997CD00A8065B /* UIImage+Extensions.swift */,
 				C1978A2422A00A3700C7F966 /* UIView+LayerProperties.swift */,
 				C1978A2522A00A3700C7F966 /* UIColor+Extensions.swift */,
 				C1978A2622A00A3700C7F966 /* UIViewController+Rx.swift */,
@@ -1006,6 +1009,7 @@
 				C1044F1022A5F1C200A8065B /* PaymentRootViewControllerAssembly.swift in Sources */,
 				C1044EB422A3D2DD00A8065B /* AnyRouter.swift in Sources */,
 				C1978A3422A00A3700C7F966 /* ObservableType+Errors.swift in Sources */,
+				C1044F8D22A997CD00A8065B /* UIImage+Extensions.swift in Sources */,
 				C1978A3022A00A3700C7F966 /* UIColor+Extensions.swift in Sources */,
 				C19789F7229FD86600C7F966 /* R.generated.swift in Sources */,
 			);

@@ -210,6 +210,12 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BUNDLE VERSION" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hWE-EP-XsK">
+                                <rect key="frame" x="131" y="641" width="113.5" height="16"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Brd-7y-7f0" customClass="ActivityIndicatorView" customModule="Example" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
@@ -248,7 +254,9 @@
                             <constraint firstItem="PYg-VX-Dgo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="FKZ-yl-2Yq"/>
                             <constraint firstItem="Brd-7y-7f0" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="J8m-ul-fud"/>
                             <constraint firstItem="Brd-7y-7f0" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="Lms-Y2-Isu"/>
+                            <constraint firstItem="hWE-EP-XsK" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="NUE-NY-LIr"/>
                             <constraint firstAttribute="bottom" secondItem="Brd-7y-7f0" secondAttribute="bottom" id="SV7-sk-Nep"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="hWE-EP-XsK" secondAttribute="bottom" constant="10" id="YRi-7s-nvQ"/>
                             <constraint firstItem="PYg-VX-Dgo" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.6" priority="999" id="c1M-K5-Jnu"/>
                             <constraint firstItem="PYg-VX-Dgo" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="dBe-6X-DC7"/>
                             <constraint firstAttribute="trailing" secondItem="Brd-7y-7f0" secondAttribute="trailing" id="leA-Ov-vOQ"/>
@@ -257,6 +265,7 @@
                     </view>
                     <connections>
                         <outlet property="activityIndicatorView" destination="Brd-7y-7f0" id="yR7-8k-WjJ"/>
+                        <outlet property="bundleVersionLabel" destination="hWE-EP-XsK" id="sv7-ev-AS1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

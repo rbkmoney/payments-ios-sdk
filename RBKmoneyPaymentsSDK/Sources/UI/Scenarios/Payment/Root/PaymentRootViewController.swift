@@ -46,6 +46,26 @@ final class PaymentRootViewController: UINavigationController {
         modalTransitionStyle = .coverVertical
         modalPresentationStyle = UIDevice.current.userInterfaceIdiom.isPhone ? .fullScreen : .formSheet
         modalPresentationCapturesStatusBarAppearance = UIDevice.current.userInterfaceIdiom.isPhone
+
+        with(navigationBar) {
+            $0.barStyle = .default
+            $0.isTranslucent = false
+
+            $0.tintColor = Palette.colors.topBarIcons
+
+            $0.setBackgroundImage(UIImage.color(Palette.colors.topBarBackground, options: .resizable), for: .any, barMetrics: .default)
+            $0.shadowImage = UIImage.color(.clear, options: .resizable)
+
+            $0.titleTextAttributes = [
+                .foregroundColor: Palette.colors.screenTitle,
+                .font: Palette.fonts.screenTitle
+            ]
+
+            let backButtonImage = R.image.common.back()
+
+            $0.backIndicatorImage = backButtonImage
+            $0.backIndicatorTransitionMaskImage = backButtonImage
+        }
     }
 }
 
