@@ -14,21 +14,8 @@
 
 import Foundation
 
-struct NetworkError: Error {
+struct PaymentResourceSourceDTO: Encodable {
 
-    enum Code {
-        case cannotEncodeRequestBody
-        case cannotMapResponse
-        case serverError(ServerErrorDTO)
-        case unacceptableResponseStatusCode(Int)
-        case wrongResponseType
-    }
-
-    let code: Code
-    let underlyingError: Error?
-
-    init(_ code: Code, underlyingError: Error? = nil) {
-        self.code = code
-        self.underlyingError = underlyingError
-    }
+    let paymentTool: PaymentToolSourceDTO
+    let clientInfo: ClientInfoDTO
 }

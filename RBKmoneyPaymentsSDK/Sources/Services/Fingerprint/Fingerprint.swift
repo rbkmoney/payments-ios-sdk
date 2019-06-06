@@ -14,26 +14,13 @@
 
 import Foundation
 
-struct DecodableNetworkResponse<Payload: Decodable> {
+final class Fingerprint {
 
-    let payload: Payload
-}
+    // MARK: - Dependencies
+    lazy var systemInfoProvider: FingerprintSystemInfoProvider = deferred()
 
-extension DecodableNetworkResponse: NetworkResponse {
-
-    init?(rawData: Data?) {
-        guard let data = rawData, data.isEmpty == false else {
-            return nil
-        }
-
-        do {
-            let decoder = with(JSONDecoder()) {
-                $0.dateDecodingStrategy = .customISO8601
-            }
-            self.init(payload: try decoder.decode(Payload.self, from: data))
-        } catch {
-            assertionFailure("Failed to decode '\(Payload.self)' with error: \(error)")
-            return nil
-        }
+    // MARK: - Internal
+    var fingerprint: String {
+        return "\(systemInfoProvider.appBundleIdentifier)-\(systemInfoProvider.identifierForVendor.uuidString)"
     }
 }

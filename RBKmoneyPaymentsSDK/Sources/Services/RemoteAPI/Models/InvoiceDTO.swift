@@ -14,21 +14,29 @@
 
 import Foundation
 
-struct NetworkError: Error {
+struct InvoiceDTO: Codable {
 
-    enum Code {
-        case cannotEncodeRequestBody
-        case cannotMapResponse
-        case serverError(ServerErrorDTO)
-        case unacceptableResponseStatusCode(Int)
-        case wrongResponseType
+    enum CodingKeys: String, CodingKey {
+        case identifier = "id"
+        case shopIdentifier = "shopID"
+        case createdAt
+        case dueDate
+        case amount
+        case currency
+        case productName = "product"
+        case description
+        case cart
+        case status
     }
 
-    let code: Code
-    let underlyingError: Error?
-
-    init(_ code: Code, underlyingError: Error? = nil) {
-        self.code = code
-        self.underlyingError = underlyingError
-    }
+    let identifier: String
+    let shopIdentifier: String
+    let createdAt: Date
+    let dueDate: Date
+    let amount: AmountDTO
+    let currency: CurrencyDTO
+    let productName: String
+    let description: String?
+    let cart: [InvoiceCartItemDTO]?
+    let status: InvoiceStatusDTO
 }

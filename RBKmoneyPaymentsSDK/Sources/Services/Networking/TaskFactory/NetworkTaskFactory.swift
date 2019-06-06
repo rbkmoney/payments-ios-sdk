@@ -50,14 +50,19 @@ final class NetworkTaskFactory {
             request.setValue($0.value, forHTTPHeaderField: $0.key)
         }
 
-        if let parameters = networkRequest.parameters {
+        switch networkRequest.bodyParameters {
+        case .none:
+            break
+        case let .json(parameters):
             do {
                 request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
-
                 request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
             } catch {
-                throw NetworkError(.cannotEncodeRequest, underlyingError: error)
+                throw NetworkError(.cannotEncodeRequestBody, underlyingError: error)
             }
+        case let .rawJSON(data):
+            request.httpBody = data
+            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
         }
 
         request.setValue(requestIdentifierGenerator.generateIdentifier(), forHTTPHeaderField: "X-Request-ID")
@@ -70,15 +75,31 @@ final class NetworkTaskFactory {
     }
 
     private func url(for networkRequest: NetworkRequest) -> URL {
+        var urlComponents: URLComponents
+
         switch networkRequest.path {
         case let .absolute(string):
-            guard let url = URL(string: string) else {
-                fatalError("Unable to get url from absolute path: \(string)")
+            guard let components = URLComponents(string: string) else {
+                fatalError("Unable to get url components from absolute path: \(string)")
             }
-            return url
+            urlComponents = components
         case let .relative(string):
-            return baseURL.appendingPathComponent(string)
+            guard let components = URLComponents(url: baseURL.appendingPathComponent(string), resolvingAgainstBaseURL: false) else {
+                fatalError("Unable to get url components from base url: \(baseURL) and relative path: \(string)")
+            }
+            urlComponents = components
         }
+
+        let requestQueryItems = networkRequest.queryParameters.map(URLQueryItem.init)
+        let queryItems = urlComponents.queryItems ?? [] + requestQueryItems
+
+        urlComponents.queryItems = queryItems.isEmpty ? nil : queryItems
+
+        guard let url = urlComponents.url else {
+            fatalError("Unable to get url from components: \(urlComponents)")
+        }
+
+        return url
     }
 
     private lazy var session = URLSession(
@@ -93,7 +114,7 @@ private class Task: NetworkTask {
     typealias Validation = (URLResponse?) -> Error?
 
     var dataTask: URLSessionDataTask?
-    var responseCompletionQueue: DispatchQueue?
+    var responseQueue: DispatchQueue?
     var responseCompletionHandler: NetworkTaskCompletion?
     var validation: Validation?
 
@@ -109,7 +130,7 @@ private class Task: NetworkTask {
     }
 
     func completeTask(data: Data?, error: Error?) {
-        guard let queue = responseCompletionQueue, let handler = responseCompletionHandler else {
+        guard let queue = responseQueue, let handler = responseCompletionHandler else {
             return
         }
         queue.async {
@@ -127,7 +148,7 @@ private class Task: NetworkTask {
     }
 
     func response(queue: DispatchQueue, completionHandler: @escaping NetworkTaskCompletion) -> Self {
-        responseCompletionQueue = queue
+        responseQueue = queue
         responseCompletionHandler = completionHandler
 
         return self

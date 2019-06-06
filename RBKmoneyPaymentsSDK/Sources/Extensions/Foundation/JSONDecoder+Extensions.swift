@@ -14,26 +14,19 @@
 
 import Foundation
 
-struct DecodableNetworkResponse<Payload: Decodable> {
+extension JSONDecoder.DateDecodingStrategy {
 
-    let payload: Payload
-}
+    static let customISO8601 = custom {
+        let container = try $0.singleValueContainer()
+        let string = try container.decode(String.self)
 
-extension DecodableNetworkResponse: NetworkResponse {
-
-    init?(rawData: Data?) {
-        guard let data = rawData, data.isEmpty == false else {
-            return nil
+        if let date = Formatter.iso8601Full.date(from: string) {
+            return date
+        }
+        if let date = Formatter.iso8601.date(from: string) {
+            return date
         }
 
-        do {
-            let decoder = with(JSONDecoder()) {
-                $0.dateDecodingStrategy = .customISO8601
-            }
-            self.init(payload: try decoder.decode(Payload.self, from: data))
-        } catch {
-            assertionFailure("Failed to decode '\(Payload.self)' with error: \(error)")
-            return nil
-        }
+        throw DecodingError.dataCorruptedError(in: container, debugDescription: "Invalid date format: \(string)")
     }
 }

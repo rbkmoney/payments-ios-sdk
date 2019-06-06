@@ -76,6 +76,49 @@
 		C1044F7A22A8B06300A8065B /* NetworkClientDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F7622A8B06300A8065B /* NetworkClientDependencies.swift */; };
 		C1044F7B22A8B06300A8065B /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F7722A8B06300A8065B /* NetworkClient.swift */; };
 		C1044F7C22A8B06300A8065B /* NetworkClientDependenciesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F7822A8B06300A8065B /* NetworkClientDependenciesExtensions.swift */; };
+		C1044F8222A9330200A8065B /* RemoteAPIAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F7E22A9330200A8065B /* RemoteAPIAssembly.swift */; };
+		C1044F8322A9330200A8065B /* RemoteAPIDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F7F22A9330200A8065B /* RemoteAPIDependencies.swift */; };
+		C1044F8422A9330200A8065B /* RemoteAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F8022A9330200A8065B /* RemoteAPI.swift */; };
+		C1044F8522A9330200A8065B /* RemoteAPIDependenciesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F8122A9330200A8065B /* RemoteAPIDependenciesExtensions.swift */; };
+		C1044F8922A936B900A8065B /* ObtainInvoiceNetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F8822A936B900A8065B /* ObtainInvoiceNetworkRequest.swift */; };
+		C1044F8B22A937F900A8065B /* InvoiceNetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F8A22A937F900A8065B /* InvoiceNetworkResponse.swift */; };
+		C1044F9022A9C38300A8065B /* InvoiceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F8F22A9C38300A8065B /* InvoiceDTO.swift */; };
+		C1044F9222A9C3BE00A8065B /* CurrencyDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F9122A9C3BE00A8065B /* CurrencyDTO.swift */; };
+		C1044F9422A9C3F500A8065B /* InvoiceStatusDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F9322A9C3F500A8065B /* InvoiceStatusDTO.swift */; };
+		C1044F9622A9C41000A8065B /* InvoiceCartItemDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F9522A9C41000A8065B /* InvoiceCartItemDTO.swift */; };
+		C1044F9822A9C42600A8065B /* AmountDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F9722A9C42600A8065B /* AmountDTO.swift */; };
+		C1044F9A22A9CEFF00A8065B /* Formatter+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F9922A9CEFF00A8065B /* Formatter+Extensions.swift */; };
+		C1044F9C22A9D05100A8065B /* JSONDecoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F9B22A9D05100A8065B /* JSONDecoder+Extensions.swift */; };
+		C1044F9E22A9D0E200A8065B /* JSONEncoder+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F9D22A9D0E200A8065B /* JSONEncoder+Extensions.swift */; };
+		C1044FA022A9D64300A8065B /* ObtainInvoicePaymentMethodsNetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F9F22A9D64300A8065B /* ObtainInvoicePaymentMethodsNetworkRequest.swift */; };
+		C1044FA222A9D7B700A8065B /* PaymentMethodDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FA122A9D7B700A8065B /* PaymentMethodDTO.swift */; };
+		C1044FA422A9D7F500A8065B /* InvoicePaymentMethodsNetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FA322A9D7F500A8065B /* InvoicePaymentMethodsNetworkResponse.swift */; };
+		C1044FAE22AAB28400A8065B /* CreatePaymentResourceNetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FAD22AAB28400A8065B /* CreatePaymentResourceNetworkRequest.swift */; };
+		C1044FB022AAB80F00A8065B /* PaymentResourceNetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FAF22AAB80F00A8065B /* PaymentResourceNetworkResponse.swift */; };
+		C1044FB222AAB90600A8065B /* PaymentResourceSourceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FB122AAB90600A8065B /* PaymentResourceSourceDTO.swift */; };
+		C1044FB422AAB99100A8065B /* PaymentResourceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FB322AAB99100A8065B /* PaymentResourceDTO.swift */; };
+		C1044FB622AB065200A8065B /* PaymentToolSourceDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FB522AB065200A8065B /* PaymentToolSourceDTO.swift */; };
+		C1044FB822AC4E5600A8065B /* ClientInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FB722AC4E5600A8065B /* ClientInfoDTO.swift */; };
+		C1044FBA22AC530000A8065B /* PaymentToolDetailsDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FB922AC530000A8065B /* PaymentToolDetailsDTO.swift */; };
+		C1044FBC22AC57B100A8065B /* BankCardPaymentSystemDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FBB22AC57B100A8065B /* BankCardPaymentSystemDTO.swift */; };
+		C1044FC022AC5BDC00A8065B /* BankCardTokenProviderDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FBF22AC5BDC00A8065B /* BankCardTokenProviderDTO.swift */; };
+		C1044FC622AC66B300A8065B /* FingerprintAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FC222AC66B300A8065B /* FingerprintAssembly.swift */; };
+		C1044FC722AC66B300A8065B /* FingerprintDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FC322AC66B300A8065B /* FingerprintDependencies.swift */; };
+		C1044FC822AC66B300A8065B /* Fingerprint.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FC422AC66B300A8065B /* Fingerprint.swift */; };
+		C1044FC922AC66B300A8065B /* FingerprintDependenciesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FC522AC66B300A8065B /* FingerprintDependenciesExtensions.swift */; };
+		C1044FCB22ADDFE500A8065B /* CreatePaymentNetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FCA22ADDFE500A8065B /* CreatePaymentNetworkRequest.swift */; };
+		C1044FCD22ADE1A600A8065B /* PaymentNetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FCC22ADE1A600A8065B /* PaymentNetworkResponse.swift */; };
+		C1044FCF22ADE36300A8065B /* PaymentParametersDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FCE22ADE36300A8065B /* PaymentParametersDTO.swift */; };
+		C1044FD122ADE3A500A8065B /* PaymentFlowDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FD022ADE3A500A8065B /* PaymentFlowDTO.swift */; };
+		C1044FD322ADE6A600A8065B /* PayerDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FD222ADE6A600A8065B /* PayerDTO.swift */; };
+		C1044FD522ADE84400A8065B /* ContactInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FD422ADE84400A8065B /* ContactInfoDTO.swift */; };
+		C1044FD722ADE8DE00A8065B /* RecurrentPaymentParentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FD622ADE8DE00A8065B /* RecurrentPaymentParentDTO.swift */; };
+		C1044FD922ADF04200A8065B /* PaymentDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FD822ADF04200A8065B /* PaymentDTO.swift */; };
+		C1044FDB22ADF4E900A8065B /* PaymentStatusDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FDA22ADF4E900A8065B /* PaymentStatusDTO.swift */; };
+		C1044FDD22ADFBC700A8065B /* ObtainInvoiceEventsNetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FDC22ADFBC700A8065B /* ObtainInvoiceEventsNetworkRequest.swift */; };
+		C1044FDF22AE04C600A8065B /* InvoiceEventDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FDE22AE04C600A8065B /* InvoiceEventDTO.swift */; };
+		C1044FE122AE04EA00A8065B /* InvoiceEventsNetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FE022AE04EA00A8065B /* InvoiceEventsNetworkResponse.swift */; };
+		C1044FE322AE087600A8065B /* InvoiceChangeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044FE222AE087600A8065B /* InvoiceChangeDTO.swift */; };
 		C19789C4229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C5229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C6229FD05800C7F966 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C3229FD05800C7F966 /* AppDelegate.swift */; };
@@ -202,6 +245,49 @@
 		C1044F7622A8B06300A8065B /* NetworkClientDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientDependencies.swift; sourceTree = "<group>"; };
 		C1044F7722A8B06300A8065B /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 		C1044F7822A8B06300A8065B /* NetworkClientDependenciesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientDependenciesExtensions.swift; sourceTree = "<group>"; };
+		C1044F7E22A9330200A8065B /* RemoteAPIAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAPIAssembly.swift; sourceTree = "<group>"; };
+		C1044F7F22A9330200A8065B /* RemoteAPIDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAPIDependencies.swift; sourceTree = "<group>"; };
+		C1044F8022A9330200A8065B /* RemoteAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAPI.swift; sourceTree = "<group>"; };
+		C1044F8122A9330200A8065B /* RemoteAPIDependenciesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteAPIDependenciesExtensions.swift; sourceTree = "<group>"; };
+		C1044F8822A936B900A8065B /* ObtainInvoiceNetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObtainInvoiceNetworkRequest.swift; sourceTree = "<group>"; };
+		C1044F8A22A937F900A8065B /* InvoiceNetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceNetworkResponse.swift; sourceTree = "<group>"; };
+		C1044F8F22A9C38300A8065B /* InvoiceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDTO.swift; sourceTree = "<group>"; };
+		C1044F9122A9C3BE00A8065B /* CurrencyDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrencyDTO.swift; sourceTree = "<group>"; };
+		C1044F9322A9C3F500A8065B /* InvoiceStatusDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceStatusDTO.swift; sourceTree = "<group>"; };
+		C1044F9522A9C41000A8065B /* InvoiceCartItemDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceCartItemDTO.swift; sourceTree = "<group>"; };
+		C1044F9722A9C42600A8065B /* AmountDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AmountDTO.swift; sourceTree = "<group>"; };
+		C1044F9922A9CEFF00A8065B /* Formatter+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Extensions.swift"; sourceTree = "<group>"; };
+		C1044F9B22A9D05100A8065B /* JSONDecoder+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONDecoder+Extensions.swift"; sourceTree = "<group>"; };
+		C1044F9D22A9D0E200A8065B /* JSONEncoder+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JSONEncoder+Extensions.swift"; sourceTree = "<group>"; };
+		C1044F9F22A9D64300A8065B /* ObtainInvoicePaymentMethodsNetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObtainInvoicePaymentMethodsNetworkRequest.swift; sourceTree = "<group>"; };
+		C1044FA122A9D7B700A8065B /* PaymentMethodDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodDTO.swift; sourceTree = "<group>"; };
+		C1044FA322A9D7F500A8065B /* InvoicePaymentMethodsNetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoicePaymentMethodsNetworkResponse.swift; sourceTree = "<group>"; };
+		C1044FAD22AAB28400A8065B /* CreatePaymentResourceNetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePaymentResourceNetworkRequest.swift; sourceTree = "<group>"; };
+		C1044FAF22AAB80F00A8065B /* PaymentResourceNetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResourceNetworkResponse.swift; sourceTree = "<group>"; };
+		C1044FB122AAB90600A8065B /* PaymentResourceSourceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResourceSourceDTO.swift; sourceTree = "<group>"; };
+		C1044FB322AAB99100A8065B /* PaymentResourceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentResourceDTO.swift; sourceTree = "<group>"; };
+		C1044FB522AB065200A8065B /* PaymentToolSourceDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentToolSourceDTO.swift; sourceTree = "<group>"; };
+		C1044FB722AC4E5600A8065B /* ClientInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClientInfoDTO.swift; sourceTree = "<group>"; };
+		C1044FB922AC530000A8065B /* PaymentToolDetailsDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentToolDetailsDTO.swift; sourceTree = "<group>"; };
+		C1044FBB22AC57B100A8065B /* BankCardPaymentSystemDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardPaymentSystemDTO.swift; sourceTree = "<group>"; };
+		C1044FBF22AC5BDC00A8065B /* BankCardTokenProviderDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankCardTokenProviderDTO.swift; sourceTree = "<group>"; };
+		C1044FC222AC66B300A8065B /* FingerprintAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerprintAssembly.swift; sourceTree = "<group>"; };
+		C1044FC322AC66B300A8065B /* FingerprintDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerprintDependencies.swift; sourceTree = "<group>"; };
+		C1044FC422AC66B300A8065B /* Fingerprint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fingerprint.swift; sourceTree = "<group>"; };
+		C1044FC522AC66B300A8065B /* FingerprintDependenciesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FingerprintDependenciesExtensions.swift; sourceTree = "<group>"; };
+		C1044FCA22ADDFE500A8065B /* CreatePaymentNetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatePaymentNetworkRequest.swift; sourceTree = "<group>"; };
+		C1044FCC22ADE1A600A8065B /* PaymentNetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentNetworkResponse.swift; sourceTree = "<group>"; };
+		C1044FCE22ADE36300A8065B /* PaymentParametersDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentParametersDTO.swift; sourceTree = "<group>"; };
+		C1044FD022ADE3A500A8065B /* PaymentFlowDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentFlowDTO.swift; sourceTree = "<group>"; };
+		C1044FD222ADE6A600A8065B /* PayerDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayerDTO.swift; sourceTree = "<group>"; };
+		C1044FD422ADE84400A8065B /* ContactInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoDTO.swift; sourceTree = "<group>"; };
+		C1044FD622ADE8DE00A8065B /* RecurrentPaymentParentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecurrentPaymentParentDTO.swift; sourceTree = "<group>"; };
+		C1044FD822ADF04200A8065B /* PaymentDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentDTO.swift; sourceTree = "<group>"; };
+		C1044FDA22ADF4E900A8065B /* PaymentStatusDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStatusDTO.swift; sourceTree = "<group>"; };
+		C1044FDC22ADFBC700A8065B /* ObtainInvoiceEventsNetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObtainInvoiceEventsNetworkRequest.swift; sourceTree = "<group>"; };
+		C1044FDE22AE04C600A8065B /* InvoiceEventDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceEventDTO.swift; sourceTree = "<group>"; };
+		C1044FE022AE04EA00A8065B /* InvoiceEventsNetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceEventsNetworkResponse.swift; sourceTree = "<group>"; };
+		C1044FE222AE087600A8065B /* InvoiceChangeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceChangeDTO.swift; sourceTree = "<group>"; };
 		C1978990229FCA0900C7F966 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789A6229FCE1900C7F966 /* Example+Pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example+Pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789B9229FCF8B00C7F966 /* Example+Pods.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Example+Pods.Release.xcconfig"; sourceTree = "<group>"; };
@@ -453,6 +539,8 @@
 			children = (
 				C1044F1522A7F32100A8065B /* SystemInfo */,
 				C1044F2E22A7FF0F00A8065B /* Networking */,
+				C1044FC122AC66A000A8065B /* Fingerprint */,
+				C1044F7D22A932F100A8065B /* RemoteAPI */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -601,6 +689,84 @@
 				C1044F7822A8B06300A8065B /* NetworkClientDependenciesExtensions.swift */,
 			);
 			path = Client;
+			sourceTree = "<group>";
+		};
+		C1044F7D22A932F100A8065B /* RemoteAPI */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F8E22A9C28700A8065B /* Models */,
+				C1044F8622A933E900A8065B /* Requests */,
+				C1044F8722A933E900A8065B /* Responses */,
+				C1044F8022A9330200A8065B /* RemoteAPI.swift */,
+				C1044F7E22A9330200A8065B /* RemoteAPIAssembly.swift */,
+				C1044F7F22A9330200A8065B /* RemoteAPIDependencies.swift */,
+				C1044F8122A9330200A8065B /* RemoteAPIDependenciesExtensions.swift */,
+			);
+			path = RemoteAPI;
+			sourceTree = "<group>";
+		};
+		C1044F8622A933E900A8065B /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F8822A936B900A8065B /* ObtainInvoiceNetworkRequest.swift */,
+				C1044F9F22A9D64300A8065B /* ObtainInvoicePaymentMethodsNetworkRequest.swift */,
+				C1044FAD22AAB28400A8065B /* CreatePaymentResourceNetworkRequest.swift */,
+				C1044FCA22ADDFE500A8065B /* CreatePaymentNetworkRequest.swift */,
+				C1044FDC22ADFBC700A8065B /* ObtainInvoiceEventsNetworkRequest.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		C1044F8722A933E900A8065B /* Responses */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F8A22A937F900A8065B /* InvoiceNetworkResponse.swift */,
+				C1044FA322A9D7F500A8065B /* InvoicePaymentMethodsNetworkResponse.swift */,
+				C1044FAF22AAB80F00A8065B /* PaymentResourceNetworkResponse.swift */,
+				C1044FCC22ADE1A600A8065B /* PaymentNetworkResponse.swift */,
+				C1044FE022AE04EA00A8065B /* InvoiceEventsNetworkResponse.swift */,
+			);
+			path = Responses;
+			sourceTree = "<group>";
+		};
+		C1044F8E22A9C28700A8065B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C1044F8F22A9C38300A8065B /* InvoiceDTO.swift */,
+				C1044F9122A9C3BE00A8065B /* CurrencyDTO.swift */,
+				C1044F9322A9C3F500A8065B /* InvoiceStatusDTO.swift */,
+				C1044F9522A9C41000A8065B /* InvoiceCartItemDTO.swift */,
+				C1044F9722A9C42600A8065B /* AmountDTO.swift */,
+				C1044FBB22AC57B100A8065B /* BankCardPaymentSystemDTO.swift */,
+				C1044FBF22AC5BDC00A8065B /* BankCardTokenProviderDTO.swift */,
+				C1044FA122A9D7B700A8065B /* PaymentMethodDTO.swift */,
+				C1044FB122AAB90600A8065B /* PaymentResourceSourceDTO.swift */,
+				C1044FB522AB065200A8065B /* PaymentToolSourceDTO.swift */,
+				C1044FB722AC4E5600A8065B /* ClientInfoDTO.swift */,
+				C1044FB322AAB99100A8065B /* PaymentResourceDTO.swift */,
+				C1044FB922AC530000A8065B /* PaymentToolDetailsDTO.swift */,
+				C1044FCE22ADE36300A8065B /* PaymentParametersDTO.swift */,
+				C1044FD022ADE3A500A8065B /* PaymentFlowDTO.swift */,
+				C1044FD222ADE6A600A8065B /* PayerDTO.swift */,
+				C1044FD422ADE84400A8065B /* ContactInfoDTO.swift */,
+				C1044FD622ADE8DE00A8065B /* RecurrentPaymentParentDTO.swift */,
+				C1044FD822ADF04200A8065B /* PaymentDTO.swift */,
+				C1044FDA22ADF4E900A8065B /* PaymentStatusDTO.swift */,
+				C1044FDE22AE04C600A8065B /* InvoiceEventDTO.swift */,
+				C1044FE222AE087600A8065B /* InvoiceChangeDTO.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C1044FC122AC66A000A8065B /* Fingerprint */ = {
+			isa = PBXGroup;
+			children = (
+				C1044FC422AC66B300A8065B /* Fingerprint.swift */,
+				C1044FC222AC66B300A8065B /* FingerprintAssembly.swift */,
+				C1044FC322AC66B300A8065B /* FingerprintDependencies.swift */,
+				C1044FC522AC66B300A8065B /* FingerprintDependenciesExtensions.swift */,
+			);
+			path = Fingerprint;
 			sourceTree = "<group>";
 		};
 		C197896E229FC91400C7F966 = {
@@ -814,6 +980,9 @@
 			isa = PBXGroup;
 			children = (
 				C1978A2822A00A3700C7F966 /* NSRecursiveLock+Extensions.swift */,
+				C1044F9922A9CEFF00A8065B /* Formatter+Extensions.swift */,
+				C1044F9B22A9D05100A8065B /* JSONDecoder+Extensions.swift */,
+				C1044F9D22A9D0E200A8065B /* JSONEncoder+Extensions.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1190,26 +1359,42 @@
 			buildActionMask = 2147483647;
 			files = (
 				C1978A3222A00A3700C7F966 /* NSRecursiveLock+Extensions.swift in Sources */,
+				C1044F9822A9C42600A8065B /* AmountDTO.swift in Sources */,
+				C1044FD522ADE84400A8065B /* ContactInfoDTO.swift in Sources */,
 				C1044EE222A5C50500A8065B /* Palette.swift in Sources */,
 				C1044F0B22A5EB9C00A8065B /* PaymentMethodDependenciesExtensions.swift in Sources */,
+				C1044FB022AAB80F00A8065B /* PaymentResourceNetworkResponse.swift in Sources */,
 				C1044EE722A5C55D00A8065B /* FontsPalette.swift in Sources */,
+				C1044F8422A9330200A8065B /* RemoteAPI.swift in Sources */,
 				C1044F0A22A5EB9C00A8065B /* PaymentMethodViewController.swift in Sources */,
 				C1044F1D22A7F32100A8065B /* SystemInfoAssembly.swift in Sources */,
+				C1044FC622AC66B300A8065B /* FingerprintAssembly.swift in Sources */,
 				C1044F4F22A866D300A8065B /* NetworkResponseMapperOutput.swift in Sources */,
 				C1044EFF22A5DEFA00A8065B /* PaymentMethod.swift in Sources */,
+				C1044FE122AE04EA00A8065B /* InvoiceEventsNetworkResponse.swift in Sources */,
+				C1044F9022A9C38300A8065B /* InvoiceDTO.swift in Sources */,
+				C1044FAE22AAB28400A8065B /* CreatePaymentResourceNetworkRequest.swift in Sources */,
 				C1044F6822A8770B00A8065B /* NetworkSessionHTTPHeadersDependencies.swift in Sources */,
+				C1044FDB22ADF4E900A8065B /* PaymentStatusDTO.swift in Sources */,
 				C1978A3122A00A3700C7F966 /* UIViewController+Rx.swift in Sources */,
 				C1044F4722A8549900A8065B /* ErrorNetworkResponse.swift in Sources */,
 				C1044EE522A5C54A00A8065B /* ColorsPalette.swift in Sources */,
+				C1044FBC22AC57B100A8065B /* BankCardPaymentSystemDTO.swift in Sources */,
+				C1044F8222A9330200A8065B /* RemoteAPIAssembly.swift in Sources */,
 				C1044F2322A7F8B100A8065B /* PaymentRootViewControllerDependencies.swift in Sources */,
 				C1978A1922A0073300C7F966 /* ModuleViewModel.swift in Sources */,
 				C1044F4022A8539C00A8065B /* NetworkRequestPerformer.swift in Sources */,
 				C1044EE022A5C50500A8065B /* PaletteAssembly.swift in Sources */,
 				C1978A3522A00A3700C7F966 /* ObservableType+AdditionalOperators.swift in Sources */,
+				C1044F8922A936B900A8065B /* ObtainInvoiceNetworkRequest.swift in Sources */,
 				C1978A1A22A0073300C7F966 /* ViewAssembly.swift in Sources */,
+				C1044FCB22ADDFE500A8065B /* CreatePaymentNetworkRequest.swift in Sources */,
 				C1044F5522A86F8500A8065B /* NetworkResponseMapperAssembly.swift in Sources */,
 				C1978A2122A00A3100C7F966 /* ActivityTracker.swift in Sources */,
+				C1044FB222AAB90600A8065B /* PaymentResourceSourceDTO.swift in Sources */,
+				C1044FD322ADE6A600A8065B /* PayerDTO.swift in Sources */,
 				C1978A2022A00A3100C7F966 /* Routines.swift in Sources */,
+				C1044FB622AB065200A8065B /* PaymentToolSourceDTO.swift in Sources */,
 				C1044F6722A8770B00A8065B /* NetworkSessionHTTPHeadersAssembly.swift in Sources */,
 				C1044EEE22A5D33E00A8065B /* PaymentRouter.swift in Sources */,
 				C1978A3322A00A3700C7F966 /* SharedSequence+AdditionalOperators.swift in Sources */,
@@ -1219,8 +1404,11 @@
 				C1044F4822A8549900A8065B /* NetworkError.swift in Sources */,
 				C1044EEC22A5D33E00A8065B /* PaymentRouterAssembly.swift in Sources */,
 				C1044F7122A88D6D00A8065B /* NetworkTaskFactoryDependencies.swift in Sources */,
+				C1044FD122ADE3A500A8065B /* PaymentFlowDTO.swift in Sources */,
+				C1044FD922ADF04200A8065B /* PaymentDTO.swift in Sources */,
 				C1044EB222A3BE8E00A8065B /* Route.swift in Sources */,
 				C1978A2F22A00A3700C7F966 /* UIView+LayerProperties.swift in Sources */,
+				C1044F8522A9330200A8065B /* RemoteAPIDependenciesExtensions.swift in Sources */,
 				C1044F1A22A7F32100A8065B /* SystemInfo.swift in Sources */,
 				C1044EFD22A5DD9C00A8065B /* PaymentDelegate.swift in Sources */,
 				C1044EFB22A5DC7900A8065B /* PaymentInputData.swift in Sources */,
@@ -1228,7 +1416,12 @@
 				C1044F5E22A870B100A8065B /* NetworkRequestIdentifierGeneratorAssembly.swift in Sources */,
 				C1044EB022A3BD4500A8065B /* Router.swift in Sources */,
 				C1044F0622A5EB9C00A8065B /* PaymentMethodAssembly.swift in Sources */,
+				C1044F9622A9C41000A8065B /* InvoiceCartItemDTO.swift in Sources */,
 				C1044F7A22A8B06300A8065B /* NetworkClientDependencies.swift in Sources */,
+				C1044F8322A9330200A8065B /* RemoteAPIDependencies.swift in Sources */,
+				C1044FC722AC66B300A8065B /* FingerprintDependencies.swift in Sources */,
+				C1044FBA22AC530000A8065B /* PaymentToolDetailsDTO.swift in Sources */,
+				C1044FDF22AE04C600A8065B /* InvoiceEventDTO.swift in Sources */,
 				C1044F7C22A8B06300A8065B /* NetworkClientDependenciesExtensions.swift in Sources */,
 				C1044F5022A866D300A8065B /* NetworkResponseMapper.swift in Sources */,
 				C1044F0822A5EB9C00A8065B /* PaymentMethodDependencies.swift in Sources */,
@@ -1236,24 +1429,43 @@
 				C1044F4322A853EC00A8065B /* NetworkResponse+Rx.swift in Sources */,
 				C1044F0722A5EB9C00A8065B /* PaymentMethodViewModel.swift in Sources */,
 				C1044F3D22A81DBD00A8065B /* NetworkTask.swift in Sources */,
+				C1044FD722ADE8DE00A8065B /* RecurrentPaymentParentDTO.swift in Sources */,
+				C1044F9422A9C3F500A8065B /* InvoiceStatusDTO.swift in Sources */,
+				C1044F8B22A937F900A8065B /* InvoiceNetworkResponse.swift in Sources */,
 				C1978A1C22A0073300C7F966 /* ModuleView.swift in Sources */,
 				C1044F7B22A8B06300A8065B /* NetworkClient.swift in Sources */,
 				C1044F7022A88D6D00A8065B /* NetworkTaskFactoryAssembly.swift in Sources */,
+				C1044FB822AC4E5600A8065B /* ClientInfoDTO.swift in Sources */,
 				C1044F6922A8770B00A8065B /* NetworkSessionHTTPHeaders.swift in Sources */,
+				C1044FA222A9D7B700A8065B /* PaymentMethodDTO.swift in Sources */,
+				C1044FC822AC66B300A8065B /* Fingerprint.swift in Sources */,
 				C1044F2522A7F8B100A8065B /* PaymentRootViewControllerDependenciesExtensions.swift in Sources */,
 				C1044EF522A5D48E00A8065B /* PaymentRouterDependencies.swift in Sources */,
 				C1044F7322A88D6D00A8065B /* NetworkTaskFactoryDependenciesExtensions.swift in Sources */,
+				C1044F9222A9C3BE00A8065B /* CurrencyDTO.swift in Sources */,
 				C1044F1222A5F1C200A8065B /* PaymentRootViewController.swift in Sources */,
+				C1044F9C22A9D05100A8065B /* JSONDecoder+Extensions.swift in Sources */,
 				C1044F4E22A866D300A8065B /* NetworkResponseMapperInput.swift in Sources */,
+				C1044FA422A9D7F500A8065B /* InvoicePaymentMethodsNetworkResponse.swift in Sources */,
+				C1044FC022AC5BDC00A8065B /* BankCardTokenProviderDTO.swift in Sources */,
 				C1044EF722A5D48E00A8065B /* PaymentRouterDependenciesExtensions.swift in Sources */,
 				C1978A3722A00A3700C7F966 /* PrimitiveSequence+AdditionalOperators.swift in Sources */,
+				C1044FCD22ADE1A600A8065B /* PaymentNetworkResponse.swift in Sources */,
 				C1978A3622A00A3700C7F966 /* Disposable+DisposedWith.swift in Sources */,
 				C1044F1022A5F1C200A8065B /* PaymentRootViewControllerAssembly.swift in Sources */,
 				C1044F6A22A8770B00A8065B /* NetworkSessionHTTPHeadersDependenciesExtensions.swift in Sources */,
+				C1044F9E22A9D0E200A8065B /* JSONEncoder+Extensions.swift in Sources */,
 				C1044EB422A3D2DD00A8065B /* AnyRouter.swift in Sources */,
+				C1044FDD22ADFBC700A8065B /* ObtainInvoiceEventsNetworkRequest.swift in Sources */,
+				C1044FE322AE087600A8065B /* InvoiceChangeDTO.swift in Sources */,
+				C1044FB422AAB99100A8065B /* PaymentResourceDTO.swift in Sources */,
+				C1044FC922AC66B300A8065B /* FingerprintDependenciesExtensions.swift in Sources */,
 				C1978A3422A00A3700C7F966 /* ObservableType+Errors.swift in Sources */,
 				C1044F3722A8163000A8065B /* NetworkResponse.swift in Sources */,
+				C1044FCF22ADE36300A8065B /* PaymentParametersDTO.swift in Sources */,
 				C1978A3022A00A3700C7F966 /* UIColor+Extensions.swift in Sources */,
+				C1044F9A22A9CEFF00A8065B /* Formatter+Extensions.swift in Sources */,
+				C1044FA022A9D64300A8065B /* ObtainInvoicePaymentMethodsNetworkRequest.swift in Sources */,
 				C19789F7229FD86600C7F966 /* R.generated.swift in Sources */,
 				C1044F7922A8B06300A8065B /* NetworkClientAssembly.swift in Sources */,
 			);

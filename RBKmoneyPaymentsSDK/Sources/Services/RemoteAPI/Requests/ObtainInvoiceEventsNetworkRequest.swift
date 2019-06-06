@@ -14,26 +14,17 @@
 
 import Foundation
 
-struct DecodableNetworkResponse<Payload: Decodable> {
+/// https://developer.rbk.money/api/#operation/getInvoiceEvents
+struct ObtainInvoiceEventsNetworkRequest: NetworkRequest {
 
-    let payload: Payload
-}
+    let httpMethod: NetworkRequestHTTPMethod = .get
+    let path: NetworkRequestPath
+    let queryParameters: [String: String?] = ["limit": "1000"]
+    let bodyParameters: NetworkRequestParameters = .none
+    let authorizationToken: String?
 
-extension DecodableNetworkResponse: NetworkResponse {
-
-    init?(rawData: Data?) {
-        guard let data = rawData, data.isEmpty == false else {
-            return nil
-        }
-
-        do {
-            let decoder = with(JSONDecoder()) {
-                $0.dateDecodingStrategy = .customISO8601
-            }
-            self.init(payload: try decoder.decode(Payload.self, from: data))
-        } catch {
-            assertionFailure("Failed to decode '\(Payload.self)' with error: \(error)")
-            return nil
-        }
+    init(invoiceIdentifier: String, invoiceAccessToken: String) {
+        path = .relative("processing/invoices/\(invoiceIdentifier)/events")
+        authorizationToken = invoiceAccessToken
     }
 }

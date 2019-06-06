@@ -14,26 +14,15 @@
 
 import Foundation
 
-struct DecodableNetworkResponse<Payload: Decodable> {
+enum FingerprintAssembly {
 
-    let payload: Payload
-}
+    // MARK: - Internal
+    static func makeFingerprint() -> Fingerprint {
+        return fingerprintInstance
+    }
 
-extension DecodableNetworkResponse: NetworkResponse {
-
-    init?(rawData: Data?) {
-        guard let data = rawData, data.isEmpty == false else {
-            return nil
-        }
-
-        do {
-            let decoder = with(JSONDecoder()) {
-                $0.dateDecodingStrategy = .customISO8601
-            }
-            self.init(payload: try decoder.decode(Payload.self, from: data))
-        } catch {
-            assertionFailure("Failed to decode '\(Payload.self)' with error: \(error)")
-            return nil
-        }
+    // MARK: - Private
+    private static let fingerprintInstance = with(Fingerprint()) {
+        $0.systemInfoProvider = SystemInfoAssembly.makeSystemInfo()
     }
 }

@@ -14,21 +14,13 @@
 
 import Foundation
 
-struct NetworkError: Error {
+extension Formatter {
 
-    enum Code {
-        case cannotEncodeRequestBody
-        case cannotMapResponse
-        case serverError(ServerErrorDTO)
-        case unacceptableResponseStatusCode(Int)
-        case wrongResponseType
-    }
+    static let iso8601Full: ISO8601DateFormatter = {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        return formatter
+    }()
 
-    let code: Code
-    let underlyingError: Error?
-
-    init(_ code: Code, underlyingError: Error? = nil) {
-        self.code = code
-        self.underlyingError = underlyingError
-    }
+    static let iso8601 = ISO8601DateFormatter()
 }

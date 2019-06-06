@@ -14,21 +14,9 @@
 
 import Foundation
 
-struct NetworkError: Error {
+enum BankCardTokenProviderDTO: String, Codable {
 
-    enum Code {
-        case cannotEncodeRequestBody
-        case cannotMapResponse
-        case serverError(ServerErrorDTO)
-        case unacceptableResponseStatusCode(Int)
-        case wrongResponseType
-    }
-
-    let code: Code
-    let underlyingError: Error?
-
-    init(_ code: Code, underlyingError: Error? = nil) {
-        self.code = code
-        self.underlyingError = underlyingError
-    }
+    case applePay = "applepay"
+    case googlePay = "googlepay"
+    case samsungPay = "samsungpay"
 }

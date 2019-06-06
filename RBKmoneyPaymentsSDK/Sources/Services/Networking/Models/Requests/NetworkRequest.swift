@@ -29,6 +29,13 @@ enum NetworkRequestPath {
     case relative(String)
 }
 
+enum NetworkRequestParameters {
+
+    case none
+    case json([String: Any])
+    case rawJSON(Data)
+}
+
 protocol NetworkRequest {
 
     var httpMethod: NetworkRequestHTTPMethod { get }
@@ -38,7 +45,10 @@ protocol NetworkRequest {
     // Request-specific headers
     var httpHeaders: [String: String] { get }
 
-    var parameters: [String: Any]? { get }
+    // Parameters to be encoded into query
+    var queryParameters: [String: String?] { get }
+
+    var bodyParameters: NetworkRequestParameters { get }
 
     var authorizationToken: String? { get }
 }
@@ -46,6 +56,10 @@ protocol NetworkRequest {
 extension NetworkRequest {
 
     var httpHeaders: [String: String] {
+        return [:]
+    }
+
+    var queryParameters: [String: String?] {
         return [:]
     }
 }

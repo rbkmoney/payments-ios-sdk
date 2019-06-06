@@ -14,26 +14,15 @@
 
 import Foundation
 
-struct DecodableNetworkResponse<Payload: Decodable> {
+struct InvoiceEventDTO: Codable {
 
-    let payload: Payload
-}
-
-extension DecodableNetworkResponse: NetworkResponse {
-
-    init?(rawData: Data?) {
-        guard let data = rawData, data.isEmpty == false else {
-            return nil
-        }
-
-        do {
-            let decoder = with(JSONDecoder()) {
-                $0.dateDecodingStrategy = .customISO8601
-            }
-            self.init(payload: try decoder.decode(Payload.self, from: data))
-        } catch {
-            assertionFailure("Failed to decode '\(Payload.self)' with error: \(error)")
-            return nil
-        }
+    enum CodingKeys: String, CodingKey {
+        case identifier = "id"
+        case createdAt
+        case changes
     }
+
+    let identifier: Int
+    let createdAt: Date
+    let changes: [InvoiceChangeDTO]
 }

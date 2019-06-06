@@ -14,26 +14,20 @@
 
 import Foundation
 
-struct DecodableNetworkResponse<Payload: Decodable> {
+struct AmountDTO {
 
-    let payload: Payload
+    let value: Decimal
 }
 
-extension DecodableNetworkResponse: NetworkResponse {
+extension AmountDTO: Codable {
 
-    init?(rawData: Data?) {
-        guard let data = rawData, data.isEmpty == false else {
-            return nil
-        }
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        value = try container.decode(Decimal.self) / 100
+    }
 
-        do {
-            let decoder = with(JSONDecoder()) {
-                $0.dateDecodingStrategy = .customISO8601
-            }
-            self.init(payload: try decoder.decode(Payload.self, from: data))
-        } catch {
-            assertionFailure("Failed to decode '\(Payload.self)' with error: \(error)")
-            return nil
-        }
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        try container.encode(Int64(truncating: NSDecimalNumber(decimal: self.value * 100)))
     }
 }
