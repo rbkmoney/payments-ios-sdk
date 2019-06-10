@@ -22,7 +22,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="amO-mh-u8Y">
                         <barButtonItem key="backBarButtonItem" title=" " id="erl-mb-BRg"/>
-                        <barButtonItem key="rightBarButtonItem" title="Cancel" id="Bx9-50-Lkg"/>
+                        <barButtonItem key="rightBarButtonItem" image="Common/close" id="Bx9-50-Lkg"/>
                     </navigationItem>
                     <connections>
                         <outlet property="cancelBarButtonItem" destination="Bx9-50-Lkg" id="9ef-T7-UWT"/>
@@ -33,4 +33,7 @@
             <point key="canvasLocation" x="-97" y="161"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Common/close" width="24" height="24"/>
+    </resources>
 </document>

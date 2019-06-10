@@ -16,6 +16,18 @@ import UIKit
 
 class ColorsPalette {
 
+    var topBarBackground: UIColor {
+        return .white
+    }
+
+    var topBarIcons: UIColor {
+        return UIColor(integralRed: 56, green: 205, blue: 143)
+    }
+
+    var screenTitle: UIColor {
+        return .black
+    }
+
     var backgroundGradientStart: UIColor {
         return UIColor(integralRed: 104, green: 91, blue: 255)
     }

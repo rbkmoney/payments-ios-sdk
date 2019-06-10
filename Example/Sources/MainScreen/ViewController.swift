@@ -9,6 +9,12 @@ import RBKmoneyPaymentsSDK
 final class ViewController: UIViewController {
 
     @IBOutlet private weak var activityIndicatorView: ActivityIndicatorView!
+    @IBOutlet private weak var bundleVersionLabel: UILabel!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        bundleVersionLabel.text = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+    }
 
     @IBAction private func purchaseFirstProduct() {
         performPurchase(invoiceTemplate: Constants.firstProductInvoiceTemplate, cost: Constants.firstProductCost)
