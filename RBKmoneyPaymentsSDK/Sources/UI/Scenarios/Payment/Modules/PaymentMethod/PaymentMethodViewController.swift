@@ -21,7 +21,8 @@ final class PaymentMethodViewController: UIViewController, ModuleView {
     // MARK: - Dependencies
 
     // MARK: - Outlets
-    @IBOutlet private weak var cancelBarButtonItem: UIBarButtonItem!
+    @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var cancelBarButtonItem: UIBarButtonItem!
 
     // MARK: - ModuleView
     var output: PaymentMethodViewModel.Input {
@@ -42,5 +43,6 @@ final class PaymentMethodViewController: UIViewController, ModuleView {
 
     // MARK: - Private
     private func setupUI() {
+        tableView.register(R.nib.paymentMethodCell)
     }
 }

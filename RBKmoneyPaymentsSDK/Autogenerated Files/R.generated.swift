@@ -32,12 +32,43 @@ struct R: Rswift.Validatable {
   
   /// This `R.image` struct is generated, and contains static references to 0 images.
   struct image {
-    /// This `R.image.common` struct is generated, and contains static references to 2 images.
+    /// This `R.image.bottomLogos` struct is generated, and contains static references to 3 images.
+    struct bottomLogos {
+      /// Image `3ds_pci_dss`.
+      static let ds_pci_dss = Rswift.ImageResource(bundle: R.hostingBundle, name: "BottomLogos/3ds_pci_dss")
+      /// Image `lock`.
+      static let lock = Rswift.ImageResource(bundle: R.hostingBundle, name: "BottomLogos/lock")
+      /// Image `rbk_money`.
+      static let rbk_money = Rswift.ImageResource(bundle: R.hostingBundle, name: "BottomLogos/rbk_money")
+      
+      /// `UIImage(named: "3ds_pci_dss", bundle: ..., traitCollection: ...)`
+      static func ds_pci_dss(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.bottomLogos.ds_pci_dss, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "lock", bundle: ..., traitCollection: ...)`
+      static func lock(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.bottomLogos.lock, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "rbk_money", bundle: ..., traitCollection: ...)`
+      static func rbk_money(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.bottomLogos.rbk_money, compatibleWith: traitCollection)
+      }
+      
+      fileprivate init() {}
+    }
+    
+    /// This `R.image.common` struct is generated, and contains static references to 4 images.
     struct common {
       /// Image `back`.
       static let back = Rswift.ImageResource(bundle: R.hostingBundle, name: "Common/back")
       /// Image `close`.
       static let close = Rswift.ImageResource(bundle: R.hostingBundle, name: "Common/close")
+      /// Image `rounded_bottom_corners`.
+      static let rounded_bottom_corners = Rswift.ImageResource(bundle: R.hostingBundle, name: "Common/rounded_bottom_corners")
+      /// Image `rounded_top_corners`.
+      static let rounded_top_corners = Rswift.ImageResource(bundle: R.hostingBundle, name: "Common/rounded_top_corners")
       
       /// `UIImage(named: "back", bundle: ..., traitCollection: ...)`
       static func back(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
@@ -49,8 +80,140 @@ struct R: Rswift.Validatable {
         return UIKit.UIImage(resource: R.image.common.close, compatibleWith: traitCollection)
       }
       
+      /// `UIImage(named: "rounded_bottom_corners", bundle: ..., traitCollection: ...)`
+      static func rounded_bottom_corners(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.common.rounded_bottom_corners, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "rounded_top_corners", bundle: ..., traitCollection: ...)`
+      static func rounded_top_corners(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.common.rounded_top_corners, compatibleWith: traitCollection)
+      }
+      
       fileprivate init() {}
     }
+    
+    /// This `R.image.paymentMethods` struct is generated, and contains static references to 6 images.
+    struct paymentMethods {
+      /// Image `applepay`.
+      static let applepay = Rswift.ImageResource(bundle: R.hostingBundle, name: "PaymentMethods/applepay")
+      /// Image `bankcard`.
+      static let bankcard = Rswift.ImageResource(bundle: R.hostingBundle, name: "PaymentMethods/bankcard")
+      /// Image `cash`.
+      static let cash = Rswift.ImageResource(bundle: R.hostingBundle, name: "PaymentMethods/cash")
+      /// Image `ebank`.
+      static let ebank = Rswift.ImageResource(bundle: R.hostingBundle, name: "PaymentMethods/ebank")
+      /// Image `ewallet`.
+      static let ewallet = Rswift.ImageResource(bundle: R.hostingBundle, name: "PaymentMethods/ewallet")
+      /// Image `mobile`.
+      static let mobile = Rswift.ImageResource(bundle: R.hostingBundle, name: "PaymentMethods/mobile")
+      
+      /// `UIImage(named: "applepay", bundle: ..., traitCollection: ...)`
+      static func applepay(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.paymentMethods.applepay, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "bankcard", bundle: ..., traitCollection: ...)`
+      static func bankcard(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.paymentMethods.bankcard, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "cash", bundle: ..., traitCollection: ...)`
+      static func cash(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.paymentMethods.cash, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "ebank", bundle: ..., traitCollection: ...)`
+      static func ebank(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.paymentMethods.ebank, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "ewallet", bundle: ..., traitCollection: ...)`
+      static func ewallet(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.paymentMethods.ewallet, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "mobile", bundle: ..., traitCollection: ...)`
+      static func mobile(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.paymentMethods.mobile, compatibleWith: traitCollection)
+      }
+      
+      fileprivate init() {}
+    }
+    
+    fileprivate init() {}
+  }
+  
+  /// This `R.nib` struct is generated, and contains static references to 5 nibs.
+  struct nib {
+    /// Nib `InvoiceSummaryView`.
+    static let invoiceSummaryView = _R.nib._InvoiceSummaryView()
+    /// Nib `LogotypesView`.
+    static let logotypesView = _R.nib._LogotypesView()
+    /// Nib `PaymentMethodCell`.
+    static let paymentMethodCell = _R.nib._PaymentMethodCell()
+    /// Nib `PaymentMethodsTableFooterView`.
+    static let paymentMethodsTableFooterView = _R.nib._PaymentMethodsTableFooterView()
+    /// Nib `PaymentMethodsTableHeaderView`.
+    static let paymentMethodsTableHeaderView = _R.nib._PaymentMethodsTableHeaderView()
+    
+    /// `UINib(name: "InvoiceSummaryView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.invoiceSummaryView) instead")
+    static func invoiceSummaryView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.invoiceSummaryView)
+    }
+    
+    /// `UINib(name: "LogotypesView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.logotypesView) instead")
+    static func logotypesView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.logotypesView)
+    }
+    
+    /// `UINib(name: "PaymentMethodCell", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.paymentMethodCell) instead")
+    static func paymentMethodCell(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.paymentMethodCell)
+    }
+    
+    /// `UINib(name: "PaymentMethodsTableFooterView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.paymentMethodsTableFooterView) instead")
+    static func paymentMethodsTableFooterView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.paymentMethodsTableFooterView)
+    }
+    
+    /// `UINib(name: "PaymentMethodsTableHeaderView", in: bundle)`
+    @available(*, deprecated, message: "Use UINib(resource: R.nib.paymentMethodsTableHeaderView) instead")
+    static func paymentMethodsTableHeaderView(_: Void = ()) -> UIKit.UINib {
+      return UIKit.UINib(resource: R.nib.paymentMethodsTableHeaderView)
+    }
+    
+    static func invoiceSummaryView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.invoiceSummaryView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func logotypesView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.logotypesView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func paymentMethodCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> PaymentMethodCell? {
+      return R.nib.paymentMethodCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? PaymentMethodCell
+    }
+    
+    static func paymentMethodsTableFooterView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.paymentMethodsTableFooterView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    static func paymentMethodsTableHeaderView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+      return R.nib.paymentMethodsTableHeaderView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+    }
+    
+    fileprivate init() {}
+  }
+  
+  /// This `R.reuseIdentifier` struct is generated, and contains static references to 1 reuse identifiers.
+  struct reuseIdentifier {
+    /// Reuse identifier `PaymentMethodCell`.
+    static let paymentMethodCell: Rswift.ReuseIdentifier<PaymentMethodCell> = Rswift.ReuseIdentifier(identifier: "PaymentMethodCell")
     
     fileprivate init() {}
   }
@@ -70,14 +233,35 @@ struct R: Rswift.Validatable {
   
   /// This `R.string` struct is generated, and contains static references to 1 localization tables.
   struct string {
-    /// This `R.string.localizable` struct is generated, and contains static references to 1 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 4 localization keys.
     struct localizable {
-      /// Value: Строка текста!
-      static let sample_string_identifier = Rswift.StringResource(key: "sample_string_identifier", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: © 2008-2018 RBKmoney | Direct Payments Ltd.
+      static let copyright = Rswift.StringResource(key: "copyright", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: БЕЗОПАСНАЯ ОПЛАТА С
+      static let securite_payment = Rswift.StringResource(key: "securite_payment", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Выберите способ оплаты
+      static let payment_method_header_title = Rswift.StringResource(key: "payment_method_header_title", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: ДЕТАЛИ ЗАКАЗА
+      static let order_details = Rswift.StringResource(key: "order_details", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       
-      /// Value: Строка текста!
-      static func sample_string_identifier(_: Void = ()) -> String {
-        return NSLocalizedString("sample_string_identifier", bundle: R.hostingBundle, comment: "")
+      /// Value: © 2008-2018 RBKmoney | Direct Payments Ltd.
+      static func copyright(_: Void = ()) -> String {
+        return NSLocalizedString("copyright", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: БЕЗОПАСНАЯ ОПЛАТА С
+      static func securite_payment(_: Void = ()) -> String {
+        return NSLocalizedString("securite_payment", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Выберите способ оплаты
+      static func payment_method_header_title(_: Void = ()) -> String {
+        return NSLocalizedString("payment_method_header_title", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: ДЕТАЛИ ЗАКАЗА
+      static func order_details(_: Void = ()) -> String {
+        return NSLocalizedString("order_details", bundle: R.hostingBundle, comment: "")
       }
       
       fileprivate init() {}
@@ -102,6 +286,95 @@ struct R: Rswift.Validatable {
 struct _R: Rswift.Validatable {
   static func validate() throws {
     try storyboard.validate()
+    try nib.validate()
+  }
+  
+  struct nib: Rswift.Validatable {
+    static func validate() throws {
+      try _LogotypesView.validate()
+      try _PaymentMethodsTableFooterView.validate()
+      try _PaymentMethodsTableHeaderView.validate()
+    }
+    
+    struct _InvoiceSummaryView: Rswift.NibResourceType {
+      let bundle = R.hostingBundle
+      let name = "InvoiceSummaryView"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _LogotypesView: Rswift.NibResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "LogotypesView"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "BottomLogos/3ds_pci_dss", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'BottomLogos/3ds_pci_dss' is used in nib 'LogotypesView', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "BottomLogos/lock", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'BottomLogos/lock' is used in nib 'LogotypesView', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "BottomLogos/rbk_money", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'BottomLogos/rbk_money' is used in nib 'LogotypesView', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _PaymentMethodCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
+      typealias ReusableType = PaymentMethodCell
+      
+      let bundle = R.hostingBundle
+      let identifier = "PaymentMethodCell"
+      let name = "PaymentMethodCell"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> PaymentMethodCell? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? PaymentMethodCell
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _PaymentMethodsTableFooterView: Rswift.NibResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "PaymentMethodsTableFooterView"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "Common/rounded_bottom_corners", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Common/rounded_bottom_corners' is used in nib 'PaymentMethodsTableFooterView', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct _PaymentMethodsTableHeaderView: Rswift.NibResourceType, Rswift.Validatable {
+      let bundle = R.hostingBundle
+      let name = "PaymentMethodsTableHeaderView"
+      
+      func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
+        return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "Common/rounded_top_corners", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Common/rounded_top_corners' is used in nib 'PaymentMethodsTableHeaderView', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    fileprivate init() {}
   }
   
   struct storyboard: Rswift.Validatable {

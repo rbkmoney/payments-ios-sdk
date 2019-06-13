@@ -8,8 +8,8 @@ import RBKmoneyPaymentsSDK
 
 final class ViewController: UIViewController {
 
-    @IBOutlet private weak var activityIndicatorView: ActivityIndicatorView!
-    @IBOutlet private weak var bundleVersionLabel: UILabel!
+    @IBOutlet private var activityIndicatorView: ActivityIndicatorView!
+    @IBOutlet private var bundleVersionLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
