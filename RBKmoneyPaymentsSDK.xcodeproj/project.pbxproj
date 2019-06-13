@@ -174,6 +174,7 @@
 		C1A2790222B2B17A00EB371F /* PaymentMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2790022B2B17A00EB371F /* PaymentMethodCell.swift */; };
 		C1A2790322B2B17A00EB371F /* PaymentMethodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1A2790122B2B17A00EB371F /* PaymentMethodCell.xib */; };
 		C1A2790522B2E24D00EB371F /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2790422B2E24D00EB371F /* UIFont+Extensions.swift */; };
+		C1A2790722B3019500EB371F /* ThrobberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2790622B3019500EB371F /* ThrobberView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -368,6 +369,7 @@
 		C1A2790022B2B17A00EB371F /* PaymentMethodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodCell.swift; sourceTree = "<group>"; };
 		C1A2790122B2B17A00EB371F /* PaymentMethodCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentMethodCell.xib; sourceTree = "<group>"; };
 		C1A2790422B2E24D00EB371F /* UIFont+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
+		C1A2790622B3019500EB371F /* ThrobberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrobberView.swift; sourceTree = "<group>"; };
 		D78C6945ABBF1097EFF0F205 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		EA210B7E0FDB7D5FA61687A8 /* Pods-Example+Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example+Pods.debug.xcconfig"; path = "Target Support Files/Pods-Example+Pods/Pods-Example+Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -828,6 +830,7 @@
 				C104500122B271C400A8065B /* InvoiceSummaryView */,
 				C1044FF322AFBC8700A8065B /* GradientView.swift */,
 				C1044FF522AFBF2A00A8065B /* GradientBackgroundView.swift */,
+				C1A2790622B3019500EB371F /* ThrobberView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1533,6 +1536,7 @@
 				C1044EFB22A5DC7900A8065B /* PaymentInputData.swift in Sources */,
 				C1044F6022A870B100A8065B /* NetworkRequestIdentifierGenerator.swift in Sources */,
 				C1044F5E22A870B100A8065B /* NetworkRequestIdentifierGeneratorAssembly.swift in Sources */,
+				C1A2790722B3019500EB371F /* ThrobberView.swift in Sources */,
 				C1044EB022A3BD4500A8065B /* Router.swift in Sources */,
 				C1044F0622A5EB9C00A8065B /* PaymentMethodAssembly.swift in Sources */,
 				C1044F9622A9C41000A8065B /* InvoiceCartItemDTO.swift in Sources */,

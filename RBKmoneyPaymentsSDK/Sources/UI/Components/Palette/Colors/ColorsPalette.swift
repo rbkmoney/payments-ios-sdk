@@ -75,4 +75,16 @@ class ColorsPalette {
     var selectionForeground: UIColor {
         return .white
     }
+
+    var throbber: UIColor {
+        return .white
+    }
+
+    var throbberCircle: UIColor {
+        return UIColor(integralWhite: 0, alpha: 0.25)
+    }
+
+    var throbberBackground: UIColor {
+        return UIColor(integralWhite: 0, alpha: 0.25)
+    }
 }

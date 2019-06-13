@@ -22,6 +22,7 @@ final class PaymentMethodViewController: UIViewController, ModuleView {
 
     // MARK: - Outlets
     @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var throbberView: ThrobberView!
     @IBOutlet private var cancelBarButtonItem: UIBarButtonItem!
 
     // MARK: - ModuleView

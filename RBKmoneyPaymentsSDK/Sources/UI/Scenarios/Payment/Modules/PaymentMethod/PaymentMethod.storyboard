@@ -25,6 +25,9 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fV4-w5-kpF" customClass="ThrobberView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.85563380281126755" green="0.23591549299577463" blue="0.21478873239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -34,7 +37,11 @@
                             <constraint firstItem="IPU-ZT-f8S" firstAttribute="bottom" secondItem="UpP-cy-ftS" secondAttribute="bottom" id="ABa-Yq-2uV"/>
                             <constraint firstAttribute="trailing" secondItem="SQC-HJ-fh7" secondAttribute="trailing" id="QQO-0W-f2W"/>
                             <constraint firstItem="UpP-cy-ftS" firstAttribute="top" secondItem="IPU-ZT-f8S" secondAttribute="top" id="Qa0-NB-40s"/>
+                            <constraint firstAttribute="bottom" secondItem="fV4-w5-kpF" secondAttribute="bottom" id="TPT-hz-1NG"/>
+                            <constraint firstAttribute="trailing" secondItem="fV4-w5-kpF" secondAttribute="trailing" id="Ut7-QP-gr5"/>
+                            <constraint firstItem="fV4-w5-kpF" firstAttribute="leading" secondItem="kKr-70-3MS" secondAttribute="leading" id="Ux1-Fp-7vE"/>
                             <constraint firstAttribute="bottom" secondItem="SQC-HJ-fh7" secondAttribute="bottom" id="jzz-NT-cpD"/>
+                            <constraint firstItem="fV4-w5-kpF" firstAttribute="top" secondItem="kKr-70-3MS" secondAttribute="top" id="nMs-T8-Ej4"/>
                             <constraint firstItem="SQC-HJ-fh7" firstAttribute="top" secondItem="kKr-70-3MS" secondAttribute="top" id="scm-kw-n4o"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IPU-ZT-f8S"/>
@@ -46,6 +53,7 @@
                     <connections>
                         <outlet property="cancelBarButtonItem" destination="Bx9-50-Lkg" id="9ef-T7-UWT"/>
                         <outlet property="tableView" destination="UpP-cy-ftS" id="UaN-ao-gx4"/>
+                        <outlet property="throbberView" destination="fV4-w5-kpF" id="cVe-MA-cFE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yJM-GT-hGU" userLabel="First Responder" sceneMemberID="firstResponder"/>
