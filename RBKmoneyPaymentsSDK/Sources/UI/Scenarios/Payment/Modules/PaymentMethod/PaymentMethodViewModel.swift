@@ -20,24 +20,118 @@ final class PaymentMethodViewModel: ModuleViewModel {
     // MARK: - Dependencies
     lazy var router: AnyRouter<PaymentRoute> = deferred()
     lazy var paymentInputData: PaymentInputData = deferred()
+    lazy var remoteAPI: PaymentMethodRemoteAPI = deferred()
     lazy var applePayInfoProvider: PaymentMethodApplePayInfoProvider = deferred()
 
     // MARK: - ModuleViewModel
     struct Input {
         let didTapCancel: Signal<Void>
+        let didSelectItem: Signal<Item>
     }
 
     func setup(with input: Input) -> Disposable {
-        return input.didTapCancel
+        let continueRoute = input.didSelectItem
+            .asObservable()
+            .withLatestFrom(invoice) { ($0, $1) }
+            .map { tuple -> PaymentRoute in
+                let (item, invoice) = tuple
+
+                switch item.method {
+                case .bankCard:
+                    return .bankCard(invoice, item.paymentSystems)
+                case .applePay:
+                    return .applePay(invoice, item.paymentSystems)
+                }
+            }
+
+        let cancelRoute = input.didTapCancel
+            .asObservable()
             .map(to: PaymentRoute.cancel)
-            .emit(to: Binder(self) {
+
+        return Observable
+            .merge(continueRoute, cancelRoute)
+            .bind(to: Binder(self) {
                 $0.router.trigger(route: $1)
             })
     }
 
-    // MARK: - Public
-
     // MARK: - Internal
+    struct Item {
+        let method: PaymentMethod
+        fileprivate let paymentSystems: Set<PaymentSystem>
+    }
+
+    private(set) lazy var isLoading = activityTracker.asDriver()
+
+    private(set) lazy var shopName = inputData
+        .map { $0.shopName }
+        .asDriver(onError: .never)
+
+    private(set) lazy var invoice = inputData
+        .flatMap { [remoteAPI, activityTracker] data -> Single<InvoiceDTO> in
+            let invoice = remoteAPI.obtainInvoice(
+                invoiceIdentifier: data.invoiceIdentifier,
+                invoiceAccessToken: data.invoiceAccessToken
+            )
+            return invoice.trackActivity(activityTracker)
+        }
+        .asDriver(onError: .never)
+
+    private(set) lazy var items = inputData
+        .flatMap { [remoteAPI, activityTracker, methodsMapper] data -> Single<[Item]> in
+            let methods = remoteAPI.obtainInvoicePaymentMethods(
+                invoiceIdentifier: data.invoiceIdentifier,
+                invoiceAccessToken: data.invoiceAccessToken
+            )
+            return methods.map({ methodsMapper(data, $0) }).trackActivity(activityTracker)
+        }
+        .asDriver(onError: .never)
 
     // MARK: - Private
+    private lazy var methodsMapper = { [applePayInfoProvider] (data: PaymentInputData, methods: [PaymentMethodDTO]) -> [Item] in
+        var result = [Item]()
+
+        // ApplePay
+        // 1. Host application has requested ApplePay method
+        // 2. Host application has provided MerchantIdentifier
+        // 3. Server supports ApplePay tokenized card data with non-zero count of payment systems
+        // 4. Device supports ApplePay with provided payment systems
+        if data.allowedPaymentMethods.contains(.applePay) && data.applePayMerchantIdentifier != nil {
+            let paymentSystems = methods.flatMap { item -> [PaymentSystem] in
+                guard case let .bankCard(paymentSystems, .some(tokenProviders)) = item, tokenProviders.contains(.applePay) else {
+                    return []
+                }
+                return paymentSystems
+            }
+            if paymentSystems.isEmpty == false && applePayInfoProvider.applePayAvailability(for: paymentSystems) != .unavailable {
+                result.append(Item(method: .applePay, paymentSystems: Set(paymentSystems)))
+            }
+        }
+
+        // BankCard
+        // 1. Host application has requested BankCard method
+        // 2. Server supports non-zero count of payment systems
+        if data.allowedPaymentMethods.contains(.bankCard) {
+            let paymentSystems = methods.flatMap { item -> [PaymentSystem] in
+                guard case let .bankCard(paymentSystems, .none) = item else {
+                    return []
+                }
+                return paymentSystems
+            }
+            if paymentSystems.isEmpty == false {
+                result.append(Item(method: .bankCard, paymentSystems: Set(paymentSystems)))
+            }
+        }
+
+        return result
+    }
+
+    private lazy var inputData = Observable.deferred { [weak self] () -> Observable<PaymentInputData> in
+        guard let this = self else {
+            return .empty()
+        }
+        return .just(this.paymentInputData)
+    }
+
+    private let activityTracker = ActivityTracker()
 }

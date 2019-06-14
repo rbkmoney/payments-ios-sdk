@@ -233,10 +233,12 @@ struct R: Rswift.Validatable {
   
   /// This `R.string` struct is generated, and contains static references to 1 localization tables.
   struct string {
-    /// This `R.string.localizable` struct is generated, and contains static references to 4 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 5 localization keys.
     struct localizable {
       /// Value: © 2008-2018 RBKmoney | Direct Payments Ltd.
       static let copyright = Rswift.StringResource(key: "copyright", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: БАНКОВСКАЯ КАРТА
+      static let payment_method_bank_card = Rswift.StringResource(key: "payment_method_bank_card", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: БЕЗОПАСНАЯ ОПЛАТА С
       static let securite_payment = Rswift.StringResource(key: "securite_payment", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Выберите способ оплаты
@@ -247,6 +249,11 @@ struct R: Rswift.Validatable {
       /// Value: © 2008-2018 RBKmoney | Direct Payments Ltd.
       static func copyright(_: Void = ()) -> String {
         return NSLocalizedString("copyright", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: БАНКОВСКАЯ КАРТА
+      static func payment_method_bank_card(_: Void = ()) -> String {
+        return NSLocalizedString("payment_method_bank_card", bundle: R.hostingBundle, comment: "")
       }
       
       /// Value: БЕЗОПАСНАЯ ОПЛАТА С

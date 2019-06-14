@@ -17,6 +17,8 @@ import Foundation
 enum PaymentRoute: Route {
 
     case paymentMethod
+    case bankCard(InvoiceDTO, Set<PaymentSystem>)
+    case applePay(InvoiceDTO, Set<PaymentSystem>)
     case cancel
     case finish(PaymentMethod)
 }
@@ -39,6 +41,10 @@ final class PaymentRouter: Router {
         case .paymentMethod:
             let module = paymentMethodAssembly.makeViewController(router: anyRouter, paymentInputData: paymentInputData)
             rootViewControllerProvider.rootViewController?.viewControllers = [module]
+        case let .bankCard(invoice, paymentSystems):
+            print("Display BankCard module with invoice: \(invoice), payment systems: \(paymentSystems)")
+        case let .applePay(invoice, paymentSystems):
+            print("Display ApplePay module with invoice: \(invoice), payment systems: \(paymentSystems)")
         case .cancel:
             paymentDelegate.paymentCancelled(invoiceIdentifier: paymentInputData.invoiceIdentifier)
         case let .finish(paymentMethod):

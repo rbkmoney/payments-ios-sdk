@@ -32,7 +32,11 @@ final class PaymentRootViewController: UINavigationController {
     func configure() {
         let screenSize = systemInfoProvider.deviceScreenSize
 
-        preferredContentSize = CGSize(width: 375, height: round(min(screenSize.width, screenSize.height) * 0.8))
+        preferredContentSize = CGSize(
+            width: Constants.preferredContentWidth,
+            height: (min(screenSize.width, screenSize.height) * Constants.preferredContentHeightFactor).rounded()
+        )
+
         modalTransitionStyle = .coverVertical
         modalPresentationStyle = systemInfoProvider.isPhoneDevice ? .fullScreen : .formSheet
         modalPresentationCapturesStatusBarAppearance = systemInfoProvider.isPhoneDevice
@@ -57,4 +61,10 @@ final class PaymentRootViewController: UINavigationController {
             $0.backIndicatorTransitionMaskImage = backButtonImage
         }
     }
+}
+
+private enum Constants {
+
+    static let preferredContentWidth: CGFloat = 375
+    static let preferredContentHeightFactor: CGFloat = 0.8
 }

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import Foundation
+import RxSwift
 
 protocol PaymentMethodPriceFormatter {
 
@@ -27,4 +27,10 @@ protocol PaymentMethodInvoiceDetailsFormatter {
 protocol PaymentMethodApplePayInfoProvider {
 
     func applePayAvailability(for paymentSystems: [PaymentSystem]) -> ApplePayAvailability
+}
+
+protocol PaymentMethodRemoteAPI {
+
+    func obtainInvoice(invoiceIdentifier: String, invoiceAccessToken: String) -> Single<InvoiceDTO>
+    func obtainInvoicePaymentMethods(invoiceIdentifier: String, invoiceAccessToken: String) -> Single<[PaymentMethodDTO]>
 }

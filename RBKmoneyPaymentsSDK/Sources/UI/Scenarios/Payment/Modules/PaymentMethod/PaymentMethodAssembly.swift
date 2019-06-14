@@ -24,6 +24,7 @@ final class PaymentMethodAssembly: ViewControllerAssembly<PaymentMethodViewContr
         bindViewModel(to: viewController) {
             $0.router = router
             $0.paymentInputData = paymentInputData
+            $0.remoteAPI = RemoteAPIAssembly.makeRemoteAPI()
             $0.applePayInfoProvider = ApplePayInfoAssembly.makeApplePayInfo()
         }
 

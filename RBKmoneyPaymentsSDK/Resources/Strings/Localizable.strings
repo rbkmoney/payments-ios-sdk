@@ -10,3 +10,4 @@
 
 // Экран "Выбор платежного метода"
 "payment_method_header_title" = "Выберите способ оплаты";
+"payment_method_bank_card" = "БАНКОВСКАЯ КАРТА";
