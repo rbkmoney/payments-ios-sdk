@@ -14,11 +14,9 @@
 
 import Foundation
 
-extension PriceFormatter: PaymentMethodPriceFormatter {
-}
+enum ApplePayAvailability {
 
-extension InvoiceDetailsFormatter: PaymentMethodInvoiceDetailsFormatter {
-}
-
-extension ApplePayInfo: PaymentMethodApplePayInfoProvider {
+    case available
+    case cardSetupRequired
+    case unavailable
 }

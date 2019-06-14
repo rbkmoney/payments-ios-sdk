@@ -23,3 +23,8 @@ protocol PaymentMethodInvoiceDetailsFormatter {
 
     func formattedDetails(invoice: InvoiceDTO) -> String
 }
+
+protocol PaymentMethodApplePayInfoProvider {
+
+    func applePayAvailability(for paymentSystems: [PaymentSystem]) -> ApplePayAvailability
+}

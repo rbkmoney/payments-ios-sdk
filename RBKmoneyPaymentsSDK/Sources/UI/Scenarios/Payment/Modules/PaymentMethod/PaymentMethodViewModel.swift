@@ -20,6 +20,7 @@ final class PaymentMethodViewModel: ModuleViewModel {
     // MARK: - Dependencies
     lazy var router: AnyRouter<PaymentRoute> = deferred()
     lazy var paymentInputData: PaymentInputData = deferred()
+    lazy var applePayInfoProvider: PaymentMethodApplePayInfoProvider = deferred()
 
     // MARK: - ModuleViewModel
     struct Input {

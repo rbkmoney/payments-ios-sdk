@@ -14,11 +14,13 @@
 
 import Foundation
 
-extension PriceFormatter: PaymentMethodPriceFormatter {
-}
+enum ApplePayInfoAssembly {
 
-extension InvoiceDetailsFormatter: PaymentMethodInvoiceDetailsFormatter {
-}
+    // MARK: - Internal
+    static func makeApplePayInfo() -> ApplePayInfo {
+        return applePayInfoInstance
+    }
 
-extension ApplePayInfo: PaymentMethodApplePayInfoProvider {
+    // MARK: - Private
+    private static let applePayInfoInstance = ApplePayInfo()
 }

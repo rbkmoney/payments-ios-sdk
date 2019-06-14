@@ -47,8 +47,8 @@ final class ViewController: UIViewController {
                 let paymentInputData = PaymentInputData(
                     invoiceIdentifier: invoice.identifier,
                     invoiceAccessToken: invoice.accessToken,
-                    applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String,
-                    shopName: "test.shop.ru"
+                    shopName: "test.shop.ru",
+                    applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String
                 )
 
                 let viewController = PaymentRootViewControllerAssembly.makeViewController(
