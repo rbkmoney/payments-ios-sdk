@@ -19,12 +19,12 @@ struct InvoiceCartItemDTO: Codable {
     enum CodingKeys: String, CodingKey {
         case productName = "product"
         case quantity
-        case price
-        case total = "cost"
+        case unitPrice = "price"
+        case cost
     }
 
     let productName: String
     let quantity: Int64
-    let price: AmountDTO
-    let total: AmountDTO?
+    let unitPrice: AmountDTO
+    let cost: AmountDTO?
 }

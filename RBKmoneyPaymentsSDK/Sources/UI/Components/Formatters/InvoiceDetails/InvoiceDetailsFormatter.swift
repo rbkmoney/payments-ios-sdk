@@ -14,12 +14,16 @@
 
 import Foundation
 
-protocol PaymentMethodPriceFormatter {
+struct InvoiceDetailsFormatter {
 
-    func formattedPrice(amount: AmountDTO, currency: CurrencyDTO) -> String
-}
+    // MARK: - Internal
+    func formattedDetails(invoice: InvoiceDTO) -> String {
+        let joined = [invoice.productName, invoice.description ?? ""]
+            .flatMap { $0.components(separatedBy: ".") }
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+            .joined(separator: ". ")
 
-protocol PaymentMethodInvoiceDetailsFormatter {
-
-    func formattedDetails(invoice: InvoiceDTO) -> String
+        return joined.isEmpty ? "" : joined + "."
+    }
 }

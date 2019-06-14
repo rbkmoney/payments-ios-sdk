@@ -14,12 +14,13 @@
 
 import Foundation
 
-protocol PaymentMethodPriceFormatter {
+enum PriceFormatterAssembly {
 
-    func formattedPrice(amount: AmountDTO, currency: CurrencyDTO) -> String
-}
+    // MARK: - Internal
+    static func makeFormatter() -> PriceFormatter {
+        return formatterInstance
+    }
 
-protocol PaymentMethodInvoiceDetailsFormatter {
-
-    func formattedDetails(invoice: InvoiceDTO) -> String
+    // MARK: - Private
+    private static let formatterInstance = PriceFormatter()
 }

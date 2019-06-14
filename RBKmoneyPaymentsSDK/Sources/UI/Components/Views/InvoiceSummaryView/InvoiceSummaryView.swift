@@ -18,12 +18,12 @@ final class InvoiceSummaryView: UIView {
 
     // MARK: - Types
     struct Model {
-        let total: String
+        let cost: String
         let details: String
     }
 
     // MARK: - Outlets
-    @IBOutlet private var totalLabel: UILabel!
+    @IBOutlet private var costLabel: UILabel!
     @IBOutlet private var detailsHeadingLabel: UILabel!
     @IBOutlet private var detailsLabel: UILabel!
 
@@ -40,7 +40,7 @@ final class InvoiceSummaryView: UIView {
 
     // MARK: - Internal
     func setup(with model: Model) {
-        totalLabel.attributedText = model.total.attributed(with: .total)
+        costLabel.attributedText = model.cost.attributed(with: .cost)
         detailsLabel.attributedText = model.details.attributed(with: .details)
     }
 
@@ -60,7 +60,7 @@ final class InvoiceSummaryView: UIView {
 
 private extension TextAttributes {
 
-    static let total = TextAttributes()
+    static let cost = TextAttributes()
         .font(.systemFont(ofSize: 30, weight: .medium))
         .textColor(Palette.colors.brightText)
         .lineBreakMode(.byTruncatingTail)

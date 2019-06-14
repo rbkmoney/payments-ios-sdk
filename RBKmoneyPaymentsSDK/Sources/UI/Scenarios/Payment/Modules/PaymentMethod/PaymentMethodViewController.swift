@@ -19,6 +19,8 @@ import UIKit
 final class PaymentMethodViewController: UIViewController, ModuleView {
 
     // MARK: - Dependencies
+    lazy var priceFormatter: PaymentMethodPriceFormatter = deferred()
+    lazy var invoiceDetailsFormatter: PaymentMethodInvoiceDetailsFormatter = deferred()
 
     // MARK: - Outlets
     @IBOutlet private var tableView: UITableView!
@@ -46,4 +48,7 @@ final class PaymentMethodViewController: UIViewController, ModuleView {
     private func setupUI() {
         tableView.register(R.nib.paymentMethodCell)
     }
+
+    private lazy var tableHeaderView = PaymentMethodsTableHeaderView()
+    private lazy var tableFooterView = PaymentMethodsTableFooterView()
 }

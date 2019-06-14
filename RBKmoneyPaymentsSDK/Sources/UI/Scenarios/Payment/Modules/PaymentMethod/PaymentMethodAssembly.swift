@@ -18,6 +18,9 @@ final class PaymentMethodAssembly: ViewControllerAssembly<PaymentMethodViewContr
     func makeViewController(router: AnyRouter<PaymentRoute>, paymentInputData: PaymentInputData) -> PaymentMethodViewController {
         let viewController = R.storyboard.paymentMethod.initial()!
 
+        viewController.priceFormatter = PriceFormatterAssembly.makeFormatter()
+        viewController.invoiceDetailsFormatter = InvoiceDetailsFormatterAssembly.makeFormatter()
+
         bindViewModel(to: viewController) {
             $0.router = router
             $0.paymentInputData = paymentInputData

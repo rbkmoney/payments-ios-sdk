@@ -13,7 +13,7 @@
             <connections>
                 <outlet property="detailsHeadingLabel" destination="VdD-tH-OBa" id="LSr-Tx-wAz"/>
                 <outlet property="detailsLabel" destination="KVe-5R-4vE" id="Y7u-Ii-mLo"/>
-                <outlet property="totalLabel" destination="ikP-nK-NtA" id="oft-hA-vEd"/>
+                <outlet property="costLabel" destination="ikP-nK-NtA" id="oft-hA-vEd"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

@@ -13,3 +13,9 @@
 // limitations under the License.
 
 import Foundation
+
+extension PriceFormatter: PaymentMethodPriceFormatter {
+}
+
+extension InvoiceDetailsFormatter: PaymentMethodInvoiceDetailsFormatter {
+}

@@ -175,6 +175,10 @@
 		C1A2790322B2B17A00EB371F /* PaymentMethodCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = C1A2790122B2B17A00EB371F /* PaymentMethodCell.xib */; };
 		C1A2790522B2E24D00EB371F /* UIFont+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2790422B2E24D00EB371F /* UIFont+Extensions.swift */; };
 		C1A2790722B3019500EB371F /* ThrobberView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2790622B3019500EB371F /* ThrobberView.swift */; };
+		C1A2790E22B373F400EB371F /* PriceFormatterAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2790A22B373F400EB371F /* PriceFormatterAssembly.swift */; };
+		C1A2791022B373F400EB371F /* PriceFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2790C22B373F400EB371F /* PriceFormatter.swift */; };
+		C1A2791822B3822600EB371F /* InvoiceDetailsFormatterAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2791422B3822600EB371F /* InvoiceDetailsFormatterAssembly.swift */; };
+		C1A2791A22B3822600EB371F /* InvoiceDetailsFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2791622B3822600EB371F /* InvoiceDetailsFormatter.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -370,6 +374,10 @@
 		C1A2790122B2B17A00EB371F /* PaymentMethodCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentMethodCell.xib; sourceTree = "<group>"; };
 		C1A2790422B2E24D00EB371F /* UIFont+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+Extensions.swift"; sourceTree = "<group>"; };
 		C1A2790622B3019500EB371F /* ThrobberView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThrobberView.swift; sourceTree = "<group>"; };
+		C1A2790A22B373F400EB371F /* PriceFormatterAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceFormatterAssembly.swift; sourceTree = "<group>"; };
+		C1A2790C22B373F400EB371F /* PriceFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriceFormatter.swift; sourceTree = "<group>"; };
+		C1A2791422B3822600EB371F /* InvoiceDetailsFormatterAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailsFormatterAssembly.swift; sourceTree = "<group>"; };
+		C1A2791622B3822600EB371F /* InvoiceDetailsFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvoiceDetailsFormatter.swift; sourceTree = "<group>"; };
 		D78C6945ABBF1097EFF0F205 /* Pods-Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example.release.xcconfig"; path = "Target Support Files/Pods-Example/Pods-Example.release.xcconfig"; sourceTree = "<group>"; };
 		EA210B7E0FDB7D5FA61687A8 /* Pods-Example+Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example+Pods.debug.xcconfig"; path = "Target Support Files/Pods-Example+Pods/Pods-Example+Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -470,6 +478,7 @@
 			children = (
 				C1044ED122A5C24E00A8065B /* Palette */,
 				C1044FF222AFBC8700A8065B /* Views */,
+				C1A2790922B373C800EB371F /* Formatters */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -1108,6 +1117,33 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		C1A2790922B373C800EB371F /* Formatters */ = {
+			isa = PBXGroup;
+			children = (
+				C1A2791222B3816200EB371F /* Price */,
+				C1A2791322B3821700EB371F /* InvoiceDetails */,
+			);
+			path = Formatters;
+			sourceTree = "<group>";
+		};
+		C1A2791222B3816200EB371F /* Price */ = {
+			isa = PBXGroup;
+			children = (
+				C1A2790C22B373F400EB371F /* PriceFormatter.swift */,
+				C1A2790A22B373F400EB371F /* PriceFormatterAssembly.swift */,
+			);
+			path = Price;
+			sourceTree = "<group>";
+		};
+		C1A2791322B3821700EB371F /* InvoiceDetails */ = {
+			isa = PBXGroup;
+			children = (
+				C1A2791622B3822600EB371F /* InvoiceDetailsFormatter.swift */,
+				C1A2791422B3822600EB371F /* InvoiceDetailsFormatterAssembly.swift */,
+			);
+			path = InvoiceDetails;
+			sourceTree = "<group>";
+		};
 		CAED3665F04A4413167F2B7F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1495,6 +1531,7 @@
 				C1044F6822A8770B00A8065B /* NetworkSessionHTTPHeadersDependencies.swift in Sources */,
 				C1044FDB22ADF4E900A8065B /* PaymentStatusDTO.swift in Sources */,
 				C1978A3122A00A3700C7F966 /* UIViewController+Rx.swift in Sources */,
+				C1A2791022B373F400EB371F /* PriceFormatter.swift in Sources */,
 				C1044F4722A8549900A8065B /* ErrorNetworkResponse.swift in Sources */,
 				C1044EE522A5C54A00A8065B /* ColorsPalette.swift in Sources */,
 				C1044FBC22AC57B100A8065B /* BankCardPaymentSystemDTO.swift in Sources */,
@@ -1556,6 +1593,7 @@
 				C1044F9422A9C3F500A8065B /* InvoiceStatusDTO.swift in Sources */,
 				C1044FE522AE94CB00A8065B /* UserInteractionDTO.swift in Sources */,
 				C1044F8B22A937F900A8065B /* InvoiceNetworkResponse.swift in Sources */,
+				C1A2791A22B3822600EB371F /* InvoiceDetailsFormatter.swift in Sources */,
 				C1978A1C22A0073300C7F966 /* ModuleView.swift in Sources */,
 				C1044F7B22A8B06300A8065B /* NetworkClient.swift in Sources */,
 				C1044F7022A88D6D00A8065B /* NetworkTaskFactoryAssembly.swift in Sources */,
@@ -1564,6 +1602,7 @@
 				C104500022B25DFA00A8065B /* PaymentMethodsTableFooterView.swift in Sources */,
 				C1044FA222A9D7B700A8065B /* PaymentMethodDTO.swift in Sources */,
 				C1044FC822AC66B300A8065B /* Fingerprint.swift in Sources */,
+				C1A2791822B3822600EB371F /* InvoiceDetailsFormatterAssembly.swift in Sources */,
 				C1044F2522A7F8B100A8065B /* PaymentRootViewControllerDependenciesExtensions.swift in Sources */,
 				C1044EF522A5D48E00A8065B /* PaymentRouterDependencies.swift in Sources */,
 				C1044F7322A88D6D00A8065B /* NetworkTaskFactoryDependenciesExtensions.swift in Sources */,
@@ -1588,6 +1627,7 @@
 				C1044FDD22ADFBC700A8065B /* ObtainInvoiceEventsNetworkRequest.swift in Sources */,
 				C1044FE322AE087600A8065B /* InvoiceChangeDTO.swift in Sources */,
 				C1044FB422AAB99100A8065B /* PaymentResourceDTO.swift in Sources */,
+				C1A2790E22B373F400EB371F /* PriceFormatterAssembly.swift in Sources */,
 				C1044FC922AC66B300A8065B /* FingerprintDependenciesExtensions.swift in Sources */,
 				C1978A3422A00A3700C7F966 /* ObservableType+Errors.swift in Sources */,
 				C1044F3722A8163000A8065B /* NetworkResponse.swift in Sources */,
