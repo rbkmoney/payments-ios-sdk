@@ -20,7 +20,8 @@ struct PriceFormatter {
     func formattedPrice(amount: AmountDTO, currency: CurrencyDTO) -> String {
         let numberFormatter = with(NumberFormatter()) {
             $0.numberStyle = .currency
-            $0.locale = currency.locale
+            $0.locale = Locale.current
+            $0.currencySymbol = currency.symbol
         }
 
         guard let string = numberFormatter.string(from: NSDecimalNumber(decimal: amount.value)) else {
@@ -34,14 +35,14 @@ struct PriceFormatter {
 
 private extension CurrencyDTO {
 
-    var locale: Locale {
+    var symbol: String {
         switch self {
         case .rub:
-            return Locale(identifier: "ru_RU")
+            return "₽"
         case .usd:
-            return Locale(identifier: "ru_US")
+            return "$"
         case .eur:
-            return Locale(identifier: "ru_EU")
+            return "€"
         }
     }
 }
