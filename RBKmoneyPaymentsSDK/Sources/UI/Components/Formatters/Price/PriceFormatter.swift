@@ -14,13 +14,16 @@
 
 import Foundation
 
-struct PriceFormatter {
+final class PriceFormatter {
+
+    // MARK: - Dependencies
+    lazy var locale: Locale = deferred()
 
     // MARK: - Internal
     func formattedPrice(amount: AmountDTO, currency: CurrencyDTO) -> String {
         let numberFormatter = with(NumberFormatter()) {
             $0.numberStyle = .currency
-            $0.locale = Locale.current
+            $0.locale = locale
             $0.currencySymbol = currency.symbol
         }
 

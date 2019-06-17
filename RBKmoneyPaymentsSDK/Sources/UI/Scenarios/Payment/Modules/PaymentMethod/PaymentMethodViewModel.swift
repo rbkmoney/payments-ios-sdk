@@ -19,7 +19,7 @@ final class PaymentMethodViewModel: ModuleViewModel {
 
     // MARK: - Dependencies
     lazy var router: AnyRouter<PaymentRoute> = deferred()
-    lazy var paymentInputData: PaymentInputData = deferred()
+    lazy var inputData: PaymentMethodInputData = deferred()
     lazy var remoteAPI: PaymentMethodRemoteAPI = deferred()
     lazy var applePayInfoProvider: PaymentMethodApplePayInfoProvider = deferred()
 
@@ -63,11 +63,11 @@ final class PaymentMethodViewModel: ModuleViewModel {
 
     private(set) lazy var isLoading = activityTracker.asDriver()
 
-    private(set) lazy var shopName = inputData
+    private(set) lazy var shopName = inputDataObservable
         .map { $0.shopName }
         .asDriver(onError: .never)
 
-    private(set) lazy var invoice = inputData
+    private(set) lazy var invoice = inputDataObservable
         .flatMap { [remoteAPI, activityTracker] data -> Single<InvoiceDTO> in
             let invoice = remoteAPI.obtainInvoice(
                 invoiceIdentifier: data.invoiceIdentifier,
@@ -77,7 +77,7 @@ final class PaymentMethodViewModel: ModuleViewModel {
         }
         .asDriver(onError: .never)
 
-    private(set) lazy var items = inputData
+    private(set) lazy var items = inputDataObservable
         .flatMap { [remoteAPI, activityTracker, methodsMapper] data -> Single<[Item]> in
             let methods = remoteAPI.obtainInvoicePaymentMethods(
                 invoiceIdentifier: data.invoiceIdentifier,
@@ -88,7 +88,7 @@ final class PaymentMethodViewModel: ModuleViewModel {
         .asDriver(onError: .never)
 
     // MARK: - Private
-    private lazy var methodsMapper = { [applePayInfoProvider] (data: PaymentInputData, methods: [PaymentMethodDTO]) -> [Item] in
+    private lazy var methodsMapper = { [applePayInfoProvider] (data: PaymentMethodInputData, methods: [PaymentMethodDTO]) -> [Item] in
         var result = [Item]()
 
         // ApplePay
@@ -126,11 +126,11 @@ final class PaymentMethodViewModel: ModuleViewModel {
         return result
     }
 
-    private lazy var inputData = Observable.deferred { [weak self] () -> Observable<PaymentInputData> in
+    private lazy var inputDataObservable = Observable.deferred { [weak self] () -> Observable<PaymentMethodInputData> in
         guard let this = self else {
             return .empty()
         }
-        return .just(this.paymentInputData)
+        return .just(this.inputData)
     }
 
     private let activityTracker = ActivityTracker()
