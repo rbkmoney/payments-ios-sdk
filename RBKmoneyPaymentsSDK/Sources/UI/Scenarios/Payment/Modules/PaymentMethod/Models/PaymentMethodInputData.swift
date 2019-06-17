@@ -14,15 +14,4 @@
 
 import Foundation
 
-enum PriceFormatterAssembly {
-
-    // MARK: - Internal
-    static func makeFormatter() -> PriceFormatter {
-        return formatterInstance
-    }
-
-    // MARK: - Private
-    private static let formatterInstance = with(PriceFormatter()) {
-        $0.locale = Locale.current
-    }
-}
+typealias PaymentMethodInputData = PaymentInputData

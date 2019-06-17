@@ -15,7 +15,7 @@
 final class PaymentMethodAssembly: ViewControllerAssembly<PaymentMethodViewController, PaymentMethodViewModel> {
 
     // MARK: - Internal
-    func makeViewController(router: AnyRouter<PaymentRoute>, paymentInputData: PaymentInputData) -> PaymentMethodViewController {
+    func makeViewController(router: AnyRouter<PaymentRoute>, inputData: PaymentMethodInputData) -> PaymentMethodViewController {
         let viewController = R.storyboard.paymentMethod.initial()!
 
         viewController.priceFormatter = PriceFormatterAssembly.makeFormatter()
@@ -23,7 +23,7 @@ final class PaymentMethodAssembly: ViewControllerAssembly<PaymentMethodViewContr
 
         bindViewModel(to: viewController) {
             $0.router = router
-            $0.paymentInputData = paymentInputData
+            $0.inputData = inputData
             $0.remoteAPI = RemoteAPIAssembly.makeRemoteAPI()
             $0.applePayInfoProvider = ApplePayInfoAssembly.makeApplePayInfo()
         }
