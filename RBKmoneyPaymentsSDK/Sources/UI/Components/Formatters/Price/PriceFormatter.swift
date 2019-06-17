@@ -41,7 +41,7 @@ private extension CurrencyDTO {
         case .usd:
             return Locale(identifier: "ru_US")
         case .eur:
-            return Locale(identifier: "ru_DE")
+            return Locale(identifier: "ru_EU")
         }
     }
 }
