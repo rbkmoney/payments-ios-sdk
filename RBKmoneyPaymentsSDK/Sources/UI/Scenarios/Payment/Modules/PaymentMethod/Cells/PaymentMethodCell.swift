@@ -42,6 +42,8 @@ final class PaymentMethodCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         formView.backgroundColor = Palette.colors.formBackground
+        containerView.borderWidth = 1
+        containerView.cornerRadius = 3
     }
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {

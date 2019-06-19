@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="woJ-BK-SnQ">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Title-->
+        <scene sceneID="YKC-9D-fGX">
+            <objects>
+                <viewController storyboardIdentifier="Initial" automaticallyAdjustsScrollViewInsets="NO" id="woJ-BK-SnQ" customClass="PaymentProgressViewController" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kKr-70-3MS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rFm-ou-JjV" customClass="ThrobberView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.85563380280000001" green="0.235915493" blue="0.21478873239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="rFm-ou-JjV" firstAttribute="top" secondItem="kKr-70-3MS" secondAttribute="top" id="0lm-6T-pgS"/>
+                            <constraint firstAttribute="bottom" secondItem="rFm-ou-JjV" secondAttribute="bottom" id="DtW-kv-Gq9"/>
+                            <constraint firstAttribute="trailing" secondItem="rFm-ou-JjV" secondAttribute="trailing" id="Gjt-nu-dKD"/>
+                            <constraint firstItem="rFm-ou-JjV" firstAttribute="leading" secondItem="kKr-70-3MS" secondAttribute="leading" id="rCi-9J-Lnw"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IPU-ZT-f8S"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="2VO-ff-J1M">
+                        <barButtonItem key="backBarButtonItem" title=" " id="eMx-GD-pCx"/>
+                        <barButtonItem key="rightBarButtonItem" image="Common/close" id="6Nk-p3-ayr"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="cancelBarButtonItem" destination="6Nk-p3-ayr" id="Sa6-wt-lTm"/>
+                        <outlet property="throbberView" destination="rFm-ou-JjV" id="PiR-EF-vsR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yJM-GT-hGU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-97" y="161"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Common/close" width="24" height="24"/>
+    </resources>
+</document>

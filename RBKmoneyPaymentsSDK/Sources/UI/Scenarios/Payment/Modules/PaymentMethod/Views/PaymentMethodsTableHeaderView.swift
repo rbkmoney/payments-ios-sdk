@@ -58,7 +58,7 @@ final class PaymentMethodsTableHeaderView: UIView {
 private extension TextAttributes {
 
     static let title = TextAttributes()
-        .font(.systemFont(ofSize: 16, weight: .medium))
+        .font(Palette.fonts.common)
         .textColor(Palette.colors.darkText)
         .textAlignment(.left)
 }

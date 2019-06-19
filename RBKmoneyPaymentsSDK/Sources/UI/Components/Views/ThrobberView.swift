@@ -62,10 +62,8 @@ final class ThrobberView: UIView {
             animations: {
                 self.containerView.alpha = 0
             },
-            completion: { isFinished in
-                if isFinished {
-                    self.isHidden = true
-                }
+            completion: { _ in
+                self.isHidden = true
             }
         )
     }

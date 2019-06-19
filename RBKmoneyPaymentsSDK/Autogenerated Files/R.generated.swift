@@ -32,6 +32,82 @@ struct R: Rswift.Validatable {
   
   /// This `R.image` struct is generated, and contains static references to 0 images.
   struct image {
+    /// This `R.image.bankCard` struct is generated, and contains static references to 10 images.
+    struct bankCard {
+      /// Image `cardholder`.
+      static let cardholder = Rswift.ImageResource(bundle: R.hostingBundle, name: "BankCard/cardholder")
+      /// Image `checkmark`.
+      static let checkmark = Rswift.ImageResource(bundle: R.hostingBundle, name: "BankCard/checkmark")
+      /// Image `cross`.
+      static let cross = Rswift.ImageResource(bundle: R.hostingBundle, name: "BankCard/cross")
+      /// Image `cvv`.
+      static let cvv = Rswift.ImageResource(bundle: R.hostingBundle, name: "BankCard/cvv")
+      /// Image `date`.
+      static let date = Rswift.ImageResource(bundle: R.hostingBundle, name: "BankCard/date")
+      /// Image `email`.
+      static let email = Rswift.ImageResource(bundle: R.hostingBundle, name: "BankCard/email")
+      /// Image `mastercard`.
+      static let mastercard = Rswift.ImageResource(bundle: R.hostingBundle, name: "BankCard/mastercard")
+      /// Image `nspkmir`.
+      static let nspkmir = Rswift.ImageResource(bundle: R.hostingBundle, name: "BankCard/nspkmir")
+      /// Image `number`.
+      static let number = Rswift.ImageResource(bundle: R.hostingBundle, name: "BankCard/number")
+      /// Image `visa`.
+      static let visa = Rswift.ImageResource(bundle: R.hostingBundle, name: "BankCard/visa")
+      
+      /// `UIImage(named: "cardholder", bundle: ..., traitCollection: ...)`
+      static func cardholder(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.bankCard.cardholder, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "checkmark", bundle: ..., traitCollection: ...)`
+      static func checkmark(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.bankCard.checkmark, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "cross", bundle: ..., traitCollection: ...)`
+      static func cross(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.bankCard.cross, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "cvv", bundle: ..., traitCollection: ...)`
+      static func cvv(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.bankCard.cvv, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "date", bundle: ..., traitCollection: ...)`
+      static func date(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.bankCard.date, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "email", bundle: ..., traitCollection: ...)`
+      static func email(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.bankCard.email, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "mastercard", bundle: ..., traitCollection: ...)`
+      static func mastercard(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.bankCard.mastercard, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "nspkmir", bundle: ..., traitCollection: ...)`
+      static func nspkmir(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.bankCard.nspkmir, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "number", bundle: ..., traitCollection: ...)`
+      static func number(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.bankCard.number, compatibleWith: traitCollection)
+      }
+      
+      /// `UIImage(named: "visa", bundle: ..., traitCollection: ...)`
+      static func visa(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
+        return UIKit.UIImage(resource: R.image.bankCard.visa, compatibleWith: traitCollection)
+      }
+      
+      fileprivate init() {}
+    }
+    
     /// This `R.image.bottomLogos` struct is generated, and contains static references to 3 images.
     struct bottomLogos {
       /// Image `3ds_pci_dss`.
@@ -218,14 +294,28 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.storyboard` struct is generated, and contains static references to 1 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 3 storyboards.
   struct storyboard {
+    /// Storyboard `BankCard`.
+    static let bankCard = _R.storyboard.bankCard()
     /// Storyboard `PaymentMethod`.
     static let paymentMethod = _R.storyboard.paymentMethod()
+    /// Storyboard `PaymentProgress`.
+    static let paymentProgress = _R.storyboard.paymentProgress()
+    
+    /// `UIStoryboard(name: "BankCard", bundle: ...)`
+    static func bankCard(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.bankCard)
+    }
     
     /// `UIStoryboard(name: "PaymentMethod", bundle: ...)`
     static func paymentMethod(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.paymentMethod)
+    }
+    
+    /// `UIStoryboard(name: "PaymentProgress", bundle: ...)`
+    static func paymentProgress(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.paymentProgress)
     }
     
     fileprivate init() {}
@@ -233,8 +323,12 @@ struct R: Rswift.Validatable {
   
   /// This `R.string` struct is generated, and contains static references to 1 localization tables.
   struct string {
-    /// This `R.string.localizable` struct is generated, and contains static references to 5 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 12 localization keys.
     struct localizable {
+      /// Value: CVV/CVC
+      static let bank_card_cvc_placeholder = Rswift.StringResource(key: "bank_card_cvc_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Email для чека
+      static let bank_card_email_placeholder = Rswift.StringResource(key: "bank_card_email_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: © 2008-2018 RBKmoney | Direct Payments Ltd.
       static let copyright = Rswift.StringResource(key: "copyright", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: БАНКОВСКАЯ КАРТА
@@ -245,6 +339,26 @@ struct R: Rswift.Validatable {
       static let payment_method_header_title = Rswift.StringResource(key: "payment_method_header_title", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: ДЕТАЛИ ЗАКАЗА
       static let order_details = Rswift.StringResource(key: "order_details", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Имя на карте
+      static let bank_card_cardholder_placeholder = Rswift.StringResource(key: "bank_card_cardholder_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: ММ/ГГ
+      static let bank_card_date_placeholder = Rswift.StringResource(key: "bank_card_date_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Номер на карте
+      static let bank_card_card_number_placeholder = Rswift.StringResource(key: "bank_card_card_number_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Оплата банковской картой
+      static let bank_card_header_title = Rswift.StringResource(key: "bank_card_header_title", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Оплатить %@
+      static let bank_card_pay = Rswift.StringResource(key: "bank_card_pay", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      
+      /// Value: CVV/CVC
+      static func bank_card_cvc_placeholder(_: Void = ()) -> String {
+        return NSLocalizedString("bank_card_cvc_placeholder", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Email для чека
+      static func bank_card_email_placeholder(_: Void = ()) -> String {
+        return NSLocalizedString("bank_card_email_placeholder", bundle: R.hostingBundle, comment: "")
+      }
       
       /// Value: © 2008-2018 RBKmoney | Direct Payments Ltd.
       static func copyright(_: Void = ()) -> String {
@@ -269,6 +383,31 @@ struct R: Rswift.Validatable {
       /// Value: ДЕТАЛИ ЗАКАЗА
       static func order_details(_: Void = ()) -> String {
         return NSLocalizedString("order_details", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Имя на карте
+      static func bank_card_cardholder_placeholder(_: Void = ()) -> String {
+        return NSLocalizedString("bank_card_cardholder_placeholder", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: ММ/ГГ
+      static func bank_card_date_placeholder(_: Void = ()) -> String {
+        return NSLocalizedString("bank_card_date_placeholder", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Номер на карте
+      static func bank_card_card_number_placeholder(_: Void = ()) -> String {
+        return NSLocalizedString("bank_card_card_number_placeholder", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Оплата банковской картой
+      static func bank_card_header_title(_: Void = ()) -> String {
+        return NSLocalizedString("bank_card_header_title", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Оплатить %@
+      static func bank_card_pay(_ value1: String) -> String {
+        return String(format: NSLocalizedString("bank_card_pay", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
       }
       
       fileprivate init() {}
@@ -386,7 +525,35 @@ struct _R: Rswift.Validatable {
   
   struct storyboard: Rswift.Validatable {
     static func validate() throws {
+      try bankCard.validate()
       try paymentMethod.validate()
+      try paymentProgress.validate()
+    }
+    
+    struct bankCard: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = BankCardViewController
+      
+      let bundle = R.hostingBundle
+      let initial = StoryboardViewControllerResource<BankCardViewController>(identifier: "Initial")
+      let name = "BankCard"
+      
+      func initial(_: Void = ()) -> BankCardViewController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: initial)
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "BankCard/cardholder", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'BankCard/cardholder' is used in storyboard 'BankCard', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "BankCard/cvv", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'BankCard/cvv' is used in storyboard 'BankCard', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "BankCard/date", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'BankCard/date' is used in storyboard 'BankCard', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "BankCard/email", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'BankCard/email' is used in storyboard 'BankCard', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "BankCard/number", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'BankCard/number' is used in storyboard 'BankCard', but couldn't be loaded.") }
+        if UIKit.UIImage(named: "Common/close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Common/close' is used in storyboard 'BankCard', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
+        if _R.storyboard.bankCard().initial() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'initial' could not be loaded from storyboard 'BankCard' as 'BankCardViewController'.") }
+      }
+      
+      fileprivate init() {}
     }
     
     struct paymentMethod: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
@@ -405,6 +572,27 @@ struct _R: Rswift.Validatable {
         if #available(iOS 11.0, *) {
         }
         if _R.storyboard.paymentMethod().initial() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'initial' could not be loaded from storyboard 'PaymentMethod' as 'PaymentMethodViewController'.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct paymentProgress: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = PaymentProgressViewController
+      
+      let bundle = R.hostingBundle
+      let initial = StoryboardViewControllerResource<PaymentProgressViewController>(identifier: "Initial")
+      let name = "PaymentProgress"
+      
+      func initial(_: Void = ()) -> PaymentProgressViewController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: initial)
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "Common/close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Common/close' is used in storyboard 'PaymentProgress', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
+        if _R.storyboard.paymentProgress().initial() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'initial' could not be loaded from storyboard 'PaymentProgress' as 'PaymentProgressViewController'.") }
       }
       
       fileprivate init() {}

@@ -73,7 +73,7 @@ private extension TextAttributes {
         .textAlignment(.left)
 
     static let details = TextAttributes()
-        .font(.systemFont(ofSize: 16, weight: .medium))
+        .font(Palette.fonts.common)
         .textColor(Palette.colors.brightText)
         .lineBreakMode(.byTruncatingTail)
         .textAlignment(.left)

@@ -64,8 +64,16 @@ class ColorsPalette {
         return UIColor(integralRed: 104, green: 91, blue: 255)
     }
 
+    var placeholder: UIColor {
+        return UIColor(integralWhite: 175)
+    }
+
     var frame: UIColor {
         return UIColor(integralWhite: 186)
+    }
+
+    var wrong: UIColor {
+        return UIColor(integralRed: 231, green: 85, blue: 66)
     }
 
     var selectionBackground: UIColor {

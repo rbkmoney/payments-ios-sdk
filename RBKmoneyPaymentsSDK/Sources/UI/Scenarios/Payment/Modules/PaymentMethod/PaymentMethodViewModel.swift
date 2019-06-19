@@ -126,12 +126,9 @@ final class PaymentMethodViewModel: ModuleViewModel {
         return result
     }
 
-    private lazy var inputDataObservable = Observable.deferred { [weak self] () -> Observable<PaymentMethodInputData> in
-        guard let this = self else {
-            return .empty()
-        }
-        return .just(this.inputData)
-    }
+    private lazy var inputDataObservable = Observable
+        .deferred { [weak self] in .just(self?.inputData) }
+        .compactMap { $0 }
 
     private let activityTracker = ActivityTracker()
 }

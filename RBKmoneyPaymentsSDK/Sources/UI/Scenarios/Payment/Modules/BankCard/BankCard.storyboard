@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="woJ-BK-SnQ">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Title-->
+        <scene sceneID="YKC-9D-fGX">
+            <objects>
+                <viewController storyboardIdentifier="Initial" automaticallyAdjustsScrollViewInsets="NO" id="woJ-BK-SnQ" customClass="BankCardViewController" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kKr-70-3MS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4h8-Am-Ww7" customClass="GradientBackgroundView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" red="0.59140625000000002" green="0.72857142860000002" blue="0.32215401789999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </view>
+                            <scrollView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="hGt-5r-YtN">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FVs-ai-0DQ">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SEe-06-n5b" customClass="InvoiceSummaryView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jNH-40-p5d" userLabel="Content">
+                                                <rect key="frame" x="5" y="102.5" width="365" height="394.5"/>
+                                                <subviews>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ngg-oz-eUS" customClass="BankCardTextField" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
+                                                        <rect key="frame" x="20" y="134.5" width="157.5" height="45"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="45" id="dhI-KS-hzT"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="image" keyPath="leftViewImage" value="BankCard/date"/>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isPasteEnabled" value="NO"/>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isCutEnabled" value="NO"/>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isDeleteEnabled" value="NO"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Wm-mg-Agp" customClass="BankCardTextField" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
+                                                        <rect key="frame" x="187.5" y="134.5" width="157.5" height="45"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="45" id="nNf-L9-Dr0"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="next" secureTextEntry="YES" textContentType="password"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="image" keyPath="leftViewImage" value="BankCard/cvv"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hYR-ab-JcW" customClass="BankCardTextField" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
+                                                        <rect key="frame" x="20" y="189.5" width="325" height="45"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="45" id="gAf-qU-h22"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" textContentType="name"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="image" keyPath="leftViewImage" value="BankCard/cardholder"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </textField>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jer-T5-uvQ" customClass="BankCardTextField" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
+                                                        <rect key="frame" x="20" y="244.5" width="325" height="45"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="45" id="oOb-s2-p18"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="done" textContentType="email"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="image" keyPath="leftViewImage" value="BankCard/email"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </textField>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uoU-T5-rS1">
+                                                        <rect key="frame" x="20" y="319.5" width="325" height="45"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="45" id="RfL-Ie-tSH"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Button">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </state>
+                                                    </button>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6ti-6u-1tf">
+                                                        <rect key="frame" x="20" y="31" width="325" height="19.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Xz-tX-C6R" customClass="BankCardTextField" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
+                                                        <rect key="frame" x="20" y="79.5" width="325" height="45"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="45" id="34c-8I-SdS"/>
+                                                        </constraints>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" returnKeyType="next" textContentType="cc-number"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="image" keyPath="leftViewImage" value="BankCard/number"/>
+                                                        </userDefinedRuntimeAttributes>
+                                                    </textField>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.85563380280000001" green="0.235915493" blue="0.21478873239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstItem="0Wm-mg-Agp" firstAttribute="leading" secondItem="jNH-40-p5d" secondAttribute="centerX" constant="5" id="0A7-FC-4aA"/>
+                                                    <constraint firstItem="hYR-ab-JcW" firstAttribute="leading" secondItem="5Xz-tX-C6R" secondAttribute="leading" id="1YS-UA-itS"/>
+                                                    <constraint firstItem="hYR-ab-JcW" firstAttribute="top" secondItem="ngg-oz-eUS" secondAttribute="bottom" constant="10" id="4EM-8H-I8X"/>
+                                                    <constraint firstItem="0Wm-mg-Agp" firstAttribute="top" secondItem="5Xz-tX-C6R" secondAttribute="bottom" constant="10" id="5wS-zx-zYM"/>
+                                                    <constraint firstItem="0Wm-mg-Agp" firstAttribute="trailing" secondItem="5Xz-tX-C6R" secondAttribute="trailing" id="9DO-cd-qtu"/>
+                                                    <constraint firstItem="uoU-T5-rS1" firstAttribute="trailing" secondItem="5Xz-tX-C6R" secondAttribute="trailing" id="9ow-R7-e2b"/>
+                                                    <constraint firstItem="uoU-T5-rS1" firstAttribute="top" secondItem="jer-T5-uvQ" secondAttribute="bottom" constant="30" id="Fdb-zW-U5B"/>
+                                                    <constraint firstItem="ngg-oz-eUS" firstAttribute="leading" secondItem="5Xz-tX-C6R" secondAttribute="leading" id="Gt5-6b-v1V"/>
+                                                    <constraint firstItem="5Xz-tX-C6R" firstAttribute="leading" secondItem="jNH-40-p5d" secondAttribute="leading" constant="20" id="IL1-im-Oct"/>
+                                                    <constraint firstItem="jer-T5-uvQ" firstAttribute="top" secondItem="hYR-ab-JcW" secondAttribute="bottom" constant="10" id="Pjj-iK-IhY"/>
+                                                    <constraint firstItem="jer-T5-uvQ" firstAttribute="leading" secondItem="5Xz-tX-C6R" secondAttribute="leading" id="Pk5-mH-Zim"/>
+                                                    <constraint firstItem="ngg-oz-eUS" firstAttribute="top" secondItem="5Xz-tX-C6R" secondAttribute="bottom" constant="10" id="UCZ-tB-rSf"/>
+                                                    <constraint firstItem="jer-T5-uvQ" firstAttribute="trailing" secondItem="5Xz-tX-C6R" secondAttribute="trailing" id="VCy-VD-18Y"/>
+                                                    <constraint firstItem="6ti-6u-1tf" firstAttribute="top" secondItem="jNH-40-p5d" secondAttribute="top" constant="31" id="VIm-nN-Sqb"/>
+                                                    <constraint firstItem="uoU-T5-rS1" firstAttribute="leading" secondItem="5Xz-tX-C6R" secondAttribute="leading" id="ZVw-Og-Omn"/>
+                                                    <constraint firstAttribute="trailing" secondItem="6ti-6u-1tf" secondAttribute="trailing" constant="20" id="e88-lE-NfA"/>
+                                                    <constraint firstItem="6ti-6u-1tf" firstAttribute="leading" secondItem="jNH-40-p5d" secondAttribute="leading" constant="20" id="efP-Au-OQD"/>
+                                                    <constraint firstAttribute="trailing" secondItem="5Xz-tX-C6R" secondAttribute="trailing" constant="20" id="gaa-y8-1TA"/>
+                                                    <constraint firstAttribute="centerX" secondItem="ngg-oz-eUS" secondAttribute="trailing" constant="5" id="t4O-h4-1fj"/>
+                                                    <constraint firstItem="hYR-ab-JcW" firstAttribute="trailing" secondItem="5Xz-tX-C6R" secondAttribute="trailing" id="w2x-sm-gSh"/>
+                                                    <constraint firstAttribute="bottom" secondItem="uoU-T5-rS1" secondAttribute="bottom" constant="30" id="w5Y-28-mu4"/>
+                                                    <constraint firstItem="5Xz-tX-C6R" firstAttribute="top" secondItem="6ti-6u-1tf" secondAttribute="bottom" constant="29" id="y1w-Tv-Ygb"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VLZ-Wx-uUQ" customClass="LogotypesView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="521" width="375" height="126"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="126" id="X0E-sm-wSc"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="VLZ-Wx-uUQ" secondAttribute="bottom" id="8fA-Nd-WcX"/>
+                                            <constraint firstItem="VLZ-Wx-uUQ" firstAttribute="leading" secondItem="FVs-ai-0DQ" secondAttribute="leading" id="AnT-c3-4k9"/>
+                                            <constraint firstItem="jNH-40-p5d" firstAttribute="top" secondItem="SEe-06-n5b" secondAttribute="bottom" constant="13" id="LDR-cC-Orx"/>
+                                            <constraint firstItem="SEe-06-n5b" firstAttribute="leading" secondItem="FVs-ai-0DQ" secondAttribute="leading" id="RVi-7i-b3w"/>
+                                            <constraint firstItem="jNH-40-p5d" firstAttribute="leading" secondItem="FVs-ai-0DQ" secondAttribute="leading" constant="5" id="TZy-6i-Wzw"/>
+                                            <constraint firstItem="SEe-06-n5b" firstAttribute="top" secondItem="FVs-ai-0DQ" secondAttribute="top" id="a9l-el-iwe"/>
+                                            <constraint firstItem="VLZ-Wx-uUQ" firstAttribute="top" secondItem="jNH-40-p5d" secondAttribute="bottom" constant="24" id="an8-cj-c3c"/>
+                                            <constraint firstAttribute="trailing" secondItem="SEe-06-n5b" secondAttribute="trailing" id="ni3-rg-feb"/>
+                                            <constraint firstAttribute="trailing" secondItem="jNH-40-p5d" secondAttribute="trailing" constant="5" id="rlN-B6-LLK"/>
+                                            <constraint firstAttribute="trailing" secondItem="VLZ-Wx-uUQ" secondAttribute="trailing" id="zV8-Q2-wKe"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="FVs-ai-0DQ" firstAttribute="height" secondItem="hGt-5r-YtN" secondAttribute="height" priority="250" id="7bL-Pm-1KF"/>
+                                    <constraint firstItem="FVs-ai-0DQ" firstAttribute="top" secondItem="hGt-5r-YtN" secondAttribute="top" id="OBO-GW-7WP"/>
+                                    <constraint firstItem="FVs-ai-0DQ" firstAttribute="width" secondItem="hGt-5r-YtN" secondAttribute="width" id="VYX-vG-B3a"/>
+                                    <constraint firstAttribute="bottom" secondItem="FVs-ai-0DQ" secondAttribute="bottom" id="XZU-2K-Kaj"/>
+                                    <constraint firstItem="FVs-ai-0DQ" firstAttribute="leading" secondItem="hGt-5r-YtN" secondAttribute="leading" id="mA0-jh-jv4"/>
+                                    <constraint firstAttribute="trailing" secondItem="FVs-ai-0DQ" secondAttribute="trailing" id="r7j-bf-ofv"/>
+                                </constraints>
+                            </scrollView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u0a-0y-xPl" customClass="ThrobberView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" red="0.92549019610000005" green="0.21176470589999999" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="u0a-0y-xPl" firstAttribute="leading" secondItem="kKr-70-3MS" secondAttribute="leading" id="D3N-ry-BWi"/>
+                            <constraint firstItem="hGt-5r-YtN" firstAttribute="top" secondItem="IPU-ZT-f8S" secondAttribute="top" id="O3K-zm-a0t"/>
+                            <constraint firstItem="IPU-ZT-f8S" firstAttribute="bottom" secondItem="hGt-5r-YtN" secondAttribute="bottom" id="Ors-Sk-pi0"/>
+                            <constraint firstAttribute="trailing" secondItem="u0a-0y-xPl" secondAttribute="trailing" id="Xhy-0q-YA2"/>
+                            <constraint firstAttribute="bottom" secondItem="4h8-Am-Ww7" secondAttribute="bottom" id="dfR-Zg-H8H"/>
+                            <constraint firstItem="4h8-Am-Ww7" firstAttribute="leading" secondItem="kKr-70-3MS" secondAttribute="leading" id="j7L-Qr-fu5"/>
+                            <constraint firstItem="4h8-Am-Ww7" firstAttribute="trailing" secondItem="kKr-70-3MS" secondAttribute="trailing" id="jny-OP-jHK"/>
+                            <constraint firstItem="4h8-Am-Ww7" firstAttribute="top" secondItem="kKr-70-3MS" secondAttribute="top" id="k7t-2f-pLQ"/>
+                            <constraint firstItem="hGt-5r-YtN" firstAttribute="leading" secondItem="IPU-ZT-f8S" secondAttribute="leading" id="lOZ-lu-uzM"/>
+                            <constraint firstItem="u0a-0y-xPl" firstAttribute="top" secondItem="kKr-70-3MS" secondAttribute="top" id="m2k-R6-k8r"/>
+                            <constraint firstItem="IPU-ZT-f8S" firstAttribute="trailing" secondItem="hGt-5r-YtN" secondAttribute="trailing" id="rdv-51-JIc"/>
+                            <constraint firstAttribute="bottom" secondItem="u0a-0y-xPl" secondAttribute="bottom" id="u7m-a8-w2j"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IPU-ZT-f8S"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="T2c-bp-vE2">
+                        <barButtonItem key="backBarButtonItem" title=" " id="4uo-nd-Kep"/>
+                        <barButtonItem key="rightBarButtonItem" image="Common/close" id="inJ-Xy-LVE"/>
+                    </navigationItem>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="cancelBarButtonItem" destination="inJ-Xy-LVE" id="NLd-eR-enh"/>
+                        <outlet property="cardNumberTextField" destination="5Xz-tX-C6R" id="kbs-Qv-Kfa"/>
+                        <outlet property="cardholderTextField" destination="hYR-ab-JcW" id="QYs-y1-fEe"/>
+                        <outlet property="contentView" destination="jNH-40-p5d" id="W5K-2j-5ay"/>
+                        <outlet property="cvvTextField" destination="0Wm-mg-Agp" id="z4b-lk-ty2"/>
+                        <outlet property="emailTextField" destination="jer-T5-uvQ" id="w1u-jx-NhQ"/>
+                        <outlet property="expirationDateTextField" destination="ngg-oz-eUS" id="XRm-ee-iy0"/>
+                        <outlet property="footerView" destination="VLZ-Wx-uUQ" id="Pzh-GQ-9ep"/>
+                        <outlet property="headerView" destination="SEe-06-n5b" id="LoW-s8-amm"/>
+                        <outlet property="payButton" destination="uoU-T5-rS1" id="N6v-Q8-Jx2"/>
+                        <outlet property="scrollView" destination="hGt-5r-YtN" id="sPj-RK-tlB"/>
+                        <outlet property="throbberView" destination="u0a-0y-xPl" id="8Rs-Q5-06b"/>
+                        <outlet property="titleLabel" destination="6ti-6u-1tf" id="Dna-Ra-sV3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yJM-GT-hGU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-98.400000000000006" y="160.56971514242881"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="BankCard/cardholder" width="17" height="21"/>
+        <image name="BankCard/cvv" width="17" height="21"/>
+        <image name="BankCard/date" width="17" height="21"/>
+        <image name="BankCard/email" width="17" height="21"/>
+        <image name="BankCard/number" width="17" height="21"/>
+        <image name="Common/close" width="24" height="24"/>
+    </resources>
+</document>
