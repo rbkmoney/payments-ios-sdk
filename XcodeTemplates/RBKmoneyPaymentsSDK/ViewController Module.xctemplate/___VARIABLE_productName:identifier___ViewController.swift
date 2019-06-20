@@ -22,7 +22,7 @@ final class ___VARIABLE_productName:identifier___ViewController: UIViewControlle
     lazy var <#dependency#>: <#DependencyType#> = deferred()
 
     // MARK: - Outlets
-    @IBOutlet private weak var <#outletName#>: <#OutletType#>!
+    @IBOutlet private var <#outletName#>: <#OutletType#>!
 
     // MARK: - ModuleView
     var output: ___VARIABLE_productName:identifier___ViewModel.Input {
