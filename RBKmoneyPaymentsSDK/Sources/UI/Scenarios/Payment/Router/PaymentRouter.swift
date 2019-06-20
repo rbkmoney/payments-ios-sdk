@@ -16,7 +16,13 @@ import Foundation
 
 enum PaymentRoute: Route {
 
-    case paymentMethod
+    case method
+    case bankCard(InvoiceDTO, Set<PaymentSystem>)
+    case applePay(InvoiceDTO, Set<PaymentSystem>)
+    case progress(PaymentResourceDTO, String?)
+    case threeDSecure
+    case paid
+    case unpaid
     case cancel
     case finish(PaymentMethod)
 }
@@ -30,15 +36,31 @@ final class PaymentRouter: Router {
 
     // MARK: - Internal
     func configure() {
-        trigger(route: .paymentMethod)
+        trigger(route: .method)
     }
 
     // MARK: - Router
     func trigger(route: PaymentRoute) {
         switch route {
-        case .paymentMethod:
-            let module = paymentMethodAssembly.makeViewController(router: anyRouter, paymentInputData: paymentInputData)
+        case .method:
+            let module = paymentMethodAssembly.makeViewController(router: anyRouter, inputData: paymentInputData)
             rootViewControllerProvider.rootViewController?.viewControllers = [module]
+        case let .bankCard(invoice, paymentSystems):
+            let inputData = BankCardInputData(invoice: invoice, paymentSystems: paymentSystems, paymentInputData: paymentInputData)
+            let module = bankCardAssembly.makeViewController(router: anyRouter, inputData: inputData)
+            rootViewControllerProvider.rootViewController?.pushViewController(module, animated: true)
+        case let .applePay(invoice, paymentSystems):
+            print("Display ApplePay module with invoice: \(invoice), payment systems: \(paymentSystems)")
+        case let .progress(paymentResource, email):
+            let inputData = PaymentProgressInputData(paymentResource: paymentResource, payerEmail: email, paymentInputData: paymentInputData)
+            let module = paymentProgressAssembly.makeViewController(router: anyRouter, inputData: inputData)
+            rootViewControllerProvider.rootViewController?.pushViewController(module, animated: false)
+        case .threeDSecure:
+            print("3DS screen. Not implemented yet")
+        case .paid:
+            print("Success screen with happy smile. Not implemented yet")
+        case .unpaid:
+            print("Failure screen with sad smile. Not implemented yet")
         case .cancel:
             paymentDelegate.paymentCancelled(invoiceIdentifier: paymentInputData.invoiceIdentifier)
         case let .finish(paymentMethod):
@@ -48,4 +70,6 @@ final class PaymentRouter: Router {
 
     // MARK: - Private
     private lazy var paymentMethodAssembly = PaymentMethodAssembly()
+    private lazy var bankCardAssembly = BankCardAssembly()
+    private lazy var paymentProgressAssembly = PaymentProgressAssembly()
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PaymentMethodsTableFooterView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
+            <connections>
+                <outlet property="decorationImageView" destination="vcF-hK-hgX" id="ksL-fo-KI9"/>
+                <outlet property="logotypesView" destination="szg-3G-KYV" id="qlc-2Z-jV0"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view userInteractionEnabled="NO" contentMode="scaleToFill" id="tN3-mk-6an">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Common/rounded_bottom_corners" translatesAutoresizingMaskIntoConstraints="NO" id="vcF-hK-hgX">
+                    <rect key="frame" x="5" y="0.0" width="310" height="24"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="24" id="W4G-6e-Bvo"/>
+                    </constraints>
+                </imageView>
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="szg-3G-KYV" customClass="LogotypesView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
+                    <rect key="frame" x="5" y="48" width="310" height="152"/>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="szg-3G-KYV" secondAttribute="bottom" id="91a-bj-HuV"/>
+                <constraint firstItem="szg-3G-KYV" firstAttribute="top" secondItem="vcF-hK-hgX" secondAttribute="bottom" constant="24" id="AnQ-vB-fGa"/>
+                <constraint firstAttribute="trailing" secondItem="vcF-hK-hgX" secondAttribute="trailing" constant="5" id="KDs-9p-Ikt"/>
+                <constraint firstItem="szg-3G-KYV" firstAttribute="trailing" secondItem="vcF-hK-hgX" secondAttribute="trailing" id="LE9-Ks-AVA"/>
+                <constraint firstItem="vcF-hK-hgX" firstAttribute="top" secondItem="tN3-mk-6an" secondAttribute="top" id="Ttn-zK-Qfj"/>
+                <constraint firstItem="szg-3G-KYV" firstAttribute="leading" secondItem="vcF-hK-hgX" secondAttribute="leading" id="jCE-dk-mAe"/>
+                <constraint firstItem="vcF-hK-hgX" firstAttribute="leading" secondItem="tN3-mk-6an" secondAttribute="leading" constant="5" id="ogR-Or-WZh"/>
+            </constraints>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="132.80000000000001" y="154.72263868065968"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Common/rounded_bottom_corners" width="13" height="8"/>
+    </resources>
+</document>

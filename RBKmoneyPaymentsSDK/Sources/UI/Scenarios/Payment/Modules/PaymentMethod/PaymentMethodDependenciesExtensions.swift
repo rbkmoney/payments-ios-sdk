@@ -13,3 +13,15 @@
 // limitations under the License.
 
 import Foundation
+
+extension PriceFormatter: PaymentMethodPriceFormatter {
+}
+
+extension InvoiceDetailsFormatter: PaymentMethodInvoiceDetailsFormatter {
+}
+
+extension ApplePayInfo: PaymentMethodApplePayInfoProvider {
+}
+
+extension RemoteAPI: PaymentMethodRemoteAPI {
+}

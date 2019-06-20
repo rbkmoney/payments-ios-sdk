@@ -19,19 +19,40 @@ import UIKit
 final class PaymentMethodViewController: UIViewController, ModuleView {
 
     // MARK: - Dependencies
+    lazy var priceFormatter: PaymentMethodPriceFormatter = deferred()
+    lazy var invoiceDetailsFormatter: PaymentMethodInvoiceDetailsFormatter = deferred()
 
     // MARK: - Outlets
-    @IBOutlet private weak var cancelBarButtonItem: UIBarButtonItem!
+    @IBOutlet private var tableView: UITableView!
+    @IBOutlet private var throbberView: ThrobberView!
+    @IBOutlet private var cancelBarButtonItem: UIBarButtonItem!
 
     // MARK: - ModuleView
     var output: PaymentMethodViewModel.Input {
         return PaymentMethodViewModel.Input(
-            didTapCancel: cancelBarButtonItem.rx.tap.asSignal()
+            didTapCancel: cancelBarButtonItem.rx.tap.asSignal(),
+            didSelectItem: tableView.rx.modelSelected(PaymentMethodViewModel.Item.self).asSignal()
         )
     }
 
     func setupBindings(to viewModel: PaymentMethodViewModel) -> Disposable {
-        return Disposables.create()
+        let tuple = Driver.combineLatest(viewModel.invoice, viewModel.items)
+        let cellIdentifier = R.reuseIdentifier.paymentMethodCell.identifier
+
+        return Disposables.create(
+            viewModel.isLoading
+                .drive(throbberView.rx.isAnimating),
+            viewModel.shopName
+                .drive(navigationItem.rx.title),
+            tuple
+                .map { $0.0 }
+                .drive(setupTableHeaderFooter),
+            tuple
+                .map { $0.1 }
+                .drive(tableView.rx.items(cellIdentifier: cellIdentifier, cellType: PaymentMethodCell.self)) { _, element, cell in
+                    cell.setup(with: element.method.cellModel)
+                }
+        )
     }
 
     // MARK: - Lifecycle
@@ -42,5 +63,54 @@ final class PaymentMethodViewController: UIViewController, ModuleView {
 
     // MARK: - Private
     private func setupUI() {
+        tableView.register(R.nib.paymentMethodCell)
+    }
+
+    private var setupTableHeaderFooter: Binder<InvoiceDTO> {
+        return Binder(self) { this, invoice in
+            let width = this.tableView.frame.width
+
+            let model = PaymentMethodsTableHeaderView.Model(
+                cost: this.priceFormatter.formattedPrice(amount: invoice.amount, currency: invoice.currency),
+                details: this.invoiceDetailsFormatter.formattedDetails(invoice: invoice)
+            )
+            this.tableHeaderView.frame = CGRect(origin: .zero, size: PaymentMethodsTableHeaderView.size(with: model, width: width))
+            this.tableHeaderView.setup(with: model)
+
+            this.tableFooterView.frame = CGRect(origin: .zero, size: CGSize(width: width, height: Constants.tableFooterHeight))
+
+            this.tableView.tableHeaderView = this.tableHeaderView
+            this.tableView.tableFooterView = this.tableFooterView
+        }
+    }
+
+    private lazy var tableHeaderView = PaymentMethodsTableHeaderView()
+    private lazy var tableFooterView = PaymentMethodsTableFooterView()
+}
+
+private enum Constants {
+
+    static let tableFooterHeight: CGFloat = 174
+}
+
+private extension PaymentMethod {
+
+    var cellModel: PaymentMethodCell.Model {
+        switch self {
+        case .bankCard:
+            return .init(
+                icon: R.image.paymentMethods.bankcard(),
+                title: R.string.localizable.payment_method_bank_card(),
+                subtitle: nil,
+                style: .default
+            )
+        case .applePay:
+            return .init(
+                icon: R.image.paymentMethods.applepay(),
+                title: nil,
+                subtitle: nil,
+                style: .black
+            )
+        }
     }
 }

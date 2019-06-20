@@ -3,5 +3,20 @@
 //  RBKmoneyPaymentsSDK
 //
 
-// Название группы строковых ресурсов
-"sample_string_identifier" = "Строка текста!";
+// Экран "Ввод данных карты"
+"bank_card_header_title" = "Оплата банковской картой";
+"bank_card_card_number_placeholder" = "Номер на карте";
+"bank_card_date_placeholder" = "ММ/ГГ";
+"bank_card_cvc_placeholder" = "CVV/CVC";
+"bank_card_cardholder_placeholder" = "Имя на карте";
+"bank_card_email_placeholder" = "Email для чека";
+"bank_card_pay" = "Оплатить %@";
+
+// Разное
+"securite_payment" = "БЕЗОПАСНАЯ ОПЛАТА С";
+"copyright" = "© 2008-2018 RBKmoney | Direct Payments Ltd.";
+"order_details" = "ДЕТАЛИ ЗАКАЗА";
+
+// Экран "Выбор платежного метода"
+"payment_method_header_title" = "Выберите способ оплаты";
+"payment_method_bank_card" = "БАНКОВСКАЯ КАРТА";

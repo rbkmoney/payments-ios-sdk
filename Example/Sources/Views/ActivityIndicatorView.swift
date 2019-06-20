@@ -7,7 +7,7 @@ import UIKit
 
 final class ActivityIndicatorView: UIView {
 
-    @IBOutlet private weak var indicatorView: UIActivityIndicatorView!
+    @IBOutlet private var indicatorView: UIActivityIndicatorView!
 
     override func awakeFromNib() {
         super.awakeFromNib()

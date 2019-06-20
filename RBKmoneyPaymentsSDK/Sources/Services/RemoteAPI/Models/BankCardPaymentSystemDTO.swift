@@ -14,7 +14,7 @@
 
 import Foundation
 
-enum BankCardPaymentSystemDTO: String, Codable {
+enum BankCardPaymentSystemDTO: String, Codable, Hashable {
 
     case visa
     case mastercard

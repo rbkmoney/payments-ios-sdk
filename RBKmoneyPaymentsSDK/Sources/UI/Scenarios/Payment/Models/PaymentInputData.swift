@@ -20,22 +20,22 @@ public struct PaymentInputData {
 
     public let invoiceAccessToken: String
 
+    public let shopName: String
+
     public let allowedPaymentMethods: [PaymentMethod]
 
     public let applePayMerchantIdentifier: String?
 
-    public let shopName: String?
-
     public init(invoiceIdentifier: String,
                 invoiceAccessToken: String,
+                shopName: String,
                 allowedPaymentMethods: [PaymentMethod] = PaymentMethod.allCases,
-                applePayMerchantIdentifier: String? = nil,
-                shopName: String? = nil) {
+                applePayMerchantIdentifier: String? = nil) {
 
         self.invoiceIdentifier = invoiceIdentifier
         self.invoiceAccessToken = invoiceAccessToken
+        self.shopName = shopName
         self.allowedPaymentMethods = allowedPaymentMethods
         self.applePayMerchantIdentifier = applePayMerchantIdentifier
-        self.shopName = shopName
     }
 }

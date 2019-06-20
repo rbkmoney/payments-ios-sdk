@@ -1,12 +1,32 @@
 [
     {
-        "type": "visa",
+        "paymentSystem": "visa",
         "prefixes": [ "4" ],
         "lengths": [ 13, 16, 19 ]
     },
     {
-        "type": "mastercard",
+        "paymentSystem": "mastercard",
         "prefixes": [ "2221", "2222", "2223", "2224", "2225", "2226", "2227", "2228", "2229", "51", "52", "53", "54", "55" ],
+        "lengths": [ 16 ]
+    },
+    {
+        "paymentSystem": "maestro",
+        "prefixes": [ "50" ],
+        "lengths": [ 13 ]
+    },
+    {
+        "paymentSystem": "maestro",
+        "prefixes": [ "56", "57", "58" ],
+        "lengths": [ 15 ]
+    },
+    {
+        "paymentSystem": "maestro",
+        "prefixes": [ "60", "61", "62", "63", "64", "65", "66", "67", "68", "69" ],
+        "lengths": [ 16, 19 ]
+    },
+    {
+        "paymentSystem": "nspkmir",
+        "prefixes": [ "2200", "2201", "2202", "2203", "2204" ],
         "lengths": [ 16 ]
     }
 ]
