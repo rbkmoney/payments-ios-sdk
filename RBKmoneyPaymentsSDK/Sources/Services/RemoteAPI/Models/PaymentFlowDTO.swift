@@ -24,6 +24,11 @@ enum PaymentFlowDTO {
 
         let expirationAction: ExpirationAction
         let heldUntil: Date?
+
+        init(expirationAction: ExpirationAction = .cancel) {
+            self.expirationAction = expirationAction
+            self.heldUntil = nil
+        }
     }
 
     case instant
@@ -70,5 +75,13 @@ extension PaymentFlowDTO: Codable {
     private enum FlowType: String, Codable {
         case instant = "PaymentFlowInstant"
         case hold = "PaymentFlowHold"
+    }
+}
+
+fileprivate extension PaymentFlowDTO.HoldParameters {
+
+    init(expirationAction: ExpirationAction, heldUntil: Date?) {
+        self.expirationAction = expirationAction
+        self.heldUntil = heldUntil
     }
 }

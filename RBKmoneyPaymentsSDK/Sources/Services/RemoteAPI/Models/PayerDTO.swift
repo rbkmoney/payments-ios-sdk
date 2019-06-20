@@ -24,6 +24,14 @@ enum PayerDTO {
         let paymentToolDetails: PaymentToolDetailsDTO?
         let clientInfo: ClientInfoDTO?
         let contactInfo: ContactInfoDTO
+
+        init(paymentToolToken: String, paymentSessionIdentifier: String?, contactInfo: ContactInfoDTO) {
+            self.paymentToolToken = paymentToolToken
+            self.paymentSessionIdentifier = paymentSessionIdentifier
+            self.paymentToolDetails = nil
+            self.clientInfo = nil
+            self.contactInfo = contactInfo
+        }
     }
 
     struct RecurrentPayment {
@@ -100,5 +108,21 @@ extension PayerDTO: Codable {
         case customer = "CustomerPayer"
         case paymentResource = "PaymentResourcePayer"
         case recurrentPayment = "RecurrentPayer"
+    }
+}
+
+fileprivate extension PayerDTO.PaymentResource {
+
+    init(paymentToolToken: String,
+         paymentSessionIdentifier: String?,
+         paymentToolDetails: PaymentToolDetailsDTO?,
+         clientInfo: ClientInfoDTO?,
+         contactInfo: ContactInfoDTO) {
+
+        self.paymentToolToken = paymentToolToken
+        self.paymentSessionIdentifier = paymentSessionIdentifier
+        self.paymentToolDetails = paymentToolDetails
+        self.clientInfo = clientInfo
+        self.contactInfo = contactInfo
     }
 }

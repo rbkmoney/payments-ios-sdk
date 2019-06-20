@@ -21,10 +21,29 @@ enum InvoiceChangeDTO {
         let paymentIdentifier: String
     }
 
+    struct PaymentInteractionRequestedData {
+        let userInteraction: UserInteractionDTO
+        let paymentIdentifier: String
+    }
+
+    struct RefundStartedData {
+        let refund: RefundDTO
+        let paymentIdentifier: String
+    }
+
+    struct RefundStatusChangedData {
+        let paymentIdentifier: String
+        let refundIdentifier: String
+        let status: RefundStatusDTO
+    }
+
     case invoiceCreated(InvoiceDTO)
     case invoiceStatusChanged(InvoiceStatusDTO)
     case paymentStarted(PaymentDTO)
     case paymentStatusChanged(PaymentStatusChangedData)
+    case paymentInteractionRequested(PaymentInteractionRequestedData)
+    case refundStarted(RefundStartedData)
+    case refundStatusChanged(RefundStatusChangedData)
 }
 
 extension InvoiceChangeDTO: Codable {
@@ -49,6 +68,25 @@ extension InvoiceChangeDTO: Codable {
                 paymentIdentifier: try container.decode(String.self, forKey: .paymentIdentifier)
             )
             self = .paymentStatusChanged(data)
+        case .paymentInteractionRequested:
+            let data = PaymentInteractionRequestedData(
+                userInteraction: try container.decode(UserInteractionDTO.self, forKey: .userInteraction),
+                paymentIdentifier: try container.decode(String.self, forKey: .paymentIdentifier)
+            )
+            self = .paymentInteractionRequested(data)
+        case .refundStarted:
+            let data = RefundStartedData(
+                refund: try container.decode(RefundDTO.self, forKey: .refund),
+                paymentIdentifier: try container.decode(String.self, forKey: .paymentIdentifier)
+            )
+            self = .refundStarted(data)
+        case .refundStatusChanged:
+            let data = RefundStatusChangedData(
+                paymentIdentifier: try container.decode(String.self, forKey: .paymentIdentifier),
+                refundIdentifier: try container.decode(String.self, forKey: .refundIdentifier),
+                status: try container.decode(RefundStatusDTO.self, forKey: .status)
+            )
+            self = .refundStatusChanged(data)
         }
     }
 
@@ -69,6 +107,19 @@ extension InvoiceChangeDTO: Codable {
             try container.encode(ChangeType.paymentStatusChanged, forKey: .type)
             try container.encode(data.status, forKey: .status)
             try container.encode(data.paymentIdentifier, forKey: .paymentIdentifier)
+        case let .paymentInteractionRequested(data):
+            try container.encode(ChangeType.paymentInteractionRequested, forKey: .type)
+            try container.encode(data.userInteraction, forKey: .userInteraction)
+            try container.encode(data.paymentIdentifier, forKey: .paymentIdentifier)
+        case let .refundStarted(data):
+            try container.encode(ChangeType.refundStarted, forKey: .type)
+            try container.encode(data.refund, forKey: .refund)
+            try container.encode(data.paymentIdentifier, forKey: .paymentIdentifier)
+        case let .refundStatusChanged(data):
+            try container.encode(ChangeType.refundStatusChanged, forKey: .type)
+            try container.encode(data.paymentIdentifier, forKey: .paymentIdentifier)
+            try container.encode(data.refundIdentifier, forKey: .refundIdentifier)
+            try container.encode(data.status, forKey: .status)
         }
     }
 
@@ -78,6 +129,9 @@ extension InvoiceChangeDTO: Codable {
         case status
         case payment
         case paymentIdentifier = "paymentID"
+        case userInteraction
+        case refund
+        case refundIdentifier = "refundID"
     }
 
     private enum ChangeType: String, Codable {
@@ -85,5 +139,8 @@ extension InvoiceChangeDTO: Codable {
         case invoiceStatusChanged = "InvoiceStatusChanged"
         case paymentStarted = "PaymentStarted"
         case paymentStatusChanged = "PaymentStatusChanged"
+        case paymentInteractionRequested = "PaymentInteractionRequested"
+        case refundStarted = "RefundStarted"
+        case refundStatusChanged = "RefundStatusChanged"
     }
 }
