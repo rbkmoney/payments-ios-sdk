@@ -16,7 +16,7 @@ import RxSwift
 
 protocol BankCardCardDetector {
 
-    func detectCard(from number: String) -> Single<CardDescription>
+    func detectCard(from number: String) -> CardDescription?
 }
 
 protocol BankCardPriceFormatter {

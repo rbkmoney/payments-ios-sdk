@@ -15,6 +15,7 @@
 import RxCocoa
 import RxSwift
 
+// swiftlint:disable:next type_body_length
 final class BankCardViewModel: ModuleViewModel {
 
     // MARK: - Dependencies
@@ -122,6 +123,10 @@ final class BankCardViewModel: ModuleViewModel {
         .map { $0.invoice }
         .asDriver(onError: .never)
 
+    private(set) lazy var initialEmail = inputDataObservable
+        .compactMap { $0.paymentInputData.payerEmail }
+        .asDriver(onError: .never)
+
     private(set) lazy var shopName = inputDataObservable
         .map { $0.paymentInputData.shopName }
         .asDriver(onError: .never)
@@ -136,15 +141,15 @@ final class BankCardViewModel: ModuleViewModel {
         }
 
     private(set) lazy var cardPaymentSystem = cardDescription
-        .map { $0.paymentSystem }
+        .map { $0?.paymentSystem }
         .asDriver(onError: .never)
 
     private(set) lazy var cardNumberFieldMaxLength = cardDescription
-        .map { $0.lengths.max() }
+        .map { $0?.lengths.max() }
         .asDriver(onError: .never)
 
     private(set) lazy var validateCardNumber: Driver<ValidationResult> = Observable
-        .merge(emptyCardNumber, correctCardNumber, emptyCardNumberLength, supportedCardValidation)
+        .merge(emptyCardNumber, correctCardNumber)
         .asDriver(onError: .never)
 
     private(set) lazy var validateCVV: Driver<ValidationResult> = Observable
@@ -178,18 +183,14 @@ final class BankCardViewModel: ModuleViewModel {
 
     private let didTapPayRelay = PublishRelay<Void>()
 
-    private lazy var cardDescription = cardNumberRelay
-        .flatMap { [weak self] number -> Observable<CardDescription> in
-            guard let this = self, let number = number, number.isEmpty == false else {
-                return .empty()
-            }
-            return this.cardDetector.detectCard(from: number).asObservable()
-        }
+    private lazy var cardDescription = cardNumberRelay.map { [cardDetector] cardNumber -> CardDescription? in
+        cardNumber.flatMap { cardDetector.detectCard(from: $0) }
+    }
 
     private lazy var emptyCardNumberLength = didTapPayRelay
         .withLatestFrom(Observable.combineLatest(cardNumberRelay, cardDescription))
         .map { cardNumber, cardDescription -> ValidationResult  in
-            guard let cardNumber = cardNumber, cardNumber.isEmpty == false else {
+            guard let cardNumber = cardNumber, let cardDescription = cardDescription, cardNumber.isEmpty == false else {
                 return .invalid
             }
             return cardDescription.lengths.contains(cardNumber.count) ? .valid : .invalid
@@ -197,11 +198,18 @@ final class BankCardViewModel: ModuleViewModel {
 
     private lazy var supportedCardValidation: Observable<ValidationResult> = Observable
         .combineLatest(inputDataObservable, cardDescription)
-        .map { $0.0.paymentSystems.contains($0.1.paymentSystem) ? .valid : .invalid }
+        .map { tuple -> ValidationResult in
+            guard let cardDescription = tuple.1 else {
+                return .unknown
+            }
+            return tuple.0.paymentSystems.contains(cardDescription.paymentSystem) ? .valid : .invalid
+        }
 
-    private lazy var emptyCardNumber = didTapPayRelay
-        .withLatestFrom(cardNumberRelay)
-        .validate(with: cardNumberValidator)
+    private lazy var cardNumberValidation = cardNumberRelay.validate(with: cardNumberValidator)
+
+    private lazy var emptyCardNumber = Observable
+        .combineLatest([emptyCardNumberLength, supportedCardValidation, cardNumberValidation])
+        .map { $0.allSatisfy { $0 == .valid } ? ValidationResult.valid : .invalid }
 
     private lazy var emptyCVV = didTapPayRelay
         .withLatestFrom(cvvCodeRelay)
@@ -221,21 +229,19 @@ final class BankCardViewModel: ModuleViewModel {
 
     private lazy var correctCardNumber = didEndEditingCardNumberRelay
         .withLatestFrom(cardNumberRelay)
-        .filter { $0?.isEmpty == false }
-        .validate(with: cardNumberValidator)
-        .withLatestFrom(correctCardNumberLength) { ($0, $1) }
-        .map { tuple -> ValidationResult in
-            if tuple.0 == .valid {
-                return tuple.1
-            } else {
-                return tuple.0
+        .flatMap { [weak self] number -> Observable<ValidationResult> in
+            guard let this = self, let cardNumber = number, cardNumber.isEmpty == false else {
+                return .just(.unknown)
             }
+            return Observable
+                .combineLatest([this.cardNumberValidation, this.correctCardNumberLength, this.supportedCardValidation])
+                .map { $0.allSatisfy { $0 == .valid } ? ValidationResult.valid : .invalid }
         }
 
-    private lazy var correctCardNumberLength = didEndEditingCardNumberRelay
-        .withLatestFrom(Observable.combineLatest(cardNumberRelay, cardDescription))
+    private lazy var correctCardNumberLength = Observable
+        .combineLatest(cardNumberRelay, cardDescription)
         .map { cardNumber, cardDescription -> ValidationResult  in
-            guard let cardNumber = cardNumber, cardNumber.isEmpty == false else {
+            guard let cardDescription = cardDescription, let cardNumber = cardNumber, cardNumber.isEmpty == false else {
                 return .unknown
             }
             return cardDescription.lengths.contains(cardNumber.count) ? .valid : .invalid
@@ -243,38 +249,54 @@ final class BankCardViewModel: ModuleViewModel {
 
     private lazy var correctCVV = didEndEditingCVVRelay
         .withLatestFrom(cvvCodeRelay)
-        .filter { $0?.isEmpty == false }
-        .validate(with: cvvCodeValidator)
+        .map { [cvvCodeValidator] cvv -> ValidationResult in
+            guard let cvv = cvv, cvv.isEmpty == false else {
+                return .unknown
+            }
+            return cvvCodeValidator.validate(cvv)
+        }
 
     private lazy var correctDate = didEndEditingExpirationDateRelay
         .withLatestFrom(expirationDateRelay)
-        .filter { $0?.isEmpty == false }
-        .validate(with: expirationDateValidator)
+        .map { [expirationDateValidator] date -> ValidationResult in
+            guard let date = date, date.isEmpty == false else {
+                return .unknown
+            }
+            return expirationDateValidator.validate(date)
+        }
 
     private lazy var correctCardholder = didEndEditingCardholderRelay
         .withLatestFrom(cardholderRelay)
-        .filter { $0?.isEmpty == false }
-        .validate(with: cardholderValidator)
+        .map { [cardholderValidator] cardholder -> ValidationResult in
+            guard let cardholder = cardholder, cardholder.isEmpty == false else {
+                return .unknown
+            }
+            return cardholderValidator.validate(cardholder)
+        }
 
     private lazy var correctEmail = didEndEditingEmailRelay
         .withLatestFrom(emailRelay)
-        .filter { $0?.isEmpty == false }
-        .validate(with: emailValidator)
+        .map { [emailValidator] email -> ValidationResult in
+            guard let email = email, email.isEmpty == false else {
+                return .unknown
+            }
+            return emailValidator.validate(email)
+        }
 
     private lazy var inputDataObservable = Observable
         .deferred { [weak self] in .just(self?.inputData) }
         .compactMap { $0 }
 
     private lazy var paymentToolWithEmail = didTapPayRelay
-        .withLatestFrom(Driver.combineLatest([validateCardNumber, validateCVV, validateDate, validateCardholder, validateEmail]))
+        .withLatestFrom(Observable.combineLatest([emptyCardNumber, emptyCVV, emptyDate, emptyCardholder, emptyEmail]))
         .filter { $0.allSatisfy { $0 == .valid } }
         .withLatestFrom(Observable.combineLatest(cardNumberRelay, expirationDateRelay, cvvCodeRelay, cardholderRelay, emailRelay))
         .flatMap { tuple -> Observable<(PaymentToolSourceDTO, String)> in
-            guard let number = tuple.0, let expiration = tuple.1, let cvv = tuple.2, let cardHolder = tuple.3, let email = tuple.4 else {
+            guard let number = tuple.0, let expiration = tuple.1, let cvv = tuple.2, let cardholder = tuple.3, let email = tuple.4 else {
                 return .empty()
             }
 
-            let cardData = PaymentToolSourceDTO.CardData(number: number, expiration: expiration, cvv: cvv, cardHolder: cardHolder)
+            let cardData = PaymentToolSourceDTO.CardData(number: number, expiration: expiration, cvv: cvv, cardholder: cardholder)
             return .just((.cardData(cardData), email))
         }
 

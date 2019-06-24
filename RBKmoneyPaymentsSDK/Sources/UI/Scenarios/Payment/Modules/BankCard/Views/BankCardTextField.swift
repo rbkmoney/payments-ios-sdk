@@ -95,19 +95,6 @@ final class BankCardTextField: UITextField {
         leftViewMode = .always
 
         applyCustomBorderStyle(.unknown)
-
-        rx.controlEvent([.editingDidBegin, .editingChanged])
-            .bind(to: Binder(self) { base, _ in
-                base.applyCustomBorderStyle(.focused)
-            })
-            .disposed(by: disposeBag)
-
-        rx.controlEvent([.editingDidEnd, .editingDidEndOnExit])
-            .bind(to: Binder(self) { base, _ in
-                base.applyCustomBorderStyle(.unknown)
-                base.rightViewMode = .never
-            })
-            .disposed(by: disposeBag)
     }
 
     fileprivate func applyCustomBorderStyle(_ style: CustomBorderStyle) {
@@ -138,8 +125,6 @@ final class BankCardTextField: UITextField {
             leftView?.tintColor = Palette.colors.darkText
         }
     }
-
-    private let disposeBag = DisposeBag()
 }
 
 extension Reactive where Base: BankCardTextField {
