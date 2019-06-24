@@ -20,7 +20,7 @@ enum PaymentToolSourceDTO {
         let number: String
         let expiration: String
         let cvv: String?
-        let cardHolder: String?
+        let cardholder: String?
     }
 
     enum TokenizedCardData {
@@ -73,7 +73,7 @@ extension PaymentToolSourceDTO: Encodable {
             try container.encode(card.number, forKey: .cardNumber)
             try container.encode(card.expiration, forKey: .cardExpiration)
             try container.encodeIfPresent(card.cvv, forKey: .cvv)
-            try container.encodeIfPresent(card.cardHolder, forKey: .cardHolder)
+            try container.encodeIfPresent(card.cardholder, forKey: .cardholder)
         case let .tokenizedCardData(provider):
             try container.encode(PaymentToolType.tokenizedCardData, forKey: .type)
             switch provider {
@@ -108,7 +108,7 @@ extension PaymentToolSourceDTO: Encodable {
         case cardNumber
         case cardExpiration = "expDate"
         case cvv
-        case cardHolder
+        case cardholder = "cardHolder"
         case provider
         case digitalWalletType
         case merchantIdentifier = "merchantID"
