@@ -71,40 +71,79 @@ final class BankCardViewController: UIViewController, ModuleView {
                 .drive(payButton.rx.attributedTitle(for: .normal)),
             viewModel.invoice
                 .drive(setupHeader),
+
+            // card number
+            Observable
+                .merge(
+                    cardNumberTextField.rx.controlEvent([.editingDidBegin, .editingChanged]).map(to: .focused),
+                    viewModel.validateCardNumber.asObservable().map { $0.customBorderStyle }
+                )
+                .bind(to: cardNumberTextField.rx.customBorderStyle),
+            Observable
+                .combineLatest(
+                    Observable.merge(
+                        viewModel.validateCardNumber.asObservable(),
+                        cardNumberTextField.rx.controlEvent([.editingDidBegin, .editingChanged]).map(to: .unknown)
+                    ),
+                    viewModel.cardPaymentSystem.asObservable()
+                )
+                .map { $0.rightViewData(for: $1) }
+                .bind(to: cardNumberTextField.rx.rightViewData),
             viewModel.cardNumberFieldMaxLength
                 .drive(cardNumberFormatter.rx.maxLength),
-            viewModel.formattedCVV
-                .drive(cvvTextField.rx.text),
-            viewModel.validateCardNumber
-                .map { $0.customBorderStyle }
-                .drive(cardNumberTextField.rx.customBorderStyle),
-            viewModel.validateCVV
-                .map { $0.customBorderStyle }
-                .drive(cvvTextField.rx.customBorderStyle),
-            viewModel.validateDate
-                .map { $0.customBorderStyle }
-                .drive(expirationDateTextField.rx.customBorderStyle),
-            viewModel.validateCardholder
-                .map { $0.customBorderStyle }
-                .drive(cardholderTextField.rx.customBorderStyle),
-            viewModel.validateEmail
-                .map { $0.customBorderStyle }
-                .drive(emailTextField.rx.customBorderStyle),
-            Driver.combineLatest(viewModel.validateCardNumber.startWith(.unknown), viewModel.cardPaymentSystem)
-                .map { $0.rightViewData(for: $1) }
-                .drive(cardNumberTextField.rx.rightViewData),
-            viewModel.validateDate
-                .map { $0.defaultRightViewData }
-                .drive(expirationDateTextField.rx.rightViewData),
-            viewModel.validateCVV
-                .map { $0.defaultRightViewData }
-                .drive(cvvTextField.rx.rightViewData),
+
+            // cardholder
+            Observable
+                .merge(
+                    cardholderTextField.rx.controlEvent([.editingDidBegin, .editingChanged]).map(to: .focused),
+                    viewModel.validateCardholder.asObservable().map { $0.customBorderStyle }
+                )
+                .bind(to: cardholderTextField.rx.customBorderStyle),
             viewModel.validateCardholder
                 .map { $0.defaultRightViewData }
                 .drive(cardholderTextField.rx.rightViewData),
+
+            // cvv
+            Observable
+                .merge(
+                    cvvTextField.rx.controlEvent([.editingDidBegin, .editingChanged]).map(to: .focused),
+                    viewModel.validateCVV.asObservable().map { $0.customBorderStyle }
+                )
+                .bind(to: cvvTextField.rx.customBorderStyle),
+            viewModel.validateCVV
+                .map { $0.defaultRightViewData }
+                .drive(cvvTextField.rx.rightViewData),
+            viewModel.formattedCVV
+                .drive(cvvTextField.rx.text),
+
+            // email
+            Observable
+                .merge(
+                    emailTextField.rx.controlEvent([.editingDidBegin, .editingChanged]).map(to: .focused),
+                    viewModel.validateEmail.asObservable().map { $0.customBorderStyle }
+                )
+                .bind(to: emailTextField.rx.customBorderStyle),
             viewModel.validateEmail
                 .map { $0.defaultRightViewData }
-                .drive(emailTextField.rx.rightViewData)
+                .drive(emailTextField.rx.rightViewData),
+            viewModel.initialEmail
+                .compactMap { $0 }
+                .filter { !$0.isEmpty }
+                .drive(Binder(emailTextField) {
+                    $0.text = $1
+                    $0.sendActions(for: .editingDidEnd)
+                }),
+
+            // date
+            Observable
+                .merge(
+                    expirationDateTextField.rx.controlEvent([.editingDidBegin, .editingChanged]).map(to: .focused),
+                    viewModel.validateDate.asObservable().map { $0.customBorderStyle }
+                )
+                .bind(to: expirationDateTextField.rx.customBorderStyle),
+            viewModel.validateDate
+                .map { $0.defaultRightViewData }
+                .drive(expirationDateTextField.rx.rightViewData)
         )
     }
 
@@ -238,22 +277,22 @@ private extension ValidationResult {
     var defaultRightViewData: (UIImage?, UITextField.ViewMode) {
         switch self {
         case .unknown:
-            return (nil, .never)
+            return (nil, .always)
         case .valid:
-            return (R.image.bankCard.checkmark(), .unlessEditing)
+            return (R.image.bankCard.checkmark(), .always)
         case .invalid:
-            return (R.image.bankCard.cross(), .unlessEditing)
+            return (R.image.bankCard.cross(), .always)
         }
     }
 
-    func rightViewData(for cardPaymentSystem: PaymentSystem) -> (UIImage?, UITextField.ViewMode) {
+    func rightViewData(for cardPaymentSystem: PaymentSystem?) -> (UIImage?, UITextField.ViewMode) {
         switch self {
         case .unknown:
-            return (cardPaymentSystem.image, .always)
+            return (cardPaymentSystem?.image, .always)
         case .valid:
-            return (cardPaymentSystem.image, .always)
+            return (cardPaymentSystem?.image, .always)
         case .invalid:
-            return (R.image.bankCard.cross(), .unlessEditing)
+            return (R.image.bankCard.cross(), .always)
         }
     }
 }

@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import RxSwift
+import Foundation
 
 final class CardDetector {
 
@@ -20,15 +20,11 @@ final class CardDetector {
     lazy var cardDescriptionsURL: URL = deferred()
 
     // MARK: - Internal
-    func detectCard(from number: String) -> Single<CardDescription> {
+    func detectCard(from number: String) -> CardDescription? {
         let digits = CharacterSet.decimalDigits
         let cleaned = String(number.unicodeScalars.filter(digits.contains))
 
-        if let result = cardDescriptions.first(where: { $0.prefixes.contains { cleaned.hasPrefix($0) } }) {
-            return .just(result)
-        } else {
-            return .never()
-        }
+        return cardDescriptions.first { $0.prefixes.contains { cleaned.hasPrefix($0) } }
     }
 
     // MARK: - Private

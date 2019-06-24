@@ -17,7 +17,6 @@ import UIKit
 extension UIView {
 
     struct EmbedEdgeInsets {
-
         let top: CGFloat?
         let left: CGFloat?
         let bottom: CGFloat?
