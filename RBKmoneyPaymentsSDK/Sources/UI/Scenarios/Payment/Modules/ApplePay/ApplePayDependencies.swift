@@ -12,10 +12,19 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import Foundation
+import RxSwift
 
-extension RemoteAPI: PaymentProgressRemoteAPI {
+protocol ApplePayPriceFormatter {
+
+    func formattedPrice(amount: AmountDTO, currency: CurrencyDTO) -> String
 }
 
-extension ThreeDSURLRequestFactory: PaymentProgress3DSURLRequestFactory {
+protocol ApplePayInvoiceDetailsFormatter {
+
+    func formattedDetails(invoice: InvoiceDTO) -> String
+}
+
+protocol ApplePayRemoteAPI {
+
+    func createPaymentResource(paymentTool: PaymentToolSourceDTO, invoiceAccessToken: String) -> Single<PaymentResourceDTO>
 }

@@ -163,6 +163,29 @@
 		C104500722B2931300A8065B /* PaymentSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C104500622B2931300A8065B /* PaymentSystem.swift */; };
 		C104500A22B2976200A8065B /* PaymentMethodsTableHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = C104500822B2976200A8065B /* PaymentMethodsTableHeaderView.xib */; };
 		C104500B22B2976200A8065B /* PaymentMethodsTableHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C104500922B2976200A8065B /* PaymentMethodsTableHeaderView.swift */; };
+		C143794D22C2311E00E59013 /* ThreeDSURLRequestFactoryAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143794922C2311E00E59013 /* ThreeDSURLRequestFactoryAssembly.swift */; };
+		C143794F22C2311E00E59013 /* ThreeDSURLRequestFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143794B22C2311E00E59013 /* ThreeDSURLRequestFactory.swift */; };
+		C143795922C25CB200E59013 /* PaidInvoiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143795322C25CB200E59013 /* PaidInvoiceAssembly.swift */; };
+		C143795A22C25CB200E59013 /* PaidInvoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143795422C25CB200E59013 /* PaidInvoiceViewModel.swift */; };
+		C143795B22C25CB200E59013 /* PaidInvoiceDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143795522C25CB200E59013 /* PaidInvoiceDependencies.swift */; };
+		C143795C22C25CB200E59013 /* PaidInvoice.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C143795622C25CB200E59013 /* PaidInvoice.storyboard */; };
+		C143795D22C25CB200E59013 /* PaidInvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143795722C25CB200E59013 /* PaidInvoiceViewController.swift */; };
+		C143795E22C25CB200E59013 /* PaidInvoiceDependenciesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143795822C25CB200E59013 /* PaidInvoiceDependenciesExtensions.swift */; };
+		C143796122C25D5F00E59013 /* PaidInvoiceInputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143796022C25D5F00E59013 /* PaidInvoiceInputData.swift */; };
+		C143796522C262A100E59013 /* ApplePayInputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143796422C262A100E59013 /* ApplePayInputData.swift */; };
+		C143797822C2633300E59013 /* ApplePayAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143797222C2633300E59013 /* ApplePayAssembly.swift */; };
+		C143797922C2633300E59013 /* ApplePayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143797322C2633300E59013 /* ApplePayViewModel.swift */; };
+		C143797A22C2633300E59013 /* ApplePayDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143797422C2633300E59013 /* ApplePayDependencies.swift */; };
+		C143797B22C2633300E59013 /* ApplePay.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C143797522C2633300E59013 /* ApplePay.storyboard */; };
+		C143797C22C2633300E59013 /* ApplePayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143797622C2633300E59013 /* ApplePayViewController.swift */; };
+		C143797D22C2633300E59013 /* ApplePayDependenciesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143797722C2633300E59013 /* ApplePayDependenciesExtensions.swift */; };
+		C143798522C2636A00E59013 /* UnpaidInvoiceAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143797F22C2636A00E59013 /* UnpaidInvoiceAssembly.swift */; };
+		C143798622C2636A00E59013 /* UnpaidInvoiceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143798022C2636A00E59013 /* UnpaidInvoiceViewModel.swift */; };
+		C143798722C2636A00E59013 /* UnpaidInvoiceDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143798122C2636A00E59013 /* UnpaidInvoiceDependencies.swift */; };
+		C143798822C2636A00E59013 /* UnpaidInvoice.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C143798222C2636A00E59013 /* UnpaidInvoice.storyboard */; };
+		C143798922C2636A00E59013 /* UnpaidInvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143798322C2636A00E59013 /* UnpaidInvoiceViewController.swift */; };
+		C143798A22C2636A00E59013 /* UnpaidInvoiceDependenciesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143798422C2636A00E59013 /* UnpaidInvoiceDependenciesExtensions.swift */; };
+		C143798C22C2638B00E59013 /* UnpaidInvoiceInputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143798B22C2638B00E59013 /* UnpaidInvoiceInputData.swift */; };
 		C19789C4229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C5229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C6229FD05800C7F966 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C3229FD05800C7F966 /* AppDelegate.swift */; };
@@ -208,6 +231,10 @@
 		C1A2792322B3B41D00EB371F /* ApplePayInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2791F22B3B41D00EB371F /* ApplePayInfo.swift */; };
 		C1A2792722B3C04E00EB371F /* ApplePayAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2792622B3C04E00EB371F /* ApplePayAvailability.swift */; };
 		C1A2792E22B7A71800EB371F /* PaymentMethodInputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2792D22B7A71800EB371F /* PaymentMethodInputData.swift */; };
+		C1D024F222BB94950014AA80 /* PaymentRootViewControllerTransitionConfiguratorAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D024EE22BB94950014AA80 /* PaymentRootViewControllerTransitionConfiguratorAssembly.swift */; };
+		C1D024F422BB94950014AA80 /* PaymentRootViewControllerTransitionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D024F022BB94950014AA80 /* PaymentRootViewControllerTransitionConfigurator.swift */; };
+		C1D024FA22BB964F0014AA80 /* TransitionStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D024F922BB964F0014AA80 /* TransitionStyle.swift */; };
+		C1D024FC22BBA1540014AA80 /* PushFadeAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D024FB22BBA1540014AA80 /* PushFadeAnimator.swift */; };
 		C1F4D17E22B9D6FB005CFA6B /* PaymentProgressAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F4D17822B9D6FB005CFA6B /* PaymentProgressAssembly.swift */; };
 		C1F4D17F22B9D6FB005CFA6B /* PaymentProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F4D17922B9D6FB005CFA6B /* PaymentProgressViewModel.swift */; };
 		C1F4D18022B9D6FB005CFA6B /* PaymentProgressDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F4D17A22B9D6FB005CFA6B /* PaymentProgressDependencies.swift */; };
@@ -395,6 +422,29 @@
 		C104500622B2931300A8065B /* PaymentSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSystem.swift; sourceTree = "<group>"; };
 		C104500822B2976200A8065B /* PaymentMethodsTableHeaderView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PaymentMethodsTableHeaderView.xib; sourceTree = "<group>"; };
 		C104500922B2976200A8065B /* PaymentMethodsTableHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentMethodsTableHeaderView.swift; sourceTree = "<group>"; };
+		C143794922C2311E00E59013 /* ThreeDSURLRequestFactoryAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSURLRequestFactoryAssembly.swift; sourceTree = "<group>"; };
+		C143794B22C2311E00E59013 /* ThreeDSURLRequestFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThreeDSURLRequestFactory.swift; sourceTree = "<group>"; };
+		C143795322C25CB200E59013 /* PaidInvoiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidInvoiceAssembly.swift; sourceTree = "<group>"; };
+		C143795422C25CB200E59013 /* PaidInvoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidInvoiceViewModel.swift; sourceTree = "<group>"; };
+		C143795522C25CB200E59013 /* PaidInvoiceDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidInvoiceDependencies.swift; sourceTree = "<group>"; };
+		C143795622C25CB200E59013 /* PaidInvoice.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PaidInvoice.storyboard; sourceTree = "<group>"; };
+		C143795722C25CB200E59013 /* PaidInvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidInvoiceViewController.swift; sourceTree = "<group>"; };
+		C143795822C25CB200E59013 /* PaidInvoiceDependenciesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidInvoiceDependenciesExtensions.swift; sourceTree = "<group>"; };
+		C143796022C25D5F00E59013 /* PaidInvoiceInputData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidInvoiceInputData.swift; sourceTree = "<group>"; };
+		C143796422C262A100E59013 /* ApplePayInputData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayInputData.swift; sourceTree = "<group>"; };
+		C143797222C2633300E59013 /* ApplePayAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayAssembly.swift; sourceTree = "<group>"; };
+		C143797322C2633300E59013 /* ApplePayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayViewModel.swift; sourceTree = "<group>"; };
+		C143797422C2633300E59013 /* ApplePayDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayDependencies.swift; sourceTree = "<group>"; };
+		C143797522C2633300E59013 /* ApplePay.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = ApplePay.storyboard; sourceTree = "<group>"; };
+		C143797622C2633300E59013 /* ApplePayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayViewController.swift; sourceTree = "<group>"; };
+		C143797722C2633300E59013 /* ApplePayDependenciesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayDependenciesExtensions.swift; sourceTree = "<group>"; };
+		C143797F22C2636A00E59013 /* UnpaidInvoiceAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidInvoiceAssembly.swift; sourceTree = "<group>"; };
+		C143798022C2636A00E59013 /* UnpaidInvoiceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidInvoiceViewModel.swift; sourceTree = "<group>"; };
+		C143798122C2636A00E59013 /* UnpaidInvoiceDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidInvoiceDependencies.swift; sourceTree = "<group>"; };
+		C143798222C2636A00E59013 /* UnpaidInvoice.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UnpaidInvoice.storyboard; sourceTree = "<group>"; };
+		C143798322C2636A00E59013 /* UnpaidInvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidInvoiceViewController.swift; sourceTree = "<group>"; };
+		C143798422C2636A00E59013 /* UnpaidInvoiceDependenciesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidInvoiceDependenciesExtensions.swift; sourceTree = "<group>"; };
+		C143798B22C2638B00E59013 /* UnpaidInvoiceInputData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidInvoiceInputData.swift; sourceTree = "<group>"; };
 		C1978990229FCA0900C7F966 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789A6229FCE1900C7F966 /* Example+Pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example+Pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789B9229FCF8B00C7F966 /* Example+Pods.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Example+Pods.Release.xcconfig"; sourceTree = "<group>"; };
@@ -443,6 +493,10 @@
 		C1A2791F22B3B41D00EB371F /* ApplePayInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayInfo.swift; sourceTree = "<group>"; };
 		C1A2792622B3C04E00EB371F /* ApplePayAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayAvailability.swift; sourceTree = "<group>"; };
 		C1A2792D22B7A71800EB371F /* PaymentMethodInputData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodInputData.swift; sourceTree = "<group>"; };
+		C1D024EE22BB94950014AA80 /* PaymentRootViewControllerTransitionConfiguratorAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRootViewControllerTransitionConfiguratorAssembly.swift; sourceTree = "<group>"; };
+		C1D024F022BB94950014AA80 /* PaymentRootViewControllerTransitionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRootViewControllerTransitionConfigurator.swift; sourceTree = "<group>"; };
+		C1D024F922BB964F0014AA80 /* TransitionStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionStyle.swift; sourceTree = "<group>"; };
+		C1D024FB22BBA1540014AA80 /* PushFadeAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushFadeAnimator.swift; sourceTree = "<group>"; };
 		C1F4D17822B9D6FB005CFA6B /* PaymentProgressAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProgressAssembly.swift; sourceTree = "<group>"; };
 		C1F4D17922B9D6FB005CFA6B /* PaymentProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProgressViewModel.swift; sourceTree = "<group>"; };
 		C1F4D17A22B9D6FB005CFA6B /* PaymentProgressDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProgressDependencies.swift; sourceTree = "<group>"; };
@@ -698,14 +752,15 @@
 			children = (
 				C1044EDB22A5C2C600A8065B /* Models */,
 				C1044EDA22A5C2C600A8065B /* Protocols */,
-				C1044ED622A5C24E00A8065B /* Root */,
+				C1044ED622A5C24E00A8065B /* RootViewController */,
+				C1D024ED22BB94710014AA80 /* RootViewControllerTransitionConfigurator */,
 				C1044ED922A5C24E00A8065B /* Router */,
 				C1044ED722A5C24E00A8065B /* Modules */,
 			);
 			path = Payment;
 			sourceTree = "<group>";
 		};
-		C1044ED622A5C24E00A8065B /* Root */ = {
+		C1044ED622A5C24E00A8065B /* RootViewController */ = {
 			isa = PBXGroup;
 			children = (
 				C1044F0E22A5F1C200A8065B /* PaymentRootViewController.swift */,
@@ -713,7 +768,7 @@
 				C1044F1F22A7F8B100A8065B /* PaymentRootViewControllerDependencies.swift */,
 				C1044F2122A7F8B100A8065B /* PaymentRootViewControllerDependenciesExtensions.swift */,
 			);
-			path = Root;
+			path = RootViewController;
 			sourceTree = "<group>";
 		};
 		C1044ED722A5C24E00A8065B /* Modules */ = {
@@ -721,7 +776,10 @@
 			children = (
 				C1044ED822A5C24E00A8065B /* PaymentMethod */,
 				869CEDF522A6B23800EDF3B8 /* BankCard */,
+				C143796222C2627E00E59013 /* ApplePay */,
 				C1F4D17722B9D6E4005CFA6B /* PaymentProgress */,
+				C143795122C25A8C00E59013 /* PaidInvoice */,
+				C143795222C25A8C00E59013 /* UnpaidInvoice */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -1053,6 +1111,89 @@
 			path = InvoiceSummaryView;
 			sourceTree = "<group>";
 		};
+		C143794722C2309D00E59013 /* URLRequestFactory */ = {
+			isa = PBXGroup;
+			children = (
+				C143794822C2309D00E59013 /* 3DS */,
+			);
+			path = URLRequestFactory;
+			sourceTree = "<group>";
+		};
+		C143794822C2309D00E59013 /* 3DS */ = {
+			isa = PBXGroup;
+			children = (
+				C143794B22C2311E00E59013 /* ThreeDSURLRequestFactory.swift */,
+				C143794922C2311E00E59013 /* ThreeDSURLRequestFactoryAssembly.swift */,
+			);
+			path = 3DS;
+			sourceTree = "<group>";
+		};
+		C143795122C25A8C00E59013 /* PaidInvoice */ = {
+			isa = PBXGroup;
+			children = (
+				C143795F22C25D4200E59013 /* Models */,
+				C143795722C25CB200E59013 /* PaidInvoiceViewController.swift */,
+				C143795422C25CB200E59013 /* PaidInvoiceViewModel.swift */,
+				C143795622C25CB200E59013 /* PaidInvoice.storyboard */,
+				C143795322C25CB200E59013 /* PaidInvoiceAssembly.swift */,
+				C143795522C25CB200E59013 /* PaidInvoiceDependencies.swift */,
+				C143795822C25CB200E59013 /* PaidInvoiceDependenciesExtensions.swift */,
+			);
+			path = PaidInvoice;
+			sourceTree = "<group>";
+		};
+		C143795222C25A8C00E59013 /* UnpaidInvoice */ = {
+			isa = PBXGroup;
+			children = (
+				C143797E22C2635600E59013 /* Models */,
+				C143798322C2636A00E59013 /* UnpaidInvoiceViewController.swift */,
+				C143798022C2636A00E59013 /* UnpaidInvoiceViewModel.swift */,
+				C143798222C2636A00E59013 /* UnpaidInvoice.storyboard */,
+				C143797F22C2636A00E59013 /* UnpaidInvoiceAssembly.swift */,
+				C143798122C2636A00E59013 /* UnpaidInvoiceDependencies.swift */,
+				C143798422C2636A00E59013 /* UnpaidInvoiceDependenciesExtensions.swift */,
+			);
+			path = UnpaidInvoice;
+			sourceTree = "<group>";
+		};
+		C143795F22C25D4200E59013 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C143796022C25D5F00E59013 /* PaidInvoiceInputData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C143796222C2627E00E59013 /* ApplePay */ = {
+			isa = PBXGroup;
+			children = (
+				C143796322C2628800E59013 /* Models */,
+				C143797622C2633300E59013 /* ApplePayViewController.swift */,
+				C143797322C2633300E59013 /* ApplePayViewModel.swift */,
+				C143797522C2633300E59013 /* ApplePay.storyboard */,
+				C143797222C2633300E59013 /* ApplePayAssembly.swift */,
+				C143797422C2633300E59013 /* ApplePayDependencies.swift */,
+				C143797722C2633300E59013 /* ApplePayDependenciesExtensions.swift */,
+			);
+			path = ApplePay;
+			sourceTree = "<group>";
+		};
+		C143796322C2628800E59013 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C143796422C262A100E59013 /* ApplePayInputData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C143797E22C2635600E59013 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C143798B22C2638B00E59013 /* UnpaidInvoiceInputData.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		C197896E229FC91400C7F966 = {
 			isa = PBXGroup;
 			children = (
@@ -1366,6 +1507,41 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		C1D024ED22BB94710014AA80 /* RootViewControllerTransitionConfigurator */ = {
+			isa = PBXGroup;
+			children = (
+				C1D024F822BB962A0014AA80 /* Models */,
+				C1D024F622BB962A0014AA80 /* Animators */,
+				C1D024F022BB94950014AA80 /* PaymentRootViewControllerTransitionConfigurator.swift */,
+				C1D024EE22BB94950014AA80 /* PaymentRootViewControllerTransitionConfiguratorAssembly.swift */,
+			);
+			path = RootViewControllerTransitionConfigurator;
+			sourceTree = "<group>";
+		};
+		C1D024F622BB962A0014AA80 /* Animators */ = {
+			isa = PBXGroup;
+			children = (
+				C1D024F722BB962A0014AA80 /* PushFade */,
+			);
+			path = Animators;
+			sourceTree = "<group>";
+		};
+		C1D024F722BB962A0014AA80 /* PushFade */ = {
+			isa = PBXGroup;
+			children = (
+				C1D024FB22BBA1540014AA80 /* PushFadeAnimator.swift */,
+			);
+			path = PushFade;
+			sourceTree = "<group>";
+		};
+		C1D024F822BB962A0014AA80 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C1D024F922BB964F0014AA80 /* TransitionStyle.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		C1F4D17622B9B44B005CFA6B /* Formatters */ = {
 			isa = PBXGroup;
 			children = (
@@ -1378,6 +1554,7 @@
 			isa = PBXGroup;
 			children = (
 				C1F4D18422B9D739005CFA6B /* Models */,
+				C143794722C2309D00E59013 /* URLRequestFactory */,
 				C1F4D17C22B9D6FB005CFA6B /* PaymentProgressViewController.swift */,
 				C1F4D17922B9D6FB005CFA6B /* PaymentProgressViewModel.swift */,
 				C1F4D17B22B9D6FB005CFA6B /* PaymentProgress.storyboard */,
@@ -1572,10 +1749,13 @@
 				C19789F1229FD83C00C7F966 /* Localizable.strings in Resources */,
 				C19789F3229FD83C00C7F966 /* Assets.xcassets in Resources */,
 				C1044F0922A5EB9C00A8065B /* PaymentMethod.storyboard in Resources */,
+				C143798822C2636A00E59013 /* UnpaidInvoice.storyboard in Resources */,
 				869CEDFF22A6B26300EDF3B8 /* BankCard.storyboard in Resources */,
+				C143795C22C25CB200E59013 /* PaidInvoice.storyboard in Resources */,
 				C1A2790322B2B17A00EB371F /* PaymentMethodCell.xib in Resources */,
 				C19789F2229FD83C00C7F966 /* Localizable.stringsdict in Resources */,
 				C19789F4229FD83C00C7F966 /* Cards.json in Resources */,
+				C143797B22C2633300E59013 /* ApplePay.storyboard in Resources */,
 				C104500422B271C500A8065B /* InvoiceSummaryView.xib in Resources */,
 				C1F4D18122B9D6FB005CFA6B /* PaymentProgress.storyboard in Resources */,
 				C1044FFB22AFC85800A8065B /* LogotypesView.xib in Resources */,
@@ -1768,6 +1948,7 @@
 				C1978A3222A00A3700C7F966 /* NSRecursiveLock+Extensions.swift in Sources */,
 				C1044F9822A9C42600A8065B /* AmountDTO.swift in Sources */,
 				C1044FD522ADE84400A8065B /* ContactInfoDTO.swift in Sources */,
+				C143796122C25D5F00E59013 /* PaidInvoiceInputData.swift in Sources */,
 				C1044EE222A5C50500A8065B /* Palette.swift in Sources */,
 				C1044FEB22AEA2BB00A8065B /* RefundStatusDTO.swift in Sources */,
 				C1044F0B22A5EB9C00A8065B /* PaymentMethodDependenciesExtensions.swift in Sources */,
@@ -1777,6 +1958,7 @@
 				C1F4D17F22B9D6FB005CFA6B /* PaymentProgressViewModel.swift in Sources */,
 				86469D6722B2E6690096882E /* BankCardCardNumberFormatterAssembly.swift in Sources */,
 				C1044FB022AAB80F00A8065B /* PaymentResourceNetworkResponse.swift in Sources */,
+				C143798A22C2636A00E59013 /* UnpaidInvoiceDependenciesExtensions.swift in Sources */,
 				C1A2792122B3B41D00EB371F /* ApplePayInfoAssembly.swift in Sources */,
 				C1044F8422A9330200A8065B /* RemoteAPI.swift in Sources */,
 				C1044F0A22A5EB9C00A8065B /* PaymentMethodViewController.swift in Sources */,
@@ -1790,11 +1972,14 @@
 				C104500722B2931300A8065B /* PaymentSystem.swift in Sources */,
 				C1044FAE22AAB28400A8065B /* CreatePaymentResourceNetworkRequest.swift in Sources */,
 				C1044F6822A8770B00A8065B /* NetworkSessionHTTPHeadersDependencies.swift in Sources */,
+				C143795E22C25CB200E59013 /* PaidInvoiceDependenciesExtensions.swift in Sources */,
 				C1044FDB22ADF4E900A8065B /* PaymentStatusDTO.swift in Sources */,
 				C1978A3122A00A3700C7F966 /* UIViewController+Rx.swift in Sources */,
+				C143798722C2636A00E59013 /* UnpaidInvoiceDependencies.swift in Sources */,
 				C1A2792E22B7A71800EB371F /* PaymentMethodInputData.swift in Sources */,
 				C1A2791022B373F400EB371F /* PriceFormatter.swift in Sources */,
 				C1044F4722A8549900A8065B /* ErrorNetworkResponse.swift in Sources */,
+				C143796522C262A100E59013 /* ApplePayInputData.swift in Sources */,
 				C1044EE522A5C54A00A8065B /* ColorsPalette.swift in Sources */,
 				C1044FBC22AC57B100A8065B /* BankCardPaymentSystemDTO.swift in Sources */,
 				C1044F8222A9330200A8065B /* RemoteAPIAssembly.swift in Sources */,
@@ -1806,6 +1991,8 @@
 				C1044FF122AFBB2E00A8065B /* UIScrollView+Rx.swift in Sources */,
 				C1044EE022A5C50500A8065B /* PaletteAssembly.swift in Sources */,
 				C1978A3522A00A3700C7F966 /* ObservableType+AdditionalOperators.swift in Sources */,
+				C1D024FA22BB964F0014AA80 /* TransitionStyle.swift in Sources */,
+				C143795B22C25CB200E59013 /* PaidInvoiceDependencies.swift in Sources */,
 				C1044F8922A936B900A8065B /* ObtainInvoiceNetworkRequest.swift in Sources */,
 				C1978A1A22A0073300C7F966 /* ViewAssembly.swift in Sources */,
 				869CEDFE22A6B26300EDF3B8 /* BankCardDependencies.swift in Sources */,
@@ -1823,6 +2010,7 @@
 				C1044F6722A8770B00A8065B /* NetworkSessionHTTPHeadersAssembly.swift in Sources */,
 				C1044EEE22A5D33E00A8065B /* PaymentRouter.swift in Sources */,
 				C1A2790222B2B17A00EB371F /* PaymentMethodCell.swift in Sources */,
+				C143794D22C2311E00E59013 /* ThreeDSURLRequestFactoryAssembly.swift in Sources */,
 				C1978A3322A00A3700C7F966 /* SharedSequence+AdditionalOperators.swift in Sources */,
 				C1978A1B22A0073300C7F966 /* ViewControllerAssembly.swift in Sources */,
 				C1044F3622A8163000A8065B /* DecodableNetworkResponse.swift in Sources */,
@@ -1832,6 +2020,7 @@
 				C1044F7122A88D6D00A8065B /* NetworkTaskFactoryDependencies.swift in Sources */,
 				C1044FD122ADE3A500A8065B /* PaymentFlowDTO.swift in Sources */,
 				C1044FD922ADF04200A8065B /* PaymentDTO.swift in Sources */,
+				C143797C22C2633300E59013 /* ApplePayViewController.swift in Sources */,
 				C1044EB222A3BE8E00A8065B /* Route.swift in Sources */,
 				86469D9722B2F6E90096882E /* EmailValidator.swift in Sources */,
 				C1978A2F22A00A3700C7F966 /* UIView+LayerProperties.swift in Sources */,
@@ -1847,11 +2036,13 @@
 				86469D8522B2F4280096882E /* ExpirationDateValidator.swift in Sources */,
 				C1044F6022A870B100A8065B /* NetworkRequestIdentifierGenerator.swift in Sources */,
 				C1044F5E22A870B100A8065B /* NetworkRequestIdentifierGeneratorAssembly.swift in Sources */,
+				C143795922C25CB200E59013 /* PaidInvoiceAssembly.swift in Sources */,
 				C1A2790722B3019500EB371F /* ThrobberView.swift in Sources */,
 				C1044EB022A3BD4500A8065B /* Router.swift in Sources */,
 				86A4BA7222A70A08001EBC55 /* BankCardTextField.swift in Sources */,
 				C1044F0622A5EB9C00A8065B /* PaymentMethodAssembly.swift in Sources */,
 				C1044F9622A9C41000A8065B /* InvoiceCartItemDTO.swift in Sources */,
+				C143794F22C2311E00E59013 /* ThreeDSURLRequestFactory.swift in Sources */,
 				C1044F7A22A8B06300A8065B /* NetworkClientDependencies.swift in Sources */,
 				C1044F8322A9330200A8065B /* RemoteAPIDependencies.swift in Sources */,
 				C1044FC722AC66B300A8065B /* FingerprintDependencies.swift in Sources */,
@@ -1863,6 +2054,7 @@
 				C1044F3222A8110B00A8065B /* NetworkRequest.swift in Sources */,
 				C1044F4322A853EC00A8065B /* NetworkResponse+Rx.swift in Sources */,
 				C1044F0722A5EB9C00A8065B /* PaymentMethodViewModel.swift in Sources */,
+				C143797922C2633300E59013 /* ApplePayViewModel.swift in Sources */,
 				C1044F3D22A81DBD00A8065B /* NetworkTask.swift in Sources */,
 				C1044FD722ADE8DE00A8065B /* RecurrentPaymentParentDTO.swift in Sources */,
 				C1044F9422A9C3F500A8065B /* InvoiceStatusDTO.swift in Sources */,
@@ -1873,11 +2065,16 @@
 				86469D7A22B2F1300096882E /* CardNumberValidatorAssembly.swift in Sources */,
 				863A5A8922B263A50044D7C0 /* CardDetector.swift in Sources */,
 				8662425322B7BA8D006AE2B1 /* BankCardInputData.swift in Sources */,
+				C143797A22C2633300E59013 /* ApplePayDependencies.swift in Sources */,
+				C143795D22C25CB200E59013 /* PaidInvoiceViewController.swift in Sources */,
+				C143798522C2636A00E59013 /* UnpaidInvoiceAssembly.swift in Sources */,
 				C1044EF722A5D48E00A8065B /* PaymentRouterDependenciesExtensions.swift in Sources */,
 				C1978A3722A00A3700C7F966 /* PrimitiveSequence+AdditionalOperators.swift in Sources */,
 				86469D9522B2F6E90096882E /* EmailValidatorAssembly.swift in Sources */,
+				C143798622C2636A00E59013 /* UnpaidInvoiceViewModel.swift in Sources */,
 				86469D6922B2E6690096882E /* BankCardCardNumberFormatter.swift in Sources */,
 				86469D8E22B2F59A0096882E /* CardholderValidator.swift in Sources */,
+				C1D024F222BB94950014AA80 /* PaymentRootViewControllerTransitionConfiguratorAssembly.swift in Sources */,
 				86469D7C22B2F1300096882E /* CardNumberValidator.swift in Sources */,
 				C1044EB422A3D2DD00A8065B /* AnyRouter.swift in Sources */,
 				86A4BA7022A70891001EBC55 /* BankCardExpirationDatePickerView.swift in Sources */,
@@ -1903,6 +2100,7 @@
 				C1044FC022AC5BDC00A8065B /* BankCardTokenProviderDTO.swift in Sources */,
 				C1044FFA22AFC85800A8065B /* LogotypesView.swift in Sources */,
 				C1044FCD22ADE1A600A8065B /* PaymentNetworkResponse.swift in Sources */,
+				C143797D22C2633300E59013 /* ApplePayDependenciesExtensions.swift in Sources */,
 				C1978A3622A00A3700C7F966 /* Disposable+DisposedWith.swift in Sources */,
 				C1044F1022A5F1C200A8065B /* PaymentRootViewControllerAssembly.swift in Sources */,
 				C1044F6A22A8770B00A8065B /* NetworkSessionHTTPHeadersDependenciesExtensions.swift in Sources */,
@@ -1912,17 +2110,23 @@
 				C1044FE322AE087600A8065B /* InvoiceChangeDTO.swift in Sources */,
 				C1F4D18222B9D6FB005CFA6B /* PaymentProgressViewController.swift in Sources */,
 				C1044FB422AAB99100A8065B /* PaymentResourceDTO.swift in Sources */,
+				C143798922C2636A00E59013 /* UnpaidInvoiceViewController.swift in Sources */,
 				C1A2790E22B373F400EB371F /* PriceFormatterAssembly.swift in Sources */,
 				C1044FC922AC66B300A8065B /* FingerprintDependenciesExtensions.swift in Sources */,
 				C1978A3422A00A3700C7F966 /* ObservableType+Errors.swift in Sources */,
 				C1044F3722A8163000A8065B /* NetworkResponse.swift in Sources */,
+				C1D024FC22BBA1540014AA80 /* PushFadeAnimator.swift in Sources */,
+				C143797822C2633300E59013 /* ApplePayAssembly.swift in Sources */,
 				C1044FCF22ADE36300A8065B /* PaymentParametersDTO.swift in Sources */,
 				C1044F8D22A997CD00A8065B /* UIImage+Extensions.swift in Sources */,
 				C1F4D18622B9D766005CFA6B /* PaymentProgressInputData.swift in Sources */,
 				C1044FE922AEA29700A8065B /* RefundDTO.swift in Sources */,
 				C1978A3022A00A3700C7F966 /* UIColor+Extensions.swift in Sources */,
+				C1D024F422BB94950014AA80 /* PaymentRootViewControllerTransitionConfigurator.swift in Sources */,
+				C143798C22C2638B00E59013 /* UnpaidInvoiceInputData.swift in Sources */,
 				C1044F9A22A9CEFF00A8065B /* Formatter+Extensions.swift in Sources */,
 				C1044FA022A9D64300A8065B /* ObtainInvoicePaymentMethodsNetworkRequest.swift in Sources */,
+				C143795A22C25CB200E59013 /* PaidInvoiceViewModel.swift in Sources */,
 				C1044FE722AE977800A8065B /* BrowserRequestDTO.swift in Sources */,
 				C19789F7229FD86600C7F966 /* R.generated.swift in Sources */,
 				C1044F7922A8B06300A8065B /* NetworkClientAssembly.swift in Sources */,

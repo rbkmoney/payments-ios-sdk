@@ -16,13 +16,12 @@ import Foundation
 
 enum PaymentRoute: Route {
 
-    case method
-    case bankCard(InvoiceDTO, Set<PaymentSystem>)
-    case applePay(InvoiceDTO, Set<PaymentSystem>)
-    case progress(PaymentResourceDTO, String?)
-    case threeDSecure
-    case paid
-    case unpaid
+    case paymentMethod
+    case bankCard(BankCardInputData.Parameters)
+    case applePay(ApplePayInputData.Parameters)
+    case paymentProgress(PaymentProgressInputData.Parameters)
+    case paidInvoice(PaidInvoiceInputData.Parameters)
+    case unpaidInvoice(UnpaidInvoiceInputData.Parameters)
     case cancel
     case finish(PaymentMethod)
 }
@@ -30,37 +29,42 @@ enum PaymentRoute: Route {
 final class PaymentRouter: Router {
 
     // MARK: - Dependencies
-    lazy var rootViewControllerProvider: PaymentRouterRootViewControllerProvider = deferred()
+    lazy var rootViewController: PaymentRouterRootViewController = deferred()
     lazy var paymentInputData: PaymentInputData = deferred()
     lazy var paymentDelegate: PaymentDelegate = deferred() // swiftlint:disable:this weak_delegate
 
     // MARK: - Internal
     func configure() {
-        trigger(route: .method)
+        trigger(route: .paymentMethod)
     }
 
     // MARK: - Router
     func trigger(route: PaymentRoute) {
         switch route {
-        case .method:
-            let module = paymentMethodAssembly.makeViewController(router: anyRouter, inputData: paymentInputData)
-            rootViewControllerProvider.rootViewController?.viewControllers = [module]
-        case let .bankCard(invoice, paymentSystems):
-            let inputData = BankCardInputData(invoice: invoice, paymentSystems: paymentSystems, paymentInputData: paymentInputData)
+        case .paymentMethod:
+            let inputData = PaymentMethodInputData(paymentInputData: paymentInputData)
+            let module = paymentMethodAssembly.makeViewController(router: anyRouter, inputData: inputData)
+            rootViewController.setViewControllers([module], animated: true)
+        case let .bankCard(parameters):
+            let inputData = BankCardInputData(parameters: parameters, paymentInputData: paymentInputData)
             let module = bankCardAssembly.makeViewController(router: anyRouter, inputData: inputData)
-            rootViewControllerProvider.rootViewController?.pushViewController(module, animated: true)
-        case let .applePay(invoice, paymentSystems):
-            print("Display ApplePay module with invoice: \(invoice), payment systems: \(paymentSystems)")
-        case let .progress(paymentResource, email):
-            let inputData = PaymentProgressInputData(paymentResource: paymentResource, payerEmail: email, paymentInputData: paymentInputData)
+            rootViewController.pushViewController(module, animated: true)
+        case let .applePay(parameters):
+            let inputData = ApplePayInputData(parameters: parameters, paymentInputData: paymentInputData)
+            let module = applePayAssembly.makeViewController(router: anyRouter, inputData: inputData)
+            rootViewController.pushViewController(module, animated: true)
+        case let .paymentProgress(parameters):
+            let inputData = PaymentProgressInputData(parameters: parameters, paymentInputData: paymentInputData)
             let module = paymentProgressAssembly.makeViewController(router: anyRouter, inputData: inputData)
-            rootViewControllerProvider.rootViewController?.pushViewController(module, animated: false)
-        case .threeDSecure:
-            print("3DS screen. Not implemented yet")
-        case .paid:
-            print("Success screen with happy smile. Not implemented yet")
-        case .unpaid:
-            print("Failure screen with sad smile. Not implemented yet")
+            rootViewController.pushViewController(module, animated: true, transitionStyle: .fade)
+        case let .paidInvoice(parameters):
+            let inputData = PaidInvoiceInputData(parameters: parameters, paymentInputData: paymentInputData)
+            let module = paidInvoiceAssembly.makeViewController(router: anyRouter, inputData: inputData)
+            rootViewController.pushViewController(module, animated: true)
+        case let .unpaidInvoice(parameters):
+            let inputData = UnpaidInvoiceInputData(parameters: parameters, paymentInputData: paymentInputData)
+            let module = unpaidInvoiceAssembly.makeViewController(router: anyRouter, inputData: inputData)
+            rootViewController.pushViewController(module, animated: true)
         case .cancel:
             paymentDelegate.paymentCancelled(invoiceIdentifier: paymentInputData.invoiceIdentifier)
         case let .finish(paymentMethod):
@@ -71,5 +75,8 @@ final class PaymentRouter: Router {
     // MARK: - Private
     private lazy var paymentMethodAssembly = PaymentMethodAssembly()
     private lazy var bankCardAssembly = BankCardAssembly()
+    private lazy var applePayAssembly = ApplePayAssembly()
     private lazy var paymentProgressAssembly = PaymentProgressAssembly()
+    private lazy var paidInvoiceAssembly = PaidInvoiceAssembly()
+    private lazy var unpaidInvoiceAssembly = UnpaidInvoiceAssembly()
 }

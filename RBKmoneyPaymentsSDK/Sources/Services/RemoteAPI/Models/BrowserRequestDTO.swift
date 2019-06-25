@@ -21,7 +21,7 @@ enum BrowserRequestDTO {
     struct FormData {
         struct Item: Codable {
             let key: String
-            let template: String
+            let template: URITemplate
         }
 
         let uriTemplate: URITemplate

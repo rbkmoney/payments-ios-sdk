@@ -12,10 +12,18 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import Foundation
 import RxSwift
 
 protocol PaymentProgressRemoteAPI {
 
     func createPayment(paymentParameters: PaymentParametersDTO, invoiceIdentifier: String, invoiceAccessToken: String) -> Single<PaymentDTO>
     func obtainInvoiceEvents(invoiceIdentifier: String, invoiceAccessToken: String) -> Single<[InvoiceEventDTO]>
+}
+
+protocol PaymentProgress3DSURLRequestFactory {
+
+    func urlRequest(for browserRequest: BrowserRequestDTO) -> URLRequest?
+
+    var terminationURLString: String { get }
 }

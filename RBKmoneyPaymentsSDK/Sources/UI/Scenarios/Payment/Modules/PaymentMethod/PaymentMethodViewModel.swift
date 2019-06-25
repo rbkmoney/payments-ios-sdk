@@ -38,9 +38,9 @@ final class PaymentMethodViewModel: ModuleViewModel {
 
                 switch item.method {
                 case .bankCard:
-                    return .bankCard(invoice, item.paymentSystems)
+                    return .bankCard(.init(invoice: invoice, paymentSystems: item.paymentSystems))
                 case .applePay:
-                    return .applePay(invoice, item.paymentSystems)
+                    return .applePay(.init(invoice: invoice, paymentSystems: item.paymentSystems))
                 }
             }
 
@@ -64,14 +64,14 @@ final class PaymentMethodViewModel: ModuleViewModel {
     private(set) lazy var isLoading = activityTracker.asDriver()
 
     private(set) lazy var shopName = inputDataObservable
-        .map { $0.shopName }
+        .map { $0.paymentInputData.shopName }
         .asDriver(onError: .never)
 
     private(set) lazy var invoice = inputDataObservable
         .flatMap { [remoteAPI, activityTracker] data -> Single<InvoiceDTO> in
             let invoice = remoteAPI.obtainInvoice(
-                invoiceIdentifier: data.invoiceIdentifier,
-                invoiceAccessToken: data.invoiceAccessToken
+                invoiceIdentifier: data.paymentInputData.invoiceIdentifier,
+                invoiceAccessToken: data.paymentInputData.invoiceAccessToken
             )
             return invoice.trackActivity(activityTracker)
         }
@@ -80,8 +80,8 @@ final class PaymentMethodViewModel: ModuleViewModel {
     private(set) lazy var items = inputDataObservable
         .flatMap { [remoteAPI, activityTracker, methodsMapper] data -> Single<[Item]> in
             let methods = remoteAPI.obtainInvoicePaymentMethods(
-                invoiceIdentifier: data.invoiceIdentifier,
-                invoiceAccessToken: data.invoiceAccessToken
+                invoiceIdentifier: data.paymentInputData.invoiceIdentifier,
+                invoiceAccessToken: data.paymentInputData.invoiceAccessToken
             )
             return methods.map({ methodsMapper(data, $0) }).trackActivity(activityTracker)
         }
@@ -96,7 +96,7 @@ final class PaymentMethodViewModel: ModuleViewModel {
         // 2. Host application has provided MerchantIdentifier
         // 3. Server supports ApplePay tokenized card data with non-zero count of payment systems
         // 4. Device supports ApplePay with provided payment systems
-        if data.allowedPaymentMethods.contains(.applePay) && data.applePayMerchantIdentifier != nil {
+        if data.paymentInputData.allowedPaymentMethods.contains(.applePay) && data.paymentInputData.applePayMerchantIdentifier != nil {
             let paymentSystems = methods.flatMap { item -> [PaymentSystem] in
                 guard case let .bankCard(paymentSystems, .some(tokenProviders)) = item, tokenProviders.contains(.applePay) else {
                     return []
@@ -111,7 +111,7 @@ final class PaymentMethodViewModel: ModuleViewModel {
         // BankCard
         // 1. Host application has requested BankCard method
         // 2. Server supports non-zero count of payment systems
-        if data.allowedPaymentMethods.contains(.bankCard) {
+        if data.paymentInputData.allowedPaymentMethods.contains(.bankCard) {
             let paymentSystems = methods.flatMap { item -> [PaymentSystem] in
                 guard case let .bankCard(paymentSystems, .none) = item else {
                     return []

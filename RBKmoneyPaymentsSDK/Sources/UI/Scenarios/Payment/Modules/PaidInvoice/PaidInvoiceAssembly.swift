@@ -12,18 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-final class PaymentProgressAssembly: ViewControllerAssembly<PaymentProgressViewController, PaymentProgressViewModel> {
+final class PaidInvoiceAssembly: ViewControllerAssembly<PaidInvoiceViewController, PaidInvoiceViewModel> {
+
+    // MARK: - Public
 
     // MARK: - Internal
-    func makeViewController(router: AnyRouter<PaymentRoute>, inputData: PaymentProgressInputData) -> PaymentProgressViewController {
-        let viewController = R.storyboard.paymentProgress.initial()!
+    func makeViewController(router: AnyRouter<PaymentRoute>, inputData: PaidInvoiceInputData) -> PaidInvoiceViewController {
+        let viewController = R.storyboard.paidInvoice.initial()!
 
-        viewController.urlRequestFactory = ThreeDSURLRequestFactoryAssembly.makeRequestFactory()
+        viewController.priceFormatter = PriceFormatterAssembly.makeFormatter()
+        viewController.invoiceDetailsFormatter = InvoiceDetailsFormatterAssembly.makeFormatter()
 
         bindViewModel(to: viewController) {
             $0.router = router
             $0.inputData = inputData
-            $0.remoteAPI = RemoteAPIAssembly.makeRemoteAPI()
         }
 
         return viewController

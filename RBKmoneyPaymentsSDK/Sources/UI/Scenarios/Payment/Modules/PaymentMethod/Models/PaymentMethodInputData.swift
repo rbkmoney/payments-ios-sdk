@@ -14,4 +14,7 @@
 
 import Foundation
 
-typealias PaymentMethodInputData = PaymentInputData
+struct PaymentMethodInputData {
+
+    let paymentInputData: PaymentInputData
+}

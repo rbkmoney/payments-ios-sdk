@@ -14,7 +14,24 @@
 
 import UIKit
 
-protocol PaymentRouterRootViewControllerProvider {
+protocol PaymentRouterRootViewControllerTransitionConfigurator {
 
-    var rootViewController: UINavigationController? { get }
+    var pushTransitionStyle: TransitionStyle { get set }
+}
+
+protocol PaymentRouterRootViewController {
+
+    func setViewControllers(_ viewControllers: [UIViewController], animated: Bool, transitionStyle: TransitionStyle)
+    func pushViewController(_ viewController: UIViewController, animated: Bool, transitionStyle: TransitionStyle)
+}
+
+extension PaymentRouterRootViewController {
+
+    func setViewControllers(_ viewControllers: [UIViewController], animated: Bool) {
+        setViewControllers(viewControllers, animated: animated, transitionStyle: .default)
+    }
+
+    func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        pushViewController(viewController, animated: animated, transitionStyle: .default)
+    }
 }

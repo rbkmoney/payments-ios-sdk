@@ -14,8 +14,8 @@
 
 import Foundation
 
-extension RemoteAPI: PaymentProgressRemoteAPI {
+extension PriceFormatter: UnpaidInvoicePriceFormatter {
 }
 
-extension ThreeDSURLRequestFactory: PaymentProgress3DSURLRequestFactory {
+extension InvoiceDetailsFormatter: UnpaidInvoiceInvoiceDetailsFormatter {
 }
