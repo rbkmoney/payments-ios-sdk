@@ -294,18 +294,34 @@ struct R: Rswift.Validatable {
     fileprivate init() {}
   }
   
-  /// This `R.storyboard` struct is generated, and contains static references to 3 storyboards.
+  /// This `R.storyboard` struct is generated, and contains static references to 6 storyboards.
   struct storyboard {
+    /// Storyboard `ApplePay`.
+    static let applePay = _R.storyboard.applePay()
     /// Storyboard `BankCard`.
     static let bankCard = _R.storyboard.bankCard()
+    /// Storyboard `PaidInvoice`.
+    static let paidInvoice = _R.storyboard.paidInvoice()
     /// Storyboard `PaymentMethod`.
     static let paymentMethod = _R.storyboard.paymentMethod()
     /// Storyboard `PaymentProgress`.
     static let paymentProgress = _R.storyboard.paymentProgress()
+    /// Storyboard `UnpaidInvoice`.
+    static let unpaidInvoice = _R.storyboard.unpaidInvoice()
+    
+    /// `UIStoryboard(name: "ApplePay", bundle: ...)`
+    static func applePay(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.applePay)
+    }
     
     /// `UIStoryboard(name: "BankCard", bundle: ...)`
     static func bankCard(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.bankCard)
+    }
+    
+    /// `UIStoryboard(name: "PaidInvoice", bundle: ...)`
+    static func paidInvoice(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.paidInvoice)
     }
     
     /// `UIStoryboard(name: "PaymentMethod", bundle: ...)`
@@ -316,6 +332,11 @@ struct R: Rswift.Validatable {
     /// `UIStoryboard(name: "PaymentProgress", bundle: ...)`
     static func paymentProgress(_: Void = ()) -> UIKit.UIStoryboard {
       return UIKit.UIStoryboard(resource: R.storyboard.paymentProgress)
+    }
+    
+    /// `UIStoryboard(name: "UnpaidInvoice", bundle: ...)`
+    static func unpaidInvoice(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.unpaidInvoice)
     }
     
     fileprivate init() {}
@@ -525,9 +546,33 @@ struct _R: Rswift.Validatable {
   
   struct storyboard: Rswift.Validatable {
     static func validate() throws {
+      try applePay.validate()
       try bankCard.validate()
+      try paidInvoice.validate()
       try paymentMethod.validate()
       try paymentProgress.validate()
+      try unpaidInvoice.validate()
+    }
+    
+    struct applePay: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = ApplePayViewController
+      
+      let bundle = R.hostingBundle
+      let initial = StoryboardViewControllerResource<ApplePayViewController>(identifier: "Initial")
+      let name = "ApplePay"
+      
+      func initial(_: Void = ()) -> ApplePayViewController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: initial)
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "Common/close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Common/close' is used in storyboard 'ApplePay', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
+        if _R.storyboard.applePay().initial() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'initial' could not be loaded from storyboard 'ApplePay' as 'ApplePayViewController'.") }
+      }
+      
+      fileprivate init() {}
     }
     
     struct bankCard: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
@@ -551,6 +596,27 @@ struct _R: Rswift.Validatable {
         if #available(iOS 11.0, *) {
         }
         if _R.storyboard.bankCard().initial() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'initial' could not be loaded from storyboard 'BankCard' as 'BankCardViewController'.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct paidInvoice: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = PaidInvoiceViewController
+      
+      let bundle = R.hostingBundle
+      let initial = StoryboardViewControllerResource<PaidInvoiceViewController>(identifier: "Initial")
+      let name = "PaidInvoice"
+      
+      func initial(_: Void = ()) -> PaidInvoiceViewController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: initial)
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "Common/close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Common/close' is used in storyboard 'PaidInvoice', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
+        if _R.storyboard.paidInvoice().initial() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'initial' could not be loaded from storyboard 'PaidInvoice' as 'PaidInvoiceViewController'.") }
       }
       
       fileprivate init() {}
@@ -593,6 +659,27 @@ struct _R: Rswift.Validatable {
         if #available(iOS 11.0, *) {
         }
         if _R.storyboard.paymentProgress().initial() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'initial' could not be loaded from storyboard 'PaymentProgress' as 'PaymentProgressViewController'.") }
+      }
+      
+      fileprivate init() {}
+    }
+    
+    struct unpaidInvoice: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
+      typealias InitialController = UnpaidInvoiceViewController
+      
+      let bundle = R.hostingBundle
+      let initial = StoryboardViewControllerResource<UnpaidInvoiceViewController>(identifier: "Initial")
+      let name = "UnpaidInvoice"
+      
+      func initial(_: Void = ()) -> UnpaidInvoiceViewController? {
+        return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: initial)
+      }
+      
+      static func validate() throws {
+        if UIKit.UIImage(named: "Common/close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Common/close' is used in storyboard 'UnpaidInvoice', but couldn't be loaded.") }
+        if #available(iOS 11.0, *) {
+        }
+        if _R.storyboard.unpaidInvoice().initial() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'initial' could not be loaded from storyboard 'UnpaidInvoice' as 'UnpaidInvoiceViewController'.") }
       }
       
       fileprivate init() {}

@@ -221,7 +221,7 @@
                                 <subviews>
                                     <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uTh-UO-EBJ">
                                         <rect key="frame" x="167.5" y="313.5" width="40" height="40"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.34999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="40" id="Cxf-8C-HQB"/>
                                             <constraint firstAttribute="height" constant="40" id="brB-Fe-F8w"/>
@@ -237,7 +237,6 @@
                                         <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </activityIndicatorView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.25" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="T8k-DO-Y2S" firstAttribute="centerY" secondItem="Brd-7y-7f0" secondAttribute="centerY" id="7jc-GX-Fla"/>
                                     <constraint firstItem="uTh-UO-EBJ" firstAttribute="centerX" secondItem="Brd-7y-7f0" secondAttribute="centerX" id="abH-o4-JEV"/>

@@ -16,7 +16,11 @@ import Foundation
 
 struct BankCardInputData {
 
-    let invoice: InvoiceDTO
-    let paymentSystems: Set<PaymentSystem>
+    struct Parameters {
+        let invoice: InvoiceDTO
+        let paymentSystems: Set<PaymentSystem>
+    }
+
+    let parameters: Parameters
     let paymentInputData: PaymentInputData
 }

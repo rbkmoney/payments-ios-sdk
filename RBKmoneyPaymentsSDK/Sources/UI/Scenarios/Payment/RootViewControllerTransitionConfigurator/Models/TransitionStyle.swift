@@ -14,8 +14,8 @@
 
 import Foundation
 
-extension RemoteAPI: PaymentProgressRemoteAPI {
-}
+enum TransitionStyle {
 
-extension ThreeDSURLRequestFactory: PaymentProgress3DSURLRequestFactory {
+    case `default`
+    case fade
 }

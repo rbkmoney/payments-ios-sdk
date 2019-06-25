@@ -18,14 +18,14 @@ public enum PaymentRootViewControllerAssembly {
 
     // MARK: - Public
     public static func makeViewController(paymentInputData: PaymentInputData, paymentDelegate: PaymentDelegate) -> UIViewController {
-        let viewController = PaymentRootViewController()
+        let rootViewController = PaymentRootViewController()
 
-        viewController.systemInfoProvider = SystemInfoAssembly.makeSystemInfo()
+        rootViewController.systemInfoProvider = SystemInfoAssembly.makeSystemInfo()
 
-        viewController.configure()
+        rootViewController.configure()
 
         let router = PaymentRouterAssembly.makeRouter(
-            rootViewController: viewController,
+            rootViewController: rootViewController,
             paymentInputData: paymentInputData,
             paymentDelegate: paymentDelegate
         )
@@ -33,9 +33,9 @@ public enum PaymentRootViewControllerAssembly {
         // Make strong reference to router, leaving it alive until root view controller is deallocated.
         // It's a bit hacky way, but we won't create a property on root view controller just to store
         // router there. Root view controller should know nothing about router.
-        objc_setAssociatedObject(viewController, &AssociatedObjectKey.router, router, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        objc_setAssociatedObject(rootViewController, &AssociatedObjectKey.router, router, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
 
-        return viewController
+        return rootViewController
     }
 
     // MARK: - Private

@@ -18,6 +18,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nbo-6v-Etp" customClass="GradientBackgroundView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </view>
+                            <wkWebView clipsSubviews="YES" contentMode="scaleToFill" allowsLinkPreview="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7lZ-8b-OnT">
+                                <rect key="frame" x="5" y="25" width="365" height="637"/>
+                                <color key="backgroundColor" red="0.54577464789999997" green="0.70774647889999998" blue="0.18661971829999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration" allowsAirPlayForMediaPlayback="NO" allowsPictureInPictureMediaPlayback="NO">
+                                    <dataDetectorTypes key="dataDetectorTypes"/>
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rFm-ou-JjV" customClass="ThrobberView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </view>
@@ -25,8 +37,16 @@
                         <color key="backgroundColor" red="0.85563380280000001" green="0.235915493" blue="0.21478873239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="rFm-ou-JjV" firstAttribute="top" secondItem="kKr-70-3MS" secondAttribute="top" id="0lm-6T-pgS"/>
+                            <constraint firstItem="7lZ-8b-OnT" firstAttribute="top" secondItem="IPU-ZT-f8S" secondAttribute="top" constant="5" id="7mq-MM-BFv"/>
+                            <constraint firstAttribute="trailing" secondItem="Nbo-6v-Etp" secondAttribute="trailing" id="7xR-bW-CBX"/>
                             <constraint firstAttribute="bottom" secondItem="rFm-ou-JjV" secondAttribute="bottom" id="DtW-kv-Gq9"/>
                             <constraint firstAttribute="trailing" secondItem="rFm-ou-JjV" secondAttribute="trailing" id="Gjt-nu-dKD"/>
+                            <constraint firstItem="IPU-ZT-f8S" firstAttribute="bottom" secondItem="7lZ-8b-OnT" secondAttribute="bottom" constant="5" id="T9c-qN-5DG"/>
+                            <constraint firstItem="IPU-ZT-f8S" firstAttribute="trailing" secondItem="7lZ-8b-OnT" secondAttribute="trailing" constant="5" id="Wnm-H7-jEB"/>
+                            <constraint firstAttribute="bottom" secondItem="Nbo-6v-Etp" secondAttribute="bottom" id="Xqc-Kb-r3k"/>
+                            <constraint firstItem="7lZ-8b-OnT" firstAttribute="leading" secondItem="IPU-ZT-f8S" secondAttribute="leading" constant="5" id="duq-cE-q4s"/>
+                            <constraint firstItem="Nbo-6v-Etp" firstAttribute="top" secondItem="kKr-70-3MS" secondAttribute="top" id="i1n-BI-CFJ"/>
+                            <constraint firstItem="Nbo-6v-Etp" firstAttribute="leading" secondItem="kKr-70-3MS" secondAttribute="leading" id="mrX-7d-aWI"/>
                             <constraint firstItem="rFm-ou-JjV" firstAttribute="leading" secondItem="kKr-70-3MS" secondAttribute="leading" id="rCi-9J-Lnw"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IPU-ZT-f8S"/>
@@ -38,6 +58,7 @@
                     <connections>
                         <outlet property="cancelBarButtonItem" destination="6Nk-p3-ayr" id="Sa6-wt-lTm"/>
                         <outlet property="throbberView" destination="rFm-ou-JjV" id="PiR-EF-vsR"/>
+                        <outlet property="webView" destination="7lZ-8b-OnT" id="0XF-mS-7n7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yJM-GT-hGU" userLabel="First Responder" sceneMemberID="firstResponder"/>

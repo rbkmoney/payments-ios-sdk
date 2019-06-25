@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="woJ-BK-SnQ">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Title-->
+        <scene sceneID="YKC-9D-fGX">
+            <objects>
+                <viewController storyboardIdentifier="Initial" automaticallyAdjustsScrollViewInsets="NO" id="woJ-BK-SnQ" customClass="PaidInvoiceViewController" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="kKr-70-3MS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1sk-AR-IqR" customClass="GradientBackgroundView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🥳" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Dw-XR-PSH">
+                                <rect key="frame" x="144.5" y="286" width="86" height="95.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="80"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="0.85563380280000001" green="0.235915493" blue="0.21478873239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="8Dw-XR-PSH" firstAttribute="centerY" secondItem="kKr-70-3MS" secondAttribute="centerY" id="Buh-ot-sGG"/>
+                            <constraint firstItem="1sk-AR-IqR" firstAttribute="top" secondItem="kKr-70-3MS" secondAttribute="top" id="HTK-tR-epy"/>
+                            <constraint firstAttribute="trailing" secondItem="1sk-AR-IqR" secondAttribute="trailing" id="Osh-LQ-Kg6"/>
+                            <constraint firstAttribute="bottom" secondItem="1sk-AR-IqR" secondAttribute="bottom" id="ay7-GH-8PW"/>
+                            <constraint firstItem="8Dw-XR-PSH" firstAttribute="centerX" secondItem="kKr-70-3MS" secondAttribute="centerX" id="ovd-sZ-MFg"/>
+                            <constraint firstItem="1sk-AR-IqR" firstAttribute="leading" secondItem="kKr-70-3MS" secondAttribute="leading" id="saH-ga-xS7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IPU-ZT-f8S"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Title" id="Z80-zb-Phu">
+                        <barButtonItem key="backBarButtonItem" title=" " id="uO3-Xa-uRi"/>
+                        <barButtonItem key="rightBarButtonItem" image="Common/close" id="a1g-zo-mlt"/>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="doneBarButtonItem" destination="a1g-zo-mlt" id="Yot-iy-jH8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yJM-GT-hGU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-97" y="161"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Common/close" width="24" height="24"/>
+    </resources>
+</document>

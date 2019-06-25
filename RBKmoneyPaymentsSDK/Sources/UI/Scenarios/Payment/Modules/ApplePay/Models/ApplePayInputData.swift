@@ -14,8 +14,13 @@
 
 import Foundation
 
-extension RemoteAPI: PaymentProgressRemoteAPI {
-}
+struct ApplePayInputData {
 
-extension ThreeDSURLRequestFactory: PaymentProgress3DSURLRequestFactory {
+    struct Parameters {
+        let invoice: InvoiceDTO
+        let paymentSystems: Set<PaymentSystem>
+    }
+
+    let parameters: Parameters
+    let paymentInputData: PaymentInputData
 }
