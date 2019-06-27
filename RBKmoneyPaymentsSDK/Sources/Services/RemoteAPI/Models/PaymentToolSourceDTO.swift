@@ -26,7 +26,11 @@ enum PaymentToolSourceDTO {
     enum TokenizedCardData {
         struct ApplePay {
             let merchantIdentifier: String
-            let paymentToken: Data
+            let paymentData: Data
+            let paymentMethodDisplayName: String?
+            let paymentMethodNetwork: String?
+            let paymentMethodType: String
+            let transactionIdentifier: String
         }
 
         struct GooglePay {
@@ -80,7 +84,7 @@ extension PaymentToolSourceDTO: Encodable {
             case let .applePay(card):
                 try container.encode(TokenizedCardDataProvider.applePay, forKey: .provider)
                 try container.encode(card.merchantIdentifier, forKey: .merchantIdentifier)
-                try container.encode(card.paymentToken, forKey: .paymentToken)
+                try container.encode(ApplePayPaymentToken(data: card), forKey: .paymentToken)
             case let .googlePay(card):
                 try container.encode(TokenizedCardDataProvider.googlePay, forKey: .provider)
                 try container.encode(card.gatewayMerchantIdentifier, forKey: .gatewayMerchantIdentifier)
@@ -134,5 +138,34 @@ extension PaymentToolSourceDTO: Encodable {
 
     private enum DigitalWalletType: String, Codable {
         case qiwi = "DigitalWalletQIWI"
+    }
+}
+
+private struct ApplePayPaymentToken: Encodable {
+
+    struct Token: Encodable {
+        struct Method: Encodable {
+            let displayName: String?
+            let network: String?
+            let type: String
+        }
+
+        let paymentData: Data
+        let paymentMethod: Method
+        let transactionIdentifier: String
+    }
+
+    let token: Token
+
+    init(data: PaymentToolSourceDTO.TokenizedCardData.ApplePay) {
+        token = Token(
+            paymentData: data.paymentData,
+            paymentMethod: Token.Method(
+                displayName: data.paymentMethodDisplayName,
+                network: data.paymentMethodNetwork,
+                type: data.paymentMethodType
+            ),
+            transactionIdentifier: data.transactionIdentifier
+        )
     }
 }
