@@ -344,10 +344,14 @@ struct R: Rswift.Validatable {
   
   /// This `R.string` struct is generated, and contains static references to 1 localization tables.
   struct string {
-    /// This `R.string.localizable` struct is generated, and contains static references to 12 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 14 localization keys.
     struct localizable {
+      /// Value: Apple Pay
+      static let apple_pay_header_title = Rswift.StringResource(key: "apple_pay_header_title", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: CVV/CVC
       static let bank_card_cvc_placeholder = Rswift.StringResource(key: "bank_card_cvc_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Email для чека
+      static let apple_pay_email_placeholder = Rswift.StringResource(key: "apple_pay_email_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Email для чека
       static let bank_card_email_placeholder = Rswift.StringResource(key: "bank_card_email_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: © 2008-2018 RBKmoney | Direct Payments Ltd.
@@ -371,9 +375,19 @@ struct R: Rswift.Validatable {
       /// Value: Оплатить %@
       static let bank_card_pay = Rswift.StringResource(key: "bank_card_pay", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       
+      /// Value: Apple Pay
+      static func apple_pay_header_title(_: Void = ()) -> String {
+        return NSLocalizedString("apple_pay_header_title", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// Value: CVV/CVC
       static func bank_card_cvc_placeholder(_: Void = ()) -> String {
         return NSLocalizedString("bank_card_cvc_placeholder", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Email для чека
+      static func apple_pay_email_placeholder(_: Void = ()) -> String {
+        return NSLocalizedString("apple_pay_email_placeholder", bundle: R.hostingBundle, comment: "")
       }
       
       /// Value: Email для чека
@@ -566,6 +580,7 @@ struct _R: Rswift.Validatable {
       }
       
       static func validate() throws {
+        if UIKit.UIImage(named: "BankCard/email", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'BankCard/email' is used in storyboard 'ApplePay', but couldn't be loaded.") }
         if UIKit.UIImage(named: "Common/close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Common/close' is used in storyboard 'ApplePay', but couldn't be loaded.") }
         if #available(iOS 11.0, *) {
         }

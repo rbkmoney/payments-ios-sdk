@@ -42,8 +42,8 @@ final class PaymentMethodCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         formView.backgroundColor = Palette.colors.formBackground
-        containerView.borderWidth = 1
-        containerView.cornerRadius = 3
+        containerView.layer.borderWidth = 1
+        containerView.layer.cornerRadius = 3
     }
 
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
@@ -75,19 +75,19 @@ final class PaymentMethodCell: UITableViewCell {
         switch style {
         case .default:
             containerView.backgroundColor = .clear
-            containerView.borderColor = Palette.colors.frame
+            containerView.layer.borderColor = Palette.colors.frame.cgColor
             iconImageView.tintColor = Palette.colors.main
             titleLabel.attributedText = titleLabel.text?.attributed(with: .titleDefault)
             subtitleLabel.attributedText = subtitleLabel.text?.attributed(with: .subtitleDefault)
         case .black:
             containerView.backgroundColor = .clear
-            containerView.borderColor = Palette.colors.frame
+            containerView.layer.borderColor = Palette.colors.frame.cgColor
             iconImageView.tintColor = .black
             titleLabel.attributedText = titleLabel.text?.attributed(with: .titleBlack)
             subtitleLabel.attributedText = subtitleLabel.text?.attributed(with: .subtitleBlack)
         case .highlighted:
             containerView.backgroundColor = Palette.colors.selectionBackground
-            containerView.borderColor = Palette.colors.selectionBackground
+            containerView.layer.borderColor = Palette.colors.selectionBackground.cgColor
             iconImageView.tintColor = Palette.colors.selectionForeground
             titleLabel.attributedText = titleLabel.text?.attributed(with: .titleHighlighted)
             subtitleLabel.attributedText = subtitleLabel.text?.attributed(with: .subtitleHighlighted)

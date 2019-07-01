@@ -69,7 +69,7 @@ final class PaymentProgressViewController: UIViewController, ModuleView {
         navigationItem.hidesBackButton = true
 
         webView.backgroundColor = Palette.colors.formBackground
-        webView.cornerRadius = 6
+        webView.layer.cornerRadius = 6
         webView.scrollView.showsVerticalScrollIndicator = false
         webView.scrollView.showsHorizontalScrollIndicator = false
         webView.navigationDelegate = self

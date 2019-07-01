@@ -85,7 +85,7 @@ final class ThrobberView: UIView {
 
         with(circleView) {
             $0.backgroundColor = Palette.colors.throbberCircle
-            $0.cornerRadius = Constants.circleSide / 2
+            $0.layer.cornerRadius = Constants.circleSide / 2
             $0.translatesAutoresizingMaskIntoConstraints = false
         }
 

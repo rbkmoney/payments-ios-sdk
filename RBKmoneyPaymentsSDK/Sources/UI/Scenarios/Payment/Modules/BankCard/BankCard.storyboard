@@ -30,7 +30,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SEe-06-n5b" customClass="InvoiceSummaryView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jNH-40-p5d" userLabel="Content">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jNH-40-p5d">
                                                 <rect key="frame" x="5" y="102.5" width="365" height="394.5"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ngg-oz-eUS" customClass="BankCardTextField" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
@@ -207,7 +207,6 @@
                         <outlet property="cvvTextField" destination="0Wm-mg-Agp" id="z4b-lk-ty2"/>
                         <outlet property="emailTextField" destination="jer-T5-uvQ" id="w1u-jx-NhQ"/>
                         <outlet property="expirationDateTextField" destination="ngg-oz-eUS" id="XRm-ee-iy0"/>
-                        <outlet property="footerView" destination="VLZ-Wx-uUQ" id="Pzh-GQ-9ep"/>
                         <outlet property="headerView" destination="SEe-06-n5b" id="LoW-s8-amm"/>
                         <outlet property="payButton" destination="uoU-T5-rS1" id="N6v-Q8-Jx2"/>
                         <outlet property="scrollView" destination="hGt-5r-YtN" id="sPj-RK-tlB"/>

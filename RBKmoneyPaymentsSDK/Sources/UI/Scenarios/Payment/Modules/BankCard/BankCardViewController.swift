@@ -31,7 +31,6 @@ final class BankCardViewController: UIViewController, ModuleView {
     @IBOutlet private var cardholderTextField: BankCardTextField!
     @IBOutlet private var emailTextField: BankCardTextField!
     @IBOutlet private var payButton: UIButton!
-    @IBOutlet private var footerView: LogotypesView!
     @IBOutlet private var scrollView: UIScrollView!
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var contentView: UIView!
@@ -159,10 +158,10 @@ final class BankCardViewController: UIViewController, ModuleView {
         titleLabel.attributedText = R.string.localizable.bank_card_header_title().attributed(with: .header)
 
         payButton.backgroundColor = Palette.colors.selectionBackground
-        payButton.cornerRadius = 22
+        payButton.layer.cornerRadius = 22
 
         contentView.backgroundColor = Palette.colors.formBackground
-        contentView.cornerRadius = 6
+        contentView.layer.cornerRadius = 6
 
         setupTextFields()
     }
