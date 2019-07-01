@@ -12,6 +12,10 @@
 "bank_card_email_placeholder" = "Email для чека";
 "bank_card_pay" = "Оплатить %@";
 
+// Экран "Apple Pay"
+"apple_pay_header_title" = "Apple Pay";
+"apple_pay_email_placeholder" = "Email для чека";
+
 // Разное
 "securite_payment" = "БЕЗОПАСНАЯ ОПЛАТА С";
 "copyright" = "© 2008-2018 RBKmoney | Direct Payments Ltd.";

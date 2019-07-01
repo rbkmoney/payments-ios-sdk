@@ -198,19 +198,10 @@ final class BankCardViewModel: ModuleViewModel {
             return cardDescription.lengths.contains(cardNumber.count) ? .valid : .invalid
         }
 
-    private lazy var supportedCardValidation: Observable<ValidationResult> = Observable
-        .combineLatest(inputDataObservable, cardDescription)
-        .map { tuple -> ValidationResult in
-            guard let cardDescription = tuple.1 else {
-                return .unknown
-            }
-            return tuple.0.parameters.paymentSystems.contains(cardDescription.paymentSystem) ? .valid : .invalid
-        }
-
     private lazy var cardNumberValidation = cardNumberRelay.validate(with: cardNumberValidator)
 
     private lazy var emptyCardNumber = Observable
-        .combineLatest([emptyCardNumberLength, supportedCardValidation, cardNumberValidation])
+        .combineLatest([emptyCardNumberLength, cardNumberValidation])
         .map { $0.allSatisfy { $0 == .valid } ? ValidationResult.valid : .invalid }
 
     private lazy var emptyCVV = didTapPayRelay
@@ -236,7 +227,7 @@ final class BankCardViewModel: ModuleViewModel {
                 return .just(.unknown)
             }
             return Observable
-                .combineLatest([this.cardNumberValidation, this.correctCardNumberLength, this.supportedCardValidation])
+                .combineLatest([this.cardNumberValidation, this.correctCardNumberLength])
                 .map { $0.allSatisfy { $0 == .valid } ? ValidationResult.valid : .invalid }
         }
 

@@ -87,7 +87,7 @@ final class BankCardTextField: UITextField {
 
     // MARK: - Private
     private func initialize() {
-        cornerRadius = 3
+        layer.cornerRadius = 3
         tintColor = Palette.colors.darkText
         textColor = Palette.colors.darkText
         backgroundColor = Palette.colors.formBackground
@@ -100,28 +100,28 @@ final class BankCardTextField: UITextField {
     fileprivate func applyCustomBorderStyle(_ style: CustomBorderStyle) {
         switch style {
         case .focused:
-            borderColor = Palette.colors.main
-            borderWidth = 2
-            shadowColor = Palette.colors.main
-            shadowRadius = 2
-            shadowOffset = .zero
-            shadowOpacity = 1
+            layer.borderColor = Palette.colors.main.cgColor
+            layer.borderWidth = 2
+            layer.shadowColor = Palette.colors.main.cgColor
+            layer.shadowRadius = 2
+            layer.shadowOffset = .zero
+            layer.shadowOpacity = 1
             leftView?.tintColor = Palette.colors.main
             rightViewMode = .never
         case .invalid:
-            borderColor = Palette.colors.wrong
-            borderWidth = 1
-            shadowOpacity = 0
+            layer.borderColor = Palette.colors.wrong.cgColor
+            layer.borderWidth = 1
+            layer.shadowOpacity = 0
             leftView?.tintColor = Palette.colors.darkText
         case .valid:
-            borderColor = Palette.colors.frame
-            borderWidth = 1
-            shadowOpacity = 0
+            layer.borderColor = Palette.colors.frame.cgColor
+            layer.borderWidth = 1
+            layer.shadowOpacity = 0
             leftView?.tintColor = Palette.colors.darkText
         case .unknown:
-            borderColor = Palette.colors.frame
-            borderWidth = 1
-            shadowOpacity = 0
+            layer.borderColor = Palette.colors.frame.cgColor
+            layer.borderWidth = 1
+            layer.shadowOpacity = 0
             leftView?.tintColor = Palette.colors.darkText
         }
     }

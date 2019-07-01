@@ -22,3 +22,6 @@ extension InvoiceDetailsFormatter: ApplePayInvoiceDetailsFormatter {
 
 extension RemoteAPI: ApplePayRemoteAPI {
 }
+
+extension ApplePayInfo: ApplePayInfoProvider {
+}
