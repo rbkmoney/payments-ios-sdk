@@ -99,7 +99,9 @@ final class BankCardViewModel: ModuleViewModel {
             .withLatestFrom(inputDataObservable) { ($0, $1) }
             .flatMap { [createPaymentResource] tuple -> Observable<PaymentRoute> in
                 let ((paymentTool, email), data) = tuple
-                return createPaymentResource(paymentTool, data).map { PaymentRoute.progress($0, email) }
+
+                return createPaymentResource(paymentTool, data)
+                    .map { PaymentRoute.paymentProgress(.init(invoice: data.parameters.invoice, paymentResource: $0, payerEmail: email)) }
             }
 
         let cancelRoute = input.didTapCancel
@@ -120,7 +122,7 @@ final class BankCardViewModel: ModuleViewModel {
     private(set) lazy var isLoading = activityTracker.asDriver()
 
     private(set) lazy var invoice = inputDataObservable
-        .map { $0.invoice }
+        .map { $0.parameters.invoice }
         .asDriver(onError: .never)
 
     private(set) lazy var initialEmail = inputDataObservable
@@ -202,7 +204,7 @@ final class BankCardViewModel: ModuleViewModel {
             guard let cardDescription = tuple.1 else {
                 return .unknown
             }
-            return tuple.0.paymentSystems.contains(cardDescription.paymentSystem) ? .valid : .invalid
+            return tuple.0.parameters.paymentSystems.contains(cardDescription.paymentSystem) ? .valid : .invalid
         }
 
     private lazy var cardNumberValidation = cardNumberRelay.validate(with: cardNumberValidator)

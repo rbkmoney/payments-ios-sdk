@@ -18,9 +18,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4h8-Am-Ww7" customClass="GradientBackgroundView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4h8-Am-Ww7" customClass="GradientBackgroundView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <color key="backgroundColor" red="0.59140625000000002" green="0.72857142860000002" blue="0.32215401789999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <scrollView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="hGt-5r-YtN">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
@@ -118,7 +117,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </textField>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.85563380280000001" green="0.235915493" blue="0.21478873239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="backgroundColor" red="0.54577464789999997" green="0.70774647889999998" blue="0.18661971829999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="0Wm-mg-Agp" firstAttribute="leading" secondItem="jNH-40-p5d" secondAttribute="centerX" constant="5" id="0A7-FC-4aA"/>
                                                     <constraint firstItem="hYR-ab-JcW" firstAttribute="leading" secondItem="5Xz-tX-C6R" secondAttribute="leading" id="1YS-UA-itS"/>
@@ -200,7 +199,6 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="4uo-nd-Kep"/>
                         <barButtonItem key="rightBarButtonItem" image="Common/close" id="inJ-Xy-LVE"/>
                     </navigationItem>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="cancelBarButtonItem" destination="inJ-Xy-LVE" id="NLd-eR-enh"/>
                         <outlet property="cardNumberTextField" destination="5Xz-tX-C6R" id="kbs-Qv-Kfa"/>

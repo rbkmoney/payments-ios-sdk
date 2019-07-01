@@ -15,26 +15,46 @@
 import RxCocoa
 import RxSwift
 import UIKit
+import WebKit
 
+// ⚠️⚠️⚠️
+// WKWebView has a bug with POST requests, it completely ignores http body.
+// This bug was fixed in iOS11. Use UIWebView instead if pre-iOS11 deployment
+// target required.
+// ⚠️⚠️⚠️
+
+@available(iOS 11.0, *)
 final class PaymentProgressViewController: UIViewController, ModuleView {
 
+    // MARK: - Dependencies
+    lazy var urlRequestFactory: PaymentProgress3DSURLRequestFactory = deferred()
+
     // MARK: - Outlets
+    @IBOutlet private var webView: WKWebView!
     @IBOutlet private var throbberView: ThrobberView!
     @IBOutlet private var cancelBarButtonItem: UIBarButtonItem!
 
     // MARK: - ModuleView
     var output: PaymentProgressViewModel.Input {
         return PaymentProgressViewModel.Input(
-            didTapCancel: cancelBarButtonItem.rx.tap.asSignal()
+            didTapCancel: cancelBarButtonItem.rx.tap.asSignal(),
+            didFinishUserInteraction: userInteractionFinishedRelay.asSignal()
         )
     }
 
     func setupBindings(to viewModel: PaymentProgressViewModel) -> Disposable {
         return Disposables.create(
-            viewModel.isLoading
-                .drive(throbberView.rx.isAnimating),
+            Observable
+                .combineLatest([
+                    viewModel.isLoading.asObservable(),
+                    webView.rx.observe(Bool.self, #keyPath(WKWebView.isLoading)).compactMap { $0 }
+                ])
+                .map { $0.contains(true) }
+                .bind(to: throbberView.rx.isAnimating),
             viewModel.shopName
-                .drive(navigationItem.rx.title)
+                .drive(navigationItem.rx.title),
+            viewModel.startUserInteraction
+                .emit(to: startUserInteraction)
         )
     }
 
@@ -46,5 +66,83 @@ final class PaymentProgressViewController: UIViewController, ModuleView {
 
     // MARK: - Private
     private func setupUI() {
+        navigationItem.hidesBackButton = true
+
+        webView.backgroundColor = Palette.colors.formBackground
+        webView.cornerRadius = 6
+        webView.scrollView.showsVerticalScrollIndicator = false
+        webView.scrollView.showsHorizontalScrollIndicator = false
+        webView.navigationDelegate = self
+
+        setWebViewHidden(true, animated: false)
+    }
+
+    private func setWebViewHidden(_ hidden: Bool, animated: Bool) {
+        let animations = { () -> Void in
+            self.webView.alpha = hidden ? 0 : 1
+        }
+
+        if animated {
+            UIView.animate(withDuration: 0.25, delay: 0, options: [.beginFromCurrentState], animations: animations)
+        } else {
+            animations()
+        }
+    }
+
+    private var startUserInteraction: Binder<UserInteractionDTO> {
+        return Binder(self) { this, userInteraction in
+            switch userInteraction {
+            case .paymentTerminalReceipt:
+                assertionFailure("Unsupported user interaction requested.")
+            case let .redirect(browserRequest):
+                guard let urlRequest = this.urlRequestFactory.urlRequest(for: browserRequest) else {
+                    assertionFailure("Unable to create URLRequest for BrowserRequestDTO \(browserRequest)")
+                    return
+                }
+
+                this.webViewURLRequest = urlRequest
+                this.webViewNavigation = this.webView.load(urlRequest)
+
+                this.setWebViewHidden(false, animated: true)
+            }
+        }
+    }
+
+    private var webViewURLRequest: URLRequest?
+    private var webViewNavigation: WKNavigation?
+    private let userInteractionFinishedRelay = PublishRelay<Void>()
+}
+
+@available(iOS 11.0, *)
+extension PaymentProgressViewController: WKNavigationDelegate {
+
+    func webView(_ webView: WKWebView,
+                 decidePolicyFor navigationAction: WKNavigationAction,
+                 decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+
+        let url = navigationAction.request.url
+
+        guard url?.absoluteString == urlRequestFactory.terminationURLString else {
+            decisionHandler(.allow)
+            return
+        }
+
+        decisionHandler(.cancel)
+
+        setWebViewHidden(true, animated: true)
+
+        userInteractionFinishedRelay.accept(())
+    }
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        if navigation == webViewNavigation {
+            print("3DS page loading finished")
+        }
+    }
+
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        if navigation == webViewNavigation {
+            print("3DS Page loading failed with error \(error)")
+        }
     }
 }

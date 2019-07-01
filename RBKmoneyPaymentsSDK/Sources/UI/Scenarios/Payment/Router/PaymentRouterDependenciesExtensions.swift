@@ -14,19 +14,32 @@
 
 import UIKit
 
-final class PaymentRouterDefaultRootViewControllerProvider: PaymentRouterRootViewControllerProvider {
+final class PaymentRouterDefaultRootViewController: PaymentRouterRootViewController {
 
     // MARK: - Initialization
-    init(navigationController: UINavigationController) {
+    init(navigationController: UINavigationController,
+         transitionConfigurator: PaymentRouterRootViewControllerTransitionConfigurator & UINavigationControllerDelegate) {
+
         self.navigationController = navigationController
+        self.transitionConfigurator = transitionConfigurator
+
+        navigationController.delegate = transitionConfigurator
     }
 
     // MARK: - PaymentRouterRootViewControllerProvider
-    var rootViewController: UINavigationController? {
-        return navigationController
+    func setViewControllers(_ viewControllers: [UIViewController], animated: Bool, transitionStyle: TransitionStyle) {
+        transitionConfigurator.pushTransitionStyle = transitionStyle
+        navigationController?.setViewControllers(viewControllers, animated: animated)
+    }
+
+    func pushViewController(_ viewController: UIViewController, animated: Bool, transitionStyle: TransitionStyle) {
+        transitionConfigurator.pushTransitionStyle = transitionStyle
+        navigationController?.pushViewController(viewController, animated: animated)
     }
 
     // MARK: - Private
+    private var transitionConfigurator: PaymentRouterRootViewControllerTransitionConfigurator
+
     private weak var navigationController: UINavigationController?
 }
 
@@ -48,4 +61,7 @@ final class PaymentRouterDefaultPaymentDelegate: PaymentDelegate {
 
     // MARK: - Private
     private weak var paymentDelegate: PaymentDelegate?
+}
+
+extension PaymentRootViewControllerTransitionConfigurator: PaymentRouterRootViewControllerTransitionConfigurator {
 }

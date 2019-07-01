@@ -23,7 +23,11 @@ enum PaymentRouterAssembly {
 
         let object = PaymentRouter()
 
-        object.rootViewControllerProvider = PaymentRouterDefaultRootViewControllerProvider(navigationController: rootViewController)
+        object.rootViewController = PaymentRouterDefaultRootViewController(
+            navigationController: rootViewController,
+            transitionConfigurator: PaymentRootViewControllerTransitionConfiguratorAssembly.makeTransitionConfigurator()
+        )
+
         object.paymentInputData = paymentInputData
         object.paymentDelegate = PaymentRouterDefaultPaymentDelegate(paymentDelegate: paymentDelegate)
 

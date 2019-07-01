@@ -36,7 +36,9 @@ final class ThrobberView: UIView {
         }
 
         activityIndicatorView.startAnimating()
+
         isHidden = false
+        ignoreFinishedFlag = false
 
         UIView.animate(
             withDuration: Constants.fadeAnimationDuration,
@@ -55,6 +57,8 @@ final class ThrobberView: UIView {
 
         activityIndicatorView.stopAnimating()
 
+        ignoreFinishedFlag = true
+
         UIView.animate(
             withDuration: Constants.fadeAnimationDuration,
             delay: 0,
@@ -62,8 +66,10 @@ final class ThrobberView: UIView {
             animations: {
                 self.containerView.alpha = 0
             },
-            completion: { _ in
-                self.isHidden = true
+            completion: { isFinished in
+                if isFinished || self.ignoreFinishedFlag {
+                    self.isHidden = true
+                }
             }
         )
     }
@@ -71,10 +77,10 @@ final class ThrobberView: UIView {
     // MARK: - Private
     private func initialize() {
         isHidden = true
+        ignoreFinishedFlag = true
 
         with(containerView) {
             $0.alpha = 0
-            $0.backgroundColor = Palette.colors.throbberBackground
         }
 
         with(circleView) {
@@ -105,6 +111,7 @@ final class ThrobberView: UIView {
         embedSubview(containerView)
     }
 
+    private var ignoreFinishedFlag: Bool = false
     private let containerView = UIView()
     private let circleView = UIView()
     private let activityIndicatorView = UIActivityIndicatorView()

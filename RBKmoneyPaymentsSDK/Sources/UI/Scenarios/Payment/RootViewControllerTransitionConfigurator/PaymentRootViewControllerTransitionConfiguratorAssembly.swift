@@ -14,8 +14,11 @@
 
 import Foundation
 
-extension RemoteAPI: PaymentProgressRemoteAPI {
-}
+// swiftlint:disable:next type_name
+enum PaymentRootViewControllerTransitionConfiguratorAssembly {
 
-extension ThreeDSURLRequestFactory: PaymentProgress3DSURLRequestFactory {
+    // MARK: - Internal
+    static func makeTransitionConfigurator() -> PaymentRootViewControllerTransitionConfigurator {
+        return PaymentRootViewControllerTransitionConfigurator()
+    }
 }

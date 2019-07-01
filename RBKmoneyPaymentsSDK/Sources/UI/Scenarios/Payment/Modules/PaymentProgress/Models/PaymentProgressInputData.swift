@@ -16,7 +16,12 @@ import Foundation
 
 struct PaymentProgressInputData {
 
-    let paymentResource: PaymentResourceDTO
-    let payerEmail: String?
+    struct Parameters {
+        let invoice: InvoiceDTO
+        let paymentResource: PaymentResourceDTO
+        let payerEmail: String
+    }
+
+    let parameters: Parameters
     let paymentInputData: PaymentInputData
 }

@@ -14,8 +14,12 @@
 
 import Foundation
 
-extension RemoteAPI: PaymentProgressRemoteAPI {
+protocol UnpaidInvoicePriceFormatter {
+
+    func formattedPrice(amount: AmountDTO, currency: CurrencyDTO) -> String
 }
 
-extension ThreeDSURLRequestFactory: PaymentProgress3DSURLRequestFactory {
+protocol UnpaidInvoiceInvoiceDetailsFormatter {
+
+    func formattedDetails(invoice: InvoiceDTO) -> String
 }

@@ -14,8 +14,17 @@
 
 import Foundation
 
-extension RemoteAPI: PaymentProgressRemoteAPI {
-}
+enum ThreeDSURLRequestFactoryAssembly {
 
-extension ThreeDSURLRequestFactory: PaymentProgress3DSURLRequestFactory {
+    // MARK: - Internal
+    static func makeRequestFactory() -> ThreeDSURLRequestFactory {
+        return requestFactoryInstance
+    }
+
+    // MARK: - Private
+    private static let requestFactoryInstance = with(ThreeDSURLRequestFactory()) {
+        $0.terminationURL = terminationURL
+    }
+
+    private static let terminationURL = URL(string: "internal://termination.url")!
 }
