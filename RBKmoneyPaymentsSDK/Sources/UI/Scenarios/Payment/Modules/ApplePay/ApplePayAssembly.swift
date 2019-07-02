@@ -20,11 +20,14 @@ final class ApplePayAssembly: ViewControllerAssembly<ApplePayViewController, App
 
         viewController.priceFormatter = PriceFormatterAssembly.makeFormatter()
         viewController.invoiceDetailsFormatter = InvoiceDetailsFormatterAssembly.makeFormatter()
+        viewController.applePayInfoProvider = ApplePayInfoAssembly.makeApplePayInfo()
 
         bindViewModel(to: viewController) {
             $0.router = router
             $0.inputData = inputData
             $0.remoteAPI = RemoteAPIAssembly.makeRemoteAPI()
+            $0.emailValidator = EmailValidatorAssembly.makeValidator()
+            $0.locale = Locale.current
         }
 
         return viewController

@@ -12,27 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import PassKit
-import RxSwift
+struct ApplePayRequestData {
 
-protocol ApplePayPriceFormatter {
-
-    func formattedPrice(amount: AmountDTO, currency: CurrencyDTO) -> String
-}
-
-protocol ApplePayInvoiceDetailsFormatter {
-
-    func formattedDetails(invoice: InvoiceDTO) -> String
-}
-
-protocol ApplePayRemoteAPI {
-
-    func createPaymentResource(paymentTool: PaymentToolSourceDTO, invoiceAccessToken: String) -> Single<PaymentResourceDTO>
-}
-
-protocol ApplePayInfoProvider {
-
-    func paymentNetworks(from paymentSystems: [PaymentSystem]) -> [PKPaymentNetwork]
-
-    var capabilities: PKMerchantCapability { get }
+    let invoice: InvoiceDTO
+    let paymentSystems: [PaymentSystem]
+    let merchantIdentifier: String
+    let countryCode: String
 }
