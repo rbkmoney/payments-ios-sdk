@@ -24,6 +24,7 @@ final class PaymentProgressAssembly: ViewControllerAssembly<PaymentProgressViewC
             $0.router = router
             $0.inputData = inputData
             $0.remoteAPI = RemoteAPIAssembly.makeRemoteAPI()
+            $0.errorHandlerProvider = DefaultErrorHandlerAssembly.makeErrorHandler(parentViewController: viewController)
         }
 
         return viewController

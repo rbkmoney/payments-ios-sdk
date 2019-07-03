@@ -18,6 +18,7 @@ enum InvoiceChangeDTO {
 
     struct PaymentStatusChangedData {
         let status: PaymentStatusDTO
+        let error: ServerErrorDTO?
         let paymentIdentifier: String
     }
 
@@ -35,6 +36,7 @@ enum InvoiceChangeDTO {
         let paymentIdentifier: String
         let refundIdentifier: String
         let status: RefundStatusDTO
+        let error: ServerErrorDTO?
     }
 
     case invoiceCreated(InvoiceDTO)
@@ -65,6 +67,7 @@ extension InvoiceChangeDTO: Codable {
         case .paymentStatusChanged:
             let data = PaymentStatusChangedData(
                 status: try container.decode(PaymentStatusDTO.self, forKey: .status),
+                error: try container.decodeIfPresent(ServerErrorDTO.self, forKey: .error),
                 paymentIdentifier: try container.decode(String.self, forKey: .paymentIdentifier)
             )
             self = .paymentStatusChanged(data)
@@ -84,7 +87,8 @@ extension InvoiceChangeDTO: Codable {
             let data = RefundStatusChangedData(
                 paymentIdentifier: try container.decode(String.self, forKey: .paymentIdentifier),
                 refundIdentifier: try container.decode(String.self, forKey: .refundIdentifier),
-                status: try container.decode(RefundStatusDTO.self, forKey: .status)
+                status: try container.decode(RefundStatusDTO.self, forKey: .status),
+                error: try container.decodeIfPresent(ServerErrorDTO.self, forKey: .error)
             )
             self = .refundStatusChanged(data)
         }
@@ -106,6 +110,7 @@ extension InvoiceChangeDTO: Codable {
         case let .paymentStatusChanged(data):
             try container.encode(ChangeType.paymentStatusChanged, forKey: .type)
             try container.encode(data.status, forKey: .status)
+            try container.encodeIfPresent(data.error, forKey: .error)
             try container.encode(data.paymentIdentifier, forKey: .paymentIdentifier)
         case let .paymentInteractionRequested(data):
             try container.encode(ChangeType.paymentInteractionRequested, forKey: .type)
@@ -120,6 +125,7 @@ extension InvoiceChangeDTO: Codable {
             try container.encode(data.paymentIdentifier, forKey: .paymentIdentifier)
             try container.encode(data.refundIdentifier, forKey: .refundIdentifier)
             try container.encode(data.status, forKey: .status)
+            try container.encodeIfPresent(data.error, forKey: .error)
         }
     }
 
@@ -132,6 +138,7 @@ extension InvoiceChangeDTO: Codable {
         case userInteraction
         case refund
         case refundIdentifier = "refundID"
+        case error
     }
 
     private enum ChangeType: String, Codable {

@@ -344,7 +344,7 @@ struct R: Rswift.Validatable {
   
   /// This `R.string` struct is generated, and contains static references to 1 localization tables.
   struct string {
-    /// This `R.string.localizable` struct is generated, and contains static references to 14 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 71 localization keys.
     struct localizable {
       /// Value: Apple Pay
       static let apple_pay_header_title = Rswift.StringResource(key: "apple_pay_header_title", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
@@ -354,6 +354,8 @@ struct R: Rswift.Validatable {
       static let apple_pay_email_placeholder = Rswift.StringResource(key: "apple_pay_email_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Email для чека
       static let bank_card_email_placeholder = Rswift.StringResource(key: "bank_card_email_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: OK
+      static let alert_button_ok = Rswift.StringResource(key: "alert_button_ok", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: © 2008-2018 RBKmoney | Direct Payments Ltd.
       static let copyright = Rswift.StringResource(key: "copyright", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: БАНКОВСКАЯ КАРТА
@@ -364,16 +366,128 @@ struct R: Rswift.Validatable {
       static let payment_method_header_title = Rswift.StringResource(key: "payment_method_header_title", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: ДЕТАЛИ ЗАКАЗА
       static let order_details = Rswift.StringResource(key: "order_details", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Да
+      static let alert_button_yes = Rswift.StringResource(key: "alert_button_yes", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Договор более не имеет силы по причине истечения срока действия или расторжения.
+      static let error_message_invalid_contract_status = Rswift.StringResource(key: "error_message_invalid_contract_status", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Имя на карте
       static let bank_card_cardholder_placeholder = Rswift.StringResource(key: "bank_card_cardholder_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Инвойс отменен.
+      static let error_message_invoice_cancelled = Rswift.StringResource(key: "error_message_invoice_cancelled", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: ММ/ГГ
       static let bank_card_date_placeholder = Rswift.StringResource(key: "bank_card_date_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Магазин заблокирован или его операции приостановлены.
+      static let error_message_invalid_shop_status = Rswift.StringResource(key: "error_message_invalid_shop_status", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Методы оплаты отсутствуют.
+      static let error_message_no_payment_methods = Rswift.StringResource(key: "error_message_no_payment_methods", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Не удалось выполнить запрос.
+      static let error_message_request_failed = Rswift.StringResource(key: "error_message_request_failed", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Не удалось выполнить платёж.
+      static let error_message_payment_failed = Rswift.StringResource(key: "error_message_payment_failed", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Не удалось получить инвойс.
+      static let error_message_cannot_obtain_invoice = Rswift.StringResource(key: "error_message_cannot_obtain_invoice", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Не удалось получить методы оплаты.
+      static let error_message_cannot_obtain_invoice_payment_methods = Rswift.StringResource(key: "error_message_cannot_obtain_invoice_payment_methods", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Не удалось получить события инвойса.
+      static let error_message_cannot_obtain_invoice_events = Rswift.StringResource(key: "error_message_cannot_obtain_invoice_events", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Не удалось создать платеж.
+      static let error_message_cannot_create_payment = Rswift.StringResource(key: "error_message_cannot_create_payment", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Не удалось создать платёжный ресурс.
+      static let error_message_cannot_create_payment_resource = Rswift.StringResource(key: "error_message_cannot_create_payment_resource", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Не удалось сформировать запрос к серверу.
+      static let error_message_cannot_build_request = Rswift.StringResource(key: "error_message_cannot_build_request", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Не удалось установить безопасное соединение с сервером.
+      static let error_message_server_insecure_connection = Rswift.StringResource(key: "error_message_server_insecure_connection", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Невернo указан родительский рекуррентный платёж.
+      static let error_message_invalid_recurrent_parent = Rswift.StringResource(key: "error_message_invalid_recurrent_parent", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Невернoе содержимое платёжной сессии.
+      static let error_message_invalid_payment_session = Rswift.StringResource(key: "error_message_invalid_payment_session", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Неверная ревизия заявки.
+      static let error_message_invalid_claim_revision = Rswift.StringResource(key: "error_message_invalid_claim_revision", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Неверное содержимое токена платёжного инструмента.
+      static let error_message_invalid_payment_tool_token = Rswift.StringResource(key: "error_message_invalid_payment_tool_token", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Неверные данные запроса.
+      static let error_message_invalid_request = Rswift.StringResource(key: "error_message_invalid_request", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Неверные изменения участника, например, попытка создать магазин в валюте, недоступной в рамках договора.
+      static let error_message_invalid_changeset = Rswift.StringResource(key: "error_message_invalid_changeset", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Неверный платёжный инструмент.
+      static let error_message_invalid_payment_tool = Rswift.StringResource(key: "error_message_invalid_payment_tool", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Неверный статус заявки.
+      static let error_message_invalid_claim_status = Rswift.StringResource(key: "error_message_invalid_claim_status", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Неверный статус инвойса.
+      static let error_message_invalid_invoice_status = Rswift.StringResource(key: "error_message_invalid_invoice_status", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Неверный статус платежа.
+      static let error_message_invalid_payment_status = Rswift.StringResource(key: "error_message_invalid_payment_status", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Неверный формат времени.
+      static let error_message_invalid_deadline = Rswift.StringResource(key: "error_message_invalid_deadline", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Недопустимый статус инвойса.
+      static let error_message_unexpected_invoice_status = Rswift.StringResource(key: "error_message_unexpected_invoice_status", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Недостаточно средств на счёте.
+      static let error_message_insufficient_funds = Rswift.StringResource(key: "error_message_insufficient_funds", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Недостаточный объём денежных средств на счёте магазина.
+      static let error_message_insufficent_account_balance = Rswift.StringResource(key: "error_message_insufficent_account_balance", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Недоступная в рамках действующего договора операция.
+      static let error_message_operation_not_permitted = Rswift.StringResource(key: "error_message_operation_not_permitted", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Некорректная корзина в инвойсе.
+      static let error_message_invalid_invoice_cart = Rswift.StringResource(key: "error_message_invalid_invoice_cart", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Неподдерживаемый системой или неподключенный в рамках действующего договора платёжный инструмент.
+      static let error_message_invalid_payment_resource = Rswift.StringResource(key: "error_message_invalid_payment_resource", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Нет
+      static let alert_button_nope = Rswift.StringResource(key: "alert_button_nope", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Номер на карте
       static let bank_card_card_number_placeholder = Rswift.StringResource(key: "bank_card_card_number_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Оплата банковской картой
       static let bank_card_header_title = Rswift.StringResource(key: "bank_card_header_title", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Оплатить %@
       static let bank_card_pay = Rswift.StringResource(key: "bank_card_pay", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Отменить
+      static let alert_button_cancel = Rswift.StringResource(key: "alert_button_cancel", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Отсутствует соединение с интернетом.
+      static let error_message_no_internet = Rswift.StringResource(key: "error_message_no_internet", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Ошибка
+      static let alert_title_error = Rswift.StringResource(key: "alert_title_error", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Платёж отклонён эмитентом.
+      static let error_message_rejected_by_issuer = Rswift.StringResource(key: "error_message_rejected_by_issuer", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Платёж отклонён.
+      static let error_message_payment_rejected = Rswift.StringResource(key: "error_message_payment_rejected", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Платёж отменен.
+      static let error_message_payment_cancelled = Rswift.StringResource(key: "error_message_payment_cancelled", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Повторить
+      static let alert_button_retry = Rswift.StringResource(key: "alert_button_retry", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Получен некорректный ответ сервера.
+      static let error_message_response_mapping_error = Rswift.StringResource(key: "error_message_response_mapping_error", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Получен ответ от сервера с HTTP кодом %d.
+      static let error_message_unacceptable_status_code = Rswift.StringResource(key: "error_message_unacceptable_status_code", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Попытка внести изменения участника, конфликтующие с изменениями в других заявках, ожидающих рассмотрения.
+      static let error_message_changeset_conflict = Rswift.StringResource(key: "error_message_changeset_conflict", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Попытка возврата сверх суммы платежа.
+      static let error_message_invoice_payment_amount_exceeded = Rswift.StringResource(key: "error_message_invoice_payment_amount_exceeded", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Попытка возврата средств в валюте, отличной от валюты платежа.
+      static let error_message_inconsistent_refund_currency = Rswift.StringResource(key: "error_message_inconsistent_refund_currency", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Последний запущенный платёж по указанному инвойсу ещё не достиг финального статуса.
+      static let error_message_invoice_payment_pending = Rswift.StringResource(key: "error_message_invoice_payment_pending", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Превышен разумный лимит выборки.
+      static let error_message_limit_exceeded = Rswift.StringResource(key: "error_message_limit_exceeded", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Превышены лимиты.
+      static let error_message_account_limits_exceeded = Rswift.StringResource(key: "error_message_account_limits_exceeded", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Предварительная авторизация отклонена.
+      static let error_message_preauthorization_failed = Rswift.StringResource(key: "error_message_preauthorization_failed", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Произошла неизвестная ошибка.
+      static let error_message_unknown_error = Rswift.StringResource(key: "error_message_unknown_error", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Произошла ошибка при взаимодействии с пользователем.
+      static let error_message_user_interaction_failed = Rswift.StringResource(key: "error_message_user_interaction_failed", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Сервер вернул ошибку с неизвестным кодом %@.
+      static let error_message_unknown_server_error = Rswift.StringResource(key: "error_message_unknown_server_error", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Сервер недоступен.
+      static let error_message_server_unavailable = Rswift.StringResource(key: "error_message_server_unavailable", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Срок действия инвойса закончился.
+      static let error_message_invoice_expired = Rswift.StringResource(key: "error_message_invoice_expired", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Стоимость инвойса не указана или неверна.
+      static let error_message_invalid_invoice_cost = Rswift.StringResource(key: "error_message_invalid_invoice_cost", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Указан идентификатор несуществующего магазина.
+      static let error_message_invalid_shop_id = Rswift.StringResource(key: "error_message_invalid_shop_id", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Участник заблокирован или его операции приостановлены.
+      static let error_message_invalid_party_status = Rswift.StringResource(key: "error_message_invalid_party_status", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       
       /// Value: Apple Pay
       static func apple_pay_header_title(_: Void = ()) -> String {
@@ -393,6 +507,11 @@ struct R: Rswift.Validatable {
       /// Value: Email для чека
       static func bank_card_email_placeholder(_: Void = ()) -> String {
         return NSLocalizedString("bank_card_email_placeholder", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: OK
+      static func alert_button_ok(_: Void = ()) -> String {
+        return NSLocalizedString("alert_button_ok", bundle: R.hostingBundle, comment: "")
       }
       
       /// Value: © 2008-2018 RBKmoney | Direct Payments Ltd.
@@ -420,14 +539,174 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("order_details", bundle: R.hostingBundle, comment: "")
       }
       
+      /// Value: Да
+      static func alert_button_yes(_: Void = ()) -> String {
+        return NSLocalizedString("alert_button_yes", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Договор более не имеет силы по причине истечения срока действия или расторжения.
+      static func error_message_invalid_contract_status(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invalid_contract_status", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// Value: Имя на карте
       static func bank_card_cardholder_placeholder(_: Void = ()) -> String {
         return NSLocalizedString("bank_card_cardholder_placeholder", bundle: R.hostingBundle, comment: "")
       }
       
+      /// Value: Инвойс отменен.
+      static func error_message_invoice_cancelled(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invoice_cancelled", bundle: R.hostingBundle, comment: "")
+      }
+      
       /// Value: ММ/ГГ
       static func bank_card_date_placeholder(_: Void = ()) -> String {
         return NSLocalizedString("bank_card_date_placeholder", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Магазин заблокирован или его операции приостановлены.
+      static func error_message_invalid_shop_status(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invalid_shop_status", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Методы оплаты отсутствуют.
+      static func error_message_no_payment_methods(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_no_payment_methods", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Не удалось выполнить запрос.
+      static func error_message_request_failed(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_request_failed", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Не удалось выполнить платёж.
+      static func error_message_payment_failed(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_payment_failed", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Не удалось получить инвойс.
+      static func error_message_cannot_obtain_invoice(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_cannot_obtain_invoice", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Не удалось получить методы оплаты.
+      static func error_message_cannot_obtain_invoice_payment_methods(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_cannot_obtain_invoice_payment_methods", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Не удалось получить события инвойса.
+      static func error_message_cannot_obtain_invoice_events(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_cannot_obtain_invoice_events", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Не удалось создать платеж.
+      static func error_message_cannot_create_payment(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_cannot_create_payment", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Не удалось создать платёжный ресурс.
+      static func error_message_cannot_create_payment_resource(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_cannot_create_payment_resource", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Не удалось сформировать запрос к серверу.
+      static func error_message_cannot_build_request(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_cannot_build_request", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Не удалось установить безопасное соединение с сервером.
+      static func error_message_server_insecure_connection(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_server_insecure_connection", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Невернo указан родительский рекуррентный платёж.
+      static func error_message_invalid_recurrent_parent(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invalid_recurrent_parent", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Невернoе содержимое платёжной сессии.
+      static func error_message_invalid_payment_session(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invalid_payment_session", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Неверная ревизия заявки.
+      static func error_message_invalid_claim_revision(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invalid_claim_revision", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Неверное содержимое токена платёжного инструмента.
+      static func error_message_invalid_payment_tool_token(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invalid_payment_tool_token", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Неверные данные запроса.
+      static func error_message_invalid_request(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invalid_request", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Неверные изменения участника, например, попытка создать магазин в валюте, недоступной в рамках договора.
+      static func error_message_invalid_changeset(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invalid_changeset", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Неверный платёжный инструмент.
+      static func error_message_invalid_payment_tool(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invalid_payment_tool", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Неверный статус заявки.
+      static func error_message_invalid_claim_status(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invalid_claim_status", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Неверный статус инвойса.
+      static func error_message_invalid_invoice_status(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invalid_invoice_status", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Неверный статус платежа.
+      static func error_message_invalid_payment_status(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invalid_payment_status", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Неверный формат времени.
+      static func error_message_invalid_deadline(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invalid_deadline", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Недопустимый статус инвойса.
+      static func error_message_unexpected_invoice_status(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_unexpected_invoice_status", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Недостаточно средств на счёте.
+      static func error_message_insufficient_funds(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_insufficient_funds", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Недостаточный объём денежных средств на счёте магазина.
+      static func error_message_insufficent_account_balance(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_insufficent_account_balance", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Недоступная в рамках действующего договора операция.
+      static func error_message_operation_not_permitted(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_operation_not_permitted", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Некорректная корзина в инвойсе.
+      static func error_message_invalid_invoice_cart(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invalid_invoice_cart", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Неподдерживаемый системой или неподключенный в рамках действующего договора платёжный инструмент.
+      static func error_message_invalid_payment_resource(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invalid_payment_resource", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Нет
+      static func alert_button_nope(_: Void = ()) -> String {
+        return NSLocalizedString("alert_button_nope", bundle: R.hostingBundle, comment: "")
       }
       
       /// Value: Номер на карте
@@ -443,6 +722,126 @@ struct R: Rswift.Validatable {
       /// Value: Оплатить %@
       static func bank_card_pay(_ value1: String) -> String {
         return String(format: NSLocalizedString("bank_card_pay", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
+      }
+      
+      /// Value: Отменить
+      static func alert_button_cancel(_: Void = ()) -> String {
+        return NSLocalizedString("alert_button_cancel", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Отсутствует соединение с интернетом.
+      static func error_message_no_internet(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_no_internet", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Ошибка
+      static func alert_title_error(_: Void = ()) -> String {
+        return NSLocalizedString("alert_title_error", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Платёж отклонён эмитентом.
+      static func error_message_rejected_by_issuer(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_rejected_by_issuer", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Платёж отклонён.
+      static func error_message_payment_rejected(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_payment_rejected", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Платёж отменен.
+      static func error_message_payment_cancelled(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_payment_cancelled", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Повторить
+      static func alert_button_retry(_: Void = ()) -> String {
+        return NSLocalizedString("alert_button_retry", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Получен некорректный ответ сервера.
+      static func error_message_response_mapping_error(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_response_mapping_error", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Получен ответ от сервера с HTTP кодом %d.
+      static func error_message_unacceptable_status_code(_ value1: Int) -> String {
+        return String(format: NSLocalizedString("error_message_unacceptable_status_code", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
+      }
+      
+      /// Value: Попытка внести изменения участника, конфликтующие с изменениями в других заявках, ожидающих рассмотрения.
+      static func error_message_changeset_conflict(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_changeset_conflict", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Попытка возврата сверх суммы платежа.
+      static func error_message_invoice_payment_amount_exceeded(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invoice_payment_amount_exceeded", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Попытка возврата средств в валюте, отличной от валюты платежа.
+      static func error_message_inconsistent_refund_currency(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_inconsistent_refund_currency", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Последний запущенный платёж по указанному инвойсу ещё не достиг финального статуса.
+      static func error_message_invoice_payment_pending(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invoice_payment_pending", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Превышен разумный лимит выборки.
+      static func error_message_limit_exceeded(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_limit_exceeded", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Превышены лимиты.
+      static func error_message_account_limits_exceeded(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_account_limits_exceeded", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Предварительная авторизация отклонена.
+      static func error_message_preauthorization_failed(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_preauthorization_failed", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Произошла неизвестная ошибка.
+      static func error_message_unknown_error(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_unknown_error", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Произошла ошибка при взаимодействии с пользователем.
+      static func error_message_user_interaction_failed(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_user_interaction_failed", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Сервер вернул ошибку с неизвестным кодом %@.
+      static func error_message_unknown_server_error(_ value1: String) -> String {
+        return String(format: NSLocalizedString("error_message_unknown_server_error", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
+      }
+      
+      /// Value: Сервер недоступен.
+      static func error_message_server_unavailable(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_server_unavailable", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Срок действия инвойса закончился.
+      static func error_message_invoice_expired(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invoice_expired", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Стоимость инвойса не указана или неверна.
+      static func error_message_invalid_invoice_cost(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invalid_invoice_cost", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Указан идентификатор несуществующего магазина.
+      static func error_message_invalid_shop_id(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invalid_shop_id", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: Участник заблокирован или его операции приостановлены.
+      static func error_message_invalid_party_status(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_invalid_party_status", bundle: R.hostingBundle, comment: "")
       }
       
       fileprivate init() {}

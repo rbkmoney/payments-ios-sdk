@@ -12,11 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import Foundation
+import RxSwift
 
-public protocol PaymentDelegate: class {
+protocol ErrorHandlerProvider {
 
-    func paymentCancelled(invoiceIdentifier: String)
-
-    func paymentFinished(invoiceIdentifier: String)
+    var errorHandler: (Observable<Error>) -> Observable<Void> { get }
 }

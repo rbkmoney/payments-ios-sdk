@@ -36,7 +36,6 @@ final class PaymentMethodViewController: UIViewController, ModuleView {
     }
 
     func setupBindings(to viewModel: PaymentMethodViewModel) -> Disposable {
-        let tuple = Driver.combineLatest(viewModel.invoice, viewModel.items)
         let cellIdentifier = R.reuseIdentifier.paymentMethodCell.identifier
 
         return Disposables.create(
@@ -44,11 +43,9 @@ final class PaymentMethodViewController: UIViewController, ModuleView {
                 .drive(throbberView.rx.isAnimating),
             viewModel.shopName
                 .drive(navigationItem.rx.title),
-            tuple
-                .map { $0.0 }
+            viewModel.invoice
                 .drive(setupTableHeaderFooter),
-            tuple
-                .map { $0.1 }
+            viewModel.items
                 .drive(tableView.rx.items(cellIdentifier: cellIdentifier, cellType: PaymentMethodCell.self)) { _, element, cell in
                     cell.setup(with: element.method.cellModel)
                 }

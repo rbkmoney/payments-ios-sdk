@@ -16,9 +16,7 @@ import Foundation
 
 struct UnpaidInvoiceInputData {
 
-    struct Parameters {
-        let invoice: InvoiceDTO
-    }
+    typealias Parameters = PaymentError
 
     let parameters: Parameters
     let paymentInputData: PaymentInputData

@@ -37,6 +37,20 @@ final class PaymentRouterDefaultRootViewController: PaymentRouterRootViewControl
         navigationController?.pushViewController(viewController, animated: animated)
     }
 
+    func popViewController(animated: Bool, transitionStyle: TransitionStyle) {
+        transitionConfigurator.popTransitionStyle = transitionStyle
+        navigationController?.popViewController(animated: animated)
+    }
+
+    func popToRootViewController(animated: Bool, transitionStyle: TransitionStyle) {
+        transitionConfigurator.popTransitionStyle = transitionStyle
+        navigationController?.popToRootViewController(animated: animated)
+    }
+
+    var viewControllers: [UIViewController] {
+        return navigationController?.viewControllers ?? []
+    }
+
     // MARK: - Private
     private var transitionConfigurator: PaymentRouterRootViewControllerTransitionConfigurator
 
@@ -55,8 +69,8 @@ final class PaymentRouterDefaultPaymentDelegate: PaymentDelegate {
         paymentDelegate?.paymentCancelled(invoiceIdentifier: invoiceIdentifier)
     }
 
-    func paymentFinished(invoiceIdentifier: String, paymentMethod: PaymentMethod) {
-        paymentDelegate?.paymentFinished(invoiceIdentifier: invoiceIdentifier, paymentMethod: paymentMethod)
+    func paymentFinished(invoiceIdentifier: String) {
+        paymentDelegate?.paymentFinished(invoiceIdentifier: invoiceIdentifier)
     }
 
     // MARK: - Private
