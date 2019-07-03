@@ -18,6 +18,7 @@ final class PaymentRootViewControllerTransitionConfigurator: NSObject, UINavigat
 
     // MARK: - Internal
     var pushTransitionStyle: TransitionStyle = .default
+    var popTransitionStyle: TransitionStyle = .default
 
     // MARK: - UINavigationControllerDelegate
     func navigationController(_ navigationController: UINavigationController,

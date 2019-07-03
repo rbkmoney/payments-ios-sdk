@@ -38,7 +38,8 @@ final class PaymentProgressViewController: UIViewController, ModuleView {
     var output: PaymentProgressViewModel.Input {
         return PaymentProgressViewModel.Input(
             didTapCancel: cancelBarButtonItem.rx.tap.asSignal(),
-            didFinishUserInteraction: userInteractionFinishedRelay.asSignal()
+            userInteractionFinished: userInteractionFinishedRelay.asSignal(),
+            userInteractionFailed: userInteractionFailedRelay.asSignal()
         )
     }
 
@@ -111,6 +112,7 @@ final class PaymentProgressViewController: UIViewController, ModuleView {
     private var webViewURLRequest: URLRequest?
     private var webViewNavigation: WKNavigation?
     private let userInteractionFinishedRelay = PublishRelay<Void>()
+    private let userInteractionFailedRelay = PublishRelay<Error>()
 }
 
 @available(iOS 11.0, *)
@@ -144,5 +146,7 @@ extension PaymentProgressViewController: WKNavigationDelegate {
         if navigation == webViewNavigation {
             print("3DS Page loading failed with error \(error)")
         }
+
+        userInteractionFailedRelay.accept(error)
     }
 }

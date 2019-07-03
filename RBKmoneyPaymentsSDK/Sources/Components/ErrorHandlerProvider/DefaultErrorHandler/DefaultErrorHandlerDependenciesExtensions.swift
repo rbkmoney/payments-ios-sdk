@@ -14,9 +14,5 @@
 
 import Foundation
 
-public protocol PaymentDelegate: class {
-
-    func paymentCancelled(invoiceIdentifier: String)
-
-    func paymentFinished(invoiceIdentifier: String)
+extension ErrorMessageFactory: DefaultErrorHandlerErrorMessageFactory {
 }

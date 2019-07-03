@@ -16,14 +16,16 @@ import Foundation
 
 enum PaymentRoute: Route {
 
+    case initial
     case paymentMethod
     case bankCard(BankCardInputData.Parameters)
     case applePay(ApplePayInputData.Parameters)
     case paymentProgress(PaymentProgressInputData.Parameters)
     case paidInvoice(PaidInvoiceInputData.Parameters)
     case unpaidInvoice(UnpaidInvoiceInputData.Parameters)
+    case back
     case cancel
-    case finish(PaymentMethod)
+    case finish
 }
 
 final class PaymentRouter: Router {
@@ -35,40 +37,55 @@ final class PaymentRouter: Router {
 
     // MARK: - Internal
     func configure() {
-        trigger(route: .paymentMethod)
+        trigger(route: .initial)
     }
 
     // MARK: - Router
     func trigger(route: PaymentRoute) {
         switch route {
-        case .paymentMethod:
+        case .initial:
             let inputData = PaymentMethodInputData(paymentInputData: paymentInputData)
             let module = paymentMethodAssembly.makeViewController(router: anyRouter, inputData: inputData)
             rootViewController.setViewControllers([module], animated: true)
+
+        case .paymentMethod:
+            rootViewController.popToRootViewController(animated: true)
+
         case let .bankCard(parameters):
             let inputData = BankCardInputData(parameters: parameters, paymentInputData: paymentInputData)
             let module = bankCardAssembly.makeViewController(router: anyRouter, inputData: inputData)
             rootViewController.pushViewController(module, animated: true)
+
         case let .applePay(parameters):
             let inputData = ApplePayInputData(parameters: parameters, paymentInputData: paymentInputData)
             let module = applePayAssembly.makeViewController(router: anyRouter, inputData: inputData)
             rootViewController.pushViewController(module, animated: true)
+
         case let .paymentProgress(parameters):
             let inputData = PaymentProgressInputData(parameters: parameters, paymentInputData: paymentInputData)
             let module = paymentProgressAssembly.makeViewController(router: anyRouter, inputData: inputData)
-            rootViewController.pushViewController(module, animated: true, transitionStyle: .fade)
+            let modules = Array(rootViewController.viewControllers.prefix(2) + [module])
+            rootViewController.setViewControllers(modules, animated: true, transitionStyle: .fade)
+
         case let .paidInvoice(parameters):
             let inputData = PaidInvoiceInputData(parameters: parameters, paymentInputData: paymentInputData)
             let module = paidInvoiceAssembly.makeViewController(router: anyRouter, inputData: inputData)
-            rootViewController.pushViewController(module, animated: true)
+            rootViewController.setViewControllers([module], animated: true)
+
         case let .unpaidInvoice(parameters):
             let inputData = UnpaidInvoiceInputData(parameters: parameters, paymentInputData: paymentInputData)
             let module = unpaidInvoiceAssembly.makeViewController(router: anyRouter, inputData: inputData)
-            rootViewController.pushViewController(module, animated: true)
+            let modules = Array(rootViewController.viewControllers.prefix(2) + [module])
+            rootViewController.setViewControllers(modules, animated: true)
+
+        case .back:
+            rootViewController.popViewController(animated: true)
+
         case .cancel:
             paymentDelegate.paymentCancelled(invoiceIdentifier: paymentInputData.invoiceIdentifier)
-        case let .finish(paymentMethod):
-            paymentDelegate.paymentFinished(invoiceIdentifier: paymentInputData.invoiceIdentifier, paymentMethod: paymentMethod)
+
+        case .finish:
+            paymentDelegate.paymentFinished(invoiceIdentifier: paymentInputData.invoiceIdentifier)
         }
     }
 

@@ -22,6 +22,7 @@ final class PaymentMethodViewModel: ModuleViewModel {
     lazy var inputData: PaymentMethodInputData = deferred()
     lazy var remoteAPI: PaymentMethodRemoteAPI = deferred()
     lazy var applePayInfoProvider: PaymentMethodApplePayInfoProvider = deferred()
+    lazy var errorHandlerProvider: ErrorHandlerProvider = deferred()
 
     // MARK: - ModuleViewModel
     struct Input {
@@ -32,10 +33,7 @@ final class PaymentMethodViewModel: ModuleViewModel {
     func setup(with input: Input) -> Disposable {
         let continueRoute = input.didSelectItem
             .asObservable()
-            .withLatestFrom(invoice) { ($0, $1) }
-            .map { tuple -> PaymentRoute in
-                let (item, invoice) = tuple
-
+            .withLatestFrom(invoice) { item, invoice -> PaymentRoute in
                 switch item.method {
                 case .bankCard:
                     return .bankCard(.init(invoice: invoice, paymentSystems: item.paymentSystems))
@@ -48,8 +46,12 @@ final class PaymentMethodViewModel: ModuleViewModel {
             .asObservable()
             .map(to: PaymentRoute.cancel)
 
+        let unpaidRoute = moduleDataObservable
+            .compactMap { $0.error as? PaymentError }
+            .map { PaymentRoute.unpaidInvoice($0) }
+
         return Observable
-            .merge(continueRoute, cancelRoute)
+            .merge(continueRoute, cancelRoute, unpaidRoute)
             .bind(to: Binder(self) {
                 $0.router.trigger(route: $1)
             })
@@ -67,28 +69,67 @@ final class PaymentMethodViewModel: ModuleViewModel {
         .map { $0.paymentInputData.shopName }
         .asDriver(onError: .never)
 
-    private(set) lazy var invoice = inputDataObservable
-        .flatMap { [remoteAPI, activityTracker] data -> Single<InvoiceDTO> in
-            let invoice = remoteAPI.obtainInvoice(
-                invoiceIdentifier: data.paymentInputData.invoiceIdentifier,
-                invoiceAccessToken: data.paymentInputData.invoiceAccessToken
-            )
-            return invoice.trackActivity(activityTracker)
-        }
+    private(set) lazy var invoice = moduleDataObservable
+        .compactMap { $0.element?.invoice }
         .asDriver(onError: .never)
 
-    private(set) lazy var items = inputDataObservable
-        .flatMap { [remoteAPI, activityTracker, methodsMapper] data -> Single<[Item]> in
-            let methods = remoteAPI.obtainInvoicePaymentMethods(
-                invoiceIdentifier: data.paymentInputData.invoiceIdentifier,
-                invoiceAccessToken: data.paymentInputData.invoiceAccessToken
-            )
-            return methods.map({ methodsMapper(data, $0) }).trackActivity(activityTracker)
-        }
+    private(set) lazy var items = moduleDataObservable
+        .compactMap { $0.element?.items }
         .asDriver(onError: .never)
 
     // MARK: - Private
-    private lazy var methodsMapper = { [applePayInfoProvider] (data: PaymentMethodInputData, methods: [PaymentMethodDTO]) -> [Item] in
+    struct ModuleData {
+        let invoice: InvoiceDTO
+        let items: [Item]
+    }
+
+    private lazy var moduleDataObservable = inputDataObservable
+        .flatMap { [remoteAPI, activityTracker, errorHandlerProvider, invoiceMapper, methodsMapper] data -> Observable<Event<ModuleData>> in
+            let obtainInvoice = remoteAPI.obtainInvoice(
+                invoiceIdentifier: data.paymentInputData.invoiceIdentifier,
+                invoiceAccessToken: data.paymentInputData.invoiceAccessToken
+            )
+
+            return obtainInvoice
+                .retry(using: errorHandlerProvider)
+                .catchError { throw PaymentError(.cannotObtainInvoice, underlyingError: $0) }
+                .map(invoiceMapper)
+                .flatMap { invoice -> Single<ModuleData> in
+                    let obtainInvoicePaymentMethods = remoteAPI.obtainInvoicePaymentMethods(
+                        invoiceIdentifier: data.paymentInputData.invoiceIdentifier,
+                        invoiceAccessToken: data.paymentInputData.invoiceAccessToken
+                    )
+
+                    return obtainInvoicePaymentMethods
+                        .retry(using: errorHandlerProvider)
+                        .catchError { throw PaymentError(.cannotObtainInvoicePaymentMethods, underlyingError: $0, invoice: invoice) }
+                        .map { ModuleData(invoice: invoice, items: try methodsMapper(data, invoice, $0)) }
+                }
+                .asObservable()
+                .materialize()
+                .trackActivity(activityTracker)
+        }
+        .share(replay: 1)
+
+    private typealias InvoiceMapper = (InvoiceDTO) throws -> InvoiceDTO
+
+    private lazy var invoiceMapper: InvoiceMapper = { invoice in
+        let currentDate = Date()
+
+        guard invoice.dueDate > currentDate else {
+            throw PaymentError(.invoiceExpired, invoice: invoice)
+        }
+
+        guard invoice.status == .unpaid else {
+            throw PaymentError(.unexpectedInvoiceStatus, invoice: invoice)
+        }
+
+        return invoice
+    }
+
+    private typealias MethodsMapper = (PaymentMethodInputData, InvoiceDTO, [PaymentMethodDTO]) throws -> [Item]
+
+    private lazy var methodsMapper: MethodsMapper = { [applePayInfoProvider] data, invoice, methods in
         var result = [Item]()
 
         // ApplePay
@@ -121,6 +162,10 @@ final class PaymentMethodViewModel: ModuleViewModel {
             if paymentSystems.isEmpty == false {
                 result.append(Item(method: .bankCard, paymentSystems: Set(paymentSystems)))
             }
+        }
+
+        guard result.isEmpty == false else {
+            throw PaymentError(.noPaymentMethods, invoice: invoice)
         }
 
         return result

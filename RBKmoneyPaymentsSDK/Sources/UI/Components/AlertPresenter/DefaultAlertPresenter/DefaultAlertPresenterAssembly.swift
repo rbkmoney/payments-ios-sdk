@@ -12,11 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import Foundation
+import UIKit
 
-public protocol PaymentDelegate: class {
+enum DefaultAlertPresenterAssembly {
 
-    func paymentCancelled(invoiceIdentifier: String)
-
-    func paymentFinished(invoiceIdentifier: String)
+    // MARK: - Internal
+    static func makeAlertPresenter(parentViewController: UIViewController) -> DefaultAlertPresenter {
+        return DefaultAlertPresenter(parentViewController: parentViewController)
+    }
 }

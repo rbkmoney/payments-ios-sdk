@@ -32,6 +32,7 @@ final class BankCardAssembly: ViewControllerAssembly<BankCardViewController, Ban
             $0.cvvCodeValidator = CVVCodeValidatorAssembly.makeValidator()
             $0.cardholderValidator = CardholderValidatorAssembly.makeValidator()
             $0.emailValidator = EmailValidatorAssembly.makeValidator()
+            $0.errorHandlerProvider = DefaultErrorHandlerAssembly.makeErrorHandler(parentViewController: viewController)
         }
 
         return viewController

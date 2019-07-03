@@ -53,7 +53,7 @@ identifier_name:
   excluded:
     - id
 
-line_length: 144
+line_length: 150
 
 type_name:
   max_length:

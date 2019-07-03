@@ -17,9 +17,13 @@ import Foundation
 struct PaymentProgressInputData {
 
     struct Parameters {
+        enum Source {
+            case resource(PaymentResourceDTO, payerEmail: String)
+            case payment(PaymentDTO)
+        }
+
         let invoice: InvoiceDTO
-        let paymentResource: PaymentResourceDTO
-        let payerEmail: String
+        let source: Source
     }
 
     let parameters: Parameters

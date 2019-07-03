@@ -26,6 +26,7 @@ final class PaymentMethodAssembly: ViewControllerAssembly<PaymentMethodViewContr
             $0.inputData = inputData
             $0.remoteAPI = RemoteAPIAssembly.makeRemoteAPI()
             $0.applePayInfoProvider = ApplePayInfoAssembly.makeApplePayInfo()
+            $0.errorHandlerProvider = DefaultErrorHandlerAssembly.makeErrorHandler(parentViewController: viewController)
         }
 
         return viewController
