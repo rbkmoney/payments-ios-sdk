@@ -10,28 +10,30 @@ final class ViewController: UIViewController {
 
     @IBOutlet private var activityIndicatorView: ActivityIndicatorView!
     @IBOutlet private var bundleVersionLabel: UILabel!
+    @IBOutlet private var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         bundleVersionLabel.text = Bundle.main.infoDictionary?["CFBundleVersion"] as? String
+
+        tableView.dataSource = self
     }
 
-    @IBAction private func purchaseFirstProduct() {
-        performPurchase(invoiceTemplate: Constants.firstProductInvoiceTemplate, cost: Constants.firstProductCost)
+    private func processItem(_ item: ExampleProduct) {
+        if let invoice = item.invoice {
+            processItem(item, invoice: invoice)
+        } else if let invoiceTemplate = item.invoiceTemplate {
+            processItem(item, invoiceTemplate: invoiceTemplate)
+        } else {
+            showAlert(title: item.title, message: item.message)
+        }
     }
 
-    @IBAction private func purchaseSecondProduct() {
-        performPurchase(invoiceTemplate: Constants.secondProductInvoiceTemplate, cost: Constants.secondProductCost)
-    }
-
-    @IBAction private func purchaseThirdProduct() {
-        performPurchase(invoiceTemplate: Constants.thirdProductInvoiceTemplate, cost: Constants.thirdProductCost)
-    }
-
-    private func performPurchase(invoiceTemplate: InvoiceTemplate, cost: Cost) {
+    private func processItem(_ item: ExampleProduct, invoiceTemplate: InvoiceTemplate) {
         activityIndicatorView.startAnimating()
 
-        InvoiceFactory.makeInvoiceWithTemplate(invoiceTemplate, cost: cost) { [weak self] invoice in
+        InvoiceFactory.makeInvoiceWithTemplate(invoiceTemplate, cost: item.cost) { [weak self] invoice in
             DispatchQueue.main.async {
                 guard let this = self else {
                     return
@@ -44,29 +46,58 @@ final class ViewController: UIViewController {
                     return
                 }
 
-                let paymentInputData = PaymentInputData(
-                    invoiceIdentifier: invoice.identifier,
-                    invoiceAccessToken: invoice.accessToken,
-                    shopName: "Продукты-онлайн",
-                    payerEmail: "payer.email@domain.name",
-                    applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String
-                )
-
-                let viewController = PaymentRootViewControllerAssembly.makeViewController(
-                    paymentInputData: paymentInputData,
-                    paymentDelegate: this
-                )
-
-                this.present(viewController, animated: true)
+                this.processItem(item, invoice: invoice)
             }
         }
     }
 
-    private func showAlert(title: String, message: String) {
+    private func processItem(_ item: ExampleProduct, invoice: Invoice) {
+        let paymentInputData = PaymentInputData(
+            invoiceIdentifier: invoice.identifier,
+            invoiceAccessToken: invoice.accessToken,
+            shopName: item.shopName,
+            payerEmail: item.payerEmail,
+            allowedPaymentMethods: item.allowedPaymentMethods,
+            applePayMerchantIdentifier: item.applePayMerchantIdentifier
+        )
+
+        let viewController = PaymentRootViewControllerAssembly.makeViewController(
+            paymentInputData: paymentInputData,
+            paymentDelegate: self
+        )
+
+        present(viewController, animated: true)
+    }
+
+    private func showAlert(title: String, message: String?) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
 
         present(alert, animated: true)
+    }
+}
+
+extension ViewController: UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return ExampleProduct.items.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProductTableViewCell", for: indexPath) as? ProductTableViewCell else {
+            fatalError("Can't dequeue ProductTableViewCell")
+        }
+
+        typealias Model = ProductTableViewCell.Model
+
+        let item = ExampleProduct.items[indexPath.row]
+        let model = Model(emoji: item.emoji, title: item.title, description: item.description, cost: item.cost, buttonColor: item.buttonColor)
+
+        cell.setup(with: model)
+
+        cell.action = { [unowned self] in self.processItem(item) }
+
+        return cell
     }
 }
 
@@ -81,25 +112,4 @@ extension ViewController: PaymentDelegate {
         print("Payment finished, invoice identifier: \(invoiceIdentifier)")
         dismiss(animated: true)
     }
-}
-
-private enum Constants {
-
-    static let firstProductInvoiceTemplate = InvoiceTemplate(
-        identifier: "1AYpfar3Yzw",
-        accessToken: "eyJhbGciOiJFUzI1NiIsImtpZCI6IllKSWl0UWNNNll6TkgtT0pyS2s4VWdjdFBVMlBoLVFCLS1tLXJ5TWtrU3MiLCJ0eXAiOiJKV1QifQ.eyJhY3IiOiIxIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCIsImh0dHBzOi8vZGFzaGJvYXJkLnJiay5tb25leSJdLCJhdWQiOiJrb2ZmaW5nIiwiYXV0aF90aW1lIjoxNTU5NTY1Mjc2LCJhenAiOiJrb2ZmaW5nIiwiZW1haWwiOiJhbGV4ZXkueXVraW5Ac2ltYmlyc29mdC5jb20iLCJleHAiOjAsImZhbWlseV9uYW1lIjoiWXVraW4iLCJnaXZlbl9uYW1lIjoiQWxleGV5IiwiaWF0IjoxNTU5NTY1Mjc3LCJpc3MiOiJodHRwczovL2F1dGgucmJrLm1vbmV5L2F1dGgvcmVhbG1zL2V4dGVybmFsIiwianRpIjoiMUFZcGZibm9RV3UiLCJuYW1lIjoiQWxleGV5IFl1a2luIiwibmJmIjowLCJub25jZSI6IjYxNmI3NzQ1LTVmZmItNDQ3ZC04ZjEwLTU5ODUwZGEzOGNiMSIsInByZWZlcnJlZF91c2VybmFtZSI6ImFsZXhleS55dWtpbkBzaW1iaXJzb2Z0LmNvbSIsInJlc291cmNlX2FjY2VzcyI6eyJjb21tb24tYXBpIjp7InJvbGVzIjpbInBhcnR5LiouaW52b2ljZV90ZW1wbGF0ZXMuMUFZcGZhcjNZencuaW52b2ljZV90ZW1wbGF0ZV9pbnZvaWNlczp3cml0ZSIsInBhcnR5LiouaW52b2ljZV90ZW1wbGF0ZXMuMUFZcGZhcjNZenc6cmVhZCJdfX0sInNjb3BlIjoib3BlbmlkIiwic2Vzc2lvbl9zdGF0ZSI6IjE2ZjU1ODkwLTY3NDEtNDUwYy1iNjBlLTUxMWM0ODRjOTYyNSIsInN1YiI6ImVhOTIyNzJiLTI5MDYtNDQwYS1iOTY0LWYyNWY1NjIzZDUxZSIsInR5cCI6IkJlYXJlciJ9.CF6udq7_wwIX0wmnKQdxv7cTjy99mKjIMvrdvXBKsV0mp48UaDZnnjX8xfS0xLP3padCgWTG6bcTtkuQNE-Sqg"
-    )
-    static let firstProductCost = Cost(amount: 10, currency: .rub)
-
-    static let secondProductInvoiceTemplate = InvoiceTemplate(
-        identifier: "1AYuebbSaRM",
-        accessToken: "eyJhbGciOiJFUzI1NiIsImtpZCI6IllKSWl0UWNNNll6TkgtT0pyS2s4VWdjdFBVMlBoLVFCLS1tLXJ5TWtrU3MiLCJ0eXAiOiJKV1QifQ.eyJhY3IiOiIwIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCIsImh0dHBzOi8vZGFzaGJvYXJkLnJiay5tb25leSJdLCJhdWQiOiJrb2ZmaW5nIiwiYXV0aF90aW1lIjoxNTU5NTY1Mjc2LCJhenAiOiJrb2ZmaW5nIiwiZW1haWwiOiJhbGV4ZXkueXVraW5Ac2ltYmlyc29mdC5jb20iLCJleHAiOjAsImZhbWlseV9uYW1lIjoiWXVraW4iLCJnaXZlbl9uYW1lIjoiQWxleGV5IiwiaWF0IjoxNTU5NTcyNTYxLCJpc3MiOiJodHRwczovL2F1dGgucmJrLm1vbmV5L2F1dGgvcmVhbG1zL2V4dGVybmFsIiwianRpIjoiMUFZdWVjT3Fpb0siLCJuYW1lIjoiQWxleGV5IFl1a2luIiwibmJmIjowLCJub25jZSI6Ijc3OGI2ZWI4LTYzZTUtNDEwNS04ZWQ5LWUxYjQ1Mjk1OGNjMSIsInByZWZlcnJlZF91c2VybmFtZSI6ImFsZXhleS55dWtpbkBzaW1iaXJzb2Z0LmNvbSIsInJlc291cmNlX2FjY2VzcyI6eyJjb21tb24tYXBpIjp7InJvbGVzIjpbInBhcnR5LiouaW52b2ljZV90ZW1wbGF0ZXMuMUFZdWViYlNhUk0uaW52b2ljZV90ZW1wbGF0ZV9pbnZvaWNlczp3cml0ZSIsInBhcnR5LiouaW52b2ljZV90ZW1wbGF0ZXMuMUFZdWViYlNhUk06cmVhZCJdfX0sInNjb3BlIjoib3BlbmlkIiwic2Vzc2lvbl9zdGF0ZSI6IjE2ZjU1ODkwLTY3NDEtNDUwYy1iNjBlLTUxMWM0ODRjOTYyNSIsInN1YiI6ImVhOTIyNzJiLTI5MDYtNDQwYS1iOTY0LWYyNWY1NjIzZDUxZSIsInR5cCI6IkJlYXJlciJ9.4l24Pt8GL1UoEOFohlKtvGmjob9mhrcFRprDPpYzu_82mIyQByzbyih7FJdiUY6L_y72m7GVFMBnD-BZCPel8g"
-    )
-    static let secondProductCost = Cost(amount: 2.99, currency: .usd)
-
-    static let thirdProductInvoiceTemplate = InvoiceTemplate(
-        identifier: "1AYuby17Ho8",
-        accessToken: "eyJhbGciOiJFUzI1NiIsImtpZCI6IllKSWl0UWNNNll6TkgtT0pyS2s4VWdjdFBVMlBoLVFCLS1tLXJ5TWtrU3MiLCJ0eXAiOiJKV1QifQ.eyJhY3IiOiIwIiwiYWxsb3dlZC1vcmlnaW5zIjpbImh0dHA6Ly9sb2NhbGhvc3Q6ODAwMCIsImh0dHBzOi8vZGFzaGJvYXJkLnJiay5tb25leSJdLCJhdWQiOiJrb2ZmaW5nIiwiYXV0aF90aW1lIjoxNTU5NTY1Mjc2LCJhenAiOiJrb2ZmaW5nIiwiZW1haWwiOiJhbGV4ZXkueXVraW5Ac2ltYmlyc29mdC5jb20iLCJleHAiOjAsImZhbWlseV9uYW1lIjoiWXVraW4iLCJnaXZlbl9uYW1lIjoiQWxleGV5IiwiaWF0IjoxNTU5NTcyNTYxLCJpc3MiOiJodHRwczovL2F1dGgucmJrLm1vbmV5L2F1dGgvcmVhbG1zL2V4dGVybmFsIiwianRpIjoiMUFZdWJ6NFAzcjYiLCJuYW1lIjoiQWxleGV5IFl1a2luIiwibmJmIjowLCJub25jZSI6Ijc3OGI2ZWI4LTYzZTUtNDEwNS04ZWQ5LWUxYjQ1Mjk1OGNjMSIsInByZWZlcnJlZF91c2VybmFtZSI6ImFsZXhleS55dWtpbkBzaW1iaXJzb2Z0LmNvbSIsInJlc291cmNlX2FjY2VzcyI6eyJjb21tb24tYXBpIjp7InJvbGVzIjpbInBhcnR5LiouaW52b2ljZV90ZW1wbGF0ZXMuMUFZdWJ5MTdIbzguaW52b2ljZV90ZW1wbGF0ZV9pbnZvaWNlczp3cml0ZSIsInBhcnR5LiouaW52b2ljZV90ZW1wbGF0ZXMuMUFZdWJ5MTdIbzg6cmVhZCJdfX0sInNjb3BlIjoib3BlbmlkIiwic2Vzc2lvbl9zdGF0ZSI6IjE2ZjU1ODkwLTY3NDEtNDUwYy1iNjBlLTUxMWM0ODRjOTYyNSIsInN1YiI6ImVhOTIyNzJiLTI5MDYtNDQwYS1iOTY0LWYyNWY1NjIzZDUxZSIsInR5cCI6IkJlYXJlciJ9.XrYKE8n7jBVcYtSPu-YrfdUHJn7NDkfMs15Cgoohyce0zMqXUisu677leLNvIPnC-EsW3E4caHGrrsfTsLekcQ"
-    )
-    static let thirdProductCost = Cost(amount: 5.50, currency: .eur)
 }
