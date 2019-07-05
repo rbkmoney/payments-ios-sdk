@@ -185,6 +185,10 @@
 		C143798922C2636A00E59013 /* UnpaidInvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143798322C2636A00E59013 /* UnpaidInvoiceViewController.swift */; };
 		C143798A22C2636A00E59013 /* UnpaidInvoiceDependenciesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143798422C2636A00E59013 /* UnpaidInvoiceDependenciesExtensions.swift */; };
 		C143798C22C2638B00E59013 /* UnpaidInvoiceInputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143798B22C2638B00E59013 /* UnpaidInvoiceInputData.swift */; };
+		C18F57F522CE6F7D0099AC1F /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F57F422CE6F7D0099AC1F /* ProductTableViewCell.swift */; };
+		C18F57F622CE774B0099AC1F /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F57F422CE6F7D0099AC1F /* ProductTableViewCell.swift */; };
+		C18F57F822CED5A90099AC1F /* ExampleProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F57F722CED5A90099AC1F /* ExampleProduct.swift */; };
+		C18F57F922CED5B10099AC1F /* ExampleProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F57F722CED5A90099AC1F /* ExampleProduct.swift */; };
 		C19789C4229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C5229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C6229FD05800C7F966 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C3229FD05800C7F966 /* AppDelegate.swift */; };
@@ -455,6 +459,8 @@
 		C143798322C2636A00E59013 /* UnpaidInvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidInvoiceViewController.swift; sourceTree = "<group>"; };
 		C143798422C2636A00E59013 /* UnpaidInvoiceDependenciesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidInvoiceDependenciesExtensions.swift; sourceTree = "<group>"; };
 		C143798B22C2638B00E59013 /* UnpaidInvoiceInputData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidInvoiceInputData.swift; sourceTree = "<group>"; };
+		C18F57F422CE6F7D0099AC1F /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		C18F57F722CED5A90099AC1F /* ExampleProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleProduct.swift; sourceTree = "<group>"; };
 		C1978990229FCA0900C7F966 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789A6229FCE1900C7F966 /* Example+Pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example+Pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789B9229FCF8B00C7F966 /* Example+Pods.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Example+Pods.Release.xcconfig"; sourceTree = "<group>"; };
@@ -678,6 +684,7 @@
 				C1044EBE22A48D8100A8065B /* Invoice.swift */,
 				C1044EC422A5372200A8065B /* Currency.swift */,
 				C1044EC722A5377300A8065B /* Cost.swift */,
+				C18F57F722CED5A90099AC1F /* ExampleProduct.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -686,6 +693,7 @@
 			isa = PBXGroup;
 			children = (
 				C1044EB822A4899800A8065B /* ActivityIndicatorView.swift */,
+				C18F57F422CE6F7D0099AC1F /* ProductTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -2016,6 +2024,8 @@
 			files = (
 				C1044EBC22A48C9C00A8065B /* InvoiceTemplate.swift in Sources */,
 				C1044EBF22A48D8100A8065B /* Invoice.swift in Sources */,
+				C18F57F822CED5A90099AC1F /* ExampleProduct.swift in Sources */,
+				C18F57F522CE6F7D0099AC1F /* ProductTableViewCell.swift in Sources */,
 				C1044EC822A5377300A8065B /* Cost.swift in Sources */,
 				C19789C6229FD05800C7F966 /* AppDelegate.swift in Sources */,
 				C1044EC522A5372200A8065B /* Currency.swift in Sources */,
@@ -2031,6 +2041,8 @@
 			files = (
 				C1044EBD22A48C9C00A8065B /* InvoiceTemplate.swift in Sources */,
 				C1044EC022A48D8100A8065B /* Invoice.swift in Sources */,
+				C18F57F922CED5B10099AC1F /* ExampleProduct.swift in Sources */,
+				C18F57F622CE774B0099AC1F /* ProductTableViewCell.swift in Sources */,
 				C1044EC922A5377300A8065B /* Cost.swift in Sources */,
 				C19789C7229FD05800C7F966 /* AppDelegate.swift in Sources */,
 				C1044EC622A5372800A8065B /* Currency.swift in Sources */,
