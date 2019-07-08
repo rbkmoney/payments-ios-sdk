@@ -12,19 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+import RxCocoa
+import RxSwift
 import UIKit
 
-class FontsPalette {
+extension Reactive where Base: UIView {
 
-    var screenTitle: UIFont {
-        return .systemFont(ofSize: 16, weight: .medium)
-    }
-
-    var common: UIFont {
-        return .systemFont(ofSize: 16, weight: .medium)
-    }
-
-    var large: UIFont {
-        return .systemFont(ofSize: 30, weight: .medium)
+    var isVisible: Binder<Bool> {
+        return Binder(base) { base, visible in
+            base.isHidden = !visible
+        }
     }
 }

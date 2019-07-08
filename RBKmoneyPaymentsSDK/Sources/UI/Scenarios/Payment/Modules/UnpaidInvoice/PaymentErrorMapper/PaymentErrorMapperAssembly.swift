@@ -14,33 +14,13 @@
 
 import Foundation
 
-struct NetworkError: Error {
+enum PaymentErrorMapperAssembly {
 
-    enum Code {
-        case cannotEncodeRequestBody
-        case cannotMapResponse
-        case serverError(ServerErrorDTO)
-        case unacceptableResponseStatusCode(Int)
-        case wrongResponseType
+    // MARK: - Internal
+    static func makeMapper() -> PaymentErrorMapper {
+        return mapperInstance
     }
 
-    let code: Code
-    let underlyingError: Error?
-
-    init(_ code: Code, underlyingError: Error? = nil) {
-        self.code = code
-        self.underlyingError = underlyingError
-    }
-}
-
-extension NetworkError {
-
-    var isServerError: Bool {
-        switch code {
-        case .serverError:
-            return true
-        default:
-            return false
-        }
-    }
+    // MARK: - Private
+    private static let mapperInstance = PaymentErrorMapper()
 }

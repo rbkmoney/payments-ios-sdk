@@ -61,7 +61,7 @@ final class InvoiceSummaryView: UIView {
 private extension TextAttributes {
 
     static let cost = TextAttributes()
-        .font(.systemFont(ofSize: 30, weight: .medium))
+        .font(Palette.fonts.large)
         .textColor(Palette.colors.brightText)
         .lineBreakMode(.byTruncatingTail)
         .textAlignment(.left)

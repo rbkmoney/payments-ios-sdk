@@ -42,7 +42,7 @@ final class LogotypesView: UIView {
         embedSubview(view)
         containerView = view
 
-        securePaymentLabel.attributedText = R.string.localizable.securite_payment().attributed(with: .securePayment)
+        securePaymentLabel.attributedText = R.string.localizable.secure_payment().attributed(with: .securePayment)
         copyrightLabel.attributedText = R.string.localizable.copyright().attributed(with: .copyright)
 
         [lockImageView as UIImageView, rbkMoneyImageView, logotypesImageView].forEach {
