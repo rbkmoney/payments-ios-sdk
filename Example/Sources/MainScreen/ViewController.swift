@@ -26,7 +26,7 @@ final class ViewController: UIViewController {
         } else if let invoiceTemplate = item.invoiceTemplate {
             processItem(item, invoiceTemplate: invoiceTemplate)
         } else {
-            showAlert(title: item.title, message: item.message)
+            showAlert(title: "Error", message: "Either invoice or invoice template should be specified!")
         }
     }
 

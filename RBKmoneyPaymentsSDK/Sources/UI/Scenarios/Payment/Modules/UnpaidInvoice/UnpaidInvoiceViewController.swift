@@ -28,7 +28,6 @@ final class UnpaidInvoiceViewController: UIViewController, ModuleView {
     @IBOutlet private var contentView: UIView!
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var errorDescriptionLabel: UILabel!
-    @IBOutlet private var helpButton: UIButton!
     @IBOutlet private var retryButton: UIButton!
     @IBOutlet private var reenterDataButton: UIButton!
     @IBOutlet private var restartScenarioButton: UIButton!
@@ -39,7 +38,6 @@ final class UnpaidInvoiceViewController: UIViewController, ModuleView {
     var output: UnpaidInvoiceViewModel.Input {
         return UnpaidInvoiceViewModel.Input(
             didTapCancel: cancelBarButtonItem.rx.tap.asSignal(),
-            didTapHelp: helpButton.rx.tap.asSignal(),
             didTapRetry: retryButton.rx.tap.asSignal(),
             didTapReenterData: reenterDataButton.rx.tap.asSignal(),
             didTapRestartScenario: restartScenarioButton.rx.tap.asSignal()
@@ -84,21 +82,18 @@ final class UnpaidInvoiceViewController: UIViewController, ModuleView {
 
     private func setupButtons() {
         let buttons: [UIButton] = [
-            helpButton,
             retryButton,
             reenterDataButton,
             restartScenarioButton
         ]
 
         let titles = [
-            R.string.localizable.unpaid_action_help().attributed(with: .other),
             R.string.localizable.unpaid_action_retry().attributed(with: .common),
             R.string.localizable.unpaid_action_reenter_data().attributed(with: .main),
             R.string.localizable.unpaid_action_restart_scenario().attributed(with: .other)
         ]
 
         let backgroundColors: [UIColor] = [
-            .clear,
             Palette.colors.selectionBackground,
             .clear,
             .clear

@@ -26,7 +26,6 @@ final class UnpaidInvoiceViewModel: ModuleViewModel {
     // MARK: - ModuleViewModel
     struct Input {
         let didTapCancel: Signal<Void>
-        let didTapHelp: Signal<Void>
         let didTapRetry: Signal<Void>
         let didTapReenterData: Signal<Void>
         let didTapRestartScenario: Signal<Void>

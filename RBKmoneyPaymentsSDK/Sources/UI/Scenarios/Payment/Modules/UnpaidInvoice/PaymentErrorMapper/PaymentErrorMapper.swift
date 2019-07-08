@@ -20,7 +20,7 @@ struct PaymentErrorMapper {
     func retryRoute(for error: PaymentError) -> PaymentRoute? {
         switch error.code {
         case .cannotObtainInvoice, .cannotObtainInvoicePaymentMethods:
-            if let networkError = error.underlyingError as? NetworkError, networkError.isServerError {
+            if let networkError = error.underlyingError as? NetworkError, case .serverError = networkError.code {
                 return nil
             }
             return .initial

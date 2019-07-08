@@ -21,7 +21,6 @@
 "payment_method_bank_card" = "БАНКОВСКАЯ КАРТА";
 
 // Экран "Не оплачено"
-"unpaid_action_help" = "КАК РЕШИТЬ ПРОБЛЕМУ?";
 "unpaid_action_retry" = "Попробовать снова";
 "unpaid_action_reenter_data" = "Использовать другую карту";
 "unpaid_action_restart_scenario" = "ВСЕ СПОСОБЫ ОПЛАТЫ";

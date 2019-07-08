@@ -32,15 +32,3 @@ struct NetworkError: Error {
         self.underlyingError = underlyingError
     }
 }
-
-extension NetworkError {
-
-    var isServerError: Bool {
-        switch code {
-        case .serverError:
-            return true
-        default:
-            return false
-        }
-    }
-}

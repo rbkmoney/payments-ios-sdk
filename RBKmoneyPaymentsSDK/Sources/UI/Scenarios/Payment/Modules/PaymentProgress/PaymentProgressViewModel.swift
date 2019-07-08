@@ -130,7 +130,7 @@ final class PaymentProgressViewModel: ModuleViewModel {
                 .trackActivity(activityTracker)
                 .flatMap { payment -> Observable<ModuleAction> in
                     let events = Observable<Int>
-                        .timer(.seconds(1), period: .seconds(3), scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
+                        .timer(.seconds(1), period: .seconds(2), scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
                         .flatMapLatest { _ in
                             remoteAPI.obtainInvoiceEvents(
                                 invoiceIdentifier: data.paymentInputData.invoiceIdentifier,

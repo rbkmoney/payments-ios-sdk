@@ -19,7 +19,6 @@ struct ExampleProduct {
     let payerEmail: String?
     let allowedPaymentMethods: [PaymentMethod]
     let applePayMerchantIdentifier: String?
-    let message: String?
 }
 
 extension ExampleProduct {
@@ -39,8 +38,7 @@ extension ExampleProduct {
             shopName: "Продукты-онлайн",
             payerEmail: "payer.email@domain.name",
             allowedPaymentMethods: [.bankCard, .applePay],
-            applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String,
-            message: nil
+            applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String
         ),
         ExampleProduct(
             emoji: "🍖",
@@ -56,8 +54,7 @@ extension ExampleProduct {
             shopName: "ООО Рога и Копыта",
             payerEmail: "foo bar baz@wrong.domain.name",
             allowedPaymentMethods: [.bankCard, .applePay],
-            applePayMerchantIdentifier: nil,
-            message: nil
+            applePayMerchantIdentifier: nil
         ),
         ExampleProduct(
             emoji: "🍓",
@@ -73,8 +70,7 @@ extension ExampleProduct {
             shopName: "Вкусняшки",
             payerEmail: nil,
             allowedPaymentMethods: [.bankCard],
-            applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String,
-            message: nil
+            applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String
         ),
         ExampleProduct(
             emoji: "🍺",
@@ -90,8 +86,7 @@ extension ExampleProduct {
             shopName: "Вкусняшки",
             payerEmail: "payer.email@domain.name",
             allowedPaymentMethods: [.bankCard],
-            applePayMerchantIdentifier: nil,
-            message: nil
+            applePayMerchantIdentifier: nil
         ),
         ExampleProduct(
             emoji: "🛒",
@@ -107,8 +102,7 @@ extension ExampleProduct {
             shopName: "ООО Рога и Копыта",
             payerEmail: nil,
             allowedPaymentMethods: [.applePay],
-            applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String,
-            message: nil
+            applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String
         ),
         ExampleProduct(
             emoji: "🦐",
@@ -124,22 +118,7 @@ extension ExampleProduct {
             shopName: "Продукты-онлайн",
             payerEmail: "payer.email@domain.name",
             allowedPaymentMethods: [],
-            applePayMerchantIdentifier: nil,
-            message: nil
-        ),
-        ExampleProduct(
-            emoji: "🐝",
-            title: "Полосатые мухи",
-            description: "Тестирование ошибок - протухший инвойс.",
-            cost: Cost(amount: 345, currency: .rub),
-            invoiceTemplate: nil,
-            invoice: nil,
-            buttonColor: UIColor(red: CGFloat(0x1D) / 255, green: CGFloat(0x1F) / 255, blue: CGFloat(0x07) / 255, alpha: 1),
-            shopName: "Тест ошибок",
-            payerEmail: nil,
-            allowedPaymentMethods: PaymentMethod.allCases,
-            applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String,
-            message: "Для воспроизведения ошибки необходим инвойс со статусом .unpaid и датой окончания действия в прошлом."
+            applePayMerchantIdentifier: nil
         ),
         ExampleProduct(
             emoji: "🧀",
@@ -155,8 +134,7 @@ extension ExampleProduct {
             shopName: "Тест ошибок",
             payerEmail: nil,
             allowedPaymentMethods: PaymentMethod.allCases,
-            applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String,
-            message: nil
+            applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String
         ),
         ExampleProduct(
             emoji: "🥦",
@@ -172,22 +150,7 @@ extension ExampleProduct {
             shopName: "Тест ошибок",
             payerEmail: nil,
             allowedPaymentMethods: PaymentMethod.allCases,
-            applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String,
-            message: nil
-        ),
-        ExampleProduct(
-            emoji: "⛱",
-            title: "Зонтик",
-            description: "Тестирование ошибок - инвойс, по которому сделан возврат.",
-            cost: Cost(amount: 500, currency: .rub),
-            invoiceTemplate: nil,
-            invoice: nil,
-            buttonColor: UIColor(red: CGFloat(0xDC) / 255, green: CGFloat(0x46) / 255, blue: CGFloat(0x27) / 255, alpha: 1),
-            shopName: "Тест ошибок",
-            payerEmail: nil,
-            allowedPaymentMethods: PaymentMethod.allCases,
-            applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String,
-            message: "Для воспроизведения ошибки необходим инвойс со статусом .refunded."
+            applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String
         ),
         ExampleProduct(
             emoji: "🍆",
@@ -203,12 +166,11 @@ extension ExampleProduct {
             shopName: "Тест ошибок",
             payerEmail: nil,
             allowedPaymentMethods: PaymentMethod.allCases,
-            applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String,
-            message: nil
+            applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String
         ),
         ExampleProduct(
-            emoji: "🏀",
-            title: "Мяч",
+            emoji: "⛱",
+            title: "Зонтик",
             description: "Тестирование ошибок - неверный идентификатор и токен инвойса - симуляция неполучения инвойса.",
             cost: Cost(amount: 2000, currency: .rub),
             invoiceTemplate: nil,
@@ -220,8 +182,7 @@ extension ExampleProduct {
             shopName: "Тест ошибок",
             payerEmail: nil,
             allowedPaymentMethods: PaymentMethod.allCases,
-            applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String,
-            message: nil
+            applePayMerchantIdentifier: Bundle.main.infoDictionary?["APPLE_PAY_MERCHANT_IDENTIFIER"] as? String
         )
     ]
 }

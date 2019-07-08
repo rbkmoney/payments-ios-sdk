@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qds-5L-q63">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="670.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="615.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mI4-E2-qLc" customClass="InvoiceSummaryView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
@@ -34,7 +34,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="723-EG-ceq">
-                                                <rect key="frame" x="5" y="13" width="365" height="507.5"/>
+                                                <rect key="frame" x="5" y="13" width="365" height="452.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CuY-Jd-6T9">
                                                         <rect key="frame" x="20" y="50" width="325" height="23"/>
@@ -52,31 +52,24 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="v4p-p3-zSS">
-                                                        <rect key="frame" x="20" y="281.5" width="325" height="210"/>
+                                                        <rect key="frame" x="20" y="281.5" width="325" height="155"/>
                                                         <subviews>
-                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PHw-uv-OTt">
-                                                                <rect key="frame" x="0.0" y="0.0" width="325" height="45"/>
-                                                                <color key="backgroundColor" red="0.92549019610000005" green="0.21176470589999999" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                                <constraints>
-                                                                    <constraint firstAttribute="height" priority="999" constant="45" id="WsW-bq-z9m"/>
-                                                                </constraints>
-                                                            </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mP-qu-lNJ">
-                                                                <rect key="frame" x="0.0" y="55" width="325" height="45"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="325" height="45"/>
                                                                 <color key="backgroundColor" red="0.92549019610000005" green="0.21176470589999999" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" priority="999" constant="45" id="to6-Pb-FLW"/>
                                                                 </constraints>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q7o-Xy-jts">
-                                                                <rect key="frame" x="0.0" y="110" width="325" height="45"/>
+                                                                <rect key="frame" x="0.0" y="55" width="325" height="45"/>
                                                                 <color key="backgroundColor" red="0.92549019610000005" green="0.21176470589999999" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" priority="999" constant="45" id="f3F-c2-2vD"/>
                                                                 </constraints>
                                                             </button>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xZL-6z-RBN">
-                                                                <rect key="frame" x="0.0" y="165" width="325" height="45"/>
+                                                                <rect key="frame" x="0.0" y="110" width="325" height="45"/>
                                                                 <color key="backgroundColor" red="0.92549019610000005" green="0.21176470589999999" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" priority="999" constant="45" id="6Nl-Bl-AgO"/>
@@ -102,7 +95,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kx6-KW-pID" customClass="LogotypesView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="544.5" width="375" height="126"/>
+                                                <rect key="frame" x="0.0" y="489.5" width="375" height="126"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="126" id="u3l-Xj-JC0"/>
                                                 </constraints>
@@ -157,7 +150,6 @@
                         <outlet property="errorImageView" destination="FoI-ci-m3E" id="zcV-Xm-9sj"/>
                         <outlet property="headerView" destination="mI4-E2-qLc" id="trD-eo-Uqv"/>
                         <outlet property="headerViewHeightConstraint" destination="YYN-uS-4G1" id="tOH-ku-feM"/>
-                        <outlet property="helpButton" destination="PHw-uv-OTt" id="xQv-If-f6K"/>
                         <outlet property="reenterDataButton" destination="q7o-Xy-jts" id="cUg-AP-gd8"/>
                         <outlet property="restartScenarioButton" destination="xZL-6z-RBN" id="QnO-rc-GSX"/>
                         <outlet property="retryButton" destination="7mP-qu-lNJ" id="3D6-Q5-h3j"/>

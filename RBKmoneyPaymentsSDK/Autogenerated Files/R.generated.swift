@@ -371,7 +371,7 @@ struct R: Rswift.Validatable {
   
   /// This `R.string` struct is generated, and contains static references to 1 localization tables.
   struct string {
-    /// This `R.string.localizable` struct is generated, and contains static references to 84 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 83 localization keys.
     struct localizable {
       /// Value: Apple Pay
       static let apple_pay_header_title = Rswift.StringResource(key: "apple_pay_header_title", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
@@ -415,8 +415,6 @@ struct R: Rswift.Validatable {
       static let unpaid_status_paid = Rswift.StringResource(key: "unpaid_status_paid", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Использовать другую карту
       static let unpaid_action_reenter_data = Rswift.StringResource(key: "unpaid_action_reenter_data", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
-      /// Value: КАК РЕШИТЬ ПРОБЛЕМУ?
-      static let unpaid_action_help = Rswift.StringResource(key: "unpaid_action_help", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: ММ/ГГ
       static let bank_card_date_placeholder = Rswift.StringResource(key: "bank_card_date_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Магазин заблокирован или его операции приостановлены.
@@ -645,11 +643,6 @@ struct R: Rswift.Validatable {
       /// Value: Использовать другую карту
       static func unpaid_action_reenter_data(_: Void = ()) -> String {
         return NSLocalizedString("unpaid_action_reenter_data", bundle: R.hostingBundle, comment: "")
-      }
-      
-      /// Value: КАК РЕШИТЬ ПРОБЛЕМУ?
-      static func unpaid_action_help(_: Void = ()) -> String {
-        return NSLocalizedString("unpaid_action_help", bundle: R.hostingBundle, comment: "")
       }
       
       /// Value: ММ/ГГ
