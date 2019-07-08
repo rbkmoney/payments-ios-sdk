@@ -32,7 +32,6 @@ final class UnpaidInvoiceViewController: UIViewController, ModuleView {
     @IBOutlet private var reenterDataButton: UIButton!
     @IBOutlet private var restartScenarioButton: UIButton!
     @IBOutlet private var errorImageView: UIImageView!
-    @IBOutlet private var headerViewHeightConstraint: NSLayoutConstraint!
 
     // MARK: - ModuleView
     var output: UnpaidInvoiceViewModel.Input {
@@ -116,7 +115,7 @@ final class UnpaidInvoiceViewController: UIViewController, ModuleView {
 
     private var setupHeader: Binder<InvoiceDTO?> {
         return Binder(self) { this, invoice in
-            this.headerViewHeightConstraint.isActive = invoice == nil
+            this.headerView.isHidden = invoice == nil
 
             guard let invoice = invoice else {
                 return

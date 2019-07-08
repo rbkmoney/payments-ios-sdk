@@ -399,10 +399,10 @@ struct R: Rswift.Validatable {
       static let alert_button_yes = Rswift.StringResource(key: "alert_button_yes", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Договор более не имеет силы по причине истечения срока действия или расторжения.
       static let error_message_invalid_contract_status = Rswift.StringResource(key: "error_message_invalid_contract_status", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
-      /// Value: Заказ оплачен картой %@ ****%@
-      static let paid_card_with_last_digits_description = Rswift.StringResource(key: "paid_card_with_last_digits_description", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Заказ оплачен картой %@.
       static let paid_card_description = Rswift.StringResource(key: "paid_card_description", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Заказ оплачен картой %@ •• %@
+      static let paid_card_with_last_digits_description = Rswift.StringResource(key: "paid_card_with_last_digits_description", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Заказ оплачен.
       static let paid_description = Rswift.StringResource(key: "paid_description", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Имя на карте
@@ -605,14 +605,14 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("error_message_invalid_contract_status", bundle: R.hostingBundle, comment: "")
       }
       
-      /// Value: Заказ оплачен картой %@ ****%@
-      static func paid_card_with_last_digits_description(_ value1: String, _ value2: String) -> String {
-        return String(format: NSLocalizedString("paid_card_with_last_digits_description", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1, value2)
-      }
-      
       /// Value: Заказ оплачен картой %@.
       static func paid_card_description(_ value1: String) -> String {
         return String(format: NSLocalizedString("paid_card_description", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
+      }
+      
+      /// Value: Заказ оплачен картой %@ •• %@
+      static func paid_card_with_last_digits_description(_ value1: String, _ value2: String) -> String {
+        return String(format: NSLocalizedString("paid_card_with_last_digits_description", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1, value2)
       }
       
       /// Value: Заказ оплачен.

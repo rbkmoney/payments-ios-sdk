@@ -33,7 +33,7 @@
 "paid_title" = "Успешная оплата";
 "paid_description" = "Заказ оплачен.";
 "paid_card_description" = "Заказ оплачен картой %@.";
-"paid_card_with_last_digits_description" = "Заказ оплачен картой %@ ****%@";
+"paid_card_with_last_digits_description" = "Заказ оплачен картой %@\U202F••\U202F%@";
 "paid_email_description" = "Чек отправлен по адресу %@";
 
 // Разное
