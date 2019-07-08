@@ -178,7 +178,7 @@ extension ExampleProduct {
                 identifier: "nonexistent invoice",
                 accessToken: "bad token"
             ),
-            buttonColor: UIColor(red: CGFloat(0xD6) / 255, green: CGFloat(0x72) / 255, blue: CGFloat(0x34) / 255, alpha: 1),
+            buttonColor: UIColor(red: CGFloat(0xDC) / 255, green: CGFloat(0x46) / 255, blue: CGFloat(0x27) / 255, alpha: 1),
             shopName: "Тест ошибок",
             payerEmail: nil,
             allowedPaymentMethods: PaymentMethod.allCases,

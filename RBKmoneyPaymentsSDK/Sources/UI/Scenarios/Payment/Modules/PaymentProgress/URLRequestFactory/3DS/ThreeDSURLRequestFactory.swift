@@ -31,7 +31,7 @@ final class ThreeDSURLRequestFactory {
                 return nil
             }
 
-            var urlRequest = URLRequest(url: url)
+            var urlRequest = URLRequest(url: url, timeoutInterval: 15)
             urlRequest.httpMethod = "GET"
 
             return urlRequest
@@ -49,7 +49,7 @@ final class ThreeDSURLRequestFactory {
 
             let queryString = type(of: self).queryString(for: parameters)
 
-            var urlRequest = URLRequest(url: url)
+            var urlRequest = URLRequest(url: url, timeoutInterval: 15)
             urlRequest.httpMethod = "POST"
             urlRequest.httpBody = queryString.data(using: .utf8)
             urlRequest.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")

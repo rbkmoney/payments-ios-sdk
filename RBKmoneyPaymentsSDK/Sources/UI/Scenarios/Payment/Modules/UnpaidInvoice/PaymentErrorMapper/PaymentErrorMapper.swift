@@ -60,9 +60,22 @@ struct PaymentErrorMapper {
 
     func restartScenarioRoute(for error: PaymentError) -> PaymentRoute? {
         switch error.code {
-        case .cannotCreatePaymentResource, .cannotCreatePayment, .cannotObtainInvoiceEvents, .paymentCancelled, .paymentFailed:
+        case .cannotCreatePaymentResource,
+             .cannotCreatePayment,
+             .cannotObtainInvoiceEvents,
+             .userInteractionFailed,
+             .paymentCancelled,
+             .paymentFailed:
+
             return .paymentMethod
-        default:
+
+        case .cannotObtainInvoice,
+             .invoiceExpired,
+             .unexpectedInvoiceStatus,
+             .cannotObtainInvoicePaymentMethods,
+             .noPaymentMethods,
+             .invoiceCancelled:
+
             return nil
         }
     }
