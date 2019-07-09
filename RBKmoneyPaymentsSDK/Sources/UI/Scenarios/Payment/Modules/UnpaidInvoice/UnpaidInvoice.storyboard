@@ -25,37 +25,37 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qds-5L-q63">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="635.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="652.5"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="TES-hf-oO4">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="485.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="502.5"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="20" translatesAutoresizingMaskIntoConstraints="NO" id="mI4-E2-qLc" customClass="InvoiceSummaryView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
                                                     </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U7S-2U-GVd">
-                                                        <rect key="frame" x="0.0" y="28" width="375" height="457.5"/>
+                                                        <rect key="frame" x="0.0" y="28" width="375" height="474.5"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="723-EG-ceq">
-                                                                <rect key="frame" x="5" y="5" width="365" height="452.5"/>
+                                                                <rect key="frame" x="5" y="5" width="365" height="469.5"/>
                                                                 <subviews>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CuY-Jd-6T9">
-                                                                        <rect key="frame" x="20" y="50" width="325" height="23"/>
+                                                                        <rect key="frame" x="20" y="45" width="325" height="23"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="86" placeholderIntrinsicHeight="86" translatesAutoresizingMaskIntoConstraints="NO" id="FoI-ci-m3E">
-                                                                        <rect key="frame" x="139.5" y="111" width="86" height="86"/>
+                                                                        <rect key="frame" x="139.5" y="103" width="86" height="86"/>
                                                                     </imageView>
                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VBj-Wa-P8x">
-                                                                        <rect key="frame" x="20" y="245" width="325" height="20.5"/>
+                                                                        <rect key="frame" x="20" y="234" width="325" height="20.5"/>
                                                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                         <nil key="highlightedColor"/>
                                                                     </label>
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="v4p-p3-zSS">
-                                                                        <rect key="frame" x="20" y="281.5" width="325" height="155"/>
+                                                                        <rect key="frame" x="20" y="284.5" width="325" height="155"/>
                                                                         <subviews>
                                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7mP-qu-lNJ">
                                                                                 <rect key="frame" x="0.0" y="0.0" width="325" height="45"/>
@@ -83,17 +83,17 @@
                                                                 </subviews>
                                                                 <color key="backgroundColor" red="0.59140625000000002" green="0.72857142860000002" blue="0.32215401789999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
-                                                                    <constraint firstAttribute="trailing" secondItem="v4p-p3-zSS" secondAttribute="trailing" constant="20" id="7In-xY-dC1"/>
-                                                                    <constraint firstItem="VBj-Wa-P8x" firstAttribute="top" secondItem="FoI-ci-m3E" secondAttribute="bottom" constant="48" id="8Li-z1-ysf"/>
-                                                                    <constraint firstItem="CuY-Jd-6T9" firstAttribute="top" secondItem="723-EG-ceq" secondAttribute="top" constant="50" id="Kbu-PA-fW3"/>
-                                                                    <constraint firstItem="VBj-Wa-P8x" firstAttribute="leading" secondItem="723-EG-ceq" secondAttribute="leading" constant="20" id="NZe-tC-LE9"/>
-                                                                    <constraint firstItem="v4p-p3-zSS" firstAttribute="top" secondItem="VBj-Wa-P8x" secondAttribute="bottom" constant="16" id="Ogr-Ur-GH6"/>
+                                                                    <constraint firstItem="VBj-Wa-P8x" firstAttribute="trailing" secondItem="CuY-Jd-6T9" secondAttribute="trailing" id="7pc-OE-GcH"/>
+                                                                    <constraint firstItem="VBj-Wa-P8x" firstAttribute="top" secondItem="FoI-ci-m3E" secondAttribute="bottom" constant="45" id="8Li-z1-ysf"/>
+                                                                    <constraint firstItem="VBj-Wa-P8x" firstAttribute="leading" secondItem="CuY-Jd-6T9" secondAttribute="leading" id="Hqh-4h-pZg"/>
+                                                                    <constraint firstItem="v4p-p3-zSS" firstAttribute="leading" secondItem="CuY-Jd-6T9" secondAttribute="leading" id="JUh-sB-C25"/>
+                                                                    <constraint firstItem="CuY-Jd-6T9" firstAttribute="top" secondItem="723-EG-ceq" secondAttribute="top" constant="45" id="Kbu-PA-fW3"/>
+                                                                    <constraint firstItem="v4p-p3-zSS" firstAttribute="top" secondItem="VBj-Wa-P8x" secondAttribute="bottom" constant="30" id="Ogr-Ur-GH6"/>
                                                                     <constraint firstItem="FoI-ci-m3E" firstAttribute="centerX" secondItem="723-EG-ceq" secondAttribute="centerX" id="PlZ-cz-KYe"/>
-                                                                    <constraint firstAttribute="trailing" secondItem="VBj-Wa-P8x" secondAttribute="trailing" constant="20" id="Szu-wh-d84"/>
-                                                                    <constraint firstItem="v4p-p3-zSS" firstAttribute="leading" secondItem="723-EG-ceq" secondAttribute="leading" constant="20" id="Wt2-Q1-NY5"/>
+                                                                    <constraint firstItem="v4p-p3-zSS" firstAttribute="trailing" secondItem="CuY-Jd-6T9" secondAttribute="trailing" id="c19-gQ-rfB"/>
                                                                     <constraint firstAttribute="trailing" secondItem="CuY-Jd-6T9" secondAttribute="trailing" constant="20" id="fgg-sK-cLH"/>
-                                                                    <constraint firstItem="FoI-ci-m3E" firstAttribute="top" secondItem="CuY-Jd-6T9" secondAttribute="bottom" constant="38" id="iSi-fy-0zH"/>
-                                                                    <constraint firstAttribute="bottom" secondItem="v4p-p3-zSS" secondAttribute="bottom" constant="16" id="nPh-UJ-z1X"/>
+                                                                    <constraint firstItem="FoI-ci-m3E" firstAttribute="top" secondItem="CuY-Jd-6T9" secondAttribute="bottom" constant="35" id="iSi-fy-0zH"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="v4p-p3-zSS" secondAttribute="bottom" constant="30" id="nPh-UJ-z1X"/>
                                                                     <constraint firstItem="CuY-Jd-6T9" firstAttribute="leading" secondItem="723-EG-ceq" secondAttribute="leading" constant="20" id="ujU-yE-4xB"/>
                                                                 </constraints>
                                                             </view>
@@ -108,7 +108,7 @@
                                                 </subviews>
                                             </stackView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kx6-KW-pID" customClass="LogotypesView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="509.5" width="375" height="126"/>
+                                                <rect key="frame" x="0.0" y="526.5" width="375" height="126"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="126" id="u3l-Xj-JC0"/>
                                                 </constraints>

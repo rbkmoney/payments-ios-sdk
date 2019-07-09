@@ -371,7 +371,7 @@ struct R: Rswift.Validatable {
   
   /// This `R.string` struct is generated, and contains static references to 1 localization tables.
   struct string {
-    /// This `R.string.localizable` struct is generated, and contains static references to 83 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 84 localization keys.
     struct localizable {
       /// Value: Apple Pay
       static let apple_pay_header_title = Rswift.StringResource(key: "apple_pay_header_title", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
@@ -383,6 +383,8 @@ struct R: Rswift.Validatable {
       static let bank_card_email_placeholder = Rswift.StringResource(key: "bank_card_email_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: OK
       static let alert_button_ok = Rswift.StringResource(key: "alert_button_ok", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: OK
+      static let paid_action_done = Rswift.StringResource(key: "paid_action_done", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: © 2008-2018 RBKmoney | Direct Payments Ltd.
       static let copyright = Rswift.StringResource(key: "copyright", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: БАНКОВСКАЯ КАРТА
@@ -533,7 +535,7 @@ struct R: Rswift.Validatable {
       static let error_message_invalid_invoice_cost = Rswift.StringResource(key: "error_message_invalid_invoice_cost", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Указан идентификатор несуществующего магазина.
       static let error_message_invalid_shop_id = Rswift.StringResource(key: "error_message_invalid_shop_id", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
-      /// Value: Успешная оплата
+      /// Value: Успешная оплата!
       static let paid_title = Rswift.StringResource(key: "paid_title", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Участник заблокирован или его операции приостановлены.
       static let error_message_invalid_party_status = Rswift.StringResource(key: "error_message_invalid_party_status", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
@@ -563,6 +565,11 @@ struct R: Rswift.Validatable {
       /// Value: OK
       static func alert_button_ok(_: Void = ()) -> String {
         return NSLocalizedString("alert_button_ok", bundle: R.hostingBundle, comment: "")
+      }
+      
+      /// Value: OK
+      static func paid_action_done(_: Void = ()) -> String {
+        return NSLocalizedString("paid_action_done", bundle: R.hostingBundle, comment: "")
       }
       
       /// Value: © 2008-2018 RBKmoney | Direct Payments Ltd.
@@ -940,7 +947,7 @@ struct R: Rswift.Validatable {
         return NSLocalizedString("error_message_invalid_shop_id", bundle: R.hostingBundle, comment: "")
       }
       
-      /// Value: Успешная оплата
+      /// Value: Успешная оплата!
       static func paid_title(_: Void = ()) -> String {
         return NSLocalizedString("paid_title", bundle: R.hostingBundle, comment: "")
       }
