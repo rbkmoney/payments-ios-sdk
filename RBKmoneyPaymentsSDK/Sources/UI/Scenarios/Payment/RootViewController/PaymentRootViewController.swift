@@ -18,6 +18,7 @@ final class PaymentRootViewController: UINavigationController {
 
     // MARK: - Dependencies
     lazy var systemInfoProvider: PaymentRootViewControllerSystemInfoProvider = deferred()
+    lazy var transitionConfigurator: UIViewControllerTransitioningDelegate = deferred()
 
     // MARK: - Overrides
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -28,19 +29,24 @@ final class PaymentRootViewController: UINavigationController {
         return systemInfoProvider.isPhoneDevice ? [.portrait, .portraitUpsideDown] : .all
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+    }
+
     // MARK: - Internal
     func configure() {
-        let screenSize = systemInfoProvider.deviceScreenSize
+        setupNavigationBar()
+        setupPresentation()
+    }
 
-        preferredContentSize = CGSize(
-            width: Constants.preferredContentWidth,
-            height: (min(screenSize.width, screenSize.height) * Constants.preferredContentHeightFactor).rounded()
-        )
+    // MARK: - Private
+    private func setupUI() {
+        view.clipsToBounds = true
+        view.layer.cornerRadius = systemInfoProvider.isPhoneDevice ? 0 : Constants.cornerRadius
+    }
 
-        modalTransitionStyle = .coverVertical
-        modalPresentationStyle = systemInfoProvider.isPhoneDevice ? .fullScreen : .formSheet
-        modalPresentationCapturesStatusBarAppearance = systemInfoProvider.isPhoneDevice
-
+    private func setupNavigationBar() {
         with(navigationBar) {
             $0.barStyle = .default
             $0.isTranslucent = false
@@ -61,10 +67,19 @@ final class PaymentRootViewController: UINavigationController {
             $0.backIndicatorTransitionMaskImage = backButtonImage
         }
     }
-}
 
-private enum Constants {
+    private func setupPresentation() {
+        if systemInfoProvider.isPhoneDevice {
+            modalPresentationStyle = .fullScreen
+        } else {
+            modalPresentationStyle = .custom
+            transitioningDelegate = transitionConfigurator
+            preferredContentSize = CGSize(width: Constants.preferredContentWidth, height: CGFloat.greatestFiniteMagnitude)
+        }
+    }
 
-    static let preferredContentWidth: CGFloat = 375
-    static let preferredContentHeightFactor: CGFloat = 0.8
+    private enum Constants {
+        static let preferredContentWidth: CGFloat = 420
+        static let cornerRadius: CGFloat = 13
+    }
 }

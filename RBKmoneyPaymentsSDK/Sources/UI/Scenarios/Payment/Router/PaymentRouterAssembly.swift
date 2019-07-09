@@ -25,7 +25,7 @@ enum PaymentRouterAssembly {
 
         object.rootViewController = PaymentRouterDefaultRootViewController(
             navigationController: rootViewController,
-            transitionConfigurator: PaymentRootViewControllerTransitionConfiguratorAssembly.makeTransitionConfigurator()
+            transitionConfigurator: TransitionConfiguratorAssembly.makeNavigationTransitionConfigurator()
         )
 
         object.paymentInputData = paymentInputData

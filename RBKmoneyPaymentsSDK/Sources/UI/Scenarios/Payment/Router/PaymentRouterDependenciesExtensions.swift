@@ -16,10 +16,11 @@ import UIKit
 
 final class PaymentRouterDefaultRootViewController: PaymentRouterRootViewController {
 
-    // MARK: - Initialization
-    init(navigationController: UINavigationController,
-         transitionConfigurator: PaymentRouterRootViewControllerTransitionConfigurator & UINavigationControllerDelegate) {
+    // MARK: - Types
+    typealias TransitionConfigurator = PaymentRouterRootViewControllerTransitionConfigurator & UINavigationControllerDelegate
 
+    // MARK: - Initialization
+    init(navigationController: UINavigationController, transitionConfigurator: TransitionConfigurator) {
         self.navigationController = navigationController
         self.transitionConfigurator = transitionConfigurator
 
@@ -77,5 +78,5 @@ final class PaymentRouterDefaultPaymentDelegate: PaymentDelegate {
     private weak var paymentDelegate: PaymentDelegate?
 }
 
-extension PaymentRootViewControllerTransitionConfigurator: PaymentRouterRootViewControllerTransitionConfigurator {
+extension NavigationTransitionConfigurator: PaymentRouterRootViewControllerTransitionConfigurator {
 }

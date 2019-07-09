@@ -14,7 +14,7 @@
 
 import UIKit
 
-final class PaymentRootViewControllerTransitionConfigurator: NSObject, UINavigationControllerDelegate {
+final class NavigationTransitionConfigurator: NSObject, UINavigationControllerDelegate {
 
     // MARK: - Internal
     var pushTransitionStyle: TransitionStyle = .default
