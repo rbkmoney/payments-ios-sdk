@@ -18,4 +18,5 @@ struct ApplePayRequestData {
     let paymentSystems: [PaymentSystem]
     let merchantIdentifier: String
     let countryCode: String
+    let shopName: String
 }

@@ -145,17 +145,15 @@ final class ApplePayViewModel: ModuleViewModel {
             invoice: inputData.parameters.invoice,
             paymentSystems: Array(inputData.parameters.paymentSystems),
             merchantIdentifier: merchantIdentifier,
-            countryCode: countryCode
+            countryCode: countryCode,
+            shopName: inputData.paymentInputData.shopName
         )
     }
 
-    private lazy var paymentToolWithEmail = Observable
-        .combineLatest(
-            emailRelay,
-            paymentTokenRelay,
-            inputDataObservable.compactMap { $0.paymentInputData.applePayMerchantIdentifier }
-        )
-        .flatMap { email, token, merchantIdentifier -> Observable<(PaymentToolSourceDTO, String)> in
+    private lazy var paymentToolWithEmail = paymentTokenRelay
+        .withLatestFrom(inputDataObservable.compactMap { $0.paymentInputData.applePayMerchantIdentifier }) { ($0, $1) }
+        .withLatestFrom(emailRelay) { ($0.0, $0.1, $1) }
+        .flatMap { token, merchantIdentifier, email -> Observable<(PaymentToolSourceDTO, String)> in
             guard let email = email else {
                 return .empty()
             }

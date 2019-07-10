@@ -111,6 +111,12 @@ final class ApplePayViewController: UIViewController, ModuleView {
             }
             .bind(to: scrollView.rx.contentInset)
             .disposed(by: disposeBag)
+
+        payButton.rx.tap
+            .bind(onNext: { [weak self] in
+                self?.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
     }
 
     private var setupHeader: Binder<InvoiceDTO> {
@@ -125,9 +131,8 @@ final class ApplePayViewController: UIViewController, ModuleView {
 
     private var presentPaymentUI: Binder<ApplePayRequestData> {
         return Binder(self) { this, requestData in
-            let label = this.invoiceDetailsFormatter.formattedDetails(invoice: requestData.invoice)
             let amount = NSDecimalNumber(decimal: requestData.invoice.amount.value)
-            let summaryItem = PKPaymentSummaryItem(label: label, amount: amount, type: .final)
+            let summaryItem = PKPaymentSummaryItem(label: requestData.shopName, amount: amount, type: .final)
 
             let request = with(PKPaymentRequest()) {
                 $0.paymentSummaryItems = [summaryItem]
