@@ -27,25 +27,10 @@ final class PaymentRouterDefaultRootViewController: PaymentRouterRootViewControl
         navigationController.delegate = transitionConfigurator
     }
 
-    // MARK: - PaymentRouterRootViewControllerProvider
+    // MARK: - PaymentRouterRootViewController
     func setViewControllers(_ viewControllers: [UIViewController], animated: Bool, transitionStyle: TransitionStyle) {
-        transitionConfigurator.pushTransitionStyle = transitionStyle
+        transitionConfigurator.transitionStyle = transitionStyle
         navigationController?.setViewControllers(viewControllers, animated: animated)
-    }
-
-    func pushViewController(_ viewController: UIViewController, animated: Bool, transitionStyle: TransitionStyle) {
-        transitionConfigurator.pushTransitionStyle = transitionStyle
-        navigationController?.pushViewController(viewController, animated: animated)
-    }
-
-    func popViewController(animated: Bool, transitionStyle: TransitionStyle) {
-        transitionConfigurator.popTransitionStyle = transitionStyle
-        navigationController?.popViewController(animated: animated)
-    }
-
-    func popToRootViewController(animated: Bool, transitionStyle: TransitionStyle) {
-        transitionConfigurator.popTransitionStyle = transitionStyle
-        navigationController?.popToRootViewController(animated: animated)
     }
 
     var viewControllers: [UIViewController] {
