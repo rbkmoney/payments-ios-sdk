@@ -16,14 +16,18 @@ import Foundation
 
 struct PaymentErrorMapper {
 
-    // MARK: - Internal
+    // swiftlint:disable:next cyclomatic_complexity
     func retryRoute(for error: PaymentError) -> PaymentRoute? {
         switch error.code {
         case .cannotObtainInvoice, .cannotObtainInvoicePaymentMethods:
             if let networkError = error.underlyingError as? NetworkError, case .serverError = networkError.code {
                 return nil
             }
+
             return .initial
+
+        case .cannotCreatePaymentResource, .paymentCancelled:
+            return .back
 
         case .cannotCreatePayment:
             guard let invoice = error.invoice,
@@ -49,20 +53,11 @@ struct PaymentErrorMapper {
 
             return .paymentProgress(.init(invoice: invoice, paymentMethod: paymentMethod, paymentSystems: paymentSystems, source: .payment(payment)))
 
-        default:
-            return nil
-        }
-    }
-
-    func reenterDataRoute(for error: PaymentError) -> PaymentRoute? {
-        switch error.code {
-        case .cannotCreatePaymentResource:
-            return .back
-
         case .paymentFailed:
             guard let serverError = error.underlyingError as? NetworkError, case let .serverError(value) = serverError.code else {
                 return nil
             }
+
             switch value.code {
             case .insufficientFunds?, .invalidPaymentTool?, .rejectedByIssuer?, .paymentRejected?, .preauthorizationFailed?:
                 return .back
@@ -70,7 +65,42 @@ struct PaymentErrorMapper {
                 return nil
             }
 
-        default:
+        case .invoiceExpired,
+             .unexpectedInvoiceStatus,
+             .noPaymentMethods,
+             .invoiceCancelled:
+
+            return nil
+        }
+    }
+
+    func reenterDataRoute(for error: PaymentError) -> PaymentRoute? {
+        switch error.code {
+        case .cannotCreatePaymentResource,
+             .cannotCreatePayment,
+             .cannotObtainInvoiceEvents,
+             .userInteractionFailed,
+             .paymentCancelled,
+             .paymentFailed:
+
+            guard let invoice = error.invoice, let paymentMethod = error.paymentMethod, let paymentSystems = error.paymentSystems else {
+                return nil
+            }
+
+            switch paymentMethod {
+            case .bankCard:
+                return .bankCard(.init(invoice: invoice, paymentSystems: paymentSystems))
+            case .applePay:
+                return .applePay(.init(invoice: invoice, paymentSystems: paymentSystems))
+            }
+
+        case .cannotObtainInvoice,
+             .invoiceExpired,
+             .unexpectedInvoiceStatus,
+             .cannotObtainInvoicePaymentMethods,
+             .noPaymentMethods,
+             .invoiceCancelled:
+
             return nil
         }
     }
