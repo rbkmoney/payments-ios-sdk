@@ -28,8 +28,9 @@ final class PaidInvoiceViewModel: ModuleViewModel {
 
     func setup(with input: Input) -> Disposable {
         return input.didTapDone
-            .map(to: PaymentRoute.finish)
-            .emit(to: Binder(self) {
+            .asObservable()
+            .withLatestFrom(inputDataObservable) { PaymentRoute.finish($1.parameters.paymentMethod) }
+            .bind(to: Binder(self) {
                 $0.router.trigger(route: $1)
             })
     }

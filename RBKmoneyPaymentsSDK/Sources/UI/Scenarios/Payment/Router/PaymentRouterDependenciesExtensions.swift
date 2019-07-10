@@ -55,8 +55,8 @@ final class PaymentRouterDefaultPaymentDelegate: PaymentDelegate {
         paymentDelegate?.paymentCancelled(invoiceIdentifier: invoiceIdentifier)
     }
 
-    func paymentFinished(invoiceIdentifier: String) {
-        paymentDelegate?.paymentFinished(invoiceIdentifier: invoiceIdentifier)
+    func paymentFinished(invoiceIdentifier: String, paymentMethod: PaymentMethod) {
+        paymentDelegate?.paymentFinished(invoiceIdentifier: invoiceIdentifier, paymentMethod: paymentMethod)
     }
 
     // MARK: - Private

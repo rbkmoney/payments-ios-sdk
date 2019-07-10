@@ -25,7 +25,7 @@ enum PaymentRoute: Route {
     case unpaidInvoice(UnpaidInvoiceInputData.Parameters)
     case back
     case cancel
-    case finish
+    case finish(PaymentMethod)
 }
 
 final class PaymentRouter: Router {
@@ -88,8 +88,8 @@ final class PaymentRouter: Router {
         case .cancel:
             paymentDelegate.paymentCancelled(invoiceIdentifier: paymentInputData.invoiceIdentifier)
 
-        case .finish:
-            paymentDelegate.paymentFinished(invoiceIdentifier: paymentInputData.invoiceIdentifier)
+        case let .finish(paymentMethod):
+            paymentDelegate.paymentFinished(invoiceIdentifier: paymentInputData.invoiceIdentifier, paymentMethod: paymentMethod)
         }
     }
 

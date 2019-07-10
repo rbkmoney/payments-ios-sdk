@@ -42,10 +42,10 @@ final class PaymentProgressViewModel: ModuleViewModel {
             .disposed(with: disposable)
 
         let paidRoute = moduleActionObservable.compactMap { event -> PaymentRoute? in
-            guard let action = event.element, case let .finishPayment(invoice, payment) = action else {
+            guard let action = event.element, case let .finishPayment(invoice, payment, paymentMethod) = action else {
                 return nil
             }
-            return .paidInvoice(.init(invoice: invoice, payment: payment))
+            return .paidInvoice(.init(invoice: invoice, payment: payment, paymentMethod: paymentMethod))
         }
 
         let unpaidRoute = moduleActionObservable.compactMap { event -> PaymentRoute? in
@@ -87,7 +87,7 @@ final class PaymentProgressViewModel: ModuleViewModel {
 
     // MARK: - Private
     fileprivate enum ModuleAction {
-        case finishPayment(InvoiceDTO, PaymentDTO)
+        case finishPayment(InvoiceDTO, PaymentDTO, PaymentMethod)
         case requestUserInteraction(UserInteractionDTO)
     }
 
@@ -196,7 +196,7 @@ private enum ActionMapper {
                 try $0.changes.compactMap { change -> PaymentProgressViewModel.ModuleAction? in
                     switch change {
                     case let .invoiceStatusChanged(status) where status == .paid:
-                        return .finishPayment(parameters.invoice, payment)
+                        return .finishPayment(parameters.invoice, payment, parameters.paymentMethod)
                     case let .invoiceStatusChanged(status) where status == .cancelled:
                         throw PaymentError(.invoiceCancelled, underlyingError: nil, parameters: parameters, payment: payment)
                     case let .paymentStatusChanged(data) where data.paymentIdentifier == payment.identifier && data.status == .cancelled:
