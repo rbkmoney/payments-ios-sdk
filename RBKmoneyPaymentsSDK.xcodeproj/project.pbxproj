@@ -229,6 +229,18 @@
 		C1A2792322B3B41D00EB371F /* ApplePayInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2791F22B3B41D00EB371F /* ApplePayInfo.swift */; };
 		C1A2792722B3C04E00EB371F /* ApplePayAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2792622B3C04E00EB371F /* ApplePayAvailability.swift */; };
 		C1A2792E22B7A71800EB371F /* PaymentMethodInputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2792D22B7A71800EB371F /* PaymentMethodInputData.swift */; };
+		C1AB4CC722CCED150079F1C7 /* AlertContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB4CC122CCED150079F1C7 /* AlertContent.swift */; };
+		C1AB4CC822CCED150079F1C7 /* DefaultAlertPresenterAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB4CC322CCED150079F1C7 /* DefaultAlertPresenterAssembly.swift */; };
+		C1AB4CC922CCED150079F1C7 /* DefaultAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB4CC422CCED150079F1C7 /* DefaultAlertPresenter.swift */; };
+		C1AB4CCA22CCED150079F1C7 /* AlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB4CC622CCED150079F1C7 /* AlertPresenter.swift */; };
+		C1AB4CCE22CD01290079F1C7 /* ErrorMessageFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB4CCC22CD01290079F1C7 /* ErrorMessageFactory.swift */; };
+		C1AB4CCF22CD01290079F1C7 /* ErrorMessageFactoryAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AB4CCD22CD01290079F1C7 /* ErrorMessageFactoryAssembly.swift */; };
+		C1B0479422CA91D900CB8C56 /* PaymentError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B0479322CA91D900CB8C56 /* PaymentError.swift */; };
+		C1B047A222CB5BFF00CB8C56 /* ErrorHandlerProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B0479D22CB5BFF00CB8C56 /* ErrorHandlerProvider.swift */; };
+		C1B047A722CB5C9400CB8C56 /* DefaultErrorHandlerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B047A322CB5C9400CB8C56 /* DefaultErrorHandlerAssembly.swift */; };
+		C1B047A822CB5C9400CB8C56 /* DefaultErrorHandlerDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B047A422CB5C9400CB8C56 /* DefaultErrorHandlerDependencies.swift */; };
+		C1B047A922CB5C9400CB8C56 /* DefaultErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B047A522CB5C9400CB8C56 /* DefaultErrorHandler.swift */; };
+		C1B047AA22CB5C9400CB8C56 /* DefaultErrorHandlerDependenciesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B047A622CB5C9400CB8C56 /* DefaultErrorHandlerDependenciesExtensions.swift */; };
 		C1D024F222BB94950014AA80 /* PaymentRootViewControllerTransitionConfiguratorAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D024EE22BB94950014AA80 /* PaymentRootViewControllerTransitionConfiguratorAssembly.swift */; };
 		C1D024F422BB94950014AA80 /* PaymentRootViewControllerTransitionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D024F022BB94950014AA80 /* PaymentRootViewControllerTransitionConfigurator.swift */; };
 		C1D024FA22BB964F0014AA80 /* TransitionStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D024F922BB964F0014AA80 /* TransitionStyle.swift */; };
@@ -490,6 +502,18 @@
 		C1A2791F22B3B41D00EB371F /* ApplePayInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayInfo.swift; sourceTree = "<group>"; };
 		C1A2792622B3C04E00EB371F /* ApplePayAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplePayAvailability.swift; sourceTree = "<group>"; };
 		C1A2792D22B7A71800EB371F /* PaymentMethodInputData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodInputData.swift; sourceTree = "<group>"; };
+		C1AB4CC122CCED150079F1C7 /* AlertContent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertContent.swift; sourceTree = "<group>"; };
+		C1AB4CC322CCED150079F1C7 /* DefaultAlertPresenterAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAlertPresenterAssembly.swift; sourceTree = "<group>"; };
+		C1AB4CC422CCED150079F1C7 /* DefaultAlertPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefaultAlertPresenter.swift; sourceTree = "<group>"; };
+		C1AB4CC622CCED150079F1C7 /* AlertPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertPresenter.swift; sourceTree = "<group>"; };
+		C1AB4CCC22CD01290079F1C7 /* ErrorMessageFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessageFactory.swift; sourceTree = "<group>"; };
+		C1AB4CCD22CD01290079F1C7 /* ErrorMessageFactoryAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorMessageFactoryAssembly.swift; sourceTree = "<group>"; };
+		C1B0479322CA91D900CB8C56 /* PaymentError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentError.swift; sourceTree = "<group>"; };
+		C1B0479D22CB5BFF00CB8C56 /* ErrorHandlerProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ErrorHandlerProvider.swift; sourceTree = "<group>"; };
+		C1B047A322CB5C9400CB8C56 /* DefaultErrorHandlerAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultErrorHandlerAssembly.swift; sourceTree = "<group>"; };
+		C1B047A422CB5C9400CB8C56 /* DefaultErrorHandlerDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultErrorHandlerDependencies.swift; sourceTree = "<group>"; };
+		C1B047A522CB5C9400CB8C56 /* DefaultErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultErrorHandler.swift; sourceTree = "<group>"; };
+		C1B047A622CB5C9400CB8C56 /* DefaultErrorHandlerDependenciesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultErrorHandlerDependenciesExtensions.swift; sourceTree = "<group>"; };
 		C1D024EE22BB94950014AA80 /* PaymentRootViewControllerTransitionConfiguratorAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRootViewControllerTransitionConfiguratorAssembly.swift; sourceTree = "<group>"; };
 		C1D024F022BB94950014AA80 /* PaymentRootViewControllerTransitionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRootViewControllerTransitionConfigurator.swift; sourceTree = "<group>"; };
 		C1D024F922BB964F0014AA80 /* TransitionStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionStyle.swift; sourceTree = "<group>"; };
@@ -694,9 +718,9 @@
 		C1044ED022A5C24E00A8065B /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				C1AB4CBF22CCED150079F1C7 /* AlertPresenter */,
 				C1044ED122A5C24E00A8065B /* Palette */,
 				C1044FF222AFBC8700A8065B /* Views */,
-				C1A2790922B373C800EB371F /* Formatters */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -741,6 +765,7 @@
 			children = (
 				C1044EDB22A5C2C600A8065B /* Models */,
 				C1044EDA22A5C2C600A8065B /* Protocols */,
+				C1B0479222CA91CB00CB8C56 /* Errors */,
 				C1044ED622A5C24E00A8065B /* RootViewController */,
 				C1D024ED22BB94710014AA80 /* RootViewControllerTransitionConfigurator */,
 				C1044ED922A5C24E00A8065B /* Router */,
@@ -1277,6 +1302,7 @@
 				C1978A1D22A00A3100C7F966 /* Helpers */,
 				C1978A2222A00A3700C7F966 /* Extensions */,
 				C1044F1422A7F26600A8065B /* Services */,
+				C1B0479522CB5B9C00CB8C56 /* Components */,
 				C1044ECF22A5C24E00A8065B /* UI */,
 			);
 			path = Sources;
@@ -1493,6 +1519,96 @@
 				863A5A7422B23A280044D7C0 /* CardDescription.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C1AB4CBF22CCED150079F1C7 /* AlertPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				C1AB4CC022CCED150079F1C7 /* Models */,
+				C1AB4CC522CCED150079F1C7 /* Protocols */,
+				C1AB4CC222CCED150079F1C7 /* DefaultAlertPresenter */,
+			);
+			path = AlertPresenter;
+			sourceTree = "<group>";
+		};
+		C1AB4CC022CCED150079F1C7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				C1AB4CC122CCED150079F1C7 /* AlertContent.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C1AB4CC222CCED150079F1C7 /* DefaultAlertPresenter */ = {
+			isa = PBXGroup;
+			children = (
+				C1AB4CC422CCED150079F1C7 /* DefaultAlertPresenter.swift */,
+				C1AB4CC322CCED150079F1C7 /* DefaultAlertPresenterAssembly.swift */,
+			);
+			path = DefaultAlertPresenter;
+			sourceTree = "<group>";
+		};
+		C1AB4CC522CCED150079F1C7 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C1AB4CC622CCED150079F1C7 /* AlertPresenter.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		C1AB4CCB22CD01290079F1C7 /* ErrorMessageFactory */ = {
+			isa = PBXGroup;
+			children = (
+				C1AB4CCC22CD01290079F1C7 /* ErrorMessageFactory.swift */,
+				C1AB4CCD22CD01290079F1C7 /* ErrorMessageFactoryAssembly.swift */,
+			);
+			path = ErrorMessageFactory;
+			sourceTree = "<group>";
+		};
+		C1B0479222CA91CB00CB8C56 /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				C1B0479322CA91D900CB8C56 /* PaymentError.swift */,
+			);
+			path = Errors;
+			sourceTree = "<group>";
+		};
+		C1B0479522CB5B9C00CB8C56 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				C1A2790922B373C800EB371F /* Formatters */,
+				C1AB4CCB22CD01290079F1C7 /* ErrorMessageFactory */,
+				C1B0479622CB5BFF00CB8C56 /* ErrorHandlerProvider */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		C1B0479622CB5BFF00CB8C56 /* ErrorHandlerProvider */ = {
+			isa = PBXGroup;
+			children = (
+				C1B0479C22CB5BFF00CB8C56 /* Protocols */,
+				C1B0479722CB5BFF00CB8C56 /* DefaultErrorHandler */,
+			);
+			path = ErrorHandlerProvider;
+			sourceTree = "<group>";
+		};
+		C1B0479722CB5BFF00CB8C56 /* DefaultErrorHandler */ = {
+			isa = PBXGroup;
+			children = (
+				C1B047A522CB5C9400CB8C56 /* DefaultErrorHandler.swift */,
+				C1B047A322CB5C9400CB8C56 /* DefaultErrorHandlerAssembly.swift */,
+				C1B047A422CB5C9400CB8C56 /* DefaultErrorHandlerDependencies.swift */,
+				C1B047A622CB5C9400CB8C56 /* DefaultErrorHandlerDependenciesExtensions.swift */,
+			);
+			path = DefaultErrorHandler;
+			sourceTree = "<group>";
+		};
+		C1B0479C22CB5BFF00CB8C56 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				C1B0479D22CB5BFF00CB8C56 /* ErrorHandlerProvider.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		C1D024ED22BB94710014AA80 /* RootViewControllerTransitionConfigurator */ = {
@@ -1943,9 +2059,11 @@
 				C1044EE722A5C55D00A8065B /* FontsPalette.swift in Sources */,
 				C1F4D17F22B9D6FB005CFA6B /* PaymentProgressViewModel.swift in Sources */,
 				86469D6722B2E6690096882E /* BankCardCardNumberFormatterAssembly.swift in Sources */,
+				C1AB4CCA22CCED150079F1C7 /* AlertPresenter.swift in Sources */,
 				C1044FB022AAB80F00A8065B /* PaymentResourceNetworkResponse.swift in Sources */,
 				C143798A22C2636A00E59013 /* UnpaidInvoiceDependenciesExtensions.swift in Sources */,
 				C1A2792122B3B41D00EB371F /* ApplePayInfoAssembly.swift in Sources */,
+				C1B047A722CB5C9400CB8C56 /* DefaultErrorHandlerAssembly.swift in Sources */,
 				C1044F8422A9330200A8065B /* RemoteAPI.swift in Sources */,
 				C1044F0A22A5EB9C00A8065B /* PaymentMethodViewController.swift in Sources */,
 				C1044F1D22A7F32100A8065B /* SystemInfoAssembly.swift in Sources */,
@@ -1957,6 +2075,7 @@
 				C1044F9022A9C38300A8065B /* InvoiceDTO.swift in Sources */,
 				C104500722B2931300A8065B /* PaymentSystem.swift in Sources */,
 				C1044FAE22AAB28400A8065B /* CreatePaymentResourceNetworkRequest.swift in Sources */,
+				C1B0479422CA91D900CB8C56 /* PaymentError.swift in Sources */,
 				C1044F6822A8770B00A8065B /* NetworkSessionHTTPHeadersDependencies.swift in Sources */,
 				C143795E22C25CB200E59013 /* PaidInvoiceDependenciesExtensions.swift in Sources */,
 				C1044FDB22ADF4E900A8065B /* PaymentStatusDTO.swift in Sources */,
@@ -1965,16 +2084,19 @@
 				C1A2792E22B7A71800EB371F /* PaymentMethodInputData.swift in Sources */,
 				C1A2791022B373F400EB371F /* PriceFormatter.swift in Sources */,
 				C1044F4722A8549900A8065B /* ErrorNetworkResponse.swift in Sources */,
+				C1AB4CC722CCED150079F1C7 /* AlertContent.swift in Sources */,
 				C143796522C262A100E59013 /* ApplePayInputData.swift in Sources */,
 				C1044EE522A5C54A00A8065B /* ColorsPalette.swift in Sources */,
 				C1044FBC22AC57B100A8065B /* BankCardPaymentSystemDTO.swift in Sources */,
 				C1044F8222A9330200A8065B /* RemoteAPIAssembly.swift in Sources */,
 				866D93C122C794C700540AF6 /* ApplePayRequestData.swift in Sources */,
 				C1044FF622AFBF2A00A8065B /* GradientBackgroundView.swift in Sources */,
+				C1B047A922CB5C9400CB8C56 /* DefaultErrorHandler.swift in Sources */,
 				C1044F2322A7F8B100A8065B /* PaymentRootViewControllerDependencies.swift in Sources */,
 				C1978A1922A0073300C7F966 /* ModuleViewModel.swift in Sources */,
 				C1044F4022A8539C00A8065B /* NetworkRequestPerformer.swift in Sources */,
 				C1F4D18022B9D6FB005CFA6B /* PaymentProgressDependencies.swift in Sources */,
+				C1AB4CC822CCED150079F1C7 /* DefaultAlertPresenterAssembly.swift in Sources */,
 				C1044FF122AFBB2E00A8065B /* UIScrollView+Rx.swift in Sources */,
 				C1044EE022A5C50500A8065B /* PaletteAssembly.swift in Sources */,
 				C1978A3522A00A3700C7F966 /* ObservableType+AdditionalOperators.swift in Sources */,
@@ -1996,6 +2118,7 @@
 				C1044FF422AFBC8700A8065B /* GradientView.swift in Sources */,
 				C1044F6722A8770B00A8065B /* NetworkSessionHTTPHeadersAssembly.swift in Sources */,
 				C1044EEE22A5D33E00A8065B /* PaymentRouter.swift in Sources */,
+				C1AB4CCE22CD01290079F1C7 /* ErrorMessageFactory.swift in Sources */,
 				C1A2790222B2B17A00EB371F /* PaymentMethodCell.swift in Sources */,
 				C143794D22C2311E00E59013 /* ThreeDSURLRequestFactoryAssembly.swift in Sources */,
 				C1978A3322A00A3700C7F966 /* SharedSequence+AdditionalOperators.swift in Sources */,
@@ -2031,6 +2154,7 @@
 				C143794F22C2311E00E59013 /* ThreeDSURLRequestFactory.swift in Sources */,
 				C1044F7A22A8B06300A8065B /* NetworkClientDependencies.swift in Sources */,
 				C1044F8322A9330200A8065B /* RemoteAPIDependencies.swift in Sources */,
+				C1AB4CC922CCED150079F1C7 /* DefaultAlertPresenter.swift in Sources */,
 				C1044FC722AC66B300A8065B /* FingerprintDependencies.swift in Sources */,
 				C1044FBA22AC530000A8065B /* PaymentToolDetailsDTO.swift in Sources */,
 				C1044FDF22AE04C600A8065B /* InvoiceEventDTO.swift in Sources */,
@@ -2053,6 +2177,7 @@
 				8662425322B7BA8D006AE2B1 /* BankCardInputData.swift in Sources */,
 				C143797A22C2633300E59013 /* ApplePayDependencies.swift in Sources */,
 				C143795D22C25CB200E59013 /* PaidInvoiceViewController.swift in Sources */,
+				C1B047A222CB5BFF00CB8C56 /* ErrorHandlerProvider.swift in Sources */,
 				C143798522C2636A00E59013 /* UnpaidInvoiceAssembly.swift in Sources */,
 				C1044EF722A5D48E00A8065B /* PaymentRouterDependenciesExtensions.swift in Sources */,
 				C1978A3722A00A3700C7F966 /* PrimitiveSequence+AdditionalOperators.swift in Sources */,
@@ -2084,6 +2209,7 @@
 				C1A2792722B3C04E00EB371F /* ApplePayAvailability.swift in Sources */,
 				C1044FA422A9D7F500A8065B /* InvoicePaymentMethodsNetworkResponse.swift in Sources */,
 				C1044FC022AC5BDC00A8065B /* BankCardTokenProviderDTO.swift in Sources */,
+				C1AB4CCF22CD01290079F1C7 /* ErrorMessageFactoryAssembly.swift in Sources */,
 				C1044FFA22AFC85800A8065B /* LogotypesView.swift in Sources */,
 				C1044FCD22ADE1A600A8065B /* PaymentNetworkResponse.swift in Sources */,
 				C143797D22C2633300E59013 /* ApplePayDependenciesExtensions.swift in Sources */,
@@ -2094,6 +2220,7 @@
 				C104500B22B2976200A8065B /* PaymentMethodsTableHeaderView.swift in Sources */,
 				C1044FDD22ADFBC700A8065B /* ObtainInvoiceEventsNetworkRequest.swift in Sources */,
 				C1044FE322AE087600A8065B /* InvoiceChangeDTO.swift in Sources */,
+				C1B047AA22CB5C9400CB8C56 /* DefaultErrorHandlerDependenciesExtensions.swift in Sources */,
 				C1F4D18222B9D6FB005CFA6B /* PaymentProgressViewController.swift in Sources */,
 				C1044FB422AAB99100A8065B /* PaymentResourceDTO.swift in Sources */,
 				C143798922C2636A00E59013 /* UnpaidInvoiceViewController.swift in Sources */,
@@ -2101,6 +2228,7 @@
 				C1044FC922AC66B300A8065B /* FingerprintDependenciesExtensions.swift in Sources */,
 				C1978A3422A00A3700C7F966 /* ObservableType+Errors.swift in Sources */,
 				C1044F3722A8163000A8065B /* NetworkResponse.swift in Sources */,
+				C1B047A822CB5C9400CB8C56 /* DefaultErrorHandlerDependencies.swift in Sources */,
 				C1D024FC22BBA1540014AA80 /* PushFadeAnimator.swift in Sources */,
 				C143797822C2633300E59013 /* ApplePayAssembly.swift in Sources */,
 				C1044FCF22ADE36300A8065B /* PaymentParametersDTO.swift in Sources */,

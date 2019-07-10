@@ -14,9 +14,7 @@
 
 import Foundation
 
-public protocol PaymentDelegate: class {
+protocol DefaultErrorHandlerErrorMessageFactory {
 
-    func paymentCancelled(invoiceIdentifier: String)
-
-    func paymentFinished(invoiceIdentifier: String)
+    func errorMessage(for error: Error) -> String
 }

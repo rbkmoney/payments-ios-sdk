@@ -24,6 +24,7 @@ final class ApplePayViewModel: ModuleViewModel {
     lazy var remoteAPI: ApplePayRemoteAPI = deferred()
     lazy var emailValidator: Validator = deferred()
     lazy var locale: Locale = deferred()
+    lazy var errorHandlerProvider: ErrorHandlerProvider = deferred()
 
     // MARK: - ModuleViewModel
     struct Input {
@@ -55,11 +56,21 @@ final class ApplePayViewModel: ModuleViewModel {
 
         let continueRoute = paymentToolWithEmail
             .withLatestFrom(inputDataObservable) { ($0, $1) }
-            .flatMap { [createPaymentResource] tuple -> Observable<PaymentRoute> in
+            .flatMapLatest { [remoteAPI, activityTracker, errorHandlerProvider] tuple -> Observable<PaymentRoute> in
                 let ((paymentTool, email), data) = tuple
 
-                return createPaymentResource(paymentTool, data)
-                    .map { PaymentRoute.paymentProgress(.init(invoice: data.parameters.invoice, paymentResource: $0, payerEmail: email)) }
+                let createPaymentResource = remoteAPI.createPaymentResource(
+                    paymentTool: paymentTool,
+                    invoiceAccessToken: data.paymentInputData.invoiceAccessToken
+                )
+
+                return createPaymentResource
+                    .map { .paymentProgress(.init(invoice: data.parameters.invoice, source: .resource($0, payerEmail: email))) }
+                    .retry(using: errorHandlerProvider)
+                    .catchError {
+                        .just(.unpaidInvoice(.init(.cannotCreatePaymentResource, underlyingError: $0, invoice: data.parameters.invoice)))
+                    }
+                    .trackActivity(activityTracker)
             }
 
         let cancelRoute = input.didTapCancel
@@ -159,16 +170,6 @@ final class ApplePayViewModel: ModuleViewModel {
             )
             return .just((.tokenizedCardData(.applePay(applePay)), email))
         }
-
-    private lazy var createPaymentResource = { [remoteAPI, activityTracker]
-                                               (paymentTool: PaymentToolSourceDTO, data: ApplePayInputData) -> Observable<PaymentResourceDTO> in
-
-        let resource = remoteAPI.createPaymentResource(
-            paymentTool: paymentTool,
-            invoiceAccessToken: data.paymentInputData.invoiceAccessToken
-        )
-        return resource.trackActivity(activityTracker)
-    }
 
     private lazy var inputDataObservable = Observable
         .deferred { [weak self] in .just(self?.inputData) }

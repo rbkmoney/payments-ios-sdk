@@ -59,3 +59,31 @@ extension ObservableType {
         }
     }
 }
+
+extension ObservableType {
+
+    func retry(using errorHandlerProvider: ErrorHandlerProvider) -> Observable<Element> {
+        return retryWhen(errorHandlerProvider.errorHandler)
+    }
+}
+
+extension PrimitiveSequence where Trait == CompletableTrait, Element == Never {
+
+    func retry(using errorHandlerProvider: ErrorHandlerProvider) -> Completable {
+        return retryWhen(errorHandlerProvider.errorHandler)
+    }
+}
+
+extension PrimitiveSequence where Trait == MaybeTrait {
+
+    func retry(using errorHandlerProvider: ErrorHandlerProvider) -> Maybe<Element> {
+        return retryWhen(errorHandlerProvider.errorHandler)
+    }
+}
+
+extension PrimitiveSequence where Trait == SingleTrait {
+
+    func retry(using errorHandlerProvider: ErrorHandlerProvider) -> Single<Element> {
+        return retryWhen(errorHandlerProvider.errorHandler)
+    }
+}

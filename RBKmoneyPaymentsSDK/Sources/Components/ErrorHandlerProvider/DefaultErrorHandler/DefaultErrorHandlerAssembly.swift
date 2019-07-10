@@ -12,11 +12,17 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import Foundation
+import UIKit
 
-public protocol PaymentDelegate: class {
+enum DefaultErrorHandlerAssembly {
 
-    func paymentCancelled(invoiceIdentifier: String)
+    // MARK: - Internal
+    static func makeErrorHandler(parentViewController: UIViewController) -> DefaultErrorHandler {
+        let object = DefaultErrorHandler()
 
-    func paymentFinished(invoiceIdentifier: String)
+        object.errorMessageFactory = ErrorMessageFactoryAssembly.makeFactory()
+        object.alertPresenter = DefaultAlertPresenterAssembly.makeAlertPresenter(parentViewController: parentViewController)
+
+        return object
+    }
 }

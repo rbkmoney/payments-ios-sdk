@@ -24,3 +24,75 @@
 // Экран "Выбор платежного метода"
 "payment_method_header_title" = "Выберите способ оплаты";
 "payment_method_bank_card" = "БАНКОВСКАЯ КАРТА";
+
+// Ошибки
+"alert_title_error" = "Ошибка";
+
+"alert_button_ok" = "OK";
+"alert_button_nope" = "Нет";
+"alert_button_yes" = "Да";
+"alert_button_cancel" = "Отменить";
+"alert_button_retry" = "Повторить";
+
+// URLError
+"error_message_server_insecure_connection" = "Не удалось установить безопасное соединение с сервером.";
+"error_message_server_unavailable" = "Сервер недоступен.";
+"error_message_no_internet" = "Отсутствует соединение с интернетом.";
+"error_message_request_failed" = "Не удалось выполнить запрос.";
+
+// NetworkError
+"error_message_cannot_build_request" = "Не удалось сформировать запрос к серверу.";
+"error_message_response_mapping_error" = "Получен некорректный ответ сервера.";
+"error_message_unknown_error" = "Произошла неизвестная ошибка.";
+"error_message_unacceptable_status_code" = "Получен ответ от сервера с HTTP кодом %d.";
+
+// PaymentError
+"error_message_cannot_obtain_invoice" = "Не удалось получить инвойс.";
+"error_message_invoice_expired" = "Срок действия инвойса закончился.";
+"error_message_unexpected_invoice_status" = "Недопустимый статус инвойса.";
+"error_message_cannot_obtain_invoice_payment_methods" = "Не удалось получить методы оплаты.";
+"error_message_no_payment_methods" = "Методы оплаты отсутствуют.";
+"error_message_cannot_create_payment_resource" = "Не удалось создать платёжный ресурс.";
+"error_message_cannot_create_payment" = "Не удалось создать платеж.";
+"error_message_cannot_obtain_invoice_events" = "Не удалось получить события инвойса.";
+"error_message_user_interaction_failed" = "Произошла ошибка при взаимодействии с пользователем.";
+"error_message_invoice_cancelled" = "Инвойс отменен.";
+"error_message_payment_cancelled" = "Платёж отменен.";
+"error_message_payment_failed" = "Не удалось выполнить платёж.";
+
+// ServerError - Ошибки платежа
+"error_message_invalid_payment_tool" = "Неверный платёжный инструмент.";
+"error_message_account_limits_exceeded" = "Превышены лимиты.";
+"error_message_insufficient_funds" = "Недостаточно средств на счёте.";
+"error_message_preauthorization_failed" = "Предварительная авторизация отклонена.";
+"error_message_rejected_by_issuer" = "Платёж отклонён эмитентом.";
+"error_message_payment_rejected" = "Платёж отклонён.";
+
+// ServerError - Ошибки бизнес-логики
+"error_message_operation_not_permitted" = "Недоступная в рамках действующего договора операция.";
+"error_message_invalid_party_status" = "Участник заблокирован или его операции приостановлены.";
+"error_message_invalid_shop_status" = "Магазин заблокирован или его операции приостановлены.";
+"error_message_invalid_contract_status" = "Договор более не имеет силы по причине истечения срока действия или расторжения.";
+"error_message_invalid_shop_id" = "Указан идентификатор несуществующего магазина.";
+"error_message_invalid_invoice_cost" = "Стоимость инвойса не указана или неверна.";
+"error_message_invalid_invoice_cart" = "Некорректная корзина в инвойсе.";
+"error_message_invalid_invoice_status" = "Неверный статус инвойса.";
+"error_message_invoice_payment_pending" = "Последний запущенный платёж по указанному инвойсу ещё не достиг финального статуса.";
+"error_message_invalid_payment_status" = "Неверный статус платежа.";
+"error_message_invalid_payment_resource" = "Неподдерживаемый системой или неподключенный в рамках действующего договора платёжный инструмент.";
+"error_message_invalid_payment_tool_token" = "Неверное содержимое токена платёжного инструмента.";
+"error_message_invalid_payment_session" = "Невернoе содержимое платёжной сессии.";
+"error_message_limit_exceeded" = "Превышен разумный лимит выборки.";
+"error_message_invalid_deadline" = "Неверный формат времени.";
+"error_message_invalid_request" = "Неверные данные запроса.";
+"error_message_invalid_recurrent_parent" = "Невернo указан родительский рекуррентный платёж.";
+"error_message_insufficent_account_balance" = "Недостаточный объём денежных средств на счёте магазина.";
+"error_message_invoice_payment_amount_exceeded" = "Попытка возврата сверх суммы платежа.";
+"error_message_inconsistent_refund_currency" = "Попытка возврата средств в валюте, отличной от валюты платежа.";
+"error_message_changeset_conflict" = "Попытка внести изменения участника, конфликтующие с изменениями в других заявках, ожидающих рассмотрения.";
+"error_message_invalid_changeset" = "Неверные изменения участника, например, попытка создать магазин в валюте, недоступной в рамках договора.";
+"error_message_invalid_claim_status" = "Неверный статус заявки.";
+"error_message_invalid_claim_revision" = "Неверная ревизия заявки.";
+
+// ServerError - Unknown
+"error_message_unknown_server_error" = "Сервер вернул ошибку с неизвестным кодом %@.";

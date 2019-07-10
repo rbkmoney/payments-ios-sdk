@@ -14,9 +14,13 @@
 
 import Foundation
 
-public protocol PaymentDelegate: class {
+enum ErrorMessageFactoryAssembly {
 
-    func paymentCancelled(invoiceIdentifier: String)
+    // MARK: - Internal
+    static func makeFactory() -> ErrorMessageFactory {
+        return factoryInstance
+    }
 
-    func paymentFinished(invoiceIdentifier: String)
+    // MARK: - Private
+    private static let factoryInstance = ErrorMessageFactory()
 }
