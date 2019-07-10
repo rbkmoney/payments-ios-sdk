@@ -65,10 +65,10 @@ final class ApplePayViewModel: ModuleViewModel {
                 )
 
                 return createPaymentResource
-                    .map { .paymentProgress(.init(invoice: data.parameters.invoice, source: .resource($0, payerEmail: email))) }
+                    .map { .paymentProgress(.init(parameters: data.parameters, source: .resource($0, payerEmail: email))) }
                     .retry(using: errorHandlerProvider)
                     .catchError {
-                        .just(.unpaidInvoice(.init(.cannotCreatePaymentResource, underlyingError: $0, invoice: data.parameters.invoice)))
+                        .just(.unpaidInvoice(.init(.cannotCreatePaymentResource, underlyingError: $0, parameters: data.parameters)))
                     }
                     .trackActivity(activityTracker)
             }
@@ -196,5 +196,25 @@ private extension PKPaymentMethodType {
             assertionFailure("Unsupported payment method type")
             return "unknown"
         }
+    }
+}
+
+private extension PaymentProgressInputData.Parameters {
+
+    init(parameters: ApplePayInputData.Parameters, source: Source) {
+        self.init(invoice: parameters.invoice, paymentMethod: .applePay, paymentSystems: parameters.paymentSystems, source: source)
+    }
+}
+
+private extension PaymentError {
+
+    init(_ code: Code, underlyingError: Error?, parameters: ApplePayInputData.Parameters) {
+        self.init(
+            code,
+            underlyingError: underlyingError,
+            invoice: parameters.invoice,
+            paymentMethod: .applePay,
+            paymentSystems: parameters.paymentSystems
+        )
     }
 }

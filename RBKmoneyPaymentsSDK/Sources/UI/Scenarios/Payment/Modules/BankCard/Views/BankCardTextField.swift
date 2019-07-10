@@ -51,10 +51,12 @@ final class BankCardTextField: UITextField {
 
     // MARK: - Overrides
     override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        let pasteSelector = #selector(UIResponderStandardEditActions.paste(_:))
+        let cutSelector = #selector(UIResponderStandardEditActions.cut(_:))
+        let deleteSelector = #selector(UIResponderStandardEditActions.delete(_:))
+
         switch action {
-        case #selector(UIResponderStandardEditActions.paste(_:)) where !isPasteEnabled,
-             #selector(UIResponderStandardEditActions.cut(_:)) where !isCutEnabled,
-             #selector(UIResponderStandardEditActions.delete(_:)) where !isDeleteEnabled:
+        case pasteSelector where !isPasteEnabled, cutSelector where !isCutEnabled, deleteSelector where !isDeleteEnabled:
             return false
         default:
             return super.canPerformAction(action, withSender: sender)

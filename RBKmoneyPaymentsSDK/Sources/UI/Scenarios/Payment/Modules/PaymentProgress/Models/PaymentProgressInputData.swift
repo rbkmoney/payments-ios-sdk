@@ -23,6 +23,8 @@ struct PaymentProgressInputData {
         }
 
         let invoice: InvoiceDTO
+        let paymentMethod: PaymentMethod
+        let paymentSystems: Set<PaymentSystem>
         let source: Source
     }
 

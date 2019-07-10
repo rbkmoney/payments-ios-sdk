@@ -121,10 +121,9 @@ final class PaymentProgressViewModel: ModuleViewModel {
                 .catchError {
                     switch data.parameters.source {
                     case let .resource(resource, email):
-                        let invoice = data.parameters.invoice
-                        throw PaymentError(.cannotCreatePayment, underlyingError: $0, invoice: invoice, paymentResource: resource, payerEmail: email)
+                        throw PaymentError(.cannotCreatePayment, underlyingError: $0, parameters: data.parameters, email: email, resource: resource)
                     case let .payment(payment):
-                        throw PaymentError(.cannotCreatePayment, underlyingError: $0, invoice: data.parameters.invoice, payment: payment)
+                        throw PaymentError(.cannotCreatePayment, underlyingError: $0, parameters: data.parameters, payment: payment)
                     }
                 }
                 .trackActivity(activityTracker)
@@ -139,7 +138,7 @@ final class PaymentProgressViewModel: ModuleViewModel {
                         }
                         .retry(using: errorHandlerProvider)
                         .catchError {
-                            throw PaymentError(.cannotObtainInvoiceEvents, underlyingError: $0, invoice: data.parameters.invoice, payment: payment)
+                            throw PaymentError(.cannotObtainInvoiceEvents, underlyingError: $0, parameters: data.parameters, payment: payment)
                         }
 
                     let firstPhaseAction = events
@@ -147,16 +146,16 @@ final class PaymentProgressViewModel: ModuleViewModel {
                             if let userInteraction = ActionMapper.userInteractionAction(payment: payment, events: events) {
                                 return userInteraction
                             } else {
-                                return try ActionMapper.paymentAction(inputData: data, payment: payment, events: events)
+                                return try ActionMapper.paymentAction(parameters: data.parameters, payment: payment, events: events)
                             }
                         }
                         .take(1)
                         .trackActivity(activityTracker)
 
-                    let secondPhaseAction = waitUserInteractionResult(data.parameters.invoice, payment)
+                    let secondPhaseAction = waitUserInteractionResult(data.parameters, payment)
 
                     let thirdPhaseAction = events
-                        .compactMap { try ActionMapper.paymentAction(inputData: data, payment: payment, events: $0) }
+                        .compactMap { try ActionMapper.paymentAction(parameters: data.parameters, payment: payment, events: $0) }
                         .take(1)
                         .trackActivity(activityTracker)
 
@@ -166,13 +165,13 @@ final class PaymentProgressViewModel: ModuleViewModel {
         }
         .share()
 
-    private typealias WaitUserInteractionResult = (InvoiceDTO, PaymentDTO) -> Observable<ModuleAction>
+    private typealias WaitUserInteractionResult = (PaymentProgressInputData.Parameters, PaymentDTO) -> Observable<ModuleAction>
 
     private lazy var waitUserInteractionResult: WaitUserInteractionResult = { [userInteractionFinishedRelay, userInteractionFailedRelay] in
-        let (invoice, payment) = ($0, $1)
+        let (parameters, payment) = ($0, $1)
 
         return userInteractionFailedRelay
-            .map { throw PaymentError(.userInteractionFailed, underlyingError: $0, invoice: invoice, payment: payment) }
+            .map { throw PaymentError(.userInteractionFailed, underlyingError: $0, parameters: parameters, payment: payment) }
             .takeUntil(userInteractionFinishedRelay.take(1))
     }
 
@@ -187,7 +186,7 @@ final class PaymentProgressViewModel: ModuleViewModel {
 
 private enum ActionMapper {
 
-    static func paymentAction(inputData: PaymentProgressInputData,
+    static func paymentAction(parameters: PaymentProgressInputData.Parameters,
                               payment: PaymentDTO,
                               events: [InvoiceEventDTO]) throws -> PaymentProgressViewModel.ModuleAction? {
 
@@ -197,15 +196,15 @@ private enum ActionMapper {
                 try $0.changes.compactMap { change -> PaymentProgressViewModel.ModuleAction? in
                     switch change {
                     case let .invoiceStatusChanged(status) where status == .paid:
-                        return .finishPayment(inputData.parameters.invoice, payment)
+                        return .finishPayment(parameters.invoice, payment)
                     case let .invoiceStatusChanged(status) where status == .cancelled:
-                        throw PaymentError(.invoiceCancelled, invoice: inputData.parameters.invoice, payment: payment)
+                        throw PaymentError(.invoiceCancelled, underlyingError: nil, parameters: parameters, payment: payment)
                     case let .paymentStatusChanged(data) where data.paymentIdentifier == payment.identifier && data.status == .cancelled:
                         let error = data.error.map { NetworkError(.serverError($0)) }
-                        throw PaymentError(.paymentCancelled, underlyingError: error, invoice: inputData.parameters.invoice, payment: payment)
+                        throw PaymentError(.paymentCancelled, underlyingError: error, parameters: parameters, payment: payment)
                     case let .paymentStatusChanged(data) where data.paymentIdentifier == payment.identifier && data.status == .failed:
                         let error = data.error.map { NetworkError(.serverError($0)) }
-                        throw PaymentError(.paymentFailed, underlyingError: error, invoice: inputData.parameters.invoice, payment: payment)
+                        throw PaymentError(.paymentFailed, underlyingError: error, parameters: parameters, payment: payment)
                     default:
                         return nil
                     }
@@ -226,5 +225,31 @@ private enum ActionMapper {
                 }
             }
             .first
+    }
+}
+
+private extension PaymentError {
+
+    init(_ code: Code, underlyingError: Error?, parameters: PaymentProgressInputData.Parameters, email: String, resource: PaymentResourceDTO) {
+        self.init(
+            code,
+            underlyingError: underlyingError,
+            invoice: parameters.invoice,
+            paymentMethod: parameters.paymentMethod,
+            paymentSystems: parameters.paymentSystems,
+            paymentResource: resource,
+            payerEmail: email
+        )
+    }
+
+    init(_ code: Code, underlyingError: Error?, parameters: PaymentProgressInputData.Parameters, payment: PaymentDTO) {
+        self.init(
+            code,
+            underlyingError: underlyingError,
+            invoice: parameters.invoice,
+            paymentMethod: parameters.paymentMethod,
+            paymentSystems: parameters.paymentSystems,
+            payment: payment
+        )
     }
 }

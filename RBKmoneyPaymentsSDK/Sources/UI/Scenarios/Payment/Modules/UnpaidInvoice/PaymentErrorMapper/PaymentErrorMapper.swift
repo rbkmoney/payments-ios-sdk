@@ -24,16 +24,31 @@ struct PaymentErrorMapper {
                 return nil
             }
             return .initial
+
         case .cannotCreatePayment:
-            guard let invoice = error.invoice, let paymentResource = error.paymentResource, let payerEmail = error.payerEmail else {
+            guard let invoice = error.invoice,
+                  let paymentResource = error.paymentResource,
+                  let payerEmail = error.payerEmail,
+                  let paymentMethod = error.paymentMethod,
+                  let paymentSystems = error.paymentSystems
+            else {
                 return nil
             }
-            return .paymentProgress(.init(invoice: invoice, source: .resource(paymentResource, payerEmail: payerEmail)))
+
+            let source = PaymentProgressInputData.Parameters.Source.resource(paymentResource, payerEmail: payerEmail)
+            return .paymentProgress(.init(invoice: invoice, paymentMethod: paymentMethod, paymentSystems: paymentSystems, source: source))
+
         case .cannotObtainInvoiceEvents, .userInteractionFailed:
-            guard let invoice = error.invoice, let payment = error.payment else {
+            guard let invoice = error.invoice,
+                  let payment = error.payment,
+                  let paymentMethod = error.paymentMethod,
+                  let paymentSystems = error.paymentSystems
+            else {
                 return nil
             }
-            return .paymentProgress(.init(invoice: invoice, source: .payment(payment)))
+
+            return .paymentProgress(.init(invoice: invoice, paymentMethod: paymentMethod, paymentSystems: paymentSystems, source: .payment(payment)))
+
         default:
             return nil
         }
@@ -43,6 +58,7 @@ struct PaymentErrorMapper {
         switch error.code {
         case .cannotCreatePaymentResource:
             return .back
+
         case .paymentFailed:
             guard let serverError = error.underlyingError as? NetworkError, case let .serverError(value) = serverError.code else {
                 return nil
@@ -53,6 +69,7 @@ struct PaymentErrorMapper {
             default:
                 return nil
             }
+
         default:
             return nil
         }
