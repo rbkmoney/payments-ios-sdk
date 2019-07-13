@@ -19,6 +19,7 @@ protocol PaymentProgressRemoteAPI {
 
     func createPayment(paymentParameters: PaymentParametersDTO, invoiceIdentifier: String, invoiceAccessToken: String) -> Single<PaymentDTO>
     func obtainInvoiceEvents(invoiceIdentifier: String, invoiceAccessToken: String) -> Single<[InvoiceEventDTO]>
+    func obtainPayment(paymentExternalIdentifier: String, invoiceAccessToken: String) -> Single<PaymentDTO>
 }
 
 protocol PaymentProgress3DSURLRequestFactory {
@@ -26,4 +27,9 @@ protocol PaymentProgress3DSURLRequestFactory {
     func urlRequest(for browserRequest: BrowserRequestDTO) -> URLRequest?
 
     var terminationURLString: String { get }
+}
+
+protocol PaymentProgressPaymentExternalIdentifierGenerator {
+
+    func generateIdentifier() -> String
 }

@@ -47,6 +47,7 @@ struct PaymentError: Error {
     let paymentSystems: Set<PaymentSystem>?
     let paymentResource: PaymentResourceDTO?
     let payerEmail: String?
+    let paymentExternalIdentifier: String?
     let payment: PaymentDTO?
 
     init(_ code: Code,
@@ -56,6 +57,7 @@ struct PaymentError: Error {
          paymentSystems: Set<PaymentSystem>? = nil,
          paymentResource: PaymentResourceDTO? = nil,
          payerEmail: String? = nil,
+         paymentExternalIdentifier: String? = nil,
          payment: PaymentDTO? = nil) {
 
         self.code = code
@@ -65,6 +67,7 @@ struct PaymentError: Error {
         self.paymentSystems = paymentSystems
         self.paymentResource = paymentResource
         self.payerEmail = payerEmail
+        self.paymentExternalIdentifier = paymentExternalIdentifier
         self.payment = payment
     }
 }

@@ -18,7 +18,7 @@ struct PaymentProgressInputData {
 
     struct Parameters {
         enum Source {
-            case resource(PaymentResourceDTO, payerEmail: String)
+            case resource(PaymentResourceDTO, payerEmail: String, paymentExternalIdentifier: String?)
             case payment(PaymentDTO)
         }
 

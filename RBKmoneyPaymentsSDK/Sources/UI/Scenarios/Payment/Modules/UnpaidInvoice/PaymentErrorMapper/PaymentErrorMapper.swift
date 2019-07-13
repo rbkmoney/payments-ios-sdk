@@ -39,7 +39,9 @@ struct PaymentErrorMapper {
                 return nil
             }
 
-            let source = PaymentProgressInputData.Parameters.Source.resource(paymentResource, payerEmail: payerEmail)
+            typealias Source = PaymentProgressInputData.Parameters.Source
+            let source = Source.resource(paymentResource, payerEmail: payerEmail, paymentExternalIdentifier: error.paymentExternalIdentifier)
+
             return .paymentProgress(.init(invoice: invoice, paymentMethod: paymentMethod, paymentSystems: paymentSystems, source: source))
 
         case .cannotObtainInvoiceEvents, .userInteractionFailed:
@@ -54,11 +56,11 @@ struct PaymentErrorMapper {
             return .paymentProgress(.init(invoice: invoice, paymentMethod: paymentMethod, paymentSystems: paymentSystems, source: .payment(payment)))
 
         case .paymentFailed:
-            guard let serverError = error.underlyingError as? NetworkError, case let .serverError(value) = serverError.code else {
+            guard let networkError = error.underlyingError as? NetworkError, case let .serverError(serverError) = networkError.code else {
                 return nil
             }
 
-            switch value.code {
+            switch serverError.code {
             case .insufficientFunds?, .invalidPaymentTool?, .rejectedByIssuer?, .paymentRejected?, .preauthorizationFailed?:
                 return .back
             default:

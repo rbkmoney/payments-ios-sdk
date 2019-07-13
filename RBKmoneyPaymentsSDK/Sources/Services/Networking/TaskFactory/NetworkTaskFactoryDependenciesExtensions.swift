@@ -14,7 +14,7 @@
 
 import Foundation
 
-extension NetworkRequestIdentifierGenerator: NetworkTaskFactoryRequestIdentifierGenerator {
+extension UniqueIdentifierGenerator: NetworkTaskFactoryRequestIdentifierGenerator {
 }
 
 extension NetworkSessionHTTPHeaders: NetworkTaskFactorySessionHTTPHeadersProvider {

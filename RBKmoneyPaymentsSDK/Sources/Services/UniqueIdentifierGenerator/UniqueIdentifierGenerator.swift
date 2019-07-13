@@ -14,7 +14,7 @@
 
 import Foundation
 
-struct NetworkRequestIdentifierGenerator {
+struct UniqueIdentifierGenerator {
 
     // MARK: - Internal
     func generateIdentifier() -> String {

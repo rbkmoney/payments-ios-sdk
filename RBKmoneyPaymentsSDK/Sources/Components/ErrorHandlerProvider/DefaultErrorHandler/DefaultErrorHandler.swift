@@ -69,7 +69,7 @@ final class DefaultErrorHandler: ErrorHandlerProvider {
             return false
         }
 
-        if let error = error as? NetworkError, case .serverError = error.code {
+        if let networkError = error as? NetworkError, case .serverError = networkError.code {
             // pass server errors through
             return false
         }

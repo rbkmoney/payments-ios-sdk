@@ -21,7 +21,7 @@ enum NetworkTaskFactoryAssembly {
         let object = NetworkTaskFactory()
 
         object.baseURL = baseURL
-        object.requestIdentifierGenerator = NetworkRequestIdentifierGeneratorAssembly.makeGenerator()
+        object.requestIdentifierGenerator = UniqueIdentifierGeneratorAssembly.makeGenerator()
         object.sessionHTTPHeadersProvider = NetworkSessionHTTPHeadersAssembly.makeSessionHTTPHeaders()
 
         return object

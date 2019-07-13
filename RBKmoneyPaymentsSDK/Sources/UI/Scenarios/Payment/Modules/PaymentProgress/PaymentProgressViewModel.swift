@@ -22,6 +22,7 @@ final class PaymentProgressViewModel: ModuleViewModel {
     lazy var inputData: PaymentProgressInputData = deferred()
     lazy var remoteAPI: PaymentProgressRemoteAPI = deferred()
     lazy var errorHandlerProvider: ErrorHandlerProvider = deferred()
+    lazy var externalIdentifierGenerator: PaymentProgressPaymentExternalIdentifierGenerator = deferred()
 
     // MARK: - ModuleViewModel
     struct Input {
@@ -92,56 +93,11 @@ final class PaymentProgressViewModel: ModuleViewModel {
     }
 
     private lazy var moduleActionObservable = inputDataObservable
-        .flatMap { [remoteAPI, activityTracker, errorHandlerProvider, waitUserInteractionResult] data -> Observable<Event<ModuleAction>> in
-            let createPayment: Single<PaymentDTO>
-
-            switch data.parameters.source {
-            case let .resource(resource, email):
-                createPayment = remoteAPI.createPayment(
-                    paymentParameters: .init(
-                        flow: .instant,
-                        payer: .paymentResource(
-                            .init(
-                                paymentToolToken: resource.paymentToolToken,
-                                paymentSessionIdentifier: resource.paymentSessionIdentifier,
-                                contactInfo: ContactInfoDTO(email: email, phoneNumber: nil)
-                            )
-                        )
-                    ),
-                    invoiceIdentifier: data.paymentInputData.invoiceIdentifier,
-                    invoiceAccessToken: data.paymentInputData.invoiceAccessToken
-                )
-            case let .payment(payment):
-                createPayment = .just(payment)
-            }
-
-            return createPayment
-                .asObservable()
-                .retry(using: errorHandlerProvider)
-                .catchError {
-                    switch data.parameters.source {
-                    case let .resource(resource, email):
-                        throw PaymentError(.cannotCreatePayment, underlyingError: $0, parameters: data.parameters, email: email, resource: resource)
-                    case let .payment(payment):
-                        throw PaymentError(.cannotCreatePayment, underlyingError: $0, parameters: data.parameters, payment: payment)
-                    }
-                }
+        .flatMap { [activityTracker, obtainPayment, obtainInvoiceEvents, waitUserInteractionResult] data -> Observable<Event<ModuleAction>> in
+            return obtainPayment(data)
                 .trackActivity(activityTracker)
                 .flatMap { payment -> Observable<ModuleAction> in
-                    let events = Observable<Int>
-                        .timer(.seconds(1), period: .seconds(2), scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
-                        .flatMapLatest { _ in
-                            remoteAPI.obtainInvoiceEvents(
-                                invoiceIdentifier: data.paymentInputData.invoiceIdentifier,
-                                invoiceAccessToken: data.paymentInputData.invoiceAccessToken
-                            )
-                        }
-                        .retry(using: errorHandlerProvider)
-                        .catchError {
-                            throw PaymentError(.cannotObtainInvoiceEvents, underlyingError: $0, parameters: data.parameters, payment: payment)
-                        }
-
-                    let firstPhaseAction = events
+                    let firstPhaseAction = obtainInvoiceEvents(data, payment)
                         .compactMap { events -> ModuleAction? in
                             if let userInteraction = ActionMapper.userInteractionAction(payment: payment, events: events) {
                                 return userInteraction
@@ -154,7 +110,7 @@ final class PaymentProgressViewModel: ModuleViewModel {
 
                     let secondPhaseAction = waitUserInteractionResult(data.parameters, payment)
 
-                    let thirdPhaseAction = events
+                    let thirdPhaseAction = obtainInvoiceEvents(data, payment)
                         .compactMap { try ActionMapper.paymentAction(parameters: data.parameters, payment: payment, events: $0) }
                         .take(1)
                         .trackActivity(activityTracker)
@@ -173,6 +129,83 @@ final class PaymentProgressViewModel: ModuleViewModel {
         return userInteractionFailedRelay
             .map { throw PaymentError(.userInteractionFailed, underlyingError: $0, parameters: parameters, payment: payment) }
             .takeUntil(userInteractionFinishedRelay.take(1))
+    }
+
+    private typealias ObtainInvoiceEvents = (PaymentProgressInputData, PaymentDTO) -> Observable<[InvoiceEventDTO]>
+
+    private lazy var obtainInvoiceEvents: ObtainInvoiceEvents = { [remoteAPI, errorHandlerProvider] data, payment in
+        return Observable<Int>
+            .timer(.seconds(1), period: .seconds(2), scheduler: ConcurrentDispatchQueueScheduler(qos: .background))
+            .flatMapLatest { _ in
+                remoteAPI.obtainInvoiceEvents(
+                    invoiceIdentifier: data.paymentInputData.invoiceIdentifier,
+                    invoiceAccessToken: data.paymentInputData.invoiceAccessToken
+                )
+            }
+            .retry(using: errorHandlerProvider)
+            .catchError {
+                throw PaymentError(.cannotObtainInvoiceEvents, underlyingError: $0, parameters: data.parameters, payment: payment)
+            }
+    }
+
+    private typealias ObtainPayment = (PaymentProgressInputData) -> Observable<PaymentDTO>
+
+    private lazy var obtainPayment: ObtainPayment = { [remoteAPI, errorHandlerProvider, externalIdentifierGenerator] data in
+        switch data.parameters.source {
+        case let .payment(payment):
+            return .just(payment)
+        case .resource(let resource, let email, var paymentExternalIdentifier):
+            let createPayment = { (externalIdentifier: String) -> Single<PaymentDTO> in
+                let payer = PayerDTO.paymentResource(.init(
+                    paymentToolToken: resource.paymentToolToken,
+                    paymentSessionIdentifier: resource.paymentSessionIdentifier,
+                    contactInfo: ContactInfoDTO(email: email, phoneNumber: nil)
+                ))
+                return remoteAPI.createPayment(
+                    paymentParameters: .init(externalIdentifier: externalIdentifier, flow: .instant, payer: payer),
+                    invoiceIdentifier: data.paymentInputData.invoiceIdentifier,
+                    invoiceAccessToken: data.paymentInputData.invoiceAccessToken
+                )
+            }
+
+            let payment = Single.deferred { () -> Single<PaymentDTO> in
+                if let externalIdentifier = paymentExternalIdentifier {
+                    let obtainPayment = remoteAPI.obtainPayment(
+                        paymentExternalIdentifier: externalIdentifier,
+                        invoiceAccessToken: data.paymentInputData.invoiceAccessToken
+                    )
+
+                    return obtainPayment.catchError {
+                        guard let networkError = $0 as? NetworkError, case .serverError = networkError.code else {
+                            throw $0
+                        }
+                        return createPayment(externalIdentifier)
+                    }
+                } else {
+                    let externalIdentifier = externalIdentifierGenerator.generateIdentifier()
+
+                    paymentExternalIdentifier = externalIdentifier
+
+                    return createPayment(externalIdentifier)
+                }
+            }
+
+            return payment
+                .asObservable()
+                .retry(using: errorHandlerProvider)
+                .catchError {
+                    throw PaymentError(
+                        .cannotCreatePayment,
+                        underlyingError: $0,
+                        invoice: data.parameters.invoice,
+                        paymentMethod: data.parameters.paymentMethod,
+                        paymentSystems: data.parameters.paymentSystems,
+                        paymentResource: resource,
+                        payerEmail: email,
+                        paymentExternalIdentifier: paymentExternalIdentifier
+                    )
+                }
+        }
     }
 
     private lazy var inputDataObservable = Observable
@@ -229,18 +262,6 @@ private enum ActionMapper {
 }
 
 private extension PaymentError {
-
-    init(_ code: Code, underlyingError: Error?, parameters: PaymentProgressInputData.Parameters, email: String, resource: PaymentResourceDTO) {
-        self.init(
-            code,
-            underlyingError: underlyingError,
-            invoice: parameters.invoice,
-            paymentMethod: parameters.paymentMethod,
-            paymentSystems: parameters.paymentSystems,
-            paymentResource: resource,
-            payerEmail: email
-        )
-    }
 
     init(_ code: Code, underlyingError: Error?, parameters: PaymentProgressInputData.Parameters, payment: PaymentDTO) {
         self.init(

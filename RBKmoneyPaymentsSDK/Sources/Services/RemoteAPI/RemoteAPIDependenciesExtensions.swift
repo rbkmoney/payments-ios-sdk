@@ -37,6 +37,10 @@ struct RemoteAPIDefaultNetworkClient: RemoteAPINetworkClient {
     func performRequest(_ request: ObtainInvoiceEventsNetworkRequest) -> Single<InvoiceEventsNetworkResponse> {
         return performer.performRequest(request)
     }
+
+    func performRequest(_ request: ObtainPaymentNetworkRequest) -> Single<PaymentNetworkResponse> {
+        return performer.performRequest(request)
+    }
 }
 
 extension Fingerprint: RemoteAPIFingerprintProvider {

@@ -72,4 +72,21 @@ final class RemoteAPI {
         )
         return networkClient.performRequest(request).payload()
     }
+
+    func obtainPayment(paymentIdentifier: String, invoiceIdentifier: String, invoiceAccessToken: String) -> Single<PaymentDTO> {
+        let request = ObtainPaymentNetworkRequest(
+            paymentIdentifier: paymentIdentifier,
+            invoiceIdentifier: invoiceIdentifier,
+            invoiceAccessToken: invoiceAccessToken
+        )
+        return networkClient.performRequest(request).payload()
+    }
+
+    func obtainPayment(paymentExternalIdentifier: String, invoiceAccessToken: String) -> Single<PaymentDTO> {
+        let request = ObtainPaymentNetworkRequest(
+            paymentExternalIdentifier: paymentExternalIdentifier,
+            invoiceAccessToken: invoiceAccessToken
+        )
+        return networkClient.performRequest(request).payload()
+    }
 }

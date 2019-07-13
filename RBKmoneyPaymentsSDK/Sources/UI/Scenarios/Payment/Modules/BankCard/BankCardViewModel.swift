@@ -107,7 +107,10 @@ final class BankCardViewModel: ModuleViewModel {
                 )
 
                 return createPaymentResource
-                    .map { .paymentProgress(.init(parameters: data.parameters, source: .resource($0, payerEmail: email))) }
+                    .map {
+                        let source = PaymentProgressInputData.Parameters.Source.resource($0, payerEmail: email, paymentExternalIdentifier: nil)
+                        return .paymentProgress(.init(parameters: data.parameters, source: source))
+                    }
                     .retry(using: errorHandlerProvider)
                     .catchError {
                         .just(.unpaidInvoice(.init(.cannotCreatePaymentResource, underlyingError: $0, parameters: data.parameters)))

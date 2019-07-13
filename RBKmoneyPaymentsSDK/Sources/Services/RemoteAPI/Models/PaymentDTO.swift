@@ -18,6 +18,7 @@ struct PaymentDTO: Codable {
 
     enum CodingKeys: String, CodingKey {
         case identifier = "id"
+        case externalIdentifier = "externalID"
         case invoiceIdentifier = "invoiceID"
         case createdAt
         case amount
@@ -28,6 +29,7 @@ struct PaymentDTO: Codable {
     }
 
     let identifier: String
+    let externalIdentifier: String?
     let invoiceIdentifier: String
     let createdAt: Date
     let amount: AmountDTO

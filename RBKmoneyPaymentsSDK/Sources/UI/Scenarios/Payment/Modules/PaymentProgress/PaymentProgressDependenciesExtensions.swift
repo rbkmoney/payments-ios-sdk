@@ -19,3 +19,6 @@ extension RemoteAPI: PaymentProgressRemoteAPI {
 
 extension ThreeDSURLRequestFactory: PaymentProgress3DSURLRequestFactory {
 }
+
+extension UniqueIdentifierGenerator: PaymentProgressPaymentExternalIdentifierGenerator {
+}
