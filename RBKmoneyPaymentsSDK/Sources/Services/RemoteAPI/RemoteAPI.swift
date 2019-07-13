@@ -22,33 +22,23 @@ final class RemoteAPI {
 
     // MARK: - Internal
     func obtainInvoice(invoiceIdentifier: String, invoiceAccessToken: String) -> Single<InvoiceDTO> {
-        let request = ObtainInvoiceNetworkRequest(
-            invoiceIdentifier: invoiceIdentifier,
-            invoiceAccessToken: invoiceAccessToken
-        )
+        let request = ObtainInvoiceNetworkRequest(invoiceIdentifier: invoiceIdentifier, invoiceAccessToken: invoiceAccessToken)
         return networkClient.performRequest(request).payload()
     }
 
     func obtainInvoicePaymentMethods(invoiceIdentifier: String, invoiceAccessToken: String) -> Single<[PaymentMethodDTO]> {
-        let request = ObtainInvoicePaymentMethodsNetworkRequest(
-            invoiceIdentifier: invoiceIdentifier,
-            invoiceAccessToken: invoiceAccessToken
-        )
+        let request = ObtainInvoicePaymentMethodsNetworkRequest(invoiceIdentifier: invoiceIdentifier, invoiceAccessToken: invoiceAccessToken)
         return networkClient.performRequest(request).payload()
     }
 
     func createPaymentResource(paymentTool: PaymentToolSourceDTO, invoiceAccessToken: String) -> Single<PaymentResourceDTO> {
-        let clientInfo = ClientInfoDTO(fingerprint: fingerprintProvider.fingerprint, ipAddress: nil)
-        let source = PaymentResourceSourceDTO(paymentTool: paymentTool, clientInfo: clientInfo)
-
         do {
-            let request = try CreatePaymentResourceNetworkRequest(
-                source: source,
-                invoiceAccessToken: invoiceAccessToken
-            )
+            let clientInfo = ClientInfoDTO(fingerprint: fingerprintProvider.fingerprint, ipAddress: nil)
+            let source = PaymentResourceSourceDTO(paymentTool: paymentTool, clientInfo: clientInfo)
+            let request = try CreatePaymentResourceNetworkRequest(source: source, invoiceAccessToken: invoiceAccessToken)
             return networkClient.performRequest(request).payload()
         } catch {
-            return .error(error)
+            return .error(NetworkError(.cannotEncodeRequestBody, underlyingError: error))
         }
     }
 
@@ -61,32 +51,35 @@ final class RemoteAPI {
             )
             return networkClient.performRequest(request).payload()
         } catch {
-            return .error(error)
+            return .error(NetworkError(.cannotEncodeRequestBody, underlyingError: error))
         }
     }
 
     func obtainInvoiceEvents(invoiceIdentifier: String, invoiceAccessToken: String) -> Single<[InvoiceEventDTO]> {
-        let request = ObtainInvoiceEventsNetworkRequest(
-            invoiceIdentifier: invoiceIdentifier,
-            invoiceAccessToken: invoiceAccessToken
-        )
+        let request = ObtainInvoiceEventsNetworkRequest(invoiceIdentifier: invoiceIdentifier, invoiceAccessToken: invoiceAccessToken)
+        return networkClient.performRequest(request).payload()
+    }
+
+    func obtainPayments(invoiceIdentifier: String, invoiceAccessToken: String) -> Single<[PaymentDTO]> {
+        let request = ObtainPaymentsNetworkRequest(invoiceIdentifier: invoiceIdentifier, invoiceAccessToken: invoiceAccessToken)
         return networkClient.performRequest(request).payload()
     }
 
     func obtainPayment(paymentIdentifier: String, invoiceIdentifier: String, invoiceAccessToken: String) -> Single<PaymentDTO> {
-        let request = ObtainPaymentNetworkRequest(
-            paymentIdentifier: paymentIdentifier,
-            invoiceIdentifier: invoiceIdentifier,
-            invoiceAccessToken: invoiceAccessToken
-        )
-        return networkClient.performRequest(request).payload()
+        return obtainPayments(invoiceIdentifier: invoiceIdentifier, invoiceAccessToken: invoiceAccessToken).map {
+            guard let element = $0.first(where: { $0.identifier == paymentIdentifier }) else {
+                throw NetworkError(.elementNotFound)
+            }
+            return element
+        }
     }
 
-    func obtainPayment(paymentExternalIdentifier: String, invoiceAccessToken: String) -> Single<PaymentDTO> {
-        let request = ObtainPaymentNetworkRequest(
-            paymentExternalIdentifier: paymentExternalIdentifier,
-            invoiceAccessToken: invoiceAccessToken
-        )
-        return networkClient.performRequest(request).payload()
+    func obtainPayment(paymentExternalIdentifier: String, invoiceIdentifier: String, invoiceAccessToken: String) -> Single<PaymentDTO> {
+        return obtainPayments(invoiceIdentifier: invoiceIdentifier, invoiceAccessToken: invoiceAccessToken).map {
+            guard let element = $0.first(where: { $0.externalIdentifier == paymentExternalIdentifier }) else {
+                throw NetworkError(.elementNotFound)
+            }
+            return element
+        }
     }
 }

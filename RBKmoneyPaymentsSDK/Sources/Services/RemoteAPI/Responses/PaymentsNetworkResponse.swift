@@ -14,22 +14,4 @@
 
 import Foundation
 
-struct NetworkError: Error {
-
-    enum Code {
-        case cannotEncodeRequestBody
-        case cannotMapResponse
-        case serverError(ServerErrorDTO)
-        case unacceptableResponseStatusCode(Int)
-        case wrongResponseType
-        case elementNotFound
-    }
-
-    let code: Code
-    let underlyingError: Error?
-
-    init(_ code: Code, underlyingError: Error? = nil) {
-        self.code = code
-        self.underlyingError = underlyingError
-    }
-}
+typealias PaymentsNetworkResponse = DecodableNetworkResponse<[PaymentDTO]>

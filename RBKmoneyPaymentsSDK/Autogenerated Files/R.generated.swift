@@ -371,7 +371,7 @@ struct R: Rswift.Validatable {
   
   /// This `R.string` struct is generated, and contains static references to 1 localization tables.
   struct string {
-    /// This `R.string.localizable` struct is generated, and contains static references to 84 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 85 localization keys.
     struct localizable {
       /// Value: Apple Pay
       static let apple_pay_header_title = Rswift.StringResource(key: "apple_pay_header_title", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
@@ -541,6 +541,8 @@ struct R: Rswift.Validatable {
       static let error_message_invalid_party_status = Rswift.StringResource(key: "error_message_invalid_party_status", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       /// Value: Чек отправлен по адресу %@
       static let paid_email_description = Rswift.StringResource(key: "paid_email_description", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
+      /// Value: Элемент не найден.
+      static let error_message_element_not_found = Rswift.StringResource(key: "error_message_element_not_found", tableName: "Localizable", bundle: R.hostingBundle, locales: [], comment: nil)
       
       /// Value: Apple Pay
       static func apple_pay_header_title(_: Void = ()) -> String {
@@ -960,6 +962,11 @@ struct R: Rswift.Validatable {
       /// Value: Чек отправлен по адресу %@
       static func paid_email_description(_ value1: String) -> String {
         return String(format: NSLocalizedString("paid_email_description", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
+      }
+      
+      /// Value: Элемент не найден.
+      static func error_message_element_not_found(_: Void = ()) -> String {
+        return NSLocalizedString("error_message_element_not_found", bundle: R.hostingBundle, comment: "")
       }
       
       fileprivate init() {}

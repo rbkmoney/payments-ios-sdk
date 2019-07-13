@@ -62,6 +62,7 @@
 "error_message_response_mapping_error" = "Получен некорректный ответ сервера.";
 "error_message_unknown_error" = "Произошла неизвестная ошибка.";
 "error_message_unacceptable_status_code" = "Получен ответ от сервера с HTTP кодом %d.";
+"error_message_element_not_found" = "Элемент не найден.";
 
 // PaymentError
 "error_message_cannot_obtain_invoice" = "Не удалось получить инвойс.";

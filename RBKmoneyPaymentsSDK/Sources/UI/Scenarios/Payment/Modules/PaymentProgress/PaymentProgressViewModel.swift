@@ -172,11 +172,12 @@ final class PaymentProgressViewModel: ModuleViewModel {
                 if let externalIdentifier = paymentExternalIdentifier {
                     let obtainPayment = remoteAPI.obtainPayment(
                         paymentExternalIdentifier: externalIdentifier,
+                        invoiceIdentifier: data.paymentInputData.invoiceIdentifier,
                         invoiceAccessToken: data.paymentInputData.invoiceAccessToken
                     )
 
                     return obtainPayment.catchError {
-                        guard let networkError = $0 as? NetworkError, case .serverError = networkError.code else {
+                        guard let networkError = $0 as? NetworkError, case .elementNotFound = networkError.code else {
                             throw $0
                         }
                         return createPayment(externalIdentifier)

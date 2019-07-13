@@ -41,6 +41,8 @@ struct ErrorMessageFactory {
             return R.string.localizable.error_message_unknown_error()
         case let .unacceptableResponseStatusCode(code):
             return R.string.localizable.error_message_unacceptable_status_code(code)
+        case .elementNotFound:
+            return R.string.localizable.error_message_element_not_found()
         case let .serverError(error):
             return message(for: error)
         }

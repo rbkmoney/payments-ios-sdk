@@ -14,25 +14,16 @@
 
 import Foundation
 
-/// https://developer.rbk.money/api/#operation/getPaymentByID
-/// https://developer.rbk.money/api/#operation/getPaymentByExternalID
-struct ObtainPaymentNetworkRequest: NetworkRequest {
+/// https://developer.rbk.money/api/#operation/getPayments
+struct ObtainPaymentsNetworkRequest: NetworkRequest {
 
     let httpMethod: NetworkRequestHTTPMethod = .get
     let path: NetworkRequestPath
-    let queryParameters: [String: String?]
     let bodyParameters: NetworkRequestParameters = .none
     let authorizationToken: String?
 
-    init(paymentIdentifier: String, invoiceIdentifier: String, invoiceAccessToken: String) {
-        path = .relative("processing/invoices/\(invoiceIdentifier)/payments/\(paymentIdentifier)")
-        queryParameters = [:]
-        authorizationToken = invoiceAccessToken
-    }
-
-    init(paymentExternalIdentifier: String, invoiceAccessToken: String) {
-        path = .relative("processing/payments")
-        queryParameters = ["externalID": paymentExternalIdentifier]
+    init(invoiceIdentifier: String, invoiceAccessToken: String) {
+        path = .relative("processing/invoices/\(invoiceIdentifier)/payments")
         authorizationToken = invoiceAccessToken
     }
 }

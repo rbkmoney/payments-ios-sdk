@@ -21,7 +21,7 @@ protocol RemoteAPINetworkClient {
     func performRequest(_ request: CreatePaymentResourceNetworkRequest) -> Single<PaymentResourceNetworkResponse>
     func performRequest(_ request: CreatePaymentNetworkRequest) -> Single<PaymentNetworkResponse>
     func performRequest(_ request: ObtainInvoiceEventsNetworkRequest) -> Single<InvoiceEventsNetworkResponse>
-    func performRequest(_ request: ObtainPaymentNetworkRequest) -> Single<PaymentNetworkResponse>
+    func performRequest(_ request: ObtainPaymentsNetworkRequest) -> Single<PaymentsNetworkResponse>
 }
 
 protocol RemoteAPIFingerprintProvider {

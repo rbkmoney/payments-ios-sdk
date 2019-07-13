@@ -38,7 +38,7 @@ struct RemoteAPIDefaultNetworkClient: RemoteAPINetworkClient {
         return performer.performRequest(request)
     }
 
-    func performRequest(_ request: ObtainPaymentNetworkRequest) -> Single<PaymentNetworkResponse> {
+    func performRequest(_ request: ObtainPaymentsNetworkRequest) -> Single<PaymentsNetworkResponse> {
         return performer.performRequest(request)
     }
 }
