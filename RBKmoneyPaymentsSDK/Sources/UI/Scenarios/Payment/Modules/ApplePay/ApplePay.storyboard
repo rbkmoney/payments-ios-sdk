@@ -25,13 +25,13 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vZv-gh-4fA">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="593.5"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s4k-SK-wak" customClass="InvoiceSummaryView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="253.5"/>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="200" translatesAutoresizingMaskIntoConstraints="NO" id="s4k-SK-wak" customClass="InvoiceSummaryView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hhv-E7-M10">
-                                                <rect key="frame" x="5" y="266.5" width="365" height="230.5"/>
+                                                <rect key="frame" x="5" y="213" width="365" height="230.5"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMY-yk-wpw">
                                                         <rect key="frame" x="20" y="31" width="325" height="20.5"/>
@@ -74,7 +74,7 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tWn-JK-4gi" customClass="LogotypesView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="521" width="375" height="126"/>
+                                                <rect key="frame" x="0.0" y="467.5" width="375" height="126"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="126" id="EpB-J7-vV9"/>
                                                 </constraints>
@@ -101,7 +101,6 @@
                                     <constraint firstItem="vZv-gh-4fA" firstAttribute="top" secondItem="0dH-ey-XO0" secondAttribute="top" id="a0X-ge-UtP"/>
                                     <constraint firstAttribute="trailing" secondItem="vZv-gh-4fA" secondAttribute="trailing" id="fpj-zh-eKk"/>
                                     <constraint firstItem="vZv-gh-4fA" firstAttribute="leading" secondItem="0dH-ey-XO0" secondAttribute="leading" id="p7F-AI-0MX"/>
-                                    <constraint firstItem="vZv-gh-4fA" firstAttribute="height" secondItem="0dH-ey-XO0" secondAttribute="height" priority="250" id="pmy-r9-E86"/>
                                 </constraints>
                             </scrollView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vQY-zf-SUZ" customClass="ThrobberView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">

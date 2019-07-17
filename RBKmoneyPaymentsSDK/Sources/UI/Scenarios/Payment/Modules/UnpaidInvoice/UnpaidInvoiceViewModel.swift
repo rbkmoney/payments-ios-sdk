@@ -69,7 +69,7 @@ final class UnpaidInvoiceViewModel: ModuleViewModel {
         .asDriver(onError: .never)
 
     private(set) lazy var invoice = inputDataObservable
-        .compactMap { $0.parameters.invoice }
+        .map { $0.parameters.invoice }
         .asDriver(onError: .never)
 
     private(set) lazy var errorDescription = inputDataObservable

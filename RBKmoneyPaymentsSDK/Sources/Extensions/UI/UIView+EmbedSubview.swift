@@ -23,16 +23,24 @@ extension UIView {
         let right: CGFloat?
     }
 
-    func embedSubview(_ view: UIView, edgeInsets: EmbedEdgeInsets = .zero) {
+    func embedSubview(_ view: UIView, edgeInsets: EmbedEdgeInsets = .zero, useSafeAreaAnchors: Bool = false) {
         view.translatesAutoresizingMaskIntoConstraints = false
 
         addSubview(view)
 
+        let anchors: (top: NSLayoutYAxisAnchor, bottom: NSLayoutYAxisAnchor, left: NSLayoutXAxisAnchor, right: NSLayoutXAxisAnchor)
+
+        if useSafeAreaAnchors {
+            anchors = { (top: $0.topAnchor, bottom: $0.bottomAnchor, left: $0.leftAnchor, right: $0.rightAnchor) }(safeAreaLayoutGuide)
+        } else {
+            anchors = { (top: $0.topAnchor, bottom: $0.bottomAnchor, left: $0.leftAnchor, right: $0.rightAnchor) }(self)
+        }
+
         let constraints = [
-            edgeInsets.top.map { view.topAnchor.constraint(equalTo: topAnchor, constant: $0) },
-            edgeInsets.left.map { view.leftAnchor.constraint(equalTo: leftAnchor, constant: $0) },
-            edgeInsets.bottom.map { view.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -$0) },
-            edgeInsets.right.map { view.rightAnchor.constraint(equalTo: rightAnchor, constant: -$0) }
+            edgeInsets.top.map { view.topAnchor.constraint(equalTo: anchors.top, constant: $0) },
+            edgeInsets.left.map { view.leftAnchor.constraint(equalTo: anchors.left, constant: $0) },
+            edgeInsets.bottom.map { view.bottomAnchor.constraint(equalTo: anchors.bottom, constant: -$0) },
+            edgeInsets.right.map { view.rightAnchor.constraint(equalTo: anchors.right, constant: -$0) }
         ]
 
         NSLayoutConstraint.activate(constraints.compactMap { $0 })

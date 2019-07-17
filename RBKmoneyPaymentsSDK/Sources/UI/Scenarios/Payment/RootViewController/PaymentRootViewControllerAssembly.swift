@@ -21,6 +21,7 @@ public enum PaymentRootViewControllerAssembly {
         let rootViewController = PaymentRootViewController()
 
         rootViewController.systemInfoProvider = SystemInfoAssembly.makeSystemInfo()
+        rootViewController.transitionConfigurator = TransitionConfiguratorAssembly.makeFormSheetModalTransitionConfigurator()
 
         rootViewController.configure()
 

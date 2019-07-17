@@ -14,11 +14,14 @@
 
 import Foundation
 
-// swiftlint:disable:next type_name
-enum PaymentRootViewControllerTransitionConfiguratorAssembly {
+enum TransitionConfiguratorAssembly {
 
     // MARK: - Internal
-    static func makeTransitionConfigurator() -> PaymentRootViewControllerTransitionConfigurator {
-        return PaymentRootViewControllerTransitionConfigurator()
+    static func makeNavigationTransitionConfigurator() -> NavigationTransitionConfigurator {
+        return NavigationTransitionConfigurator()
+    }
+
+    static func makeFormSheetModalTransitionConfigurator() -> FormSheetModalTransitionConfigurator {
+        return FormSheetModalTransitionConfigurator()
     }
 }

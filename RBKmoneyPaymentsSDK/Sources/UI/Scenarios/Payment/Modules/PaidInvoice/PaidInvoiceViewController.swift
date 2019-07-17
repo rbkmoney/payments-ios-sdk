@@ -27,12 +27,13 @@ final class PaidInvoiceViewController: UIViewController, ModuleView {
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet private var messageLabel: UILabel!
     @IBOutlet private var headerView: InvoiceSummaryView!
+    @IBOutlet private var doneButton: UIButton!
     @IBOutlet private var doneBarButtonItem: UIBarButtonItem!
 
     // MARK: - ModuleView
     var output: PaidInvoiceViewModel.Input {
         return PaidInvoiceViewModel.Input(
-            didTapDone: doneBarButtonItem.rx.tap.asSignal()
+            didTapDone: Signal.merge(doneBarButtonItem.rx.tap.asSignal(), doneButton.rx.tap.asSignal())
         )
     }
 
@@ -61,6 +62,10 @@ final class PaidInvoiceViewController: UIViewController, ModuleView {
         contentView.layer.cornerRadius = 6
 
         titleLabel.attributedText = R.string.localizable.paid_title().attributed(with: .title)
+
+        doneButton.setAttributedTitle(R.string.localizable.paid_action_done().attributed(with: .button), for: .normal)
+        doneButton.backgroundColor = Palette.colors.selectionBackground
+        doneButton.layer.cornerRadius = 22
     }
 
     private var setupHeader: Binder<InvoiceDTO> {
@@ -118,6 +123,10 @@ private extension TextAttributes {
         .lineHeight(20)
         .textAlignment(.center)
         .textColor(Palette.colors.darkText)
+
+    static let button = TextAttributes()
+        .font(Palette.fonts.common)
+        .textColor(Palette.colors.selectionForeground)
 }
 
 private extension PaymentSystem {

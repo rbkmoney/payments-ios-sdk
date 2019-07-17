@@ -12,9 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import CoreGraphics
+import UIKit
 
-protocol PaymentRootViewControllerSystemInfoProvider {
+final class FormSheetModalTransitionConfigurator: NSObject, UIViewControllerTransitioningDelegate {
 
-    var isPhoneDevice: Bool { get }
+    // MARK: - UIViewControllerTransitioningDelegate
+    func presentationController(forPresented presented: UIViewController,
+                                presenting: UIViewController?,
+                                source: UIViewController) -> UIPresentationController? {
+
+        return FormSheetPresentationController(presentedViewController: presented, presenting: presenting)
+    }
 }
