@@ -371,7 +371,7 @@ struct R: Rswift.Validatable {
   
   /// This `R.string` struct is generated, and contains static references to 1 localization tables.
   struct string {
-    /// This `R.string.localizable` struct is generated, and contains static references to 85 localization keys.
+    /// This `R.string.localizable` struct is generated, and contains static references to 84 localization keys.
     struct localizable {
       /// en translation: ALL PAYMENT METHODS
       /// 
@@ -709,10 +709,6 @@ struct R: Rswift.Validatable {
       /// 
       /// Locales: en, ru
       static let error_message_rejected_by_issuer = Rswift.StringResource(key: "error_message_rejected_by_issuer", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
-      /// en translation: © 2008-2019 RBKmoney | Direct Payments Ltd.
-      /// 
-      /// Locales: en, ru
-      static let copyright = Rswift.StringResource(key: "copyright", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       
       /// en translation: ALL PAYMENT METHODS
       /// 
@@ -1300,13 +1296,6 @@ struct R: Rswift.Validatable {
       /// Locales: en, ru
       static func error_message_rejected_by_issuer(_: Void = ()) -> String {
         return NSLocalizedString("error_message_rejected_by_issuer", bundle: R.hostingBundle, comment: "")
-      }
-      
-      /// en translation: © 2008-2019 RBKmoney | Direct Payments Ltd.
-      /// 
-      /// Locales: en, ru
-      static func copyright(_: Void = ()) -> String {
-        return NSLocalizedString("copyright", bundle: R.hostingBundle, comment: "")
       }
       
       fileprivate init() {}
