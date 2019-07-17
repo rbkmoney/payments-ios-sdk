@@ -87,7 +87,7 @@ final class PaymentMethodViewController: UIViewController, ModuleView {
 
 private enum Constants {
 
-    static let tableFooterHeight: CGFloat = 174
+    static let tableFooterHeight: CGFloat = 150
 }
 
 private extension PaymentMethod {
