@@ -61,7 +61,7 @@ struct PaymentErrorMapper {
             }
 
             switch serverError.code {
-            case .insufficientFunds?, .invalidPaymentTool?, .rejectedByIssuer?, .paymentRejected?, .preauthorizationFailed?:
+            case .insufficientFunds?, .invalidPaymentTool?, .rejectedByIssuer?, .paymentRejected?, .preauthorizationFailed?, .accountLimitsExceeded?:
                 return .back
             default:
                 return nil
