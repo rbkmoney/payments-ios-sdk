@@ -23,4 +23,8 @@ class FontsPalette {
     var common: UIFont {
         return .systemFont(ofSize: 16, weight: .medium)
     }
+
+    var large: UIFont {
+        return .systemFont(ofSize: 30, weight: .medium)
+    }
 }

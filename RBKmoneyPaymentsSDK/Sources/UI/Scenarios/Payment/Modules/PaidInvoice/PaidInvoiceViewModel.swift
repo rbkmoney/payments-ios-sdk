@@ -39,6 +39,14 @@ final class PaidInvoiceViewModel: ModuleViewModel {
         .map { $0.paymentInputData.shopName }
         .asDriver(onError: .never)
 
+    private(set) lazy var invoice = inputDataObservable
+        .map { $0.parameters.invoice }
+        .asDriver(onError: .never)
+
+    private(set) lazy var payer = inputDataObservable
+        .map { $0.parameters.payment.payer }
+        .asDriver(onError: .never)
+
     // MARK: - Private
     private lazy var inputDataObservable = Observable
         .deferred { [weak self] in .just(self?.inputData) }

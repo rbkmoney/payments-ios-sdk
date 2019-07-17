@@ -12,9 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import CoreGraphics
+import Foundation
 
-protocol PaymentRootViewControllerSystemInfoProvider {
+enum TransitionConfiguratorAssembly {
 
-    var isPhoneDevice: Bool { get }
+    // MARK: - Internal
+    static func makeNavigationTransitionConfigurator() -> NavigationTransitionConfigurator {
+        return NavigationTransitionConfigurator()
+    }
+
+    static func makeFormSheetModalTransitionConfigurator() -> FormSheetModalTransitionConfigurator {
+        return FormSheetModalTransitionConfigurator()
+    }
 }

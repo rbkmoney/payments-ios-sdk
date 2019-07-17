@@ -12,13 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import Foundation
+import RxCocoa
+import RxSwift
+import UIKit
 
-// swiftlint:disable:next type_name
-enum PaymentRootViewControllerTransitionConfiguratorAssembly {
+extension Reactive where Base: UIView {
 
-    // MARK: - Internal
-    static func makeTransitionConfigurator() -> PaymentRootViewControllerTransitionConfigurator {
-        return PaymentRootViewControllerTransitionConfigurator()
+    var isVisible: Binder<Bool> {
+        return Binder(base) { base, visible in
+            base.isHidden = !visible
+        }
     }
 }

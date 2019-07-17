@@ -101,16 +101,12 @@ final class PaymentProgressViewController: UIViewController, ModuleView {
                     return
                 }
 
-                this.webViewURLRequest = urlRequest
-                this.webViewNavigation = this.webView.load(urlRequest)
-
+                this.webView.load(urlRequest)
                 this.setWebViewHidden(false, animated: true)
             }
         }
     }
 
-    private var webViewURLRequest: URLRequest?
-    private var webViewNavigation: WKNavigation?
     private let userInteractionFinishedRelay = PublishRelay<Void>()
     private let userInteractionFailedRelay = PublishRelay<Error>()
 }
@@ -136,17 +132,11 @@ extension PaymentProgressViewController: WKNavigationDelegate {
         userInteractionFinishedRelay.accept(())
     }
 
-    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        if navigation == webViewNavigation {
-            print("3DS page loading finished")
-        }
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        userInteractionFailedRelay.accept(error)
     }
 
-    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        if navigation == webViewNavigation {
-            print("3DS Page loading failed with error \(error)")
-        }
-
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
         userInteractionFailedRelay.accept(error)
     }
 }

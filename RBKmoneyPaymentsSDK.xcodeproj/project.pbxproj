@@ -185,6 +185,15 @@
 		C143798922C2636A00E59013 /* UnpaidInvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143798322C2636A00E59013 /* UnpaidInvoiceViewController.swift */; };
 		C143798A22C2636A00E59013 /* UnpaidInvoiceDependenciesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143798422C2636A00E59013 /* UnpaidInvoiceDependenciesExtensions.swift */; };
 		C143798C22C2638B00E59013 /* UnpaidInvoiceInputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143798B22C2638B00E59013 /* UnpaidInvoiceInputData.swift */; };
+		C18F57F522CE6F7D0099AC1F /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F57F422CE6F7D0099AC1F /* ProductTableViewCell.swift */; };
+		C18F57F622CE774B0099AC1F /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F57F422CE6F7D0099AC1F /* ProductTableViewCell.swift */; };
+		C18F57F822CED5A90099AC1F /* ExampleProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F57F722CED5A90099AC1F /* ExampleProduct.swift */; };
+		C18F57F922CED5B10099AC1F /* ExampleProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F57F722CED5A90099AC1F /* ExampleProduct.swift */; };
+		C18F57FE22D276AC0099AC1F /* PaymentErrorMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F57FC22D276AC0099AC1F /* PaymentErrorMapper.swift */; };
+		C18F57FF22D276AC0099AC1F /* PaymentErrorMapperAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F57FD22D276AC0099AC1F /* PaymentErrorMapperAssembly.swift */; };
+		C18F580122D2BD1A0099AC1F /* UIView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F580022D2BD1A0099AC1F /* UIView+Rx.swift */; };
+		C18F580422D4DE250099AC1F /* FormSheetPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F580322D4DE250099AC1F /* FormSheetPresentationController.swift */; };
+		C18F580622D4E13D0099AC1F /* FormSheetModalTransitionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F580522D4E13D0099AC1F /* FormSheetModalTransitionConfigurator.swift */; };
 		C19789C4229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C5229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C6229FD05800C7F966 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C3229FD05800C7F966 /* AppDelegate.swift */; };
@@ -241,8 +250,8 @@
 		C1B047A822CB5C9400CB8C56 /* DefaultErrorHandlerDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B047A422CB5C9400CB8C56 /* DefaultErrorHandlerDependencies.swift */; };
 		C1B047A922CB5C9400CB8C56 /* DefaultErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B047A522CB5C9400CB8C56 /* DefaultErrorHandler.swift */; };
 		C1B047AA22CB5C9400CB8C56 /* DefaultErrorHandlerDependenciesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1B047A622CB5C9400CB8C56 /* DefaultErrorHandlerDependenciesExtensions.swift */; };
-		C1D024F222BB94950014AA80 /* PaymentRootViewControllerTransitionConfiguratorAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D024EE22BB94950014AA80 /* PaymentRootViewControllerTransitionConfiguratorAssembly.swift */; };
-		C1D024F422BB94950014AA80 /* PaymentRootViewControllerTransitionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D024F022BB94950014AA80 /* PaymentRootViewControllerTransitionConfigurator.swift */; };
+		C1D024F222BB94950014AA80 /* TransitionConfiguratorAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D024EE22BB94950014AA80 /* TransitionConfiguratorAssembly.swift */; };
+		C1D024F422BB94950014AA80 /* NavigationTransitionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D024F022BB94950014AA80 /* NavigationTransitionConfigurator.swift */; };
 		C1D024FA22BB964F0014AA80 /* TransitionStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D024F922BB964F0014AA80 /* TransitionStyle.swift */; };
 		C1D024FC22BBA1540014AA80 /* PushFadeAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1D024FB22BBA1540014AA80 /* PushFadeAnimator.swift */; };
 		C1F4D17E22B9D6FB005CFA6B /* PaymentProgressAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1F4D17822B9D6FB005CFA6B /* PaymentProgressAssembly.swift */; };
@@ -455,6 +464,13 @@
 		C143798322C2636A00E59013 /* UnpaidInvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidInvoiceViewController.swift; sourceTree = "<group>"; };
 		C143798422C2636A00E59013 /* UnpaidInvoiceDependenciesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidInvoiceDependenciesExtensions.swift; sourceTree = "<group>"; };
 		C143798B22C2638B00E59013 /* UnpaidInvoiceInputData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidInvoiceInputData.swift; sourceTree = "<group>"; };
+		C18F57F422CE6F7D0099AC1F /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
+		C18F57F722CED5A90099AC1F /* ExampleProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleProduct.swift; sourceTree = "<group>"; };
+		C18F57FC22D276AC0099AC1F /* PaymentErrorMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentErrorMapper.swift; sourceTree = "<group>"; };
+		C18F57FD22D276AC0099AC1F /* PaymentErrorMapperAssembly.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentErrorMapperAssembly.swift; sourceTree = "<group>"; };
+		C18F580022D2BD1A0099AC1F /* UIView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Rx.swift"; sourceTree = "<group>"; };
+		C18F580322D4DE250099AC1F /* FormSheetPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSheetPresentationController.swift; sourceTree = "<group>"; };
+		C18F580522D4E13D0099AC1F /* FormSheetModalTransitionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSheetModalTransitionConfigurator.swift; sourceTree = "<group>"; };
 		C1978990229FCA0900C7F966 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789A6229FCE1900C7F966 /* Example+Pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example+Pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789B9229FCF8B00C7F966 /* Example+Pods.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Example+Pods.Release.xcconfig"; sourceTree = "<group>"; };
@@ -514,8 +530,8 @@
 		C1B047A422CB5C9400CB8C56 /* DefaultErrorHandlerDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultErrorHandlerDependencies.swift; sourceTree = "<group>"; };
 		C1B047A522CB5C9400CB8C56 /* DefaultErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultErrorHandler.swift; sourceTree = "<group>"; };
 		C1B047A622CB5C9400CB8C56 /* DefaultErrorHandlerDependenciesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultErrorHandlerDependenciesExtensions.swift; sourceTree = "<group>"; };
-		C1D024EE22BB94950014AA80 /* PaymentRootViewControllerTransitionConfiguratorAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRootViewControllerTransitionConfiguratorAssembly.swift; sourceTree = "<group>"; };
-		C1D024F022BB94950014AA80 /* PaymentRootViewControllerTransitionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRootViewControllerTransitionConfigurator.swift; sourceTree = "<group>"; };
+		C1D024EE22BB94950014AA80 /* TransitionConfiguratorAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionConfiguratorAssembly.swift; sourceTree = "<group>"; };
+		C1D024F022BB94950014AA80 /* NavigationTransitionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTransitionConfigurator.swift; sourceTree = "<group>"; };
 		C1D024F922BB964F0014AA80 /* TransitionStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransitionStyle.swift; sourceTree = "<group>"; };
 		C1D024FB22BBA1540014AA80 /* PushFadeAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushFadeAnimator.swift; sourceTree = "<group>"; };
 		C1F4D17822B9D6FB005CFA6B /* PaymentProgressAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentProgressAssembly.swift; sourceTree = "<group>"; };
@@ -678,6 +694,7 @@
 				C1044EBE22A48D8100A8065B /* Invoice.swift */,
 				C1044EC422A5372200A8065B /* Currency.swift */,
 				C1044EC722A5377300A8065B /* Cost.swift */,
+				C18F57F722CED5A90099AC1F /* ExampleProduct.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -686,6 +703,7 @@
 			isa = PBXGroup;
 			children = (
 				C1044EB822A4899800A8065B /* ActivityIndicatorView.swift */,
+				C18F57F422CE6F7D0099AC1F /* ProductTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -720,6 +738,7 @@
 			children = (
 				C1AB4CBF22CCED150079F1C7 /* AlertPresenter */,
 				C1044ED122A5C24E00A8065B /* Palette */,
+				C1D024ED22BB94710014AA80 /* TransitionConfigurators */,
 				C1044FF222AFBC8700A8065B /* Views */,
 			);
 			path = Components;
@@ -767,7 +786,6 @@
 				C1044EDA22A5C2C600A8065B /* Protocols */,
 				C1B0479222CA91CB00CB8C56 /* Errors */,
 				C1044ED622A5C24E00A8065B /* RootViewController */,
-				C1D024ED22BB94710014AA80 /* RootViewControllerTransitionConfigurator */,
 				C1044ED922A5C24E00A8065B /* Router */,
 				C1044ED722A5C24E00A8065B /* Modules */,
 			);
@@ -1160,6 +1178,7 @@
 			isa = PBXGroup;
 			children = (
 				C143797E22C2635600E59013 /* Models */,
+				C18F57FB22D276AC0099AC1F /* PaymentErrorMapper */,
 				C143798322C2636A00E59013 /* UnpaidInvoiceViewController.swift */,
 				C143798022C2636A00E59013 /* UnpaidInvoiceViewModel.swift */,
 				C143798222C2636A00E59013 /* UnpaidInvoice.storyboard */,
@@ -1207,6 +1226,23 @@
 				C143798B22C2638B00E59013 /* UnpaidInvoiceInputData.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		C18F57FB22D276AC0099AC1F /* PaymentErrorMapper */ = {
+			isa = PBXGroup;
+			children = (
+				C18F57FC22D276AC0099AC1F /* PaymentErrorMapper.swift */,
+				C18F57FD22D276AC0099AC1F /* PaymentErrorMapperAssembly.swift */,
+			);
+			path = PaymentErrorMapper;
+			sourceTree = "<group>";
+		};
+		C18F580222D4DDFB0099AC1F /* PresentationControllers */ = {
+			isa = PBXGroup;
+			children = (
+				C18F580322D4DE250099AC1F /* FormSheetPresentationController.swift */,
+			);
+			path = PresentationControllers;
 			sourceTree = "<group>";
 		};
 		C197896E229FC91400C7F966 = {
@@ -1416,6 +1452,7 @@
 				C1044FEE22AFBAFF00A8065B /* UIView+EmbedSubview.swift */,
 				C1A2790422B2E24D00EB371F /* UIFont+Extensions.swift */,
 				C1044FF022AFBB2E00A8065B /* UIScrollView+Rx.swift */,
+				C18F580022D2BD1A0099AC1F /* UIView+Rx.swift */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -1611,31 +1648,25 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
-		C1D024ED22BB94710014AA80 /* RootViewControllerTransitionConfigurator */ = {
+		C1D024ED22BB94710014AA80 /* TransitionConfigurators */ = {
 			isa = PBXGroup;
 			children = (
 				C1D024F822BB962A0014AA80 /* Models */,
 				C1D024F622BB962A0014AA80 /* Animators */,
-				C1D024F022BB94950014AA80 /* PaymentRootViewControllerTransitionConfigurator.swift */,
-				C1D024EE22BB94950014AA80 /* PaymentRootViewControllerTransitionConfiguratorAssembly.swift */,
+				C18F580222D4DDFB0099AC1F /* PresentationControllers */,
+				C1D024F022BB94950014AA80 /* NavigationTransitionConfigurator.swift */,
+				C18F580522D4E13D0099AC1F /* FormSheetModalTransitionConfigurator.swift */,
+				C1D024EE22BB94950014AA80 /* TransitionConfiguratorAssembly.swift */,
 			);
-			path = RootViewControllerTransitionConfigurator;
+			path = TransitionConfigurators;
 			sourceTree = "<group>";
 		};
 		C1D024F622BB962A0014AA80 /* Animators */ = {
 			isa = PBXGroup;
 			children = (
-				C1D024F722BB962A0014AA80 /* PushFade */,
-			);
-			path = Animators;
-			sourceTree = "<group>";
-		};
-		C1D024F722BB962A0014AA80 /* PushFade */ = {
-			isa = PBXGroup;
-			children = (
 				C1D024FB22BBA1540014AA80 /* PushFadeAnimator.swift */,
 			);
-			path = PushFade;
+			path = Animators;
 			sourceTree = "<group>";
 		};
 		C1D024F822BB962A0014AA80 /* Models */ = {
@@ -2016,6 +2047,8 @@
 			files = (
 				C1044EBC22A48C9C00A8065B /* InvoiceTemplate.swift in Sources */,
 				C1044EBF22A48D8100A8065B /* Invoice.swift in Sources */,
+				C18F57F822CED5A90099AC1F /* ExampleProduct.swift in Sources */,
+				C18F57F522CE6F7D0099AC1F /* ProductTableViewCell.swift in Sources */,
 				C1044EC822A5377300A8065B /* Cost.swift in Sources */,
 				C19789C6229FD05800C7F966 /* AppDelegate.swift in Sources */,
 				C1044EC522A5372200A8065B /* Currency.swift in Sources */,
@@ -2031,6 +2064,8 @@
 			files = (
 				C1044EBD22A48C9C00A8065B /* InvoiceTemplate.swift in Sources */,
 				C1044EC022A48D8100A8065B /* Invoice.swift in Sources */,
+				C18F57F922CED5B10099AC1F /* ExampleProduct.swift in Sources */,
+				C18F57F622CE774B0099AC1F /* ProductTableViewCell.swift in Sources */,
 				C1044EC922A5377300A8065B /* Cost.swift in Sources */,
 				C19789C7229FD05800C7F966 /* AppDelegate.swift in Sources */,
 				C1044EC622A5372800A8065B /* Currency.swift in Sources */,
@@ -2111,6 +2146,7 @@
 				C1044FCB22ADDFE500A8065B /* CreatePaymentNetworkRequest.swift in Sources */,
 				C1044F5522A86F8500A8065B /* NetworkResponseMapperAssembly.swift in Sources */,
 				C1F4D17E22B9D6FB005CFA6B /* PaymentProgressAssembly.swift in Sources */,
+				C18F580122D2BD1A0099AC1F /* UIView+Rx.swift in Sources */,
 				C1978A2122A00A3100C7F966 /* ActivityTracker.swift in Sources */,
 				C1044FB222AAB90600A8065B /* PaymentResourceSourceDTO.swift in Sources */,
 				C1044FD322ADE6A600A8065B /* PayerDTO.swift in Sources */,
@@ -2180,12 +2216,14 @@
 				C1B047A222CB5BFF00CB8C56 /* ErrorHandlerProvider.swift in Sources */,
 				C143798522C2636A00E59013 /* UnpaidInvoiceAssembly.swift in Sources */,
 				C1044EF722A5D48E00A8065B /* PaymentRouterDependenciesExtensions.swift in Sources */,
+				C18F57FF22D276AC0099AC1F /* PaymentErrorMapperAssembly.swift in Sources */,
 				C1978A3722A00A3700C7F966 /* PrimitiveSequence+AdditionalOperators.swift in Sources */,
 				86469D9522B2F6E90096882E /* EmailValidatorAssembly.swift in Sources */,
 				C143798622C2636A00E59013 /* UnpaidInvoiceViewModel.swift in Sources */,
 				86469D6922B2E6690096882E /* BankCardCardNumberFormatter.swift in Sources */,
 				86469D8E22B2F59A0096882E /* CardholderValidator.swift in Sources */,
-				C1D024F222BB94950014AA80 /* PaymentRootViewControllerTransitionConfiguratorAssembly.swift in Sources */,
+				C18F580422D4DE250099AC1F /* FormSheetPresentationController.swift in Sources */,
+				C1D024F222BB94950014AA80 /* TransitionConfiguratorAssembly.swift in Sources */,
 				86469D7C22B2F1300096882E /* CardNumberValidator.swift in Sources */,
 				C1044EB422A3D2DD00A8065B /* AnyRouter.swift in Sources */,
 				86A4BA7022A70891001EBC55 /* BankCardExpirationDatePickerView.swift in Sources */,
@@ -2203,6 +2241,7 @@
 				C1044F9222A9C3BE00A8065B /* CurrencyDTO.swift in Sources */,
 				C1044FED22AFBA3600A8065B /* TextAttributes.swift in Sources */,
 				C1044FEF22AFBAFF00A8065B /* UIView+EmbedSubview.swift in Sources */,
+				C18F580622D4E13D0099AC1F /* FormSheetModalTransitionConfigurator.swift in Sources */,
 				C1044F1222A5F1C200A8065B /* PaymentRootViewController.swift in Sources */,
 				C1044F9C22A9D05100A8065B /* JSONDecoder+Extensions.swift in Sources */,
 				C1044F4E22A866D300A8065B /* NetworkResponseMapperInput.swift in Sources */,
@@ -2229,6 +2268,7 @@
 				C1978A3422A00A3700C7F966 /* ObservableType+Errors.swift in Sources */,
 				C1044F3722A8163000A8065B /* NetworkResponse.swift in Sources */,
 				C1B047A822CB5C9400CB8C56 /* DefaultErrorHandlerDependencies.swift in Sources */,
+				C18F57FE22D276AC0099AC1F /* PaymentErrorMapper.swift in Sources */,
 				C1D024FC22BBA1540014AA80 /* PushFadeAnimator.swift in Sources */,
 				C143797822C2633300E59013 /* ApplePayAssembly.swift in Sources */,
 				C1044FCF22ADE36300A8065B /* PaymentParametersDTO.swift in Sources */,
@@ -2236,7 +2276,7 @@
 				C1F4D18622B9D766005CFA6B /* PaymentProgressInputData.swift in Sources */,
 				C1044FE922AEA29700A8065B /* RefundDTO.swift in Sources */,
 				C1978A3022A00A3700C7F966 /* UIColor+Extensions.swift in Sources */,
-				C1D024F422BB94950014AA80 /* PaymentRootViewControllerTransitionConfigurator.swift in Sources */,
+				C1D024F422BB94950014AA80 /* NavigationTransitionConfigurator.swift in Sources */,
 				C143798C22C2638B00E59013 /* UnpaidInvoiceInputData.swift in Sources */,
 				C1044F9A22A9CEFF00A8065B /* Formatter+Extensions.swift in Sources */,
 				C1044FA022A9D64300A8065B /* ObtainInvoicePaymentMethodsNetworkRequest.swift in Sources */,

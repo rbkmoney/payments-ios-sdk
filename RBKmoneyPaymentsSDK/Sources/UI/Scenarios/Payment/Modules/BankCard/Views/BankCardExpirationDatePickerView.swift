@@ -16,7 +16,7 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-final class BankCardExpirationDatePickerView: UIView {
+final class BankCardExpirationDatePickerView: UIInputView {
 
     // MARK: - Types
     struct ExpirationDate {
@@ -25,8 +25,13 @@ final class BankCardExpirationDatePickerView: UIView {
     }
 
     // MARK: - Initialization
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: .zero, inputViewStyle: .keyboard)
+        initialize()
+    }
+
+    override init(frame: CGRect, inputViewStyle: UIInputView.Style) {
+        super.init(frame: frame, inputViewStyle: inputViewStyle)
         initialize()
     }
 
@@ -35,11 +40,16 @@ final class BankCardExpirationDatePickerView: UIView {
         initialize()
     }
 
+    // MARK: - Overrides
+    override var intrinsicContentSize: CGSize {
+        return CGSize(width: UIView.noIntrinsicMetric, height: Constants.defaultHeight + safeAreaInsets.bottom)
+    }
+
     // MARK: - Private
     private func initialize() {
-        autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        translatesAutoresizingMaskIntoConstraints = false
 
-        embedSubview(pickerView)
+        embedSubview(pickerView, useSafeAreaAnchors: true)
 
         pickerView.dataSource = self
         pickerView.delegate = self
@@ -154,8 +164,9 @@ extension BankCardExpirationDatePickerView: UIPickerViewDelegate {
         let yearRow = pickerView.selectedRow(inComponent: Constants.yearComponent)
         let month = row % Constants.monthsPerYear
         let value = (validMonthsRange.lowerBound / Constants.monthsPerYear + yearRow) * Constants.monthsPerYear + month
+        let title = String(format: "%02d", month + 1) + " - " + monthNames[month]
 
-        return monthNames[month].attributed(with: validMonthsRange.contains(value) ? .enabled : .disabled)
+        return title.attributed(with: validMonthsRange.contains(value) ? .enabled : .disabled)
     }
 }
 
@@ -187,6 +198,8 @@ private enum Constants {
     static let yearComponent: Int = 1
 
     static let numberOfMonthRows: Int = 250 * 2 * monthsPerYear
+
+    static let defaultHeight: CGFloat = 216
 }
 
 private extension TextAttributes {

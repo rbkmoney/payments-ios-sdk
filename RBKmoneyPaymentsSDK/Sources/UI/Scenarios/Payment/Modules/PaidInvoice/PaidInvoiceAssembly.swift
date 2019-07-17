@@ -14,8 +14,6 @@
 
 final class PaidInvoiceAssembly: ViewControllerAssembly<PaidInvoiceViewController, PaidInvoiceViewModel> {
 
-    // MARK: - Public
-
     // MARK: - Internal
     func makeViewController(router: AnyRouter<PaymentRoute>, inputData: PaidInvoiceInputData) -> PaidInvoiceViewController {
         let viewController = R.storyboard.paidInvoice.initial()!

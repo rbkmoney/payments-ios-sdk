@@ -19,3 +19,9 @@ extension PriceFormatter: UnpaidInvoicePriceFormatter {
 
 extension InvoiceDetailsFormatter: UnpaidInvoiceInvoiceDetailsFormatter {
 }
+
+extension ErrorMessageFactory: UnpaidInvoiceErrorMessageFactory {
+}
+
+extension PaymentErrorMapper: UnpaidInvoicePaymentErrorMapper {
+}

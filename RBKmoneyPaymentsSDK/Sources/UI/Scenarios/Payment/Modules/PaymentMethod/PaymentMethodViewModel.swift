@@ -116,12 +116,12 @@ final class PaymentMethodViewModel: ModuleViewModel {
     private lazy var invoiceMapper: InvoiceMapper = { invoice in
         let currentDate = Date()
 
-        guard invoice.dueDate > currentDate else {
-            throw PaymentError(.invoiceExpired, invoice: invoice)
-        }
-
         guard invoice.status == .unpaid else {
             throw PaymentError(.unexpectedInvoiceStatus, invoice: invoice)
+        }
+
+        guard invoice.dueDate > currentDate else {
+            throw PaymentError(.invoiceExpired, invoice: invoice)
         }
 
         return invoice

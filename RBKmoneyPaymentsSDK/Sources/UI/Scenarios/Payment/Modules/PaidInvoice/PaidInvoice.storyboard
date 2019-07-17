@@ -21,20 +21,97 @@
                             <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1sk-AR-IqR" customClass="GradientBackgroundView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🥳" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Dw-XR-PSH">
-                                <rect key="frame" x="144.5" y="286" width="86" height="95.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="80"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <scrollView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" keyboardDismissMode="interactive" translatesAutoresizingMaskIntoConstraints="NO" id="Mhz-kS-0KT">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gzJ-Tq-BYf">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="647.5"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="100" translatesAutoresizingMaskIntoConstraints="NO" id="Lma-AI-seO" customClass="InvoiceSummaryView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BeM-BQ-d8j">
+                                                <rect key="frame" x="5" y="113" width="365" height="384.5"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7yc-Oc-p2Q">
+                                                        <rect key="frame" x="20" y="45" width="325" height="23"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Result/paid" translatesAutoresizingMaskIntoConstraints="NO" id="p48-wH-boA">
+                                                        <rect key="frame" x="139.5" y="103" width="86" height="86"/>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jfL-QL-7uS">
+                                                        <rect key="frame" x="20" y="234" width="325" height="20.5"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mBH-6W-bQN">
+                                                        <rect key="frame" x="20" y="284.5" width="325" height="45"/>
+                                                        <color key="backgroundColor" red="0.92549019610000005" green="0.21176470589999999" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="45" id="Sax-GL-rEi"/>
+                                                        </constraints>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.59140625000000002" green="0.72857142860000002" blue="0.32215401789999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="7yc-Oc-p2Q" secondAttribute="trailing" constant="20" id="2EH-db-B2x"/>
+                                                    <constraint firstItem="p48-wH-boA" firstAttribute="top" secondItem="7yc-Oc-p2Q" secondAttribute="bottom" constant="35" id="FCF-jd-HaM"/>
+                                                    <constraint firstItem="jfL-QL-7uS" firstAttribute="top" secondItem="p48-wH-boA" secondAttribute="bottom" constant="45" id="GUe-Rs-1RE"/>
+                                                    <constraint firstItem="mBH-6W-bQN" firstAttribute="top" secondItem="jfL-QL-7uS" secondAttribute="bottom" constant="30" id="JeW-2S-b0K"/>
+                                                    <constraint firstItem="p48-wH-boA" firstAttribute="centerX" secondItem="BeM-BQ-d8j" secondAttribute="centerX" id="JxL-oy-KEu"/>
+                                                    <constraint firstItem="mBH-6W-bQN" firstAttribute="trailing" secondItem="7yc-Oc-p2Q" secondAttribute="trailing" id="Lg0-RP-z9q"/>
+                                                    <constraint firstItem="mBH-6W-bQN" firstAttribute="leading" secondItem="7yc-Oc-p2Q" secondAttribute="leading" id="Vxc-1f-FVq"/>
+                                                    <constraint firstItem="jfL-QL-7uS" firstAttribute="leading" secondItem="7yc-Oc-p2Q" secondAttribute="leading" id="aT1-P9-pcq"/>
+                                                    <constraint firstItem="7yc-Oc-p2Q" firstAttribute="top" secondItem="BeM-BQ-d8j" secondAttribute="top" constant="45" id="abC-Rd-TlG"/>
+                                                    <constraint firstItem="jfL-QL-7uS" firstAttribute="trailing" secondItem="7yc-Oc-p2Q" secondAttribute="trailing" id="drX-oz-vjb"/>
+                                                    <constraint firstAttribute="bottom" secondItem="mBH-6W-bQN" secondAttribute="bottom" constant="55" id="hXn-sj-xob"/>
+                                                    <constraint firstItem="7yc-Oc-p2Q" firstAttribute="leading" secondItem="BeM-BQ-d8j" secondAttribute="leading" constant="20" id="n99-zw-K40"/>
+                                                </constraints>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HKc-FV-6sL" customClass="LogotypesView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="521.5" width="375" height="126"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="126" id="lEx-kq-WKs"/>
+                                                </constraints>
+                                            </view>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="HKc-FV-6sL" secondAttribute="trailing" id="4Te-OF-ZVU"/>
+                                            <constraint firstItem="Lma-AI-seO" firstAttribute="top" secondItem="gzJ-Tq-BYf" secondAttribute="top" id="Jur-Ci-5Yr"/>
+                                            <constraint firstItem="BeM-BQ-d8j" firstAttribute="top" secondItem="Lma-AI-seO" secondAttribute="bottom" constant="13" id="KgI-4U-DYV"/>
+                                            <constraint firstAttribute="trailing" secondItem="BeM-BQ-d8j" secondAttribute="trailing" constant="5" id="LCj-99-WVS"/>
+                                            <constraint firstItem="Lma-AI-seO" firstAttribute="leading" secondItem="gzJ-Tq-BYf" secondAttribute="leading" id="NB2-og-Qv2"/>
+                                            <constraint firstAttribute="trailing" secondItem="Lma-AI-seO" secondAttribute="trailing" id="TQr-Sx-Fb6"/>
+                                            <constraint firstAttribute="bottom" secondItem="HKc-FV-6sL" secondAttribute="bottom" id="amn-XU-4Cu"/>
+                                            <constraint firstItem="HKc-FV-6sL" firstAttribute="leading" secondItem="gzJ-Tq-BYf" secondAttribute="leading" id="g1l-cJ-3p2"/>
+                                            <constraint firstItem="BeM-BQ-d8j" firstAttribute="leading" secondItem="gzJ-Tq-BYf" secondAttribute="leading" constant="5" id="hgg-I3-Gbd"/>
+                                            <constraint firstItem="HKc-FV-6sL" firstAttribute="top" secondItem="BeM-BQ-d8j" secondAttribute="bottom" constant="24" id="s23-mU-FXs"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="gzJ-Tq-BYf" firstAttribute="leading" secondItem="Mhz-kS-0KT" secondAttribute="leading" id="4c1-aa-Hq1"/>
+                                    <constraint firstItem="gzJ-Tq-BYf" firstAttribute="top" secondItem="Mhz-kS-0KT" secondAttribute="top" id="5Fh-tf-RWg"/>
+                                    <constraint firstAttribute="bottom" secondItem="gzJ-Tq-BYf" secondAttribute="bottom" id="8YU-ih-z1C"/>
+                                    <constraint firstAttribute="trailing" secondItem="gzJ-Tq-BYf" secondAttribute="trailing" id="Lpe-NM-Ghm"/>
+                                    <constraint firstItem="gzJ-Tq-BYf" firstAttribute="width" secondItem="Mhz-kS-0KT" secondAttribute="width" id="hTf-cL-nq9"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.85563380280000001" green="0.235915493" blue="0.21478873239999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="8Dw-XR-PSH" firstAttribute="centerY" secondItem="kKr-70-3MS" secondAttribute="centerY" id="Buh-ot-sGG"/>
+                            <constraint firstItem="Mhz-kS-0KT" firstAttribute="leading" secondItem="IPU-ZT-f8S" secondAttribute="leading" id="91K-YW-4f0"/>
+                            <constraint firstItem="IPU-ZT-f8S" firstAttribute="bottom" secondItem="Mhz-kS-0KT" secondAttribute="bottom" id="AwJ-fY-KZ2"/>
                             <constraint firstItem="1sk-AR-IqR" firstAttribute="top" secondItem="kKr-70-3MS" secondAttribute="top" id="HTK-tR-epy"/>
+                            <constraint firstItem="Mhz-kS-0KT" firstAttribute="top" secondItem="IPU-ZT-f8S" secondAttribute="top" id="LLw-T2-UN2"/>
                             <constraint firstAttribute="trailing" secondItem="1sk-AR-IqR" secondAttribute="trailing" id="Osh-LQ-Kg6"/>
                             <constraint firstAttribute="bottom" secondItem="1sk-AR-IqR" secondAttribute="bottom" id="ay7-GH-8PW"/>
-                            <constraint firstItem="8Dw-XR-PSH" firstAttribute="centerX" secondItem="kKr-70-3MS" secondAttribute="centerX" id="ovd-sZ-MFg"/>
+                            <constraint firstItem="IPU-ZT-f8S" firstAttribute="trailing" secondItem="Mhz-kS-0KT" secondAttribute="trailing" id="nNE-H0-xv2"/>
                             <constraint firstItem="1sk-AR-IqR" firstAttribute="leading" secondItem="kKr-70-3MS" secondAttribute="leading" id="saH-ga-xS7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IPU-ZT-f8S"/>
@@ -44,15 +121,21 @@
                         <barButtonItem key="rightBarButtonItem" image="Common/close" id="a1g-zo-mlt"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="contentView" destination="BeM-BQ-d8j" id="s8V-fM-qHQ"/>
                         <outlet property="doneBarButtonItem" destination="a1g-zo-mlt" id="Yot-iy-jH8"/>
+                        <outlet property="doneButton" destination="mBH-6W-bQN" id="kzu-sf-ARS"/>
+                        <outlet property="headerView" destination="Lma-AI-seO" id="r1Y-zx-AGe"/>
+                        <outlet property="messageLabel" destination="jfL-QL-7uS" id="p8z-mu-dgy"/>
+                        <outlet property="titleLabel" destination="7yc-Oc-p2Q" id="sta-3b-CZZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yJM-GT-hGU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-97" y="161"/>
+            <point key="canvasLocation" x="-98.400000000000006" y="160.56971514242881"/>
         </scene>
     </scenes>
     <resources>
         <image name="Common/close" width="24" height="24"/>
+        <image name="Result/paid" width="86" height="86"/>
     </resources>
 </document>

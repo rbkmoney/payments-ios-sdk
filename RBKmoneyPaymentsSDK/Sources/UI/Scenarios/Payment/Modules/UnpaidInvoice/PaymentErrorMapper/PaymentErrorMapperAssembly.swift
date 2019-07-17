@@ -12,9 +12,15 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import CoreGraphics
+import Foundation
 
-protocol PaymentRootViewControllerSystemInfoProvider {
+enum PaymentErrorMapperAssembly {
 
-    var isPhoneDevice: Bool { get }
+    // MARK: - Internal
+    static func makeMapper() -> PaymentErrorMapper {
+        return mapperInstance
+    }
+
+    // MARK: - Private
+    private static let mapperInstance = PaymentErrorMapper()
 }

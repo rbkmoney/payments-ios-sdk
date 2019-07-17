@@ -23,3 +23,15 @@ protocol UnpaidInvoiceInvoiceDetailsFormatter {
 
     func formattedDetails(invoice: InvoiceDTO) -> String
 }
+
+protocol UnpaidInvoiceErrorMessageFactory {
+
+    func errorMessage(for error: Error) -> String
+}
+
+protocol UnpaidInvoicePaymentErrorMapper {
+
+    func retryRoute(for error: PaymentError) -> PaymentRoute?
+    func reenterDataRoute(for error: PaymentError) -> PaymentRoute?
+    func restartScenarioRoute(for error: PaymentError) -> PaymentRoute?
+}

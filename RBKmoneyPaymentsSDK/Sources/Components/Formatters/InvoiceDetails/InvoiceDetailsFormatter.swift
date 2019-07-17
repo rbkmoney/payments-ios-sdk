@@ -18,7 +18,17 @@ struct InvoiceDetailsFormatter {
 
     // MARK: - Internal
     func formattedDetails(invoice: InvoiceDTO) -> String {
-        let joined = [invoice.productName, invoice.description ?? ""]
+        let products: [String]
+
+        if let cartItems = invoice.cart, cartItems.count > 1 {
+            products = cartItems.map { "\($0.productName) × \($0.quantity)" }
+        } else {
+            products = [invoice.productName]
+        }
+
+        let parts = products + [invoice.description ?? ""]
+
+        let joined = parts
             .flatMap { $0.components(separatedBy: ".") }
             .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
             .filter { !$0.isEmpty }

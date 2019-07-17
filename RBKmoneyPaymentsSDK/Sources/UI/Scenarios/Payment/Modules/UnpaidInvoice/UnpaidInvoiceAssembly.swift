@@ -14,8 +14,6 @@
 
 final class UnpaidInvoiceAssembly: ViewControllerAssembly<UnpaidInvoiceViewController, UnpaidInvoiceViewModel> {
 
-    // MARK: - Public
-
     // MARK: - Internal
     func makeViewController(router: AnyRouter<PaymentRoute>, inputData: UnpaidInvoiceInputData) -> UnpaidInvoiceViewController {
         let viewController = R.storyboard.unpaidInvoice.initial()!
@@ -26,6 +24,8 @@ final class UnpaidInvoiceAssembly: ViewControllerAssembly<UnpaidInvoiceViewContr
         bindViewModel(to: viewController) {
             $0.router = router
             $0.inputData = inputData
+            $0.errorMessageFactory = ErrorMessageFactoryAssembly.makeFactory()
+            $0.paymentErrorMapper = PaymentErrorMapperAssembly.makeMapper()
         }
 
         return viewController
