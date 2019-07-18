@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>EXAMPLE  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+
+
+    <a title="EXAMPLE  Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+          RBKmoneyPaymentsSDK 1.0.0 Docs
+        </a>
+         (100% documented)
+      </p>
+    
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/rbkmoney/payments-ios-sdk">
+            <img class="header-icon" src="img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html">RBKmoneyPaymentsSDK Reference</a>
+      <img class="carat" src="img/carat.png" />
+      EXAMPLE  Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="changelog.html">CHANGELOG</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="example.html">EXAMPLE</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/PaymentMethod.html">PaymentMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/PaymentRootViewControllerAssembly.html">PaymentRootViewControllerAssembly</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/PaymentDelegate.html">PaymentDelegate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/PaymentInputData.html">PaymentInputData</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            
+            <h1 id='example' class='heading'>Example</h1>
+<h2 id='' class='heading'>Порядок разворачивания проекта</h2>
+
+<p>В проекте используем Ruby гемы: <strong>CocoaPods</strong> (<a href="https://cocoapods.org">https://cocoapods.org</a>)</p>
+
+<p>Для управления версией Ruby используем <strong>rbenv</strong> (<a href="https://blog.metova.com/choosing-a-ruby-version-management-tool">https://blog.metova.com/choosing-a-ruby-version-management-tool</a>)</p>
+
+<p>Для управления гемами проекта используем <strong>bundler</strong> (<a href="http://bundler.io">http://bundler.io</a>)</p>
+
+<p>Для сборки проекта необходим актуальный <strong>iOS SDK / Xcode</strong> (iOS 12.2 SDK / Xcode 10.2.1 (10E1001) на момент создания этого документа)</p>
+
+<ol>
+<li><p>Установить Homebrew + rbenv (если уже установлено, то пропускаем этот шаг)</p>
+<pre class="highlight shell"><code>/usr/bin/ruby -e <span class="s2">"</span><span class="k">$(</span>curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install<span class="k">)</span><span class="s2">"</span>
+brew install rbenv
+</code></pre></li>
+<li><p>Установить необходимую версию Ruby (смотри версию в файле .ruby-version в папке проекта) (если уже установлено, то пропускаем этот шаг)</p>
+<pre class="highlight shell"><code>rbenv install 2.6.1
+</code></pre></li>
+<li><p>Добавить в конец файла ~/.bash_profile (если уже настроено, то переходим к шагу 5)</p>
+<pre class="highlight shell"><code><span class="nb">export </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/.rbenv/bin:</span><span class="nv">$PATH</span><span class="s2">"</span>
+<span class="nb">eval</span> <span class="s2">"</span><span class="k">$(</span>rbenv init -<span class="k">)</span><span class="s2">"</span>
+</code></pre></li>
+<li><p>Перезапустить Terminal</p></li>
+<li><p>Установить bundler (если уже установлено, то пропускаем этот шаг)</p>
+<pre class="highlight shell"><code>gem install bundler
+</code></pre></li>
+<li><p>Склонировать репозиторий проекта, в терминале перейти в папку проекта</p></li>
+<li><p>Установить описаные в Gemfile зависимости</p>
+<pre class="highlight shell"><code>bundle install
+</code></pre></li>
+<li><p>Установить описанные в Podfile зависимости</p>
+<pre class="highlight shell"><code>bundle <span class="nb">exec </span>pod install --repo-update
+</code></pre></li>
+<li><p>Открыть RBKmoneyPaymentsSDK.xcworkspace в Xcode</p></li>
+</ol>
+<h2 id='' class='heading'>Настройки</h2>
+
+<p>Различные идентификаторы вынесены в приватный xcconfig файл (Private.Example.Debug.xcconfig для debug конфигурации, Private.Example.Release.xcconfig для release конфигурации). Необходимо создать эти файлы и указать идентификаторы.</p>
+
+<p>Содержимое файлов имеет следующий примерный вид:</p>
+<pre class="highlight plaintext"><code>  PRODUCT_BUNDLE_IDENTIFIER = &lt;your app bundle identifier&gt;
+  DEVELOPMENT_TEAM = &lt;dev team&gt;
+  APPLE_PAY_MERCHANT_IDENTIFIER = &lt;apple pay merchant identifier&gt;
+  PROVISIONING_PROFILE_SPECIFIER = &lt;provisioning profile specifier&gt;
+</code></pre>
+
+<p>Файлы необходимо положить по следующему пути:</p>
+<pre class="highlight plaintext"><code>  Example
+  ├─ Resources
+  ├─ Sources
+  └─ Supporting Files
+     ├─ ....
+     ├─ ....
+     └─ Private
+        ├─ Private.Example.Debug.xcconfig
+        └─ Private.Example.Release.xcconfig
+</code></pre>
+
+<p>Проект сам по себе уже полностью настроен на работу с Apple Pay согласно <a href="https://developer.apple.com/documentation/passkit/apple_pay/setting_up_apple_pay_requirements">документу</a>, но требуются внешние (по отношению к проекту) настройки - <a href="https://developer.apple.com/account/resources/certificates/">в панели разработчика Apple</a> и настройка Apple Pay на стороне сервера RBKmoney. После настройки необходимо указать APPLE_PAY_MERCHANT_IDENTIFIER в xcconfig файле. Если же Apple Pay не требуется или выполнение настроек не представляется возможным, то можно удалить все упоминания APPLE_PAY_MERCHANT_IDENTIFIER во всех файлах проекта (найти поиском).</p>
+<h2 id='' class='heading'>Сборка проекта, таргеты</h2>
+
+<p>Воркспейс содержит 3 таргета:</p>
+
+<ul>
+<li>Example - демо-приложение с интеграцией SDK через embedded framework (зависимость от таргета Framework) (используется при разработке SDK)</li>
+<li>Example+Pods - демо-приложение с интеграцией SDK через CocoaPods (рекомендуемый вариант использования SDK)</li>
+<li>Framework - сборка SDK в фреймворк</li>
+</ul>
+
+<p>Для сборки и запуска проекта используется либо первый, либо второй таргет.</p>
+
+          </div>
+        </section>
+
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2019 <a class="link" href="https://rbk.money" target="_blank" rel="external">RBKmoney</a>. All rights reserved. (Last updated: 2019-07-18)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

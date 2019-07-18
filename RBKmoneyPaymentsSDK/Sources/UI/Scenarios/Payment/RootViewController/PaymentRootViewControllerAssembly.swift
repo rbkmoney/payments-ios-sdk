@@ -14,9 +14,26 @@
 
 import UIKit
 
+/// Сборка, предоставляющая статический метод для создания корневого вьюконтроллера сценария "Payment".
 public enum PaymentRootViewControllerAssembly {
 
-    // MARK: - Public
+    /// Создает корневой вьюконтроллер для сценария "Payment".
+    ///
+    /// Последовательность действий для отображения пользователю UI оплаты инвойса включает в себя:
+    ///
+    /// * создание корневого вьюконтроллера с указанием параметров и делегата
+    /// * представление пользователю UI сценария модально методом
+    ///   [UIViewController.present(_:animated:completion:)](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621380-present)
+    /// * реализация методов делегата, вызываемых при отмене и завершении платежа
+    /// * скрытие UI сценария после обработки отмены/завершения платежа методом
+    ///   [UIViewController.dismiss(animated:completion:)](https://developer.apple.com/documentation/uikit/uiviewcontroller/1621505-dismiss)
+    ///
+    /// - Parameter paymentInputData: Набор входных параметров для сценария
+    ///
+    /// - Parameter paymentDelegate: Объект, реализующий протокол делегата сценария "Payment". Сценарий будет иметь слабую ссылку на этот объект,
+    ///   поэтому ответственность за время жизни этого объекта целиком и полностью лежит на вызывающем коде
+    ///
+    /// - Returns: Сконфигурированный корневой вьюконтроллер сценария
     public static func makeViewController(paymentInputData: PaymentInputData, paymentDelegate: PaymentDelegate) -> UIViewController {
         let rootViewController = PaymentRootViewController()
 
@@ -39,7 +56,6 @@ public enum PaymentRootViewControllerAssembly {
         return rootViewController
     }
 
-    // MARK: - Private
     private enum AssociatedObjectKey {
         static var router: Int32 = 0
     }

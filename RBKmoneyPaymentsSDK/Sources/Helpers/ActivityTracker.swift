@@ -39,14 +39,14 @@ private struct ActivityToken<Element>: ObservableConvertibleType, Disposable {
 
 class ActivityTracker: SharedSequenceConvertibleType {
 
-    public typealias Element = Bool
-    public typealias SharingStrategy = DriverSharingStrategy
+    typealias Element = Bool
+    typealias SharingStrategy = DriverSharingStrategy
 
     private let _lock = NSRecursiveLock()
     private let _relay = BehaviorRelay(value: 0)
     private let _loading: SharedSequence<SharingStrategy, Bool>
 
-    public init() {
+    init() {
         _loading = _relay.asDriver()
             .map { $0 > 0 }
             .distinctUntilChanged()
@@ -76,7 +76,7 @@ class ActivityTracker: SharedSequenceConvertibleType {
         }
     }
 
-    public func asSharedSequence() -> SharedSequence<SharingStrategy, Element> {
+    func asSharedSequence() -> SharedSequence<SharingStrategy, Element> {
         return _loading
     }
 }

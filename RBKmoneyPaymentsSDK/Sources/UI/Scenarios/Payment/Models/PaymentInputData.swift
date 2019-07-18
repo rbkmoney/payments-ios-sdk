@@ -14,20 +14,53 @@
 
 import Foundation
 
+/// Набор входных параметров для сценария "Payment".
 public struct PaymentInputData {
 
+    /// Идентификатор инвойса, который необходимо оплатить. Больше подробностей можно найти в
+    /// [документации RBKmoney](https://developer.rbk.money/api/#tag/Invoices).
     public let invoiceIdentifier: String
 
+    /// Токен доступа, имеющий необходимые права для проведения операций с указанным инвойсом. Обычно это токен доступа инвойса. Больше подробностей
+    /// можно найти в [документации RBKmoney](https://developer.rbk.money/api/#tag/Invoices).
     public let invoiceAccessToken: String
 
+    /// Название магазина.
+    ///
+    /// Произвольная строка текста, которая будет отображаться в заголовке экранов, отображаемых пользователю.
     public let shopName: String
 
+    /// Email плательщика.
+    ///
+    /// Если перед отображением UI сценария email плательщика уже известен, то его можно указать в этом параметре. Значение будет использовано в
+    /// качестве начального значения поля email на разных экранах, отображаемых пользователю. В любом случае, пользователь будет иметь возможность
+    /// изменить значение поля email через UI.
     public let payerEmail: String?
 
+    /// Разрешенные методы оплаты.
+    ///
+    /// Методы оплаты, которые разрешено использовать для оплаты инвойса. Конечный список методов оплаты, отображаемый пользователю в UI, будет
+    /// зависеть от перечисленных в этом параметре методов и от требований, накладываемых каждым методом оплаты в отдельности. Требования указаны в
+    /// описании перечисления `PaymentMethod`.
+    ///
+    /// Например, можно разрешить оплату только банковской картой, при этом другие методы не будут отображены в UI даже при возможности их
+    /// применения.
     public let allowedPaymentMethods: [PaymentMethod]
 
+    /// Идентификатор Apple Pay Merchant.
+    ///
+    /// Идентификатор продавца является необходимым, в числе прочих требований, для оплаты с помощью Apple Pay. Больше подробностей можно найти в
+    /// [документации по настройке Apple Pay](https://developer.apple.com/documentation/passkit/apple_pay/setting_up_apple_pay_requirements).
     public let applePayMerchantIdentifier: String?
 
+    /// Инициализатор структуры.
+    ///
+    /// - Parameter invoiceIdentifier: обязательный
+    /// - Parameter invoiceAccessToken: обязательный
+    /// - Parameter shopName: обязательный
+    /// - Parameter payerEmail: необязательный, по умолчанию - nil
+    /// - Parameter allowedPaymentMethods: обязательный, по умолчанию - все доступные методы
+    /// - Parameter applePayMerchantIdentifier: необязательный, по умолчанию - nil
     public init(invoiceIdentifier: String,
                 invoiceAccessToken: String,
                 shopName: String,

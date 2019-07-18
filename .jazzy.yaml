@@ -1,0 +1,27 @@
+output: Docs
+
+clean: true
+
+disable_search: true
+
+author: RBKmoney
+
+author_url: https://rbk.money
+
+module: RBKmoneyPaymentsSDK
+
+module_version: 1.0.0
+
+github_url: https://github.com/rbkmoney/payments-ios-sdk
+
+github_file_prefix: https://github.com/rbkmoney/payments-ios-sdk/tree/1.0.0
+
+theme: fullwidth
+
+documentation:
+  - CHANGELOG.md
+  - EXAMPLE.md
+
+readme: README.md
+
+podspec: RBKmoneyPaymentsSDK.podspec
