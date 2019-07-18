@@ -107,10 +107,13 @@ final class BankCardViewModel: ModuleViewModel {
                 )
 
                 return createPaymentResource
-                    .map { .paymentProgress(.init(invoice: data.parameters.invoice, source: .resource($0, payerEmail: email))) }
+                    .map {
+                        let source = PaymentProgressInputData.Parameters.Source.resource($0, payerEmail: email, paymentExternalIdentifier: nil)
+                        return .paymentProgress(.init(parameters: data.parameters, source: source))
+                    }
                     .retry(using: errorHandlerProvider)
                     .catchError {
-                        .just(.unpaidInvoice(.init(.cannotCreatePaymentResource, underlyingError: $0, invoice: data.parameters.invoice)))
+                        .just(.unpaidInvoice(.init(.cannotCreatePaymentResource, underlyingError: $0, parameters: data.parameters)))
                     }
                     .trackActivity(activityTracker)
             }
@@ -305,4 +308,24 @@ final class BankCardViewModel: ModuleViewModel {
         }
 
     private let activityTracker = ActivityTracker()
+}
+
+private extension PaymentProgressInputData.Parameters {
+
+    init(parameters: BankCardInputData.Parameters, source: Source) {
+        self.init(invoice: parameters.invoice, paymentMethod: .bankCard, paymentSystems: parameters.paymentSystems, source: source)
+    }
+}
+
+private extension PaymentError {
+
+    init(_ code: Code, underlyingError: Error?, parameters: BankCardInputData.Parameters) {
+        self.init(
+            code,
+            underlyingError: underlyingError,
+            invoice: parameters.invoice,
+            paymentMethod: .bankCard,
+            paymentSystems: parameters.paymentSystems
+        )
+    }
 }

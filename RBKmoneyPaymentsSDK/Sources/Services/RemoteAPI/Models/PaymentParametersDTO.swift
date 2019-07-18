@@ -16,6 +16,13 @@ import Foundation
 
 struct PaymentParametersDTO: Codable {
 
+    enum CodingKeys: String, CodingKey {
+        case externalIdentifier = "externalID"
+        case flow
+        case payer
+    }
+
+    let externalIdentifier: String
     let flow: PaymentFlowDTO
     let payer: PayerDTO
 }

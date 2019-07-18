@@ -11,7 +11,6 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LogotypesView" customModule="RBKmoneyPaymentsSDK" customModuleProvider="target">
             <connections>
-                <outlet property="copyrightLabel" destination="Qod-0O-f9J" id="kBg-MA-ZuQ"/>
                 <outlet property="lockImageView" destination="89A-UX-x8Y" id="bJ0-9d-uSF"/>
                 <outlet property="logotypesImageView" destination="3hI-CP-krh" id="rXa-8l-Wc1"/>
                 <outlet property="rbkMoneyImageView" destination="dta-wN-oYU" id="QOq-Ps-8zF"/>
@@ -20,7 +19,7 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view userInteractionEnabled="NO" contentMode="scaleToFill" id="tN3-mk-6an">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="150"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <stackView opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="oC4-Mv-IiP">
@@ -43,21 +42,12 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BottomLogos/3ds_pci_dss" translatesAutoresizingMaskIntoConstraints="NO" id="3hI-CP-krh">
                     <rect key="frame" x="20" y="44" width="280" height="50"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qod-0O-f9J">
-                    <rect key="frame" x="71" y="109" width="178" height="20.5"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <constraints>
                 <constraint firstItem="oC4-Mv-IiP" firstAttribute="top" secondItem="tN3-mk-6an" secondAttribute="top" id="1Lr-ub-I7S"/>
                 <constraint firstItem="oC4-Mv-IiP" firstAttribute="centerX" secondItem="tN3-mk-6an" secondAttribute="centerX" id="MXp-c1-AxM"/>
                 <constraint firstItem="3hI-CP-krh" firstAttribute="centerX" secondItem="tN3-mk-6an" secondAttribute="centerX" id="T7g-XV-Nbx"/>
-                <constraint firstItem="Qod-0O-f9J" firstAttribute="leading" secondItem="oC4-Mv-IiP" secondAttribute="leading" id="Xd5-vo-JhL"/>
                 <constraint firstItem="3hI-CP-krh" firstAttribute="top" secondItem="oC4-Mv-IiP" secondAttribute="bottom" constant="8" id="Y0b-Gn-qJi"/>
-                <constraint firstItem="Qod-0O-f9J" firstAttribute="top" secondItem="3hI-CP-krh" secondAttribute="bottom" constant="15" id="h1d-Ti-yu2"/>
-                <constraint firstItem="Qod-0O-f9J" firstAttribute="trailing" secondItem="oC4-Mv-IiP" secondAttribute="trailing" id="nas-cE-Vnr"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>

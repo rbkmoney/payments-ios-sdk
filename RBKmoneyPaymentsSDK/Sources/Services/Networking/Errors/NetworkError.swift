@@ -22,6 +22,7 @@ struct NetworkError: Error {
         case serverError(ServerErrorDTO)
         case unacceptableResponseStatusCode(Int)
         case wrongResponseType
+        case elementNotFound
     }
 
     let code: Code

@@ -14,10 +14,16 @@
 
 import Foundation
 
-struct NetworkRequestIdentifierGenerator {
+/// https://developer.rbk.money/api/#operation/getPayments
+struct ObtainPaymentsNetworkRequest: NetworkRequest {
 
-    // MARK: - Internal
-    func generateIdentifier() -> String {
-        return UUID().uuidString.replacingOccurrences(of: "-", with: "")
+    let httpMethod: NetworkRequestHTTPMethod = .get
+    let path: NetworkRequestPath
+    let bodyParameters: NetworkRequestParameters = .none
+    let authorizationToken: String?
+
+    init(invoiceIdentifier: String, invoiceAccessToken: String) {
+        path = .relative("processing/invoices/\(invoiceIdentifier)/payments")
+        authorizationToken = invoiceAccessToken
     }
 }

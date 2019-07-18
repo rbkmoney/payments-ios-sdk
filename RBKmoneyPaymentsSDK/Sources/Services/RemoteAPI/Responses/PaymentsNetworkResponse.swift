@@ -12,11 +12,6 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-struct ApplePayRequestData {
+import Foundation
 
-    let invoice: InvoiceDTO
-    let paymentSystems: [PaymentSystem]
-    let merchantIdentifier: String
-    let countryCode: String
-    let shopName: String
-}
+typealias PaymentsNetworkResponse = DecodableNetworkResponse<[PaymentDTO]>

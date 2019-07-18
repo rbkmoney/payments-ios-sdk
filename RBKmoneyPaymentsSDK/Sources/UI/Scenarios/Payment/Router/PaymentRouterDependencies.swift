@@ -16,35 +16,12 @@ import UIKit
 
 protocol PaymentRouterRootViewControllerTransitionConfigurator {
 
-    var pushTransitionStyle: TransitionStyle { get set }
-    var popTransitionStyle: TransitionStyle { get set }
+    var transitionStyle: TransitionStyle { get set }
 }
 
 protocol PaymentRouterRootViewController {
 
     func setViewControllers(_ viewControllers: [UIViewController], animated: Bool, transitionStyle: TransitionStyle)
-    func pushViewController(_ viewController: UIViewController, animated: Bool, transitionStyle: TransitionStyle)
-    func popViewController(animated: Bool, transitionStyle: TransitionStyle)
-    func popToRootViewController(animated: Bool, transitionStyle: TransitionStyle)
 
     var viewControllers: [UIViewController] { get }
-}
-
-extension PaymentRouterRootViewController {
-
-    func setViewControllers(_ viewControllers: [UIViewController], animated: Bool) {
-        setViewControllers(viewControllers, animated: animated, transitionStyle: .default)
-    }
-
-    func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        pushViewController(viewController, animated: animated, transitionStyle: .default)
-    }
-
-    func popViewController(animated: Bool) {
-        popViewController(animated: animated, transitionStyle: .default)
-    }
-
-    func popToRootViewController(animated: Bool) {
-        popToRootViewController(animated: animated, transitionStyle: .default)
-    }
 }

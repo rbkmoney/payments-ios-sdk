@@ -18,5 +18,5 @@ public protocol PaymentDelegate: class {
 
     func paymentCancelled(invoiceIdentifier: String)
 
-    func paymentFinished(invoiceIdentifier: String)
+    func paymentFinished(invoiceIdentifier: String, paymentMethod: PaymentMethod)
 }

@@ -17,8 +17,7 @@ import UIKit
 final class NavigationTransitionConfigurator: NSObject, UINavigationControllerDelegate {
 
     // MARK: - Internal
-    var pushTransitionStyle: TransitionStyle = .default
-    var popTransitionStyle: TransitionStyle = .default
+    var transitionStyle: TransitionStyle = .default
 
     // MARK: - UINavigationControllerDelegate
     func navigationController(_ navigationController: UINavigationController,
@@ -27,7 +26,7 @@ final class NavigationTransitionConfigurator: NSObject, UINavigationControllerDe
                               to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 
         switch operation {
-        case .push where pushTransitionStyle == .fade:
+        case .push where transitionStyle == .fade:
             return PushFadeAnimator()
         default:
             return nil

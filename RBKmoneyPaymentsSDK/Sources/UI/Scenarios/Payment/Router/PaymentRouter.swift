@@ -25,7 +25,7 @@ enum PaymentRoute: Route {
     case unpaidInvoice(UnpaidInvoiceInputData.Parameters)
     case back
     case cancel
-    case finish
+    case finish(PaymentMethod)
 }
 
 final class PaymentRouter: Router {
@@ -46,46 +46,50 @@ final class PaymentRouter: Router {
         case .initial:
             let inputData = PaymentMethodInputData(paymentInputData: paymentInputData)
             let module = paymentMethodAssembly.makeViewController(router: anyRouter, inputData: inputData)
-            rootViewController.setViewControllers([module], animated: true)
+            rootViewController.setViewControllers([module], animated: true, transitionStyle: .default)
 
         case .paymentMethod:
-            rootViewController.popToRootViewController(animated: true)
+            let modules = Array(rootViewController.viewControllers.prefix(1))
+            rootViewController.setViewControllers(modules, animated: true, transitionStyle: .default)
 
         case let .bankCard(parameters):
             let inputData = BankCardInputData(parameters: parameters, paymentInputData: paymentInputData)
             let module = bankCardAssembly.makeViewController(router: anyRouter, inputData: inputData)
-            rootViewController.pushViewController(module, animated: true)
+            let modules = Array(rootViewController.viewControllers.prefix(1)) + [module]
+            rootViewController.setViewControllers(modules, animated: true, transitionStyle: .default)
 
         case let .applePay(parameters):
             let inputData = ApplePayInputData(parameters: parameters, paymentInputData: paymentInputData)
             let module = applePayAssembly.makeViewController(router: anyRouter, inputData: inputData)
-            rootViewController.pushViewController(module, animated: true)
+            let modules = Array(rootViewController.viewControllers.prefix(1)) + [module]
+            rootViewController.setViewControllers(modules, animated: true, transitionStyle: .default)
 
         case let .paymentProgress(parameters):
             let inputData = PaymentProgressInputData(parameters: parameters, paymentInputData: paymentInputData)
             let module = paymentProgressAssembly.makeViewController(router: anyRouter, inputData: inputData)
-            let modules = Array(rootViewController.viewControllers.prefix(2) + [module])
+            let modules = Array(rootViewController.viewControllers.prefix(2)) + [module]
             rootViewController.setViewControllers(modules, animated: true, transitionStyle: .fade)
 
         case let .paidInvoice(parameters):
             let inputData = PaidInvoiceInputData(parameters: parameters, paymentInputData: paymentInputData)
             let module = paidInvoiceAssembly.makeViewController(router: anyRouter, inputData: inputData)
-            rootViewController.setViewControllers([module], animated: true)
+            rootViewController.setViewControllers([module], animated: true, transitionStyle: .default)
 
         case let .unpaidInvoice(parameters):
             let inputData = UnpaidInvoiceInputData(parameters: parameters, paymentInputData: paymentInputData)
             let module = unpaidInvoiceAssembly.makeViewController(router: anyRouter, inputData: inputData)
-            let modules = Array(rootViewController.viewControllers.prefix(2) + [module])
-            rootViewController.setViewControllers(modules, animated: true)
+            let modules = Array(rootViewController.viewControllers.prefix(2)) + [module]
+            rootViewController.setViewControllers(modules, animated: true, transitionStyle: .default)
 
         case .back:
-            rootViewController.popViewController(animated: true)
+            let modules = Array(rootViewController.viewControllers.dropLast())
+            rootViewController.setViewControllers(modules, animated: true, transitionStyle: .default)
 
         case .cancel:
             paymentDelegate.paymentCancelled(invoiceIdentifier: paymentInputData.invoiceIdentifier)
 
-        case .finish:
-            paymentDelegate.paymentFinished(invoiceIdentifier: paymentInputData.invoiceIdentifier)
+        case let .finish(paymentMethod):
+            paymentDelegate.paymentFinished(invoiceIdentifier: paymentInputData.invoiceIdentifier, paymentMethod: paymentMethod)
         }
     }
 

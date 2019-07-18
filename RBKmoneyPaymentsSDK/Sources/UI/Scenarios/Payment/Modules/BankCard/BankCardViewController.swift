@@ -219,6 +219,12 @@ final class BankCardViewController: UIViewController, ModuleView {
             .map { $0.formattedString }
             .emit(to: expirationDateTextField.rx.text)
             .disposed(by: disposeBag)
+
+        payButton.rx.tap
+            .bind(onNext: { [weak self] in
+                self?.view.endEditing(true)
+            })
+            .disposed(by: disposeBag)
     }
 
     private let expirationDatePickerView = BankCardExpirationDatePickerView()

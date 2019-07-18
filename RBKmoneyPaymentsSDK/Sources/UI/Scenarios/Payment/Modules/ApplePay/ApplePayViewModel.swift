@@ -65,10 +65,13 @@ final class ApplePayViewModel: ModuleViewModel {
                 )
 
                 return createPaymentResource
-                    .map { .paymentProgress(.init(invoice: data.parameters.invoice, source: .resource($0, payerEmail: email))) }
+                    .map {
+                        let source = PaymentProgressInputData.Parameters.Source.resource($0, payerEmail: email, paymentExternalIdentifier: nil)
+                        return .paymentProgress(.init(parameters: data.parameters, source: source))
+                    }
                     .retry(using: errorHandlerProvider)
                     .catchError {
-                        .just(.unpaidInvoice(.init(.cannotCreatePaymentResource, underlyingError: $0, invoice: data.parameters.invoice)))
+                        .just(.unpaidInvoice(.init(.cannotCreatePaymentResource, underlyingError: $0, parameters: data.parameters)))
                     }
                     .trackActivity(activityTracker)
             }
@@ -145,17 +148,15 @@ final class ApplePayViewModel: ModuleViewModel {
             invoice: inputData.parameters.invoice,
             paymentSystems: Array(inputData.parameters.paymentSystems),
             merchantIdentifier: merchantIdentifier,
-            countryCode: countryCode
+            countryCode: countryCode,
+            shopName: inputData.paymentInputData.shopName
         )
     }
 
-    private lazy var paymentToolWithEmail = Observable
-        .combineLatest(
-            emailRelay,
-            paymentTokenRelay,
-            inputDataObservable.compactMap { $0.paymentInputData.applePayMerchantIdentifier }
-        )
-        .flatMap { email, token, merchantIdentifier -> Observable<(PaymentToolSourceDTO, String)> in
+    private lazy var paymentToolWithEmail = paymentTokenRelay
+        .withLatestFrom(inputDataObservable.compactMap { $0.paymentInputData.applePayMerchantIdentifier }) { ($0, $1) }
+        .withLatestFrom(emailRelay) { ($0.0, $0.1, $1) }
+        .flatMap { token, merchantIdentifier, email -> Observable<(PaymentToolSourceDTO, String)> in
             guard let email = email else {
                 return .empty()
             }
@@ -196,5 +197,25 @@ private extension PKPaymentMethodType {
             assertionFailure("Unsupported payment method type")
             return "unknown"
         }
+    }
+}
+
+private extension PaymentProgressInputData.Parameters {
+
+    init(parameters: ApplePayInputData.Parameters, source: Source) {
+        self.init(invoice: parameters.invoice, paymentMethod: .applePay, paymentSystems: parameters.paymentSystems, source: source)
+    }
+}
+
+private extension PaymentError {
+
+    init(_ code: Code, underlyingError: Error?, parameters: ApplePayInputData.Parameters) {
+        self.init(
+            code,
+            underlyingError: underlyingError,
+            invoice: parameters.invoice,
+            paymentMethod: .applePay,
+            paymentSystems: parameters.paymentSystems
+        )
     }
 }

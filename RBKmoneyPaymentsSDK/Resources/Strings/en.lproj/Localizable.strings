@@ -1,0 +1,115 @@
+//
+//  Localizable.strings
+//  RBKmoneyPaymentsSDK
+//
+
+// Экран "Ввод данных карты"
+"bank_card_header_title" = "Payment with bank card";
+"bank_card_card_number_placeholder" = "Card number";
+"bank_card_date_placeholder" = "MM/YY";
+"bank_card_cvc_placeholder" = "CVV/CVC";
+"bank_card_cardholder_placeholder" = "Cardholder name";
+"bank_card_email_placeholder" = "Email";
+"bank_card_pay" = "Pay %@";
+
+// Экран "Apple Pay"
+"apple_pay_header_title" = "Apple Pay";
+"apple_pay_email_placeholder" = "Email";
+
+// Экран "Выбор платежного метода"
+"payment_method_header_title" = "Choose payment method";
+"payment_method_bank_card" = "BANK CARD";
+
+// Экран "Не оплачено"
+"unpaid_action_retry" = "Try again";
+"unpaid_action_reenter_data" = "Use another card";
+"unpaid_action_restart_scenario" = "ALL PAYMENT METHODS";
+"unpaid_status_unpaid" = "Unpaid";
+"unpaid_status_cancelled" = "Invoice cancelled";
+"unpaid_status_paid" = "Invoice already fully paid-up";
+"unpaid_status_refunded" = "Invoice refunded";
+
+// Экран "Успешная оплата"
+"paid_title" = "Successful payment!";
+"paid_description" = "Order paid.";
+"paid_card_description" = "Order paid with card %@.";
+"paid_card_with_last_digits_description" = "Order paid with card %@\U202F••\U202F%@";
+"paid_email_description" = "Receipt sent to email %@";
+"paid_action_done" = "OK";
+
+// Разное
+"secure_payment" = "SECURE PAYMENT WITH";
+"order_details" = "ORDER DETAILS";
+
+// Ошибки
+"alert_title_error" = "Error";
+
+"alert_button_ok" = "OK";
+"alert_button_nope" = "No";
+"alert_button_yes" = "Yes";
+"alert_button_cancel" = "Cancel";
+"alert_button_retry" = "Try again";
+
+// URLError
+"error_message_server_insecure_connection" = "Secure connection to the server cannot be established.";
+"error_message_server_unavailable" = "Server is not available.";
+"error_message_no_internet" = "No internet connection.";
+"error_message_request_failed" = "Request failed.";
+
+// NetworkError
+"error_message_cannot_build_request" = "Failed to build network request.";
+"error_message_response_mapping_error" = "Incorrect server response.";
+"error_message_unknown_error" = "An unknown error has occured.";
+"error_message_unacceptable_status_code" = "Unexpected server response received, HTTP code %d.";
+"error_message_element_not_found" = "Element not found.";
+
+// PaymentError
+"error_message_cannot_obtain_invoice" = "Failed to get invoice.";
+"error_message_invoice_expired" = "Invoice is expired.";
+"error_message_unexpected_invoice_status" = "Unexpected invoice status.";
+"error_message_cannot_obtain_invoice_payment_methods" = "Failed to get invoice payment methods.";
+"error_message_no_payment_methods" = "No payment methods.";
+"error_message_cannot_create_payment_resource" = "Failed to create payment resource.";
+"error_message_cannot_create_payment" = "Failed to create payment.";
+"error_message_cannot_obtain_invoice_events" = "Failed to get invoice events.";
+"error_message_user_interaction_failed" = "User interaction failed.";
+"error_message_invoice_cancelled" = "Invoice cancelled.";
+"error_message_payment_cancelled" = "Payment cancelled.";
+"error_message_payment_failed" = "Payment failed.";
+
+// ServerError - Ошибки платежа
+"error_message_invalid_payment_tool" = "Invalid payment data entered.";
+"error_message_account_limits_exceeded" = "Account limits exceeded.";
+"error_message_insufficient_funds" = "Insufficient funds.";
+"error_message_preauthorization_failed" = "Preauthorization failed: can't verify confirmation code.";
+"error_message_rejected_by_issuer" = "Your payment institution has rejected your payment.";
+"error_message_payment_rejected" = "Your payment has been rejected.";
+
+// ServerError - Ошибки бизнес-логики
+"error_message_operation_not_permitted" = "Current contract does not support such type of operations.";
+"error_message_invalid_party_status" = "Participant is blocked or operations are on hold.";
+"error_message_invalid_shop_status" = "Merchant is blocked or operations are on hold.";
+"error_message_invalid_contract_status" = "Contract is no longer valid due to expiration or termination.";
+"error_message_invalid_shop_id" = "Merchant with such identifier does not exist.";
+"error_message_invalid_invoice_cost" = "Incorrect invoice price.";
+"error_message_invalid_invoice_cart" = "Incorrect invoice cart.";
+"error_message_invalid_invoice_status" = "Incorrect invoice status.";
+"error_message_invoice_payment_pending" = "The last payment launched for the specified invoice has not yet reached the final status.";
+"error_message_invalid_payment_status" = "Incorrect payment status.";
+"error_message_invalid_payment_resource" = "Specified payment method is not supported by your contract or system.";
+"error_message_invalid_payment_tool_token" = "Incorrect payment tool token.";
+"error_message_invalid_payment_session" = "Incorrect payment session.";
+"error_message_limit_exceeded" = "Limit exceeded.";
+"error_message_invalid_deadline" = "Invalid deadline.";
+"error_message_invalid_request" = "Invalid request data.";
+"error_message_invalid_recurrent_parent" = "Incorrect parent recurrent payment.";
+"error_message_insufficent_account_balance" = "Insufficient funds on merchant balance.";
+"error_message_invoice_payment_amount_exceeded" = "Attempt to refund payment with excessed amount.";
+"error_message_inconsistent_refund_currency" = "Attempt to refund payment with different currency.";
+"error_message_changeset_conflict" = "Attempt to change is in conflict with other changes in pending requests.";
+"error_message_invalid_changeset" = "Incorrect participant changes e.g. creating merchant with currency that is not supported by current contract.";
+"error_message_invalid_claim_status" = "Incorrect claim status.";
+"error_message_invalid_claim_revision" = "Incorrect claim revision.";
+
+// ServerError - Unknown
+"error_message_unknown_server_error" = "Server returned an error with unknown code %@.";

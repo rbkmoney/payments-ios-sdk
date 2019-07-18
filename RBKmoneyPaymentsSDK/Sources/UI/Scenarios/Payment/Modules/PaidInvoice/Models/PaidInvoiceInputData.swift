@@ -19,6 +19,7 @@ struct PaidInvoiceInputData {
     struct Parameters {
         let invoice: InvoiceDTO
         let payment: PaymentDTO
+        let paymentMethod: PaymentMethod
     }
 
     let parameters: Parameters

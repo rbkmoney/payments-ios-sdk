@@ -14,13 +14,10 @@
 
 import Foundation
 
-enum NetworkRequestIdentifierGeneratorAssembly {
+struct UniqueIdentifierGenerator {
 
     // MARK: - Internal
-    static func makeGenerator() -> NetworkRequestIdentifierGenerator {
-        return generatorInstance
+    func generateIdentifier() -> String {
+        return UUID().uuidString.replacingOccurrences(of: "-", with: "")
     }
-
-    // MARK: - Private
-    private static let generatorInstance = NetworkRequestIdentifierGenerator()
 }

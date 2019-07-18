@@ -18,11 +18,13 @@ struct PaymentProgressInputData {
 
     struct Parameters {
         enum Source {
-            case resource(PaymentResourceDTO, payerEmail: String)
+            case resource(PaymentResourceDTO, payerEmail: String, paymentExternalIdentifier: String?)
             case payment(PaymentDTO)
         }
 
         let invoice: InvoiceDTO
+        let paymentMethod: PaymentMethod
+        let paymentSystems: Set<PaymentSystem>
         let source: Source
     }
 

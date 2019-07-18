@@ -25,6 +25,7 @@ final class PaymentProgressAssembly: ViewControllerAssembly<PaymentProgressViewC
             $0.inputData = inputData
             $0.remoteAPI = RemoteAPIAssembly.makeRemoteAPI()
             $0.errorHandlerProvider = DefaultErrorHandlerAssembly.makeErrorHandler(parentViewController: viewController)
+            $0.externalIdentifierGenerator = UniqueIdentifierGeneratorAssembly.makeGenerator()
         }
 
         return viewController

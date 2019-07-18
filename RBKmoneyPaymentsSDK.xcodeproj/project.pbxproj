@@ -86,8 +86,8 @@
 		C1044F4F22A866D300A8065B /* NetworkResponseMapperOutput.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F4C22A866D300A8065B /* NetworkResponseMapperOutput.swift */; };
 		C1044F5022A866D300A8065B /* NetworkResponseMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F4D22A866D300A8065B /* NetworkResponseMapper.swift */; };
 		C1044F5522A86F8500A8065B /* NetworkResponseMapperAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F5122A86F8500A8065B /* NetworkResponseMapperAssembly.swift */; };
-		C1044F5E22A870B100A8065B /* NetworkRequestIdentifierGeneratorAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F5A22A870B100A8065B /* NetworkRequestIdentifierGeneratorAssembly.swift */; };
-		C1044F6022A870B100A8065B /* NetworkRequestIdentifierGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F5C22A870B100A8065B /* NetworkRequestIdentifierGenerator.swift */; };
+		C1044F5E22A870B100A8065B /* UniqueIdentifierGeneratorAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F5A22A870B100A8065B /* UniqueIdentifierGeneratorAssembly.swift */; };
+		C1044F6022A870B100A8065B /* UniqueIdentifierGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F5C22A870B100A8065B /* UniqueIdentifierGenerator.swift */; };
 		C1044F6722A8770B00A8065B /* NetworkSessionHTTPHeadersAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F6322A8770B00A8065B /* NetworkSessionHTTPHeadersAssembly.swift */; };
 		C1044F6822A8770B00A8065B /* NetworkSessionHTTPHeadersDependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F6422A8770B00A8065B /* NetworkSessionHTTPHeadersDependencies.swift */; };
 		C1044F6922A8770B00A8065B /* NetworkSessionHTTPHeaders.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044F6522A8770B00A8065B /* NetworkSessionHTTPHeaders.swift */; };
@@ -194,6 +194,9 @@
 		C18F580122D2BD1A0099AC1F /* UIView+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F580022D2BD1A0099AC1F /* UIView+Rx.swift */; };
 		C18F580422D4DE250099AC1F /* FormSheetPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F580322D4DE250099AC1F /* FormSheetPresentationController.swift */; };
 		C18F580622D4E13D0099AC1F /* FormSheetModalTransitionConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F580522D4E13D0099AC1F /* FormSheetModalTransitionConfigurator.swift */; };
+		C18F580822D9EC440099AC1F /* ObtainPaymentsNetworkRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F580722D9EC440099AC1F /* ObtainPaymentsNetworkRequest.swift */; };
+		C18F580A22DA796C0099AC1F /* PaymentsNetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F580922DA796C0099AC1F /* PaymentsNetworkResponse.swift */; };
+		C18F580B22DEE04F0099AC1F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C18F580D22DEE04F0099AC1F /* Localizable.strings */; };
 		C19789C4229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C5229FD05800C7F966 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C2229FD05800C7F966 /* ViewController.swift */; };
 		C19789C6229FD05800C7F966 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789C3229FD05800C7F966 /* AppDelegate.swift */; };
@@ -207,8 +210,6 @@
 		C19789DB229FD32C00C7F966 /* RBKmoneyPaymentsSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = C19789D9229FD32C00C7F966 /* RBKmoneyPaymentsSDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		C19789DE229FD32C00C7F966 /* RBKmoneyPaymentsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C19789D7229FD32C00C7F966 /* RBKmoneyPaymentsSDK.framework */; };
 		C19789DF229FD32C00C7F966 /* RBKmoneyPaymentsSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = C19789D7229FD32C00C7F966 /* RBKmoneyPaymentsSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		C19789F1229FD83C00C7F966 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = C19789EC229FD83C00C7F966 /* Localizable.strings */; };
-		C19789F2229FD83C00C7F966 /* Localizable.stringsdict in Resources */ = {isa = PBXBuildFile; fileRef = C19789ED229FD83C00C7F966 /* Localizable.stringsdict */; };
 		C19789F3229FD83C00C7F966 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C19789EE229FD83C00C7F966 /* Assets.xcassets */; };
 		C19789F4229FD83C00C7F966 /* Cards.json in Resources */ = {isa = PBXBuildFile; fileRef = C19789F0229FD83C00C7F966 /* Cards.json */; };
 		C19789F7229FD86600C7F966 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = C19789F6229FD86600C7F966 /* R.generated.swift */; };
@@ -365,8 +366,8 @@
 		C1044F4C22A866D300A8065B /* NetworkResponseMapperOutput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkResponseMapperOutput.swift; sourceTree = "<group>"; };
 		C1044F4D22A866D300A8065B /* NetworkResponseMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkResponseMapper.swift; sourceTree = "<group>"; };
 		C1044F5122A86F8500A8065B /* NetworkResponseMapperAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponseMapperAssembly.swift; sourceTree = "<group>"; };
-		C1044F5A22A870B100A8065B /* NetworkRequestIdentifierGeneratorAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestIdentifierGeneratorAssembly.swift; sourceTree = "<group>"; };
-		C1044F5C22A870B100A8065B /* NetworkRequestIdentifierGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRequestIdentifierGenerator.swift; sourceTree = "<group>"; };
+		C1044F5A22A870B100A8065B /* UniqueIdentifierGeneratorAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueIdentifierGeneratorAssembly.swift; sourceTree = "<group>"; };
+		C1044F5C22A870B100A8065B /* UniqueIdentifierGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniqueIdentifierGenerator.swift; sourceTree = "<group>"; };
 		C1044F6322A8770B00A8065B /* NetworkSessionHTTPHeadersAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionHTTPHeadersAssembly.swift; sourceTree = "<group>"; };
 		C1044F6422A8770B00A8065B /* NetworkSessionHTTPHeadersDependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionHTTPHeadersDependencies.swift; sourceTree = "<group>"; };
 		C1044F6522A8770B00A8065B /* NetworkSessionHTTPHeaders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkSessionHTTPHeaders.swift; sourceTree = "<group>"; };
@@ -471,6 +472,10 @@
 		C18F580022D2BD1A0099AC1F /* UIView+Rx.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Rx.swift"; sourceTree = "<group>"; };
 		C18F580322D4DE250099AC1F /* FormSheetPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSheetPresentationController.swift; sourceTree = "<group>"; };
 		C18F580522D4E13D0099AC1F /* FormSheetModalTransitionConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FormSheetModalTransitionConfigurator.swift; sourceTree = "<group>"; };
+		C18F580722D9EC440099AC1F /* ObtainPaymentsNetworkRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObtainPaymentsNetworkRequest.swift; sourceTree = "<group>"; };
+		C18F580922DA796C0099AC1F /* PaymentsNetworkResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentsNetworkResponse.swift; sourceTree = "<group>"; };
+		C18F580C22DEE04F0099AC1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		C18F580E22DEE1040099AC1F /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
 		C1978990229FCA0900C7F966 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789A6229FCE1900C7F966 /* Example+Pods.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Example+Pods.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789B9229FCF8B00C7F966 /* Example+Pods.Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = "Example+Pods.Release.xcconfig"; sourceTree = "<group>"; };
@@ -486,8 +491,6 @@
 		C19789D7229FD32C00C7F966 /* RBKmoneyPaymentsSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RBKmoneyPaymentsSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C19789D9229FD32C00C7F966 /* RBKmoneyPaymentsSDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RBKmoneyPaymentsSDK.h; sourceTree = "<group>"; };
 		C19789DA229FD32C00C7F966 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		C19789EC229FD83C00C7F966 /* Localizable.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
-		C19789ED229FD83C00C7F966 /* Localizable.stringsdict */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.stringsdict; path = Localizable.stringsdict; sourceTree = "<group>"; };
 		C19789EE229FD83C00C7F966 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C19789F0229FD83C00C7F966 /* Cards.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Cards.json; sourceTree = "<group>"; };
 		C19789F6229FD86600C7F966 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
@@ -866,6 +869,7 @@
 			children = (
 				C1044F1522A7F32100A8065B /* SystemInfo */,
 				C1044F2E22A7FF0F00A8065B /* Networking */,
+				C1044F5922A8708000A8065B /* UniqueIdentifierGenerator */,
 				C1044FC122AC66A000A8065B /* Fingerprint */,
 				C1044F7D22A932F100A8065B /* RemoteAPI */,
 				C1A2791C22B3B40E00EB371F /* ApplePayInfo */,
@@ -891,7 +895,6 @@
 				C1044F4122A853EC00A8065B /* Extensions */,
 				C1044F4422A8549900A8065B /* Errors */,
 				C1044F4922A866D300A8065B /* ResponseMapper */,
-				C1044F5922A8708000A8065B /* RequestIdentifierGenerator */,
 				C1044F6222A876EB00A8065B /* SessionHTTPHeaders */,
 				C1044F6B22A88D5E00A8065B /* TaskFactory */,
 				C1044F7422A8B05600A8065B /* Client */,
@@ -978,13 +981,13 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		C1044F5922A8708000A8065B /* RequestIdentifierGenerator */ = {
+		C1044F5922A8708000A8065B /* UniqueIdentifierGenerator */ = {
 			isa = PBXGroup;
 			children = (
-				C1044F5C22A870B100A8065B /* NetworkRequestIdentifierGenerator.swift */,
-				C1044F5A22A870B100A8065B /* NetworkRequestIdentifierGeneratorAssembly.swift */,
+				C1044F5C22A870B100A8065B /* UniqueIdentifierGenerator.swift */,
+				C1044F5A22A870B100A8065B /* UniqueIdentifierGeneratorAssembly.swift */,
 			);
-			path = RequestIdentifierGenerator;
+			path = UniqueIdentifierGenerator;
 			sourceTree = "<group>";
 		};
 		C1044F6222A876EB00A8065B /* SessionHTTPHeaders */ = {
@@ -1042,6 +1045,7 @@
 				C1044FAD22AAB28400A8065B /* CreatePaymentResourceNetworkRequest.swift */,
 				C1044FCA22ADDFE500A8065B /* CreatePaymentNetworkRequest.swift */,
 				C1044FDC22ADFBC700A8065B /* ObtainInvoiceEventsNetworkRequest.swift */,
+				C18F580722D9EC440099AC1F /* ObtainPaymentsNetworkRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1053,6 +1057,7 @@
 				C1044FA322A9D7F500A8065B /* InvoicePaymentMethodsNetworkResponse.swift */,
 				C1044FAF22AAB80F00A8065B /* PaymentResourceNetworkResponse.swift */,
 				C1044FCC22ADE1A600A8065B /* PaymentNetworkResponse.swift */,
+				C18F580922DA796C0099AC1F /* PaymentsNetworkResponse.swift */,
 				C1044FE022AE04EA00A8065B /* InvoiceEventsNetworkResponse.swift */,
 			);
 			path = Responses;
@@ -1357,8 +1362,7 @@
 		C19789EB229FD83C00C7F966 /* Strings */ = {
 			isa = PBXGroup;
 			children = (
-				C19789EC229FD83C00C7F966 /* Localizable.strings */,
-				C19789ED229FD83C00C7F966 /* Localizable.stringsdict */,
+				C18F580D22DEE04F0099AC1F /* Localizable.strings */,
 			);
 			path = Strings;
 			sourceTree = "<group>";
@@ -1839,9 +1843,10 @@
 			};
 			buildConfigurationList = C1978972229FC91400C7F966 /* Build configuration list for PBXProject "RBKmoneyPaymentsSDK" */;
 			compatibilityVersion = "Xcode 9.3";
-			developmentRegion = ru;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				en,
 				ru,
 			);
 			mainGroup = C197896E229FC91400C7F966;
@@ -1881,14 +1886,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C19789F1229FD83C00C7F966 /* Localizable.strings in Resources */,
+				C18F580B22DEE04F0099AC1F /* Localizable.strings in Resources */,
 				C19789F3229FD83C00C7F966 /* Assets.xcassets in Resources */,
 				C1044F0922A5EB9C00A8065B /* PaymentMethod.storyboard in Resources */,
 				C143798822C2636A00E59013 /* UnpaidInvoice.storyboard in Resources */,
 				869CEDFF22A6B26300EDF3B8 /* BankCard.storyboard in Resources */,
 				C143795C22C25CB200E59013 /* PaidInvoice.storyboard in Resources */,
 				C1A2790322B2B17A00EB371F /* PaymentMethodCell.xib in Resources */,
-				C19789F2229FD83C00C7F966 /* Localizable.stringsdict in Resources */,
 				C19789F4229FD83C00C7F966 /* Cards.json in Resources */,
 				C143797B22C2633300E59013 /* ApplePay.storyboard in Resources */,
 				C104500422B271C500A8065B /* InvoiceSummaryView.xib in Resources */,
@@ -2094,8 +2098,10 @@
 				C1044EE722A5C55D00A8065B /* FontsPalette.swift in Sources */,
 				C1F4D17F22B9D6FB005CFA6B /* PaymentProgressViewModel.swift in Sources */,
 				86469D6722B2E6690096882E /* BankCardCardNumberFormatterAssembly.swift in Sources */,
+				C18F580822D9EC440099AC1F /* ObtainPaymentsNetworkRequest.swift in Sources */,
 				C1AB4CCA22CCED150079F1C7 /* AlertPresenter.swift in Sources */,
 				C1044FB022AAB80F00A8065B /* PaymentResourceNetworkResponse.swift in Sources */,
+				C18F580A22DA796C0099AC1F /* PaymentsNetworkResponse.swift in Sources */,
 				C143798A22C2636A00E59013 /* UnpaidInvoiceDependenciesExtensions.swift in Sources */,
 				C1A2792122B3B41D00EB371F /* ApplePayInfoAssembly.swift in Sources */,
 				C1B047A722CB5C9400CB8C56 /* DefaultErrorHandlerAssembly.swift in Sources */,
@@ -2179,8 +2185,8 @@
 				869CEE0122A6B26300EDF3B8 /* BankCardDependenciesExtensions.swift in Sources */,
 				C1044EFB22A5DC7900A8065B /* PaymentInputData.swift in Sources */,
 				86469D8522B2F4280096882E /* ExpirationDateValidator.swift in Sources */,
-				C1044F6022A870B100A8065B /* NetworkRequestIdentifierGenerator.swift in Sources */,
-				C1044F5E22A870B100A8065B /* NetworkRequestIdentifierGeneratorAssembly.swift in Sources */,
+				C1044F6022A870B100A8065B /* UniqueIdentifierGenerator.swift in Sources */,
+				C1044F5E22A870B100A8065B /* UniqueIdentifierGeneratorAssembly.swift in Sources */,
 				C143795922C25CB200E59013 /* PaidInvoiceAssembly.swift in Sources */,
 				C1A2790722B3019500EB371F /* ThrobberView.swift in Sources */,
 				C1044EB022A3BD4500A8065B /* Router.swift in Sources */,
@@ -2299,11 +2305,24 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		C18F580D22DEE04F0099AC1F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				C18F580C22DEE04F0099AC1F /* en */,
+				C18F580E22DEE1040099AC1F /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
 		C1978987229FC91500C7F966 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -2365,6 +2384,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";

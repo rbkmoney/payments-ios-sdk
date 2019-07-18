@@ -41,25 +41,33 @@ struct PaymentError: Error {
     let code: Code
     let underlyingError: Error?
 
+    // Payment info available at the time of error occurrence
     let invoice: InvoiceDTO?
-
+    let paymentMethod: PaymentMethod?
+    let paymentSystems: Set<PaymentSystem>?
     let paymentResource: PaymentResourceDTO?
     let payerEmail: String?
-
+    let paymentExternalIdentifier: String?
     let payment: PaymentDTO?
 
     init(_ code: Code,
          underlyingError: Error? = nil,
          invoice: InvoiceDTO? = nil,
+         paymentMethod: PaymentMethod? = nil,
+         paymentSystems: Set<PaymentSystem>? = nil,
          paymentResource: PaymentResourceDTO? = nil,
          payerEmail: String? = nil,
+         paymentExternalIdentifier: String? = nil,
          payment: PaymentDTO? = nil) {
 
         self.code = code
         self.underlyingError = underlyingError
         self.invoice = invoice
+        self.paymentMethod = paymentMethod
+        self.paymentSystems = paymentSystems
         self.paymentResource = paymentResource
         self.payerEmail = payerEmail
+        self.paymentExternalIdentifier = paymentExternalIdentifier
         self.payment = payment
     }
 }

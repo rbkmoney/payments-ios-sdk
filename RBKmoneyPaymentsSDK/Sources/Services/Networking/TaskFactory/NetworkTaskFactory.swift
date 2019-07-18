@@ -50,19 +50,19 @@ final class NetworkTaskFactory {
             request.setValue($0.value, forHTTPHeaderField: $0.key)
         }
 
-        switch networkRequest.bodyParameters {
-        case .none:
-            break
-        case let .json(parameters):
-            do {
+        do {
+            switch networkRequest.bodyParameters {
+            case .none:
+                break
+            case let .json(parameters):
                 request.httpBody = try JSONSerialization.data(withJSONObject: parameters)
                 request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
-            } catch {
-                throw NetworkError(.cannotEncodeRequestBody, underlyingError: error)
+            case let .rawJSON(data):
+                request.httpBody = data
+                request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
             }
-        case let .rawJSON(data):
-            request.httpBody = data
-            request.setValue("application/json; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        } catch {
+            throw NetworkError(.cannotEncodeRequestBody, underlyingError: error)
         }
 
         request.setValue(requestIdentifierGenerator.generateIdentifier(), forHTTPHeaderField: "X-Request-ID")

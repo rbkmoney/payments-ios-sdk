@@ -108,8 +108,8 @@ extension ViewController: PaymentDelegate {
         dismiss(animated: true)
     }
 
-    func paymentFinished(invoiceIdentifier: String) {
-        print("Payment finished, invoice identifier: \(invoiceIdentifier)")
+    func paymentFinished(invoiceIdentifier: String, paymentMethod: PaymentMethod) {
+        print("Payment finished, invoice identifier: \(invoiceIdentifier), payment method: \(paymentMethod)")
         dismiss(animated: true)
     }
 }

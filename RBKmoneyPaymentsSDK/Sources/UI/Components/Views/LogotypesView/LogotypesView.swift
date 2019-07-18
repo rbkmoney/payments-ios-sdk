@@ -18,7 +18,6 @@ final class LogotypesView: UIView {
 
     // MARK: - Outlets
     @IBOutlet private var securePaymentLabel: UILabel!
-    @IBOutlet private var copyrightLabel: UILabel!
     @IBOutlet private var lockImageView: UIImageView!
     @IBOutlet private var rbkMoneyImageView: UIImageView!
     @IBOutlet private var logotypesImageView: UIImageView!
@@ -43,7 +42,6 @@ final class LogotypesView: UIView {
         containerView = view
 
         securePaymentLabel.attributedText = R.string.localizable.secure_payment().attributed(with: .securePayment)
-        copyrightLabel.attributedText = R.string.localizable.copyright().attributed(with: .copyright)
 
         [lockImageView as UIImageView, rbkMoneyImageView, logotypesImageView].forEach {
             $0.tintColor = Palette.colors.commonLogotypes
@@ -59,10 +57,5 @@ private extension TextAttributes {
         .font(.systemFont(ofSize: 11, weight: .black))
         .textColor(Palette.colors.commonLogotypes)
         .letterSpacing(1)
-        .textAlignment(.left)
-
-    static let copyright = TextAttributes()
-        .font(.systemFont(ofSize: 10, weight: .regular))
-        .textColor(Palette.colors.commonLogotypes)
         .textAlignment(.left)
 }

@@ -43,8 +43,8 @@ struct CreatePaymentResourceNetworkRequest: NetworkRequest {
 
         let intermediateData = try encoder.encode(source)
 
-        let resultData = String(data: intermediateData, encoding: .utf8).flatMap { string in
-            string
+        let resultData = String(data: intermediateData, encoding: .utf8).flatMap {
+            return $0
                 .components(separatedBy: "\"\(Constants.encodedDataStart)")
                 .flatMap { $0.components(separatedBy: "\(Constants.encodedDataEnd)\"") }
                 .filter { !$0.isEmpty }
@@ -61,11 +61,15 @@ struct CreatePaymentResourceNetworkRequest: NetworkRequest {
         }
 
         guard let data = resultData else {
-            throw NetworkError(.cannotEncodeRequestBody)
+            throw Error.noJSONData
         }
 
         bodyParameters = .rawJSON(data)
         authorizationToken = invoiceAccessToken
+    }
+
+    private enum Error: Swift.Error {
+        case noJSONData
     }
 
     private enum Constants {
