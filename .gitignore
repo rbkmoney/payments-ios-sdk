@@ -45,3 +45,7 @@ Private/
 
 ## Gems
 !Gemfile.lock
+
+## Jazzy
+Docs/undocumented.json
+Docs/docsets/
