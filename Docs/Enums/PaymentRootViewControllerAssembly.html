@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>PaymentRootViewControllerAssembly Enumeration Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+
+    <a name="//apple_ref/swift/Enum/PaymentRootViewControllerAssembly" class="dashAnchor"></a>
+
+    <a title="PaymentRootViewControllerAssembly Enumeration Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="../index.html">
+          RBKmoneyPaymentsSDK 1.0.0 Docs
+        </a>
+         (100% documented)
+      </p>
+    
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/rbkmoney/payments-ios-sdk">
+            <img class="header-icon" src="../img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="../index.html">RBKmoneyPaymentsSDK Reference</a>
+      <img class="carat" src="../img/carat.png" />
+      PaymentRootViewControllerAssembly Enumeration Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../changelog.html">CHANGELOG</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../example.html">EXAMPLE</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/PaymentMethod.html">PaymentMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Enums/PaymentRootViewControllerAssembly.html">PaymentRootViewControllerAssembly</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Protocols/PaymentDelegate.html">PaymentDelegate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="../Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="../Structs/PaymentInputData.html">PaymentInputData</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            <h1>PaymentRootViewControllerAssembly</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">enum</span> <span class="kt">PaymentRootViewControllerAssembly</span></code></pre>
+
+                </div>
+              </div>
+            <p>Сборка, предоставляющая статический метод для создания корневого вьюконтроллера сценария <q>Payment</q>.</p>
+
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="section-content">
+            <div class="task-group">
+              <ul class="item-container">
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:19RBKmoneyPaymentsSDK33PaymentRootViewControllerAssemblyO04makefG016paymentInputData0J8DelegateSo06UIViewG0CAA0dkL0V_AA0dM0_ptFZ"></a>
+                    <a name="//apple_ref/swift/Method/makeViewController(paymentInputData:paymentDelegate:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:19RBKmoneyPaymentsSDK33PaymentRootViewControllerAssemblyO04makefG016paymentInputData0J8DelegateSo06UIViewG0CAA0dkL0V_AA0dM0_ptFZ">makeViewController(paymentInputData:paymentDelegate:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Создает корневой вьюконтроллер для сценария <q>Payment</q>.</p>
+
+<p>Последовательность действий для отображения пользователю UI оплаты инвойса включает в себя:</p>
+
+<ul>
+<li>создание корневого вьюконтроллера с указанием параметров и делегата</li>
+<li>представление пользователю UI сценария модально методом
+<a href="https://developer.apple.com/documentation/uikit/uiviewcontroller/1621380-present">UIViewController.present(_:animated:completion:)</a></li>
+<li>реализация методов делегата, вызываемых при отмене и завершении платежа</li>
+<li><p>скрытие UI сценария после обработки отмены/завершения платежа методом
+<a href="https://developer.apple.com/documentation/uikit/uiviewcontroller/1621505-dismiss">UIViewController.dismiss(animated:completion:)</a></p></li>
+</ul>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight swift"><code><span class="kd">public</span> <span class="kd">static</span> <span class="kd">func</span> <span class="nf">makeViewController</span><span class="p">(</span><span class="nv">paymentInputData</span><span class="p">:</span> <span class="kt"><a href="../Structs/PaymentInputData.html">PaymentInputData</a></span><span class="p">,</span> <span class="nv">paymentDelegate</span><span class="p">:</span> <span class="kt"><a href="../Protocols/PaymentDelegate.html">PaymentDelegate</a></span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">UIViewController</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>paymentInputData</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Набор входных параметров для сценария</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>paymentDelegate</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>Объект, реализующий протокол делегата сценария <q>Payment</q>. Сценарий будет иметь слабую ссылку на этот объект,
+поэтому ответственность за время жизни этого объекта целиком и полностью лежит на вызывающем коде</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>Сконфигурированный корневой вьюконтроллер сценария</p>
+                      </div>
+                      <div class="slightly-smaller">
+                        <a href="https://github.com/rbkmoney/payments-ios-sdk/tree/1.0.0/RBKmoneyPaymentsSDK/Sources/UI/Scenarios/Payment/RootViewController/PaymentRootViewControllerAssembly.swift#L37-L57">Show on GitHub</a>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2019 <a class="link" href="https://rbk.money" target="_blank" rel="external">RBKmoney</a>. All rights reserved. (Last updated: 2019-07-18)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>

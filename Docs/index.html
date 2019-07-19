@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>RBKmoneyPaymentsSDK  Reference</title>
+    <link rel="stylesheet" type="text/css" href="css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="css/highlight.css" />
+    <meta charset="utf-8">
+    <script src="js/jquery.min.js" defer></script>
+    <script src="js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+
+
+    <a title="RBKmoneyPaymentsSDK  Reference"></a>
+
+    <header class="header">
+      <p class="header-col header-col--primary">
+        <a class="header-link" href="index.html">
+          RBKmoneyPaymentsSDK 1.0.0 Docs
+        </a>
+         (100% documented)
+      </p>
+    
+    
+        <p class="header-col header-col--secondary">
+          <a class="header-link" href="https://github.com/rbkmoney/payments-ios-sdk">
+            <img class="header-icon" src="img/gh.png"/>
+            View on GitHub
+          </a>
+        </p>
+    
+    </header>
+
+    <p class="breadcrumbs">
+      <a class="breadcrumb" href="index.html">RBKmoneyPaymentsSDK Reference</a>
+      <img class="carat" src="img/carat.png" />
+      RBKmoneyPaymentsSDK  Reference
+    </p>
+
+    <div class="content-wrapper">
+      <nav class="navigation">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Guides.html">Guides</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="changelog.html">CHANGELOG</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="example.html">EXAMPLE</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Enums.html">Enumerations</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/PaymentMethod.html">PaymentMethod</a>
+              </li>
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Enums/PaymentRootViewControllerAssembly.html">PaymentRootViewControllerAssembly</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Protocols/PaymentDelegate.html">PaymentDelegate</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a class="nav-group-name-link" href="Structs.html">Structures</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/PaymentInputData.html">PaymentInputData</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+
+        <section class="section">
+          <div class="section-content">
+            
+            <h1 id='rbkmoneypaymentssdk' class='heading'>RBKmoneyPaymentsSDK</h1>
+
+<p><a href="https://img.shields.io/badge/supports-iOS%2011%2B-green.svg"><img src="https://img.shields.io/badge/supports-iOS%2011%2B-green.svg" alt="Platform"></a>
+<a href="https://img.shields.io/cocoapods/v/RBKmoneyPaymentsSDK.svg"><img src="https://img.shields.io/cocoapods/v/RBKmoneyPaymentsSDK.svg" alt="CocoaPods Compatible"></a>
+<a href="https://img.shields.io/github/license/rbkmoney/payments-ios-sdk.svg"><img src="https://img.shields.io/github/license/rbkmoney/payments-ios-sdk.svg" alt="License"></a></p>
+
+<p>Библиотека для приема платежей в мобильных приложениях iOS.</p>
+
+<ul>
+<li><a href="#%D0%BE-%D1%87%D0%B5%D0%BC-%D0%B2%D1%81%D0%B5-%D1%8D%D1%82%D0%BE">О чем все это</a></li>
+<li><a href="#%D0%BC%D0%B8%D0%BD%D0%B8%D0%BC%D0%B0%D0%BB%D1%8C%D0%BD%D1%8B%D0%B5-%D1%82%D1%80%D0%B5%D0%B1%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F">Минимальные требования</a></li>
+<li><a href="#%D1%83%D1%81%D1%82%D0%B0%D0%BD%D0%BE%D0%B2%D0%BA%D0%B0">Установка</a></li>
+<li><a href="#%D0%B1%D1%8B%D1%81%D1%82%D1%80%D1%8B%D0%B9-%D1%81%D1%82%D0%B0%D1%80%D1%82">Быстрый старт</a></li>
+<li><a href="#%D0%B8%D0%BD%D0%B2%D0%BE%D0%B9%D1%81%D1%8B">Инвойсы</a></li>
+<li><a href="#%D0%BC%D0%B5%D1%82%D0%BE%D0%B4%D1%8B-%D0%BE%D0%BF%D0%BB%D0%B0%D1%82%D1%8B">Методы оплаты</a></li>
+<li><a href="#%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F">Документация</a></li>
+<li><a href="CHANGELOG.md">Change Log</a></li>
+<li><a href="EXAMPLE.md">Example App</a></li>
+</ul>
+<h2 id='' class='heading'>О чем все это</h2>
+
+<p>Для понимания документа, терминологии и прочего необходимо ознакомиться с:</p>
+
+<ul>
+<li><a href="https://dashboard.rbk.money">Личный кабинет RBKmoney</a></li>
+<li><a href="https://developer.rbk.money">Документация RBKmoney</a></li>
+<li><a href="https://developer.rbk.money/api/">RBKmoney Payments API</a></li>
+<li>Сертификаты, профили, идентификаторы и прочее - <a href="https://developer.apple.com/account/resources/certificates/">панель разработчика Apple</a></li>
+<li><a href="https://developer.apple.com/documentation/passkit/apple_pay/setting_up_apple_pay_requirements">Настройка Apple Pay</a></li>
+</ul>
+<h2 id='' class='heading'>Минимальные требования</h2>
+
+<ul>
+<li>Xcode 10.2</li>
+<li>Swift 5.0</li>
+<li>iOS 11.0</li>
+</ul>
+<h2 id='' class='heading'>Установка</h2>
+<h3 id='cocoapods' class='heading'>CocoaPods (рекомендованный способ)</h3>
+
+<p><a href="https://cocoapods.org">CocoaPods</a> - менеджер зависимостей для cocoa проектов. Для получения дополнительной информации, инструкций по установке и использованию, посетите их вебсайт. Для интеграции RBKmoneyPaymentsSDK в Xcode проект с помощью CocoaPods, добавьте следующую строку в ваш <code>Podfile</code>:</p>
+<pre class="highlight ruby"><code>  <span class="n">pod</span> <span class="s1">'RBKmoneyPaymentsSDK'</span>
+</code></pre>
+<h3 id='' class='heading'>Ручная установка</h3>
+
+<p>Библиотека может быть проинтегрирована в ваш Xcode проект в виде embedded framework, при этом понадобятся следующие внешние зависимости:</p>
+
+<ul>
+<li><a href="https://github.com/ReactiveX/RxSwift">RxSwift</a></li>
+<li><a href="https://github.com/ReactiveX/RxSwift">RxCocoa</a></li>
+<li><a href="https://github.com/mac-cain13/R.swift.Library">R.swift.Library</a></li>
+</ul>
+<h2 id='' class='heading'>Быстрый старт</h2>
+
+<ol>
+<li><p>Импортируйте модуль SDK</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">RBKmoneyPaymentsSDK</span>
+</code></pre></li>
+<li><p>Получите идентификатор и токен доступа инвойса - <code>invoiceIdentifier</code> и <code>invoiceAccessToken</code>. Немного подробнее <a href="#%D0%B8%D0%BD%D0%B2%D0%BE%D0%B9%D1%81%D1%8B">ниже</a>.</p></li>
+<li><p>Создайте объект <code><a href="Structs/PaymentInputData.html">PaymentInputData</a></code>. Описание полей можно найти в <a href="#%D0%B4%D0%BE%D0%BA%D1%83%D0%BC%D0%B5%D0%BD%D1%82%D0%B0%D1%86%D0%B8%D1%8F">документации</a>.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">paymentInputData</span> <span class="o">=</span> <span class="kt">PaymentInputData</span><span class="p">(</span>
+  <span class="nv">invoiceIdentifier</span><span class="p">:</span> <span class="n">invoiceIdentifier</span><span class="p">,</span>
+  <span class="nv">invoiceAccessToken</span><span class="p">:</span> <span class="n">invoiceAccessToken</span><span class="p">,</span>
+  <span class="nv">shopName</span><span class="p">:</span> <span class="s">"Название магазина"</span>
+<span class="p">)</span>
+</code></pre></li>
+<li><p>Создайте корневой вьюконтроллер с указанием входных параметров и объекта, реализующего протокол <code><a href="Protocols/PaymentDelegate.html">PaymentDelegate</a></code>.</p>
+<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">viewController</span> <span class="o">=</span> <span class="kt">PaymentRootViewControllerAssembly</span><span class="o">.</span><span class="nf">makeViewController</span><span class="p">(</span>
+  <span class="nv">paymentInputData</span><span class="p">:</span> <span class="n">paymentInputData</span><span class="p">,</span>
+  <span class="nv">paymentDelegate</span><span class="p">:</span> <span class="k">self</span>
+<span class="p">)</span>
+</code></pre></li>
+<li><p>Покажите UI пользователю.</p>
+<pre class="highlight swift"><code><span class="nf">present</span><span class="p">(</span><span class="n">viewController</span><span class="p">,</span> <span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+</code></pre></li>
+<li><p>Реализуйте методы протокола <code><a href="Protocols/PaymentDelegate.html">PaymentDelegate</a></code> и обработайте в них соответствующие случаи, после этого скройте UI.</p>
+<pre class="highlight swift"><code><span class="kd">extension</span> <span class="kt">ViewController</span><span class="p">:</span> <span class="kt">PaymentDelegate</span> <span class="p">{</span>
+
+  <span class="kd">func</span> <span class="nf">paymentCancelled</span><span class="p">(</span><span class="nv">invoiceIdentifier</span><span class="p">:</span> <span class="kt">String</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nf">print</span><span class="p">(</span><span class="s">"Payment cancelled, invoice identifier: </span><span class="se">\(</span><span class="n">invoiceIdentifier</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+      <span class="nf">dismiss</span><span class="p">(</span><span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="kd">func</span> <span class="nf">paymentFinished</span><span class="p">(</span><span class="nv">invoiceIdentifier</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">paymentMethod</span><span class="p">:</span> <span class="kt">PaymentMethod</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nf">print</span><span class="p">(</span><span class="s">"Payment finished, invoice identifier: </span><span class="se">\(</span><span class="n">invoiceIdentifier</span><span class="se">)</span><span class="s">, payment method: </span><span class="se">\(</span><span class="n">paymentMethod</span><span class="se">)</span><span class="s">"</span><span class="p">)</span>
+      <span class="nf">dismiss</span><span class="p">(</span><span class="nv">animated</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></li>
+</ol>
+<h2 id='' class='heading'>Инвойсы</h2>
+
+<p>Инвойс - документ, сущность, содержащая перечень товаров и услуг, их количество и цену и прочие метаданные. При создании заказа пользователем, создается инвойс, в соответствии с которым пользователь оплачивает заказ. SDK работает с уже созданными инвойсами - во входных параметрах принимает идентификатор и токен доступа инвойса, которые используются в дальнейшем для выполнения логики, связанной с оплатой заказа. Получить эти параметры можно тремя способами:</p>
+
+<ul>
+<li><p>У вас есть свой бэкэнд. Приложение отправляет запрос на бэкэнд, который в свою очередь создает инвойс с использованием <a href="https://developer.rbk.money/api/">RBKmoney Payments API</a> и API-Key и выдает необходимые данные приложению. Самый гибкий вариант.</p></li>
+<li><p>Приложение создает инвойсы по шаблону/ам с использованием <a href="https://developer.rbk.money/api/">RBKmoney Payments API</a>, при этом идентификаторы/токены доступа шаблонов обычно зашиваются в приложение. Этот вариант используется в Example приложении.</p></li>
+<li><p>Приложение создает инвойсы с использованием <a href="https://developer.rbk.money/api/">RBKmoney Payments API</a> и API-Key. Посколько API-Key в этом случае зашивается в приложение, этот вариант не является полностью безопасным и ⚠️ <strong>не рекомендуется</strong> ⚠️ к использованию. </p></li>
+</ul>
+<h2 id='' class='heading'>Методы оплаты</h2>
+
+<p>Методы оплаты, предоставленные пользователю, могут варьироваться в зависимости от входных параметров SDK (поле <code>allowedPaymentMethods</code> структуры <code><a href="Structs/PaymentInputData.html">PaymentInputData</a></code>), от возможностей устройства пользователя и от поддержки сервером RBKmoney оплаты заданного инвойса конкретным методом. Например, оплата банковской картой может быть разрешена во входных параметрах SDK, но запрещена со стороны сервера RBKmoney, в таком случае пользователь не будет иметь возможности воспользоваться оплатой банковской картой. По умолчанию все методы во входных параметрах разрешены. Ниже перечислены требования, накладываемые каждым методом.</p>
+<h3 id='' class='heading'>Банковская карта</h3>
+
+<ul>
+<li><code><a href="Structs/PaymentInputData.html#/s:19RBKmoneyPaymentsSDK16PaymentInputDataV07allowedD7MethodsSayAA0D6MethodOGvp">PaymentInputData.allowedPaymentMethods</a></code> содержит <code>.bankCard</code></li>
+<li>Сервер RBKmoney разрешает оплату заданного инвойса с помощью банковской карты</li>
+</ul>
+<h3 id='apple-pay' class='heading'>Apple Pay</h3>
+
+<ul>
+<li><code><a href="Structs/PaymentInputData.html#/s:19RBKmoneyPaymentsSDK16PaymentInputDataV07allowedD7MethodsSayAA0D6MethodOGvp">PaymentInputData.allowedPaymentMethods</a></code> содержит <code>.applePay</code></li>
+<li>Приложение сконфигурировано на работу с Apple Pay согласно <a href="https://developer.apple.com/documentation/passkit/apple_pay/setting_up_apple_pay_requirements">документу</a></li>
+<li>Во входных параметрах SDK указан <code>applePayMerchantIdentifier</code></li>
+<li>Устройство пользователя поддерживает оплату с помощью Apple Pay</li>
+<li>На устройстве пользователя отсутствует запрет на платежи</li>
+<li>Сервер RBKmoney разрешает оплату заданного инвойса с помощью токенизированных данных Apple Pay</li>
+</ul>
+
+<p>Также, сервер RBKmoney должен уметь расшифровывать токенизированные данные Apple Pay. Для этого необходимо:</p>
+
+<ul>
+<li>Вариант 1: сгенерировать CSR (certificate signing request) на своей машине и использовать его для генерации сертификата в <a href="https://developer.apple.com/account/resources/certificates/">панели разработчика Apple</a>, затем связаться с менеджером RBKmoney и передать ему пару сертификат/приватный ключ в формате p12</li>
+<li>Вариант 2: связаться с менеджером RBKmoney, попросить его сгенерировать CSR для вас, получить и использовать CSR для генерации сертификата, затем передать сертификат менеджеру</li>
+<li>Сообщить менеджеру идентификатор мерчанта, который будет использоваться с переданным сертификатом (можно и не сообщать - сертификат содержит эту информацию в метаданных)</li>
+</ul>
+
+<p>Вышеуказанный <a href="https://developer.apple.com/documentation/passkit/apple_pay/setting_up_apple_pay_requirements">документ</a> содержит детальную инструкцию по генерации CSR / сертификата.</p>
+<h2 id='' class='heading'>Документация</h2>
+
+<p>Все публичные символы SDK документированы, описание доступно непосредственно в Xcode по alt-click символа. Так же, вы можете найти сгенерированную <a href="https://github.com/realm/jazzy">jazzy</a> документацию в html формате в папке Docs.</p>
+
+          </div>
+        </section>
+
+
+      </article>
+    </div>
+    <section class="footer">
+      <p>&copy; 2019 <a class="link" href="https://rbk.money" target="_blank" rel="external">RBKmoney</a>. All rights reserved. (Last updated: 2019-07-18)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+    </section>
+  </body>
+</div>
+</html>
