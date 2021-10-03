@@ -3,13 +3,13 @@
 
 ## Порядок разворачивания проекта
 
-В проекте используем Ruby гемы: **CocoaPods** (https://cocoapods.org)
+В проекте используем Ruby гем **CocoaPods** (https://cocoapods.org)
 
-Для управления версией Ruby используем **rbenv** (https://blog.metova.com/choosing-a-ruby-version-management-tool)
+Для управления версией Ruby используем **rbenv** (https://metova.com/choosing-a-ruby-version-management-tool-rbenv-vs-rvm/)
 
 Для управления гемами проекта используем **bundler** (http://bundler.io)
 
-Для сборки проекта необходим актуальный **iOS SDK / Xcode** (iOS 12.2 SDK / Xcode 10.2.1 (10E1001) на момент создания этого документа)
+Для сборки проекта необходим актуальный **Xcode** (Xcode 12.5 (12E262) на момент создания/правки этого документа)
 
 
 1. Установить Homebrew + rbenv (если уже установлено, то пропускаем этот шаг)
@@ -53,7 +53,7 @@
 
 ## Настройки
 
-Различные идентификаторы вынесены в приватный xcconfig файл (Private.Example.Debug.xcconfig для debug конфигурации, Private.Example.Release.xcconfig для release конфигурации). Необходимо создать эти файлы и указать идентификаторы.
+Различные идентификаторы вынесены в приватный xcconfig файл (`Private.Example.Debug.xcconfig` для debug конфигурации, `Private.Example.Release.xcconfig` для release конфигурации). Необходимо создать эти файлы и указать идентификаторы.
 
 Содержимое файлов имеет следующий примерный вид:
 
@@ -78,7 +78,7 @@
         └─ Private.Example.Release.xcconfig
   ```
 
-Проект сам по себе уже полностью настроен на работу с Apple Pay согласно [документу](https://developer.apple.com/documentation/passkit/apple_pay/setting_up_apple_pay_requirements), но требуются внешние (по отношению к проекту) настройки - [в панели разработчика Apple](https://developer.apple.com/account/resources/certificates/) и настройка Apple Pay на стороне сервера RBKmoney. После настройки необходимо указать APPLE_PAY_MERCHANT_IDENTIFIER в xcconfig файле. Если же Apple Pay не требуется или выполнение настроек не представляется возможным, то можно удалить все упоминания APPLE_PAY_MERCHANT_IDENTIFIER во всех файлах проекта (найти поиском).
+Проект сам по себе уже полностью настроен на работу с Apple Pay согласно [документу](https://developer.apple.com/documentation/passkit/apple_pay/setting_up_apple_pay_requirements), но требуются внешние (по отношению к проекту) настройки - [в панели разработчика Apple](https://developer.apple.com/account/resources/certificates/) и настройка Apple Pay на стороне сервера RBKmoney. После настройки необходимо указать `APPLE_PAY_MERCHANT_IDENTIFIER` в xcconfig файле. Если же Apple Pay не требуется или выполнение настроек не представляется возможным, то можно удалить все упоминания `APPLE_PAY_MERCHANT_IDENTIFIER` во всех файлах проекта (найти поиском).
 
 
 ## Сборка проекта, таргеты

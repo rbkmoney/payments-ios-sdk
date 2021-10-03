@@ -17,9 +17,9 @@
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="index.html">
-          RBKmoneyPaymentsSDK 1.0.0 Docs
+          RBKmoneyPaymentsSDK 1.1.0 Docs
         </a>
-         (100% documented)
+        
       </p>
     
     
@@ -75,6 +75,9 @@
             <a class="nav-group-name-link" href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/PaymentApplePayInputData.html">PaymentApplePayInputData</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/PaymentInputData.html">PaymentInputData</a>
               </li>
             </ul>
@@ -84,7 +87,7 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             
             <h1 id='rbkmoneypaymentssdk' class='heading'>RBKmoneyPaymentsSDK</h1>
 
@@ -105,7 +108,7 @@
 <li><a href="CHANGELOG.md">Change Log</a></li>
 <li><a href="EXAMPLE.md">Example App</a></li>
 </ul>
-<h2 id='' class='heading'>О чем все это</h2>
+<h2 id='о-чем-все-это' class='heading'>О чем все это</h2>
 
 <p>Для понимания документа, терминологии и прочего необходимо ознакомиться с:</p>
 
@@ -116,20 +119,20 @@
 <li>Сертификаты, профили, идентификаторы и прочее - <a href="https://developer.apple.com/account/resources/certificates/">панель разработчика Apple</a></li>
 <li><a href="https://developer.apple.com/documentation/passkit/apple_pay/setting_up_apple_pay_requirements">Настройка Apple Pay</a></li>
 </ul>
-<h2 id='' class='heading'>Минимальные требования</h2>
+<h2 id='минимальные-требования' class='heading'>Минимальные требования</h2>
 
 <ul>
-<li>Xcode 10.2</li>
-<li>Swift 5.0</li>
+<li>Xcode 12.x</li>
+<li>Swift 5.3</li>
 <li>iOS 11.0</li>
 </ul>
-<h2 id='' class='heading'>Установка</h2>
-<h3 id='cocoapods' class='heading'>CocoaPods (рекомендованный способ)</h3>
+<h2 id='установка' class='heading'>Установка</h2>
+<h3 id='cocoapods-рекомендованный-способ' class='heading'>CocoaPods (рекомендованный способ)</h3>
 
 <p><a href="https://cocoapods.org">CocoaPods</a> - менеджер зависимостей для cocoa проектов. Для получения дополнительной информации, инструкций по установке и использованию, посетите их вебсайт. Для интеграции RBKmoneyPaymentsSDK в Xcode проект с помощью CocoaPods, добавьте следующую строку в ваш <code>Podfile</code>:</p>
 <pre class="highlight ruby"><code>  <span class="n">pod</span> <span class="s1">'RBKmoneyPaymentsSDK'</span>
 </code></pre>
-<h3 id='' class='heading'>Ручная установка</h3>
+<h3 id='ручная-установка' class='heading'>Ручная установка</h3>
 
 <p>Библиотека может быть проинтегрирована в ваш Xcode проект в виде embedded framework, при этом понадобятся следующие внешние зависимости:</p>
 
@@ -138,7 +141,7 @@
 <li><a href="https://github.com/ReactiveX/RxSwift">RxCocoa</a></li>
 <li><a href="https://github.com/mac-cain13/R.swift.Library">R.swift.Library</a></li>
 </ul>
-<h2 id='' class='heading'>Быстрый старт</h2>
+<h2 id='быстрый-старт' class='heading'>Быстрый старт</h2>
 
 <ol>
 <li><p>Импортируйте модуль SDK</p>
@@ -176,7 +179,7 @@
 <span class="p">}</span>
 </code></pre></li>
 </ol>
-<h2 id='' class='heading'>Инвойсы</h2>
+<h2 id='инвойсы' class='heading'>Инвойсы</h2>
 
 <p>Инвойс - документ, сущность, содержащая перечень товаров и услуг, их количество и цену и прочие метаданные. При создании заказа пользователем, создается инвойс, в соответствии с которым пользователь оплачивает заказ. SDK работает с уже созданными инвойсами - во входных параметрах принимает идентификатор и токен доступа инвойса, которые используются в дальнейшем для выполнения логики, связанной с оплатой заказа. Получить эти параметры можно тремя способами:</p>
 
@@ -185,10 +188,10 @@
 <li><p>Приложение создает инвойсы по шаблону/ам с использованием <a href="https://developer.rbk.money/api/">RBKmoney Payments API</a>, при этом идентификаторы/токены доступа шаблонов обычно зашиваются в приложение. Этот вариант используется в Example приложении.</p></li>
 <li><p>Приложение создает инвойсы с использованием <a href="https://developer.rbk.money/api/">RBKmoney Payments API</a> и API-Key. Посколько API-Key в этом случае зашивается в приложение, этот вариант не является полностью безопасным и ⚠️ <strong>не рекомендуется</strong> ⚠️ к использованию. </p></li>
 </ul>
-<h2 id='' class='heading'>Методы оплаты</h2>
+<h2 id='методы-оплаты' class='heading'>Методы оплаты</h2>
 
 <p>Методы оплаты, предоставленные пользователю, могут варьироваться в зависимости от входных параметров SDK (поле <code>allowedPaymentMethods</code> структуры <code><a href="Structs/PaymentInputData.html">PaymentInputData</a></code>), от возможностей устройства пользователя и от поддержки сервером RBKmoney оплаты заданного инвойса конкретным методом. Например, оплата банковской картой может быть разрешена во входных параметрах SDK, но запрещена со стороны сервера RBKmoney, в таком случае пользователь не будет иметь возможности воспользоваться оплатой банковской картой. По умолчанию все методы во входных параметрах разрешены. Ниже перечислены требования, накладываемые каждым методом.</p>
-<h3 id='' class='heading'>Банковская карта</h3>
+<h3 id='банковская-карта' class='heading'>Банковская карта</h3>
 
 <ul>
 <li><code><a href="Structs/PaymentInputData.html#/s:19RBKmoneyPaymentsSDK16PaymentInputDataV07allowedD7MethodsSayAA0D6MethodOGvp">PaymentInputData.allowedPaymentMethods</a></code> содержит <code>.bankCard</code></li>
@@ -199,7 +202,7 @@
 <ul>
 <li><code><a href="Structs/PaymentInputData.html#/s:19RBKmoneyPaymentsSDK16PaymentInputDataV07allowedD7MethodsSayAA0D6MethodOGvp">PaymentInputData.allowedPaymentMethods</a></code> содержит <code>.applePay</code></li>
 <li>Приложение сконфигурировано на работу с Apple Pay согласно <a href="https://developer.apple.com/documentation/passkit/apple_pay/setting_up_apple_pay_requirements">документу</a></li>
-<li>Во входных параметрах SDK указан <code>applePayMerchantIdentifier</code></li>
+<li><code><a href="Structs/PaymentInputData.html#/s:19RBKmoneyPaymentsSDK16PaymentInputDataV08applePayeF0AA0d5AppleheF0VSgvp">PaymentInputData.applePayInputData</a></code> указан и содержит необходимые параметры <code>merchantIdentifier</code> и <code>countryCode</code></li>
 <li>Устройство пользователя поддерживает оплату с помощью Apple Pay</li>
 <li>На устройстве пользователя отсутствует запрет на платежи</li>
 <li>Сервер RBKmoney разрешает оплату заданного инвойса с помощью токенизированных данных Apple Pay</li>
@@ -214,7 +217,7 @@
 </ul>
 
 <p>Вышеуказанный <a href="https://developer.apple.com/documentation/passkit/apple_pay/setting_up_apple_pay_requirements">документ</a> содержит детальную инструкцию по генерации CSR / сертификата.</p>
-<h2 id='' class='heading'>Документация</h2>
+<h2 id='документация' class='heading'>Документация</h2>
 
 <p>Все публичные символы SDK документированы, описание доступно непосредственно в Xcode по alt-click символа. Так же, вы можете найти сгенерированную <a href="https://github.com/realm/jazzy">jazzy</a> документацию в html формате в папке Docs.</p>
 
@@ -225,8 +228,8 @@
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2019 <a class="link" href="https://rbk.money" target="_blank" rel="external">RBKmoney</a>. All rights reserved. (Last updated: 2019-07-18)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2021 <a class="link" href="https://rbk.money" target="_blank" rel="external">RBKmoney</a>. All rights reserved. (Last updated: 2021-10-04)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

@@ -30,8 +30,8 @@
 
 ## Минимальные требования
 
-* Xcode 10.2
-* Swift 5.0
+* Xcode 12.x
+* Swift 5.3
 * iOS 11.0
 
 
@@ -126,7 +126,7 @@
 
 * `PaymentInputData.allowedPaymentMethods` содержит `.applePay`
 * Приложение сконфигурировано на работу с Apple Pay согласно [документу][Apple Pay Setup]
-* Во входных параметрах SDK указан `applePayMerchantIdentifier`
+* `PaymentInputData.applePayInputData` указан и содержит необходимые параметры `merchantIdentifier` и `countryCode`
 * Устройство пользователя поддерживает оплату с помощью Apple Pay
 * На устройстве пользователя отсутствует запрет на платежи
 * Сервер RBKmoney разрешает оплату заданного инвойса с помощью токенизированных данных Apple Pay
