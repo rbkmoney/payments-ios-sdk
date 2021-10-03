@@ -28,4 +28,8 @@ enum BankCardPaymentSystemDTO: String, Codable, Hashable {
     case unionpay
     case jcb
     case nspkmir
+    case elo
+    case rupay
+    case dummy
+    case uzcard
 }

@@ -19,4 +19,5 @@ enum BankCardTokenProviderDTO: String, Codable {
     case applePay = "applepay"
     case googlePay = "googlepay"
     case samsungPay = "samsungpay"
+    case yandexPay = "yandexpay"
 }

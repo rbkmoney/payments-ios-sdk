@@ -14,10 +14,11 @@
 
 import Foundation
 
-extension JSONEncoder.DateEncodingStrategy {
+enum MobileCommerceOperatorDTO: String, Codable {
 
-    static let customISO8601 = custom {
-        let string = Formatter.iso8601Full.string(from: $0)
-        try string.encode(to: $1)
-    }
+    case mts
+    case beeline
+    case megafone
+    case tele2
+    case yota
 }

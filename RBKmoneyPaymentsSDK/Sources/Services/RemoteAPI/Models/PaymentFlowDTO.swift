@@ -16,23 +16,32 @@ import Foundation
 
 enum PaymentFlowDTO {
 
-    struct HoldParameters {
+    case instant
+    case hold(Hold)
+}
+
+extension PaymentFlowDTO {
+
+    struct Hold: Codable {
+
+        enum CodingKeys: String, CodingKey {
+            case expirationAction = "onHoldExpiration"
+            case untilDate = "heldUntil"
+        }
+
         enum ExpirationAction: String, Codable {
             case cancel
             case capture
         }
 
         let expirationAction: ExpirationAction
-        let heldUntil: Date?
+        let untilDate: Date?
 
         init(expirationAction: ExpirationAction = .cancel) {
             self.expirationAction = expirationAction
-            self.heldUntil = nil
+            self.untilDate = nil
         }
     }
-
-    case instant
-    case hold(HoldParameters)
 }
 
 extension PaymentFlowDTO: Codable {
@@ -40,48 +49,43 @@ extension PaymentFlowDTO: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let type = try container.decode(FlowType.self, forKey: .type)
+        let singleValueContainer = try decoder.singleValueContainer()
 
         switch type {
         case .instant:
             self = .instant
         case .hold:
-            let parameters = HoldParameters(
-                expirationAction: try container.decode(HoldParameters.ExpirationAction.self, forKey: .expirationAction),
-                heldUntil: try container.decodeIfPresent(Date.self, forKey: .heldUntil)
-            )
-            self = .hold(parameters)
+            self = .hold(try singleValueContainer.decode(Hold.self))
         }
     }
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(flowType, forKey: .type)
 
         switch self {
         case .instant:
-            try container.encode(FlowType.instant, forKey: .type)
-        case let .hold(parameters):
-            try container.encode(FlowType.hold, forKey: .type)
-            try container.encode(parameters.expirationAction, forKey: .expirationAction)
-            try container.encodeIfPresent(parameters.heldUntil, forKey: .heldUntil)
+            break
+        case let .hold(hold):
+            try hold.encode(to: encoder)
         }
     }
 
     private enum CodingKeys: String, CodingKey {
         case type
-        case expirationAction = "onHoldExpiration"
-        case heldUntil
     }
 
     private enum FlowType: String, Codable {
         case instant = "PaymentFlowInstant"
         case hold = "PaymentFlowHold"
     }
-}
 
-fileprivate extension PaymentFlowDTO.HoldParameters {
-
-    init(expirationAction: ExpirationAction, heldUntil: Date?) {
-        self.expirationAction = expirationAction
-        self.heldUntil = heldUntil
+    private var flowType: FlowType {
+        switch self {
+        case .instant:
+            return .instant
+        case .hold:
+            return .hold
+        }
     }
 }

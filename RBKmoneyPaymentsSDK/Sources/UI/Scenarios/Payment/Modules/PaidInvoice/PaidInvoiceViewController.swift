@@ -157,6 +157,14 @@ private extension PaymentSystem {
             return "JCB"
         case .nspkmir:
             return "МИР"
+        case .elo:
+            return "ELO"
+        case .rupay:
+            return "RuPay"
+        case .dummy:
+            return "DummyPay"
+        case .uzcard:
+            return "UZCÁRD"
         }
     }
 }

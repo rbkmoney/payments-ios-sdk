@@ -14,10 +14,7 @@
 
 import Foundation
 
-extension JSONEncoder.DateEncodingStrategy {
+enum DigitalWalletProviderDTO: String, Codable {
 
-    static let customISO8601 = custom {
-        let string = Formatter.iso8601Full.string(from: $0)
-        try string.encode(to: $1)
-    }
+    case qiwi
 }

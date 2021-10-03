@@ -14,10 +14,8 @@
 
 import Foundation
 
-extension JSONEncoder.DateEncodingStrategy {
+struct TransactionInfoDTO: Codable {
 
-    static let customISO8601 = custom {
-        let string = Formatter.iso8601Full.string(from: $0)
-        try string.encode(to: $1)
-    }
+    let rrn: String?
+    let approvalCode: String?
 }

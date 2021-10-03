@@ -24,7 +24,7 @@ struct PaymentResourceDTO: Codable {
     }
 
     let paymentToolToken: String
-    let paymentSessionIdentifier: String?
+    let paymentSessionIdentifier: String
     let paymentToolDetails: PaymentToolDetailsDTO?
     let clientInfo: ClientInfoDTO?
 }

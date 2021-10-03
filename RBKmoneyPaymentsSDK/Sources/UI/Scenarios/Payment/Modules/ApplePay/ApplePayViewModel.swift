@@ -161,7 +161,7 @@ final class ApplePayViewModel: ModuleViewModel {
                 return .empty()
             }
 
-            let applePay = PaymentToolSourceDTO.TokenizedCardData.ApplePay(
+            let applePay = PaymentToolSourceDTO.TokenizedCard.ApplePay(
                 merchantIdentifier: merchantIdentifier,
                 paymentData: token.paymentData,
                 paymentMethodDisplayName: token.paymentMethod.displayName,
@@ -169,7 +169,7 @@ final class ApplePayViewModel: ModuleViewModel {
                 paymentMethodType: token.paymentMethod.type.asString(),
                 transactionIdentifier: token.transactionIdentifier
             )
-            return .just((.tokenizedCardData(.applePay(applePay)), email))
+            return .just((.tokenizedCard(.applePay(applePay)), email))
         }
 
     private lazy var inputDataObservable = Observable

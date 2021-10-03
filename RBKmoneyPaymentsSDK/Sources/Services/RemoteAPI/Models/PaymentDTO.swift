@@ -25,6 +25,7 @@ struct PaymentDTO: Codable {
         case currency
         case flow
         case payer
+        case transactionInfo
         case status
     }
 
@@ -36,5 +37,6 @@ struct PaymentDTO: Codable {
     let currency: CurrencyDTO
     let flow: PaymentFlowDTO
     let payer: PayerDTO
+    let transactionInfo: TransactionInfoDTO?
     let status: PaymentStatusDTO
 }

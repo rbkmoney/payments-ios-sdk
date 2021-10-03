@@ -14,20 +14,26 @@
 
 import Foundation
 
-struct AmountDTO {
+struct CryptoAmountDTO {
 
     let value: Decimal
 }
 
-extension AmountDTO: Codable {
+extension CryptoAmountDTO: Codable {
 
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        value = try container.decode(Decimal.self) / 100
+        let raw = try container.decode(String.self)
+
+        if let decimal = Decimal(string: raw) {
+            value = decimal
+        } else {
+            throw DecodingError.valueNotFound(Decimal.self, DecodingError.Context(codingPath: [], debugDescription: "Can't create decimal value"))
+        }
     }
 
     func encode(to encoder: Encoder) throws {
-        let integer = Int64(truncating: NSDecimalNumber(decimal: value * 100))
-        try integer.encode(to: encoder)
+        let string = "\(value)"
+        try string.encode(to: encoder)
     }
 }

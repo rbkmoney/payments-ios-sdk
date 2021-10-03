@@ -16,29 +16,101 @@ import Foundation
 
 enum PaymentToolDetailsDTO {
 
-    struct CardData {
+    case bankCard(BankCard)
+    case paymentTerminal(PaymentTerminal)
+    case digitalWallet(DigitalWallet)
+    case cryptoWallet(CryptoWallet)
+    case mobileCommerce(MobileCommerce)
+}
+
+extension PaymentToolDetailsDTO {
+
+    struct BankCard: Codable {
+
+        enum CodingKeys: String, CodingKey {
+            case maskedNumber = "cardNumberMask"
+            case firstDigits = "first6"
+            case lastDigits = "last4"
+            case paymentSystem
+            case tokenProvider
+        }
+
         let maskedNumber: String
-        let bin: String?
+        let firstDigits: String?
         let lastDigits: String?
         let paymentSystem: BankCardPaymentSystemDTO
         let tokenProvider: BankCardTokenProviderDTO?
     }
 
-    enum PaymentTerminalProvider: String, Codable {
-        case euroset
+    struct PaymentTerminal: Codable {
+        let provider: PaymentTerminalProviderDTO
     }
 
-    enum DigitalWalletData {
-        struct QIWI {
+    enum DigitalWallet {
+
+        struct QIWI: Codable {
+
+            enum CodingKeys: String, CodingKey {
+                case maskedPhoneNumber = "phoneNumberMask"
+            }
+
             let maskedPhoneNumber: String
         }
 
         case qiwi(QIWI)
     }
 
-    case bankCard(CardData)
-    case paymentTerminal(PaymentTerminalProvider)
-    case digitalWallet(DigitalWalletData)
+    struct CryptoWallet: Codable {
+        let cryptoCurrency: CryptoWalletCurrencyDTO
+    }
+
+    struct MobileCommerce: Codable {
+
+        enum CodingKeys: String, CodingKey {
+            case maskedPhoneNumber = "phoneNumber"
+        }
+
+        let maskedPhoneNumber: String
+    }
+}
+
+extension PaymentToolDetailsDTO.DigitalWallet: Codable {
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        let type = try container.decode(DigitalWalletDetailsType.self, forKey: .type)
+        let singleValueContainer = try decoder.singleValueContainer()
+
+        switch type {
+        case .qiwi:
+            self = .qiwi(try singleValueContainer.decode(QIWI.self))
+        }
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(digitalWalletDetailsType, forKey: .type)
+
+        switch self {
+        case let .qiwi(qiwi):
+            try qiwi.encode(to: encoder)
+        }
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case type = "digitalWalletDetailsType"
+    }
+
+    private enum DigitalWalletDetailsType: String, Codable {
+        case qiwi = "DigitalWalletDetailsQIWI"
+    }
+
+    private var digitalWalletDetailsType: DigitalWalletDetailsType {
+        switch self {
+        case .qiwi:
+            return .qiwi
+        }
+    }
 }
 
 extension PaymentToolDetailsDTO: Codable {
@@ -46,75 +118,64 @@ extension PaymentToolDetailsDTO: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let type = try container.decode(DetailsType.self, forKey: .type)
+        let singleValueContainer = try decoder.singleValueContainer()
 
         switch type {
         case .bankCard:
-            let cardData = CardData(
-                maskedNumber: try container.decode(String.self, forKey: .maskedNumber),
-                bin: try container.decodeIfPresent(String.self, forKey: .bin),
-                lastDigits: try container.decodeIfPresent(String.self, forKey: .lastDigits),
-                paymentSystem: try container.decode(BankCardPaymentSystemDTO.self, forKey: .paymentSystem),
-                tokenProvider: try container.decodeIfPresent(BankCardTokenProviderDTO.self, forKey: .tokenProvider)
-            )
-            self = .bankCard(cardData)
+            self = .bankCard(try singleValueContainer.decode(BankCard.self))
         case .paymentTerminal:
-            let provider = try container.decode(PaymentTerminalProvider.self, forKey: .provider)
-            self = .paymentTerminal(provider)
+            self = .paymentTerminal(try singleValueContainer.decode(PaymentTerminal.self))
         case .digitalWallet:
-            let type = try container.decode(DigitalWalletType.self, forKey: .digitalWalletType)
-            switch type {
-            case .qiwi:
-                let data = DigitalWalletData.QIWI(
-                    maskedPhoneNumber: try container.decode(String.self, forKey: .maskedPhoneNumber)
-                )
-                self = .digitalWallet(.qiwi(data))
-            }
+            self = .digitalWallet(try singleValueContainer.decode(DigitalWallet.self))
+        case .cryptoWallet:
+            self = .cryptoWallet(try singleValueContainer.decode(CryptoWallet.self))
+        case .mobileCommerce:
+            self = .mobileCommerce(try singleValueContainer.decode(MobileCommerce.self))
         }
     }
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(detailsType, forKey: .type)
 
         switch self {
-        case let .bankCard(card):
-            try container.encode(DetailsType.bankCard, forKey: .type)
-            try container.encode(card.maskedNumber, forKey: .maskedNumber)
-            try container.encodeIfPresent(card.bin, forKey: .bin)
-            try container.encodeIfPresent(card.lastDigits, forKey: .lastDigits)
-            try container.encode(card.paymentSystem, forKey: .paymentSystem)
-            try container.encodeIfPresent(card.tokenProvider, forKey: .tokenProvider)
-        case let .paymentTerminal(provider):
-            try container.encode(DetailsType.paymentTerminal, forKey: .type)
-            try container.encode(provider, forKey: .provider)
-        case let .digitalWallet(provider):
-            try container.encode(DetailsType.digitalWallet, forKey: .type)
-            switch provider {
-            case let .qiwi(data):
-                try container.encode(DigitalWalletType.qiwi, forKey: .digitalWalletType)
-                try container.encode(data.maskedPhoneNumber, forKey: .maskedPhoneNumber)
-            }
+        case let .bankCard(bankCard):
+            try bankCard.encode(to: encoder)
+        case let .paymentTerminal(paymentTerminal):
+            try paymentTerminal.encode(to: encoder)
+        case let .digitalWallet(digitalWallet):
+            try digitalWallet.encode(to: encoder)
+        case let .cryptoWallet(cryptoWallet):
+            try cryptoWallet.encode(to: encoder)
+        case let .mobileCommerce(mobileCommerce):
+            try mobileCommerce.encode(to: encoder)
         }
     }
 
     private enum CodingKeys: String, CodingKey {
         case type = "detailsType"
-        case maskedNumber = "cardNumberMask"
-        case bin
-        case lastDigits
-        case paymentSystem
-        case tokenProvider
-        case provider
-        case digitalWalletType = "digitalWalletDetailsType"
-        case maskedPhoneNumber = "phoneNumberMask"
     }
 
     private enum DetailsType: String, Codable {
         case bankCard = "PaymentToolDetailsBankCard"
         case paymentTerminal = "PaymentToolDetailsPaymentTerminal"
         case digitalWallet = "PaymentToolDetailsDigitalWallet"
+        case cryptoWallet = "PaymentToolDetailsCryptoWallet"
+        case mobileCommerce = "PaymentToolDetailsMobileCommerce"
     }
 
-    private enum DigitalWalletType: String, Codable {
-        case qiwi = "DigitalWalletDetailsQIWI"
+    private var detailsType: DetailsType {
+        switch self {
+        case .bankCard:
+            return .bankCard
+        case .paymentTerminal:
+            return .paymentTerminal
+        case .digitalWallet:
+            return .digitalWallet
+        case .cryptoWallet:
+            return .cryptoWallet
+        case .mobileCommerce:
+            return .mobileCommerce
+        }
     }
 }

@@ -16,20 +16,26 @@ import Foundation
 
 enum BrowserRequestDTO {
 
-    typealias URITemplate = String
+    case get(Get)
+    case post(Post)
+}
 
-    struct FormData {
-        struct Item: Codable {
-            let key: String
-            let template: URITemplate
-        }
+extension BrowserRequestDTO {
 
-        let uriTemplate: URITemplate
-        let items: [Item]
+    struct Get: Codable {
+        let uriTemplate: String
     }
 
-    case get(URITemplate)
-    case post(FormData)
+    struct Post: Codable {
+
+        struct FormItem: Codable {
+            let key: String
+            let template: String
+        }
+
+        let uriTemplate: String
+        let form: [FormItem]
+    }
 }
 
 extension BrowserRequestDTO: Codable {
@@ -37,42 +43,43 @@ extension BrowserRequestDTO: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let type = try container.decode(RequestType.self, forKey: .type)
+        let singleValueContainer = try decoder.singleValueContainer()
 
         switch type {
         case .get:
-            let template = try container.decode(URITemplate.self, forKey: .uriTemplate)
-            self = .get(template)
+            self = .get(try singleValueContainer.decode(Get.self))
         case .post:
-            let data = FormData(
-                uriTemplate: try container.decode(URITemplate.self, forKey: .uriTemplate),
-                items: try container.decode([FormData.Item].self, forKey: .form)
-            )
-            self = .post(data)
+            self = .post(try singleValueContainer.decode(Post.self))
         }
     }
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(requestType, forKey: .type)
 
         switch self {
-        case let .get(template):
-            try container.encode(RequestType.get, forKey: .type)
-            try container.encode(template, forKey: .uriTemplate)
-        case let .post(data):
-            try container.encode(RequestType.post, forKey: .type)
-            try container.encode(data.uriTemplate, forKey: .uriTemplate)
-            try container.encode(data.items, forKey: .form)
+        case let .get(get):
+            try get.encode(to: encoder)
+        case let .post(post):
+            try post.encode(to: encoder)
         }
     }
 
     private enum CodingKeys: String, CodingKey {
         case type = "requestType"
-        case uriTemplate
-        case form
     }
 
     private enum RequestType: String, Codable {
         case get = "BrowserGetRequest"
         case post = "BrowserPostRequest"
+    }
+
+    private var requestType: RequestType {
+        switch self {
+        case .get:
+            return .get
+        case .post:
+            return .post
+        }
     }
 }

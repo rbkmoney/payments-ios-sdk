@@ -73,6 +73,18 @@ private extension PaymentSystem {
             return .JCB
         case .nspkmir:
             return nil
+        case .elo:
+            if #available(iOS 12.1.1, *) {
+                return .elo
+            } else {
+                return nil
+            }
+        case .rupay:
+            return nil
+        case .dummy:
+            return nil
+        case .uzcard:
+            return nil
         }
     }
 }

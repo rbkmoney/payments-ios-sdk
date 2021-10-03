@@ -133,72 +133,74 @@ extension ServerErrorDTO.Code: Codable {
 
     // swiftlint:disable:next cyclomatic_complexity function_body_length
     func encode(to encoder: Encoder) throws {
-        var container = encoder.singleValueContainer()
+        let string: String
 
         switch self {
         case .operationNotPermitted:
-            try container.encode(RawValue.operationNotPermitted.rawValue)
+            string = RawValue.operationNotPermitted.rawValue
         case .invalidPartyStatus:
-            try container.encode(RawValue.invalidPartyStatus.rawValue)
+            string = RawValue.invalidPartyStatus.rawValue
         case .invalidShopStatus:
-            try container.encode(RawValue.invalidShopStatus.rawValue)
+            string = RawValue.invalidShopStatus.rawValue
         case .invalidContractStatus:
-            try container.encode(RawValue.invalidContractStatus.rawValue)
+            string = RawValue.invalidContractStatus.rawValue
         case .invalidShopID:
-            try container.encode(RawValue.invalidShopID.rawValue)
+            string = RawValue.invalidShopID.rawValue
         case .invalidInvoiceCost:
-            try container.encode(RawValue.invalidInvoiceCost.rawValue)
+            string = RawValue.invalidInvoiceCost.rawValue
         case .invalidInvoiceCart:
-            try container.encode(RawValue.invalidInvoiceCart.rawValue)
+            string = RawValue.invalidInvoiceCart.rawValue
         case .invalidInvoiceStatus:
-            try container.encode(RawValue.invalidInvoiceStatus.rawValue)
+            string = RawValue.invalidInvoiceStatus.rawValue
         case .invoicePaymentPending:
-            try container.encode(RawValue.invoicePaymentPending.rawValue)
+            string = RawValue.invoicePaymentPending.rawValue
         case .invalidPaymentStatus:
-            try container.encode(RawValue.invalidPaymentStatus.rawValue)
+            string = RawValue.invalidPaymentStatus.rawValue
         case .invalidPaymentResource:
-            try container.encode(RawValue.invalidPaymentResource.rawValue)
+            string = RawValue.invalidPaymentResource.rawValue
         case .invalidPaymentToolToken:
-            try container.encode(RawValue.invalidPaymentToolToken.rawValue)
+            string = RawValue.invalidPaymentToolToken.rawValue
         case .invalidPaymentSession:
-            try container.encode(RawValue.invalidPaymentSession.rawValue)
+            string = RawValue.invalidPaymentSession.rawValue
         case .invalidRecurrentParent:
-            try container.encode(RawValue.invalidRecurrentParent.rawValue)
+            string = RawValue.invalidRecurrentParent.rawValue
         case .insufficentAccountBalance:
-            try container.encode(RawValue.insufficentAccountBalance.rawValue)
+            string = RawValue.insufficentAccountBalance.rawValue
         case .invoicePaymentAmountExceeded:
-            try container.encode(RawValue.invoicePaymentAmountExceeded.rawValue)
+            string = RawValue.invoicePaymentAmountExceeded.rawValue
         case .inconsistentRefundCurrency:
-            try container.encode(RawValue.inconsistentRefundCurrency.rawValue)
+            string = RawValue.inconsistentRefundCurrency.rawValue
         case .changesetConflict:
-            try container.encode(RawValue.changesetConflict.rawValue)
+            string = RawValue.changesetConflict.rawValue
         case .invalidChangeset:
-            try container.encode(RawValue.invalidChangeset.rawValue)
+            string = RawValue.invalidChangeset.rawValue
         case .invalidClaimStatus:
-            try container.encode(RawValue.invalidClaimStatus.rawValue)
+            string = RawValue.invalidClaimStatus.rawValue
         case .invalidClaimRevision:
-            try container.encode(RawValue.invalidClaimRevision.rawValue)
+            string = RawValue.invalidClaimRevision.rawValue
         case .limitExceeded:
-            try container.encode(RawValue.limitExceeded.rawValue)
+            string = RawValue.limitExceeded.rawValue
         case .invalidDeadline:
-            try container.encode(RawValue.invalidDeadline.rawValue)
+            string = RawValue.invalidDeadline.rawValue
         case .invalidRequest:
-            try container.encode(RawValue.invalidRequest.rawValue)
+            string = RawValue.invalidRequest.rawValue
         case .invalidPaymentTool:
-            try container.encode(RawValue.invalidPaymentTool.rawValue)
+            string = RawValue.invalidPaymentTool.rawValue
         case .accountLimitsExceeded:
-            try container.encode(RawValue.accountLimitsExceeded.rawValue)
+            string = RawValue.accountLimitsExceeded.rawValue
         case .insufficientFunds:
-            try container.encode(RawValue.insufficientFunds.rawValue)
+            string = RawValue.insufficientFunds.rawValue
         case .preauthorizationFailed:
-            try container.encode(RawValue.preauthorizationFailed.rawValue)
+            string = RawValue.preauthorizationFailed.rawValue
         case .rejectedByIssuer:
-            try container.encode(RawValue.rejectedByIssuer.rawValue)
+            string = RawValue.rejectedByIssuer.rawValue
         case .paymentRejected:
-            try container.encode(RawValue.paymentRejected.rawValue)
+            string = RawValue.paymentRejected.rawValue
         case let .unknown(value):
-            try container.encode(value)
+            string = value
         }
+
+        try string.encode(to: encoder)
     }
 
     private enum RawValue: String {
