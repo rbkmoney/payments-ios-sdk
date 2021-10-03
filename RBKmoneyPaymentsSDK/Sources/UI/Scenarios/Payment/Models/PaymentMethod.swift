@@ -31,6 +31,6 @@ public enum PaymentMethod: CaseIterable {
     /// * поддержки сервером RBKmoney оплаты заданного инвойса с помощью токенизированных данных Apple Pay
     /// * поддержки устройством пользователя оплаты с помощью Apple Pay
     /// * отсутствия запрета на платежи с помощью Apple Pay на устройстве пользователя
-    /// * настройки приложения и наличия Apple Pay Merchant Identifier
+    /// * настройки приложения и наличия `PaymentApplePayInputData` во входных параметрах платежа
     case applePay
 }

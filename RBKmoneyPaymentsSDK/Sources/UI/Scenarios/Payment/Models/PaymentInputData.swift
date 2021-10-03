@@ -47,11 +47,8 @@ public struct PaymentInputData {
     /// применения.
     public let allowedPaymentMethods: [PaymentMethod]
 
-    /// Идентификатор Apple Pay Merchant.
-    ///
-    /// Идентификатор продавца является необходимым, в числе прочих требований, для оплаты с помощью Apple Pay. Больше подробностей можно найти в
-    /// [документации по настройке Apple Pay](https://developer.apple.com/documentation/passkit/apple_pay/setting_up_apple_pay_requirements).
-    public let applePayMerchantIdentifier: String?
+    /// Набор входных данных для оплаты с помощью Apple Pay.
+    public let applePayInputData: PaymentApplePayInputData?
 
     /// Инициализатор структуры.
     ///
@@ -60,19 +57,19 @@ public struct PaymentInputData {
     /// - Parameter shopName: обязательный
     /// - Parameter payerEmail: необязательный, по умолчанию - nil
     /// - Parameter allowedPaymentMethods: обязательный, по умолчанию - все доступные методы
-    /// - Parameter applePayMerchantIdentifier: необязательный, по умолчанию - nil
+    /// - Parameter applePayInputData: необязательный, по умолчанию - nil
     public init(invoiceIdentifier: String,
                 invoiceAccessToken: String,
                 shopName: String,
                 payerEmail: String? = nil,
                 allowedPaymentMethods: [PaymentMethod] = PaymentMethod.allCases,
-                applePayMerchantIdentifier: String? = nil) {
+                applePayInputData: PaymentApplePayInputData? = nil) {
 
         self.invoiceIdentifier = invoiceIdentifier
         self.invoiceAccessToken = invoiceAccessToken
         self.shopName = shopName
         self.payerEmail = payerEmail
         self.allowedPaymentMethods = allowedPaymentMethods
-        self.applePayMerchantIdentifier = applePayMerchantIdentifier
+        self.applePayInputData = applePayInputData
     }
 }
