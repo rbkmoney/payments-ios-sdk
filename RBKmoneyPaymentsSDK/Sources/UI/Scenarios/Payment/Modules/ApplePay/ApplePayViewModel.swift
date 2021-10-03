@@ -70,7 +70,7 @@ final class ApplePayViewModel: ModuleViewModel {
                         return .paymentProgress(.init(parameters: data.parameters, source: source))
                     }
                     .retry(using: errorHandlerProvider)
-                    .catchError {
+                    .catch {
                         .just(.unpaidInvoice(.init(.cannotCreatePaymentResource, underlyingError: $0, parameters: data.parameters)))
                     }
                     .trackActivity(activityTracker)

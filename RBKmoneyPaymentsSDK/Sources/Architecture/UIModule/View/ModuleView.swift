@@ -14,7 +14,7 @@
 
 import RxSwift
 
-protocol ModuleView: class {
+protocol ModuleView: AnyObject {
 
     associatedtype ViewModel: ModuleViewModel
 

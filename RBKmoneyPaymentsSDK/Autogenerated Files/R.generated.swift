@@ -9,27 +9,161 @@ import UIKit
 
 /// This `R` struct is generated and contains references to static resources.
 struct R: Rswift.Validatable {
-  fileprivate static let applicationLocale = hostingBundle.preferredLocalizations.first.flatMap(Locale.init) ?? Locale.current
+  fileprivate static let applicationLocale = hostingBundle.preferredLocalizations.first.flatMap { Locale(identifier: $0) } ?? Locale.current
   fileprivate static let hostingBundle = Bundle(for: R.Class.self)
-  
+
+  /// Find first language and bundle for which the table exists
+  fileprivate static func localeBundle(tableName: String, preferredLanguages: [String]) -> (Foundation.Locale, Foundation.Bundle)? {
+    // Filter preferredLanguages to localizations, use first locale
+    var languages = preferredLanguages
+      .map { Locale(identifier: $0) }
+      .prefix(1)
+      .flatMap { locale -> [String] in
+        if hostingBundle.localizations.contains(locale.identifier) {
+          if let language = locale.languageCode, hostingBundle.localizations.contains(language) {
+            return [locale.identifier, language]
+          } else {
+            return [locale.identifier]
+          }
+        } else if let language = locale.languageCode, hostingBundle.localizations.contains(language) {
+          return [language]
+        } else {
+          return []
+        }
+      }
+
+    // If there's no languages, use development language as backstop
+    if languages.isEmpty {
+      if let developmentLocalization = hostingBundle.developmentLocalization {
+        languages = [developmentLocalization]
+      }
+    } else {
+      // Insert Base as second item (between locale identifier and languageCode)
+      languages.insert("Base", at: 1)
+
+      // Add development language as backstop
+      if let developmentLocalization = hostingBundle.developmentLocalization {
+        languages.append(developmentLocalization)
+      }
+    }
+
+    // Find first language for which table exists
+    // Note: key might not exist in chosen language (in that case, key will be shown)
+    for language in languages {
+      if let lproj = hostingBundle.url(forResource: language, withExtension: "lproj"),
+         let lbundle = Bundle(url: lproj)
+      {
+        let strings = lbundle.url(forResource: tableName, withExtension: "strings")
+        let stringsdict = lbundle.url(forResource: tableName, withExtension: "stringsdict")
+
+        if strings != nil || stringsdict != nil {
+          return (Locale(identifier: language), lbundle)
+        }
+      }
+    }
+
+    // If table is available in main bundle, don't look for localized resources
+    let strings = hostingBundle.url(forResource: tableName, withExtension: "strings", subdirectory: nil, localization: nil)
+    let stringsdict = hostingBundle.url(forResource: tableName, withExtension: "stringsdict", subdirectory: nil, localization: nil)
+
+    if strings != nil || stringsdict != nil {
+      return (applicationLocale, hostingBundle)
+    }
+
+    // If table is not found for requested languages, key will be shown
+    return nil
+  }
+
+  /// Load string from Info.plist file
+  fileprivate static func infoPlistString(path: [String], key: String) -> String? {
+    var dict = hostingBundle.infoDictionary
+    for step in path {
+      guard let obj = dict?[step] as? [String: Any] else { return nil }
+      dict = obj
+    }
+    return dict?[key] as? String
+  }
+
   static func validate() throws {
     try intern.validate()
   }
-  
+
+  #if os(iOS) || os(tvOS)
+  /// This `R.storyboard` struct is generated, and contains static references to 6 storyboards.
+  struct storyboard {
+    /// Storyboard `ApplePay`.
+    static let applePay = _R.storyboard.applePay()
+    /// Storyboard `BankCard`.
+    static let bankCard = _R.storyboard.bankCard()
+    /// Storyboard `PaidInvoice`.
+    static let paidInvoice = _R.storyboard.paidInvoice()
+    /// Storyboard `PaymentMethod`.
+    static let paymentMethod = _R.storyboard.paymentMethod()
+    /// Storyboard `PaymentProgress`.
+    static let paymentProgress = _R.storyboard.paymentProgress()
+    /// Storyboard `UnpaidInvoice`.
+    static let unpaidInvoice = _R.storyboard.unpaidInvoice()
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "ApplePay", bundle: ...)`
+    static func applePay(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.applePay)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "BankCard", bundle: ...)`
+    static func bankCard(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.bankCard)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "PaidInvoice", bundle: ...)`
+    static func paidInvoice(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.paidInvoice)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "PaymentMethod", bundle: ...)`
+    static func paymentMethod(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.paymentMethod)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "PaymentProgress", bundle: ...)`
+    static func paymentProgress(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.paymentProgress)
+    }
+    #endif
+
+    #if os(iOS) || os(tvOS)
+    /// `UIStoryboard(name: "UnpaidInvoice", bundle: ...)`
+    static func unpaidInvoice(_: Void = ()) -> UIKit.UIStoryboard {
+      return UIKit.UIStoryboard(resource: R.storyboard.unpaidInvoice)
+    }
+    #endif
+
+    fileprivate init() {}
+  }
+  #endif
+
   /// This `R.file` struct is generated, and contains static references to 1 files.
   struct file {
     /// Resource file `Cards.json`.
     static let cardsJson = Rswift.FileResource(bundle: R.hostingBundle, name: "Cards", pathExtension: "json")
-    
+
     /// `bundle.url(forResource: "Cards", withExtension: "json")`
     static func cardsJson(_: Void = ()) -> Foundation.URL? {
       let fileResource = R.file.cardsJson
       return fileResource.bundle.url(forResource: fileResource)
     }
-    
+
     fileprivate init() {}
   }
-  
+
   /// This `R.image` struct is generated, and contains static references to 0 images.
   struct image {
     /// This `R.image.bankCard` struct is generated, and contains static references to 10 images.
@@ -54,60 +188,80 @@ struct R: Rswift.Validatable {
       static let number = Rswift.ImageResource(bundle: R.hostingBundle, name: "BankCard/number")
       /// Image `visa`.
       static let visa = Rswift.ImageResource(bundle: R.hostingBundle, name: "BankCard/visa")
-      
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "cardholder", bundle: ..., traitCollection: ...)`
       static func cardholder(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.bankCard.cardholder, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "checkmark", bundle: ..., traitCollection: ...)`
       static func checkmark(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.bankCard.checkmark, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "cross", bundle: ..., traitCollection: ...)`
       static func cross(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.bankCard.cross, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "cvv", bundle: ..., traitCollection: ...)`
       static func cvv(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.bankCard.cvv, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "date", bundle: ..., traitCollection: ...)`
       static func date(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.bankCard.date, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "email", bundle: ..., traitCollection: ...)`
       static func email(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.bankCard.email, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "mastercard", bundle: ..., traitCollection: ...)`
       static func mastercard(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.bankCard.mastercard, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "nspkmir", bundle: ..., traitCollection: ...)`
       static func nspkmir(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.bankCard.nspkmir, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "number", bundle: ..., traitCollection: ...)`
       static func number(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.bankCard.number, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "visa", bundle: ..., traitCollection: ...)`
       static func visa(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.bankCard.visa, compatibleWith: traitCollection)
       }
-      
+      #endif
+
       fileprivate init() {}
     }
-    
+
     /// This `R.image.bottomLogos` struct is generated, and contains static references to 3 images.
     struct bottomLogos {
       /// Image `3ds_pci_dss`.
@@ -116,25 +270,31 @@ struct R: Rswift.Validatable {
       static let lock = Rswift.ImageResource(bundle: R.hostingBundle, name: "BottomLogos/lock")
       /// Image `rbk_money`.
       static let rbk_money = Rswift.ImageResource(bundle: R.hostingBundle, name: "BottomLogos/rbk_money")
-      
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "3ds_pci_dss", bundle: ..., traitCollection: ...)`
       static func ds_pci_dss(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.bottomLogos.ds_pci_dss, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "lock", bundle: ..., traitCollection: ...)`
       static func lock(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.bottomLogos.lock, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "rbk_money", bundle: ..., traitCollection: ...)`
       static func rbk_money(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.bottomLogos.rbk_money, compatibleWith: traitCollection)
       }
-      
+      #endif
+
       fileprivate init() {}
     }
-    
+
     /// This `R.image.common` struct is generated, and contains static references to 4 images.
     struct common {
       /// Image `back`.
@@ -145,30 +305,38 @@ struct R: Rswift.Validatable {
       static let rounded_bottom_corners = Rswift.ImageResource(bundle: R.hostingBundle, name: "Common/rounded_bottom_corners")
       /// Image `rounded_top_corners`.
       static let rounded_top_corners = Rswift.ImageResource(bundle: R.hostingBundle, name: "Common/rounded_top_corners")
-      
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "back", bundle: ..., traitCollection: ...)`
       static func back(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.common.back, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "close", bundle: ..., traitCollection: ...)`
       static func close(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.common.close, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "rounded_bottom_corners", bundle: ..., traitCollection: ...)`
       static func rounded_bottom_corners(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.common.rounded_bottom_corners, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "rounded_top_corners", bundle: ..., traitCollection: ...)`
       static func rounded_top_corners(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.common.rounded_top_corners, compatibleWith: traitCollection)
       }
-      
+      #endif
+
       fileprivate init() {}
     }
-    
+
     /// This `R.image.paymentMethods` struct is generated, and contains static references to 6 images.
     struct paymentMethods {
       /// Image `applepay`.
@@ -183,40 +351,52 @@ struct R: Rswift.Validatable {
       static let ewallet = Rswift.ImageResource(bundle: R.hostingBundle, name: "PaymentMethods/ewallet")
       /// Image `mobile`.
       static let mobile = Rswift.ImageResource(bundle: R.hostingBundle, name: "PaymentMethods/mobile")
-      
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "applepay", bundle: ..., traitCollection: ...)`
       static func applepay(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.paymentMethods.applepay, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "bankcard", bundle: ..., traitCollection: ...)`
       static func bankcard(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.paymentMethods.bankcard, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "cash", bundle: ..., traitCollection: ...)`
       static func cash(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.paymentMethods.cash, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "ebank", bundle: ..., traitCollection: ...)`
       static func ebank(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.paymentMethods.ebank, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "ewallet", bundle: ..., traitCollection: ...)`
       static func ewallet(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.paymentMethods.ewallet, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "mobile", bundle: ..., traitCollection: ...)`
       static func mobile(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.paymentMethods.mobile, compatibleWith: traitCollection)
       }
-      
+      #endif
+
       fileprivate init() {}
     }
-    
+
     /// This `R.image.result` struct is generated, and contains static references to 3 images.
     struct result {
       /// Image `paid`.
@@ -225,28 +405,34 @@ struct R: Rswift.Validatable {
       static let unpaid = Rswift.ImageResource(bundle: R.hostingBundle, name: "Result/unpaid")
       /// Image `warning`.
       static let warning = Rswift.ImageResource(bundle: R.hostingBundle, name: "Result/warning")
-      
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "paid", bundle: ..., traitCollection: ...)`
       static func paid(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.result.paid, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "unpaid", bundle: ..., traitCollection: ...)`
       static func unpaid(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.result.unpaid, compatibleWith: traitCollection)
       }
-      
+      #endif
+
+      #if os(iOS) || os(tvOS)
       /// `UIImage(named: "warning", bundle: ..., traitCollection: ...)`
       static func warning(compatibleWith traitCollection: UIKit.UITraitCollection? = nil) -> UIKit.UIImage? {
         return UIKit.UIImage(resource: R.image.result.warning, compatibleWith: traitCollection)
       }
-      
+      #endif
+
       fileprivate init() {}
     }
-    
+
     fileprivate init() {}
   }
-  
+
   /// This `R.nib` struct is generated, and contains static references to 5 nibs.
   struct nib {
     /// Nib `InvoiceSummaryView`.
@@ -259,1201 +445,1869 @@ struct R: Rswift.Validatable {
     static let paymentMethodsTableFooterView = _R.nib._PaymentMethodsTableFooterView()
     /// Nib `PaymentMethodsTableHeaderView`.
     static let paymentMethodsTableHeaderView = _R.nib._PaymentMethodsTableHeaderView()
-    
+
+    #if os(iOS) || os(tvOS)
     /// `UINib(name: "InvoiceSummaryView", in: bundle)`
     @available(*, deprecated, message: "Use UINib(resource: R.nib.invoiceSummaryView) instead")
     static func invoiceSummaryView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.invoiceSummaryView)
     }
-    
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UINib(name: "LogotypesView", in: bundle)`
     @available(*, deprecated, message: "Use UINib(resource: R.nib.logotypesView) instead")
     static func logotypesView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.logotypesView)
     }
-    
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UINib(name: "PaymentMethodCell", in: bundle)`
     @available(*, deprecated, message: "Use UINib(resource: R.nib.paymentMethodCell) instead")
     static func paymentMethodCell(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.paymentMethodCell)
     }
-    
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UINib(name: "PaymentMethodsTableFooterView", in: bundle)`
     @available(*, deprecated, message: "Use UINib(resource: R.nib.paymentMethodsTableFooterView) instead")
     static func paymentMethodsTableFooterView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.paymentMethodsTableFooterView)
     }
-    
+    #endif
+
+    #if os(iOS) || os(tvOS)
     /// `UINib(name: "PaymentMethodsTableHeaderView", in: bundle)`
     @available(*, deprecated, message: "Use UINib(resource: R.nib.paymentMethodsTableHeaderView) instead")
     static func paymentMethodsTableHeaderView(_: Void = ()) -> UIKit.UINib {
       return UIKit.UINib(resource: R.nib.paymentMethodsTableHeaderView)
     }
-    
+    #endif
+
     static func invoiceSummaryView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
       return R.nib.invoiceSummaryView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
     }
-    
+
     static func logotypesView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
       return R.nib.logotypesView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
     }
-    
+
     static func paymentMethodCell(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> PaymentMethodCell? {
       return R.nib.paymentMethodCell.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? PaymentMethodCell
     }
-    
+
     static func paymentMethodsTableFooterView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
       return R.nib.paymentMethodsTableFooterView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
     }
-    
+
     static func paymentMethodsTableHeaderView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
       return R.nib.paymentMethodsTableHeaderView.instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
     }
-    
+
     fileprivate init() {}
   }
-  
+
   /// This `R.reuseIdentifier` struct is generated, and contains static references to 1 reuse identifiers.
   struct reuseIdentifier {
     /// Reuse identifier `PaymentMethodCell`.
     static let paymentMethodCell: Rswift.ReuseIdentifier<PaymentMethodCell> = Rswift.ReuseIdentifier(identifier: "PaymentMethodCell")
-    
+
     fileprivate init() {}
   }
-  
-  /// This `R.storyboard` struct is generated, and contains static references to 6 storyboards.
-  struct storyboard {
-    /// Storyboard `ApplePay`.
-    static let applePay = _R.storyboard.applePay()
-    /// Storyboard `BankCard`.
-    static let bankCard = _R.storyboard.bankCard()
-    /// Storyboard `PaidInvoice`.
-    static let paidInvoice = _R.storyboard.paidInvoice()
-    /// Storyboard `PaymentMethod`.
-    static let paymentMethod = _R.storyboard.paymentMethod()
-    /// Storyboard `PaymentProgress`.
-    static let paymentProgress = _R.storyboard.paymentProgress()
-    /// Storyboard `UnpaidInvoice`.
-    static let unpaidInvoice = _R.storyboard.unpaidInvoice()
-    
-    /// `UIStoryboard(name: "ApplePay", bundle: ...)`
-    static func applePay(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.applePay)
-    }
-    
-    /// `UIStoryboard(name: "BankCard", bundle: ...)`
-    static func bankCard(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.bankCard)
-    }
-    
-    /// `UIStoryboard(name: "PaidInvoice", bundle: ...)`
-    static func paidInvoice(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.paidInvoice)
-    }
-    
-    /// `UIStoryboard(name: "PaymentMethod", bundle: ...)`
-    static func paymentMethod(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.paymentMethod)
-    }
-    
-    /// `UIStoryboard(name: "PaymentProgress", bundle: ...)`
-    static func paymentProgress(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.paymentProgress)
-    }
-    
-    /// `UIStoryboard(name: "UnpaidInvoice", bundle: ...)`
-    static func unpaidInvoice(_: Void = ()) -> UIKit.UIStoryboard {
-      return UIKit.UIStoryboard(resource: R.storyboard.unpaidInvoice)
-    }
-    
-    fileprivate init() {}
-  }
-  
+
   /// This `R.string` struct is generated, and contains static references to 1 localization tables.
   struct string {
     /// This `R.string.localizable` struct is generated, and contains static references to 84 localization keys.
     struct localizable {
       /// en translation: ALL PAYMENT METHODS
-      /// 
+      ///
       /// Locales: en, ru
       static let unpaid_action_restart_scenario = Rswift.StringResource(key: "unpaid_action_restart_scenario", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Account limits exceeded.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_account_limits_exceeded = Rswift.StringResource(key: "error_message_account_limits_exceeded", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: An unknown error has occured.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_unknown_error = Rswift.StringResource(key: "error_message_unknown_error", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Apple Pay
-      /// 
+      ///
       /// Locales: en, ru
       static let apple_pay_header_title = Rswift.StringResource(key: "apple_pay_header_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Attempt to change is in conflict with other changes in pending requests.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_changeset_conflict = Rswift.StringResource(key: "error_message_changeset_conflict", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Attempt to refund payment with different currency.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_inconsistent_refund_currency = Rswift.StringResource(key: "error_message_inconsistent_refund_currency", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Attempt to refund payment with excessed amount.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invoice_payment_amount_exceeded = Rswift.StringResource(key: "error_message_invoice_payment_amount_exceeded", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: BANK CARD
-      /// 
+      ///
       /// Locales: en, ru
       static let payment_method_bank_card = Rswift.StringResource(key: "payment_method_bank_card", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: CVV/CVC
-      /// 
+      ///
       /// Locales: en, ru
       static let bank_card_cvc_placeholder = Rswift.StringResource(key: "bank_card_cvc_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Cancel
-      /// 
+      ///
       /// Locales: en, ru
       static let alert_button_cancel = Rswift.StringResource(key: "alert_button_cancel", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Card number
-      /// 
+      ///
       /// Locales: en, ru
       static let bank_card_card_number_placeholder = Rswift.StringResource(key: "bank_card_card_number_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Cardholder name
-      /// 
+      ///
       /// Locales: en, ru
       static let bank_card_cardholder_placeholder = Rswift.StringResource(key: "bank_card_cardholder_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Choose payment method
-      /// 
+      ///
       /// Locales: en, ru
       static let payment_method_header_title = Rswift.StringResource(key: "payment_method_header_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Contract is no longer valid due to expiration or termination.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invalid_contract_status = Rswift.StringResource(key: "error_message_invalid_contract_status", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Current contract does not support such type of operations.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_operation_not_permitted = Rswift.StringResource(key: "error_message_operation_not_permitted", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Element not found.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_element_not_found = Rswift.StringResource(key: "error_message_element_not_found", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Email
-      /// 
+      ///
       /// Locales: en, ru
       static let apple_pay_email_placeholder = Rswift.StringResource(key: "apple_pay_email_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Email
-      /// 
+      ///
       /// Locales: en, ru
       static let bank_card_email_placeholder = Rswift.StringResource(key: "bank_card_email_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Error
-      /// 
+      ///
       /// Locales: en, ru
       static let alert_title_error = Rswift.StringResource(key: "alert_title_error", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Failed to build network request.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_cannot_build_request = Rswift.StringResource(key: "error_message_cannot_build_request", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Failed to create payment resource.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_cannot_create_payment_resource = Rswift.StringResource(key: "error_message_cannot_create_payment_resource", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Failed to create payment.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_cannot_create_payment = Rswift.StringResource(key: "error_message_cannot_create_payment", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Failed to get invoice events.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_cannot_obtain_invoice_events = Rswift.StringResource(key: "error_message_cannot_obtain_invoice_events", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Failed to get invoice payment methods.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_cannot_obtain_invoice_payment_methods = Rswift.StringResource(key: "error_message_cannot_obtain_invoice_payment_methods", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Failed to get invoice.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_cannot_obtain_invoice = Rswift.StringResource(key: "error_message_cannot_obtain_invoice", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Incorrect claim revision.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invalid_claim_revision = Rswift.StringResource(key: "error_message_invalid_claim_revision", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Incorrect claim status.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invalid_claim_status = Rswift.StringResource(key: "error_message_invalid_claim_status", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Incorrect invoice cart.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invalid_invoice_cart = Rswift.StringResource(key: "error_message_invalid_invoice_cart", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Incorrect invoice price.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invalid_invoice_cost = Rswift.StringResource(key: "error_message_invalid_invoice_cost", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Incorrect invoice status.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invalid_invoice_status = Rswift.StringResource(key: "error_message_invalid_invoice_status", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Incorrect parent recurrent payment.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invalid_recurrent_parent = Rswift.StringResource(key: "error_message_invalid_recurrent_parent", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Incorrect participant changes e.g. creating merchant with currency that is not supported by current contract.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invalid_changeset = Rswift.StringResource(key: "error_message_invalid_changeset", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Incorrect payment session.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invalid_payment_session = Rswift.StringResource(key: "error_message_invalid_payment_session", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Incorrect payment status.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invalid_payment_status = Rswift.StringResource(key: "error_message_invalid_payment_status", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Incorrect payment tool token.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invalid_payment_tool_token = Rswift.StringResource(key: "error_message_invalid_payment_tool_token", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Incorrect server response.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_response_mapping_error = Rswift.StringResource(key: "error_message_response_mapping_error", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Insufficient funds on merchant balance.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_insufficent_account_balance = Rswift.StringResource(key: "error_message_insufficent_account_balance", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Insufficient funds.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_insufficient_funds = Rswift.StringResource(key: "error_message_insufficient_funds", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Invalid deadline.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invalid_deadline = Rswift.StringResource(key: "error_message_invalid_deadline", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Invalid payment data entered.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invalid_payment_tool = Rswift.StringResource(key: "error_message_invalid_payment_tool", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Invalid request data.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invalid_request = Rswift.StringResource(key: "error_message_invalid_request", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Invoice already fully paid-up
-      /// 
+      ///
       /// Locales: en, ru
       static let unpaid_status_paid = Rswift.StringResource(key: "unpaid_status_paid", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Invoice cancelled
-      /// 
+      ///
       /// Locales: en, ru
       static let unpaid_status_cancelled = Rswift.StringResource(key: "unpaid_status_cancelled", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Invoice cancelled.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invoice_cancelled = Rswift.StringResource(key: "error_message_invoice_cancelled", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Invoice is expired.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invoice_expired = Rswift.StringResource(key: "error_message_invoice_expired", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Invoice refunded
-      /// 
+      ///
       /// Locales: en, ru
       static let unpaid_status_refunded = Rswift.StringResource(key: "unpaid_status_refunded", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Limit exceeded.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_limit_exceeded = Rswift.StringResource(key: "error_message_limit_exceeded", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: MM/YY
-      /// 
+      ///
       /// Locales: en, ru
       static let bank_card_date_placeholder = Rswift.StringResource(key: "bank_card_date_placeholder", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Merchant is blocked or operations are on hold.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invalid_shop_status = Rswift.StringResource(key: "error_message_invalid_shop_status", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Merchant with such identifier does not exist.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invalid_shop_id = Rswift.StringResource(key: "error_message_invalid_shop_id", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: No
-      /// 
+      ///
       /// Locales: en, ru
       static let alert_button_nope = Rswift.StringResource(key: "alert_button_nope", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: No internet connection.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_no_internet = Rswift.StringResource(key: "error_message_no_internet", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: No payment methods.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_no_payment_methods = Rswift.StringResource(key: "error_message_no_payment_methods", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: OK
-      /// 
+      ///
       /// Locales: en, ru
       static let alert_button_ok = Rswift.StringResource(key: "alert_button_ok", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: OK
-      /// 
+      ///
       /// Locales: en, ru
       static let paid_action_done = Rswift.StringResource(key: "paid_action_done", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: ORDER DETAILS
-      /// 
+      ///
       /// Locales: en, ru
       static let order_details = Rswift.StringResource(key: "order_details", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Order paid with card %@.
-      /// 
+      ///
       /// Locales: en, ru
       static let paid_card_description = Rswift.StringResource(key: "paid_card_description", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Order paid with card %@ •• %@
-      /// 
+      ///
       /// Locales: en, ru
       static let paid_card_with_last_digits_description = Rswift.StringResource(key: "paid_card_with_last_digits_description", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Order paid.
-      /// 
+      ///
       /// Locales: en, ru
       static let paid_description = Rswift.StringResource(key: "paid_description", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Participant is blocked or operations are on hold.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invalid_party_status = Rswift.StringResource(key: "error_message_invalid_party_status", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Pay %@
-      /// 
+      ///
       /// Locales: en, ru
       static let bank_card_pay = Rswift.StringResource(key: "bank_card_pay", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Payment cancelled.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_payment_cancelled = Rswift.StringResource(key: "error_message_payment_cancelled", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Payment failed.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_payment_failed = Rswift.StringResource(key: "error_message_payment_failed", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Payment with bank card
-      /// 
+      ///
       /// Locales: en, ru
       static let bank_card_header_title = Rswift.StringResource(key: "bank_card_header_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Preauthorization failed: can't verify confirmation code.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_preauthorization_failed = Rswift.StringResource(key: "error_message_preauthorization_failed", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Receipt sent to email %@
-      /// 
+      ///
       /// Locales: en, ru
       static let paid_email_description = Rswift.StringResource(key: "paid_email_description", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Request failed.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_request_failed = Rswift.StringResource(key: "error_message_request_failed", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: SECURE PAYMENT WITH
-      /// 
+      ///
       /// Locales: en, ru
       static let secure_payment = Rswift.StringResource(key: "secure_payment", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Secure connection to the server cannot be established.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_server_insecure_connection = Rswift.StringResource(key: "error_message_server_insecure_connection", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Server is not available.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_server_unavailable = Rswift.StringResource(key: "error_message_server_unavailable", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Server returned an error with unknown code %@.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_unknown_server_error = Rswift.StringResource(key: "error_message_unknown_server_error", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Specified payment method is not supported by your contract or system.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invalid_payment_resource = Rswift.StringResource(key: "error_message_invalid_payment_resource", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Successful payment!
-      /// 
+      ///
       /// Locales: en, ru
       static let paid_title = Rswift.StringResource(key: "paid_title", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: The last payment launched for the specified invoice has not yet reached the final status.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_invoice_payment_pending = Rswift.StringResource(key: "error_message_invoice_payment_pending", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Try again
-      /// 
+      ///
       /// Locales: en, ru
       static let alert_button_retry = Rswift.StringResource(key: "alert_button_retry", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Try again
-      /// 
+      ///
       /// Locales: en, ru
       static let unpaid_action_retry = Rswift.StringResource(key: "unpaid_action_retry", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Unexpected invoice status.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_unexpected_invoice_status = Rswift.StringResource(key: "error_message_unexpected_invoice_status", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Unexpected server response received, HTTP code %d.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_unacceptable_status_code = Rswift.StringResource(key: "error_message_unacceptable_status_code", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Unpaid
-      /// 
+      ///
       /// Locales: en, ru
       static let unpaid_status_unpaid = Rswift.StringResource(key: "unpaid_status_unpaid", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Use another card
-      /// 
+      ///
       /// Locales: en, ru
       static let unpaid_action_reenter_data = Rswift.StringResource(key: "unpaid_action_reenter_data", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: User interaction failed.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_user_interaction_failed = Rswift.StringResource(key: "error_message_user_interaction_failed", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Yes
-      /// 
+      ///
       /// Locales: en, ru
       static let alert_button_yes = Rswift.StringResource(key: "alert_button_yes", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Your payment has been rejected.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_payment_rejected = Rswift.StringResource(key: "error_message_payment_rejected", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
       /// en translation: Your payment institution has rejected your payment.
-      /// 
+      ///
       /// Locales: en, ru
       static let error_message_rejected_by_issuer = Rswift.StringResource(key: "error_message_rejected_by_issuer", tableName: "Localizable", bundle: R.hostingBundle, locales: ["en", "ru"], comment: nil)
-      
+
       /// en translation: ALL PAYMENT METHODS
-      /// 
+      ///
       /// Locales: en, ru
-      static func unpaid_action_restart_scenario(_: Void = ()) -> String {
-        return NSLocalizedString("unpaid_action_restart_scenario", bundle: R.hostingBundle, comment: "")
+      static func unpaid_action_restart_scenario(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("unpaid_action_restart_scenario", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "unpaid_action_restart_scenario"
+        }
+
+        return NSLocalizedString("unpaid_action_restart_scenario", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Account limits exceeded.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_account_limits_exceeded(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_account_limits_exceeded", bundle: R.hostingBundle, comment: "")
+      static func error_message_account_limits_exceeded(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_account_limits_exceeded", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_account_limits_exceeded"
+        }
+
+        return NSLocalizedString("error_message_account_limits_exceeded", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: An unknown error has occured.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_unknown_error(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_unknown_error", bundle: R.hostingBundle, comment: "")
+      static func error_message_unknown_error(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_unknown_error", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_unknown_error"
+        }
+
+        return NSLocalizedString("error_message_unknown_error", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Apple Pay
-      /// 
+      ///
       /// Locales: en, ru
-      static func apple_pay_header_title(_: Void = ()) -> String {
-        return NSLocalizedString("apple_pay_header_title", bundle: R.hostingBundle, comment: "")
+      static func apple_pay_header_title(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("apple_pay_header_title", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "apple_pay_header_title"
+        }
+
+        return NSLocalizedString("apple_pay_header_title", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Attempt to change is in conflict with other changes in pending requests.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_changeset_conflict(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_changeset_conflict", bundle: R.hostingBundle, comment: "")
+      static func error_message_changeset_conflict(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_changeset_conflict", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_changeset_conflict"
+        }
+
+        return NSLocalizedString("error_message_changeset_conflict", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Attempt to refund payment with different currency.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_inconsistent_refund_currency(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_inconsistent_refund_currency", bundle: R.hostingBundle, comment: "")
+      static func error_message_inconsistent_refund_currency(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_inconsistent_refund_currency", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_inconsistent_refund_currency"
+        }
+
+        return NSLocalizedString("error_message_inconsistent_refund_currency", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Attempt to refund payment with excessed amount.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invoice_payment_amount_exceeded(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invoice_payment_amount_exceeded", bundle: R.hostingBundle, comment: "")
+      static func error_message_invoice_payment_amount_exceeded(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invoice_payment_amount_exceeded", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invoice_payment_amount_exceeded"
+        }
+
+        return NSLocalizedString("error_message_invoice_payment_amount_exceeded", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: BANK CARD
-      /// 
+      ///
       /// Locales: en, ru
-      static func payment_method_bank_card(_: Void = ()) -> String {
-        return NSLocalizedString("payment_method_bank_card", bundle: R.hostingBundle, comment: "")
+      static func payment_method_bank_card(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("payment_method_bank_card", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "payment_method_bank_card"
+        }
+
+        return NSLocalizedString("payment_method_bank_card", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: CVV/CVC
-      /// 
+      ///
       /// Locales: en, ru
-      static func bank_card_cvc_placeholder(_: Void = ()) -> String {
-        return NSLocalizedString("bank_card_cvc_placeholder", bundle: R.hostingBundle, comment: "")
+      static func bank_card_cvc_placeholder(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("bank_card_cvc_placeholder", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "bank_card_cvc_placeholder"
+        }
+
+        return NSLocalizedString("bank_card_cvc_placeholder", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Cancel
-      /// 
+      ///
       /// Locales: en, ru
-      static func alert_button_cancel(_: Void = ()) -> String {
-        return NSLocalizedString("alert_button_cancel", bundle: R.hostingBundle, comment: "")
+      static func alert_button_cancel(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("alert_button_cancel", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "alert_button_cancel"
+        }
+
+        return NSLocalizedString("alert_button_cancel", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Card number
-      /// 
+      ///
       /// Locales: en, ru
-      static func bank_card_card_number_placeholder(_: Void = ()) -> String {
-        return NSLocalizedString("bank_card_card_number_placeholder", bundle: R.hostingBundle, comment: "")
+      static func bank_card_card_number_placeholder(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("bank_card_card_number_placeholder", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "bank_card_card_number_placeholder"
+        }
+
+        return NSLocalizedString("bank_card_card_number_placeholder", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Cardholder name
-      /// 
+      ///
       /// Locales: en, ru
-      static func bank_card_cardholder_placeholder(_: Void = ()) -> String {
-        return NSLocalizedString("bank_card_cardholder_placeholder", bundle: R.hostingBundle, comment: "")
+      static func bank_card_cardholder_placeholder(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("bank_card_cardholder_placeholder", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "bank_card_cardholder_placeholder"
+        }
+
+        return NSLocalizedString("bank_card_cardholder_placeholder", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Choose payment method
-      /// 
+      ///
       /// Locales: en, ru
-      static func payment_method_header_title(_: Void = ()) -> String {
-        return NSLocalizedString("payment_method_header_title", bundle: R.hostingBundle, comment: "")
+      static func payment_method_header_title(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("payment_method_header_title", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "payment_method_header_title"
+        }
+
+        return NSLocalizedString("payment_method_header_title", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Contract is no longer valid due to expiration or termination.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invalid_contract_status(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invalid_contract_status", bundle: R.hostingBundle, comment: "")
+      static func error_message_invalid_contract_status(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invalid_contract_status", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invalid_contract_status"
+        }
+
+        return NSLocalizedString("error_message_invalid_contract_status", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Current contract does not support such type of operations.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_operation_not_permitted(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_operation_not_permitted", bundle: R.hostingBundle, comment: "")
+      static func error_message_operation_not_permitted(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_operation_not_permitted", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_operation_not_permitted"
+        }
+
+        return NSLocalizedString("error_message_operation_not_permitted", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Element not found.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_element_not_found(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_element_not_found", bundle: R.hostingBundle, comment: "")
+      static func error_message_element_not_found(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_element_not_found", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_element_not_found"
+        }
+
+        return NSLocalizedString("error_message_element_not_found", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Email
-      /// 
+      ///
       /// Locales: en, ru
-      static func apple_pay_email_placeholder(_: Void = ()) -> String {
-        return NSLocalizedString("apple_pay_email_placeholder", bundle: R.hostingBundle, comment: "")
+      static func apple_pay_email_placeholder(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("apple_pay_email_placeholder", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "apple_pay_email_placeholder"
+        }
+
+        return NSLocalizedString("apple_pay_email_placeholder", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Email
-      /// 
+      ///
       /// Locales: en, ru
-      static func bank_card_email_placeholder(_: Void = ()) -> String {
-        return NSLocalizedString("bank_card_email_placeholder", bundle: R.hostingBundle, comment: "")
+      static func bank_card_email_placeholder(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("bank_card_email_placeholder", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "bank_card_email_placeholder"
+        }
+
+        return NSLocalizedString("bank_card_email_placeholder", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Error
-      /// 
+      ///
       /// Locales: en, ru
-      static func alert_title_error(_: Void = ()) -> String {
-        return NSLocalizedString("alert_title_error", bundle: R.hostingBundle, comment: "")
+      static func alert_title_error(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("alert_title_error", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "alert_title_error"
+        }
+
+        return NSLocalizedString("alert_title_error", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Failed to build network request.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_cannot_build_request(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_cannot_build_request", bundle: R.hostingBundle, comment: "")
+      static func error_message_cannot_build_request(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_cannot_build_request", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_cannot_build_request"
+        }
+
+        return NSLocalizedString("error_message_cannot_build_request", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Failed to create payment resource.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_cannot_create_payment_resource(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_cannot_create_payment_resource", bundle: R.hostingBundle, comment: "")
+      static func error_message_cannot_create_payment_resource(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_cannot_create_payment_resource", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_cannot_create_payment_resource"
+        }
+
+        return NSLocalizedString("error_message_cannot_create_payment_resource", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Failed to create payment.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_cannot_create_payment(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_cannot_create_payment", bundle: R.hostingBundle, comment: "")
+      static func error_message_cannot_create_payment(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_cannot_create_payment", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_cannot_create_payment"
+        }
+
+        return NSLocalizedString("error_message_cannot_create_payment", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Failed to get invoice events.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_cannot_obtain_invoice_events(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_cannot_obtain_invoice_events", bundle: R.hostingBundle, comment: "")
+      static func error_message_cannot_obtain_invoice_events(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_cannot_obtain_invoice_events", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_cannot_obtain_invoice_events"
+        }
+
+        return NSLocalizedString("error_message_cannot_obtain_invoice_events", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Failed to get invoice payment methods.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_cannot_obtain_invoice_payment_methods(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_cannot_obtain_invoice_payment_methods", bundle: R.hostingBundle, comment: "")
+      static func error_message_cannot_obtain_invoice_payment_methods(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_cannot_obtain_invoice_payment_methods", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_cannot_obtain_invoice_payment_methods"
+        }
+
+        return NSLocalizedString("error_message_cannot_obtain_invoice_payment_methods", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Failed to get invoice.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_cannot_obtain_invoice(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_cannot_obtain_invoice", bundle: R.hostingBundle, comment: "")
+      static func error_message_cannot_obtain_invoice(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_cannot_obtain_invoice", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_cannot_obtain_invoice"
+        }
+
+        return NSLocalizedString("error_message_cannot_obtain_invoice", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Incorrect claim revision.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invalid_claim_revision(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invalid_claim_revision", bundle: R.hostingBundle, comment: "")
+      static func error_message_invalid_claim_revision(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invalid_claim_revision", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invalid_claim_revision"
+        }
+
+        return NSLocalizedString("error_message_invalid_claim_revision", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Incorrect claim status.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invalid_claim_status(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invalid_claim_status", bundle: R.hostingBundle, comment: "")
+      static func error_message_invalid_claim_status(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invalid_claim_status", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invalid_claim_status"
+        }
+
+        return NSLocalizedString("error_message_invalid_claim_status", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Incorrect invoice cart.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invalid_invoice_cart(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invalid_invoice_cart", bundle: R.hostingBundle, comment: "")
+      static func error_message_invalid_invoice_cart(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invalid_invoice_cart", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invalid_invoice_cart"
+        }
+
+        return NSLocalizedString("error_message_invalid_invoice_cart", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Incorrect invoice price.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invalid_invoice_cost(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invalid_invoice_cost", bundle: R.hostingBundle, comment: "")
+      static func error_message_invalid_invoice_cost(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invalid_invoice_cost", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invalid_invoice_cost"
+        }
+
+        return NSLocalizedString("error_message_invalid_invoice_cost", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Incorrect invoice status.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invalid_invoice_status(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invalid_invoice_status", bundle: R.hostingBundle, comment: "")
+      static func error_message_invalid_invoice_status(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invalid_invoice_status", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invalid_invoice_status"
+        }
+
+        return NSLocalizedString("error_message_invalid_invoice_status", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Incorrect parent recurrent payment.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invalid_recurrent_parent(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invalid_recurrent_parent", bundle: R.hostingBundle, comment: "")
+      static func error_message_invalid_recurrent_parent(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invalid_recurrent_parent", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invalid_recurrent_parent"
+        }
+
+        return NSLocalizedString("error_message_invalid_recurrent_parent", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Incorrect participant changes e.g. creating merchant with currency that is not supported by current contract.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invalid_changeset(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invalid_changeset", bundle: R.hostingBundle, comment: "")
+      static func error_message_invalid_changeset(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invalid_changeset", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invalid_changeset"
+        }
+
+        return NSLocalizedString("error_message_invalid_changeset", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Incorrect payment session.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invalid_payment_session(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invalid_payment_session", bundle: R.hostingBundle, comment: "")
+      static func error_message_invalid_payment_session(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invalid_payment_session", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invalid_payment_session"
+        }
+
+        return NSLocalizedString("error_message_invalid_payment_session", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Incorrect payment status.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invalid_payment_status(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invalid_payment_status", bundle: R.hostingBundle, comment: "")
+      static func error_message_invalid_payment_status(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invalid_payment_status", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invalid_payment_status"
+        }
+
+        return NSLocalizedString("error_message_invalid_payment_status", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Incorrect payment tool token.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invalid_payment_tool_token(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invalid_payment_tool_token", bundle: R.hostingBundle, comment: "")
+      static func error_message_invalid_payment_tool_token(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invalid_payment_tool_token", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invalid_payment_tool_token"
+        }
+
+        return NSLocalizedString("error_message_invalid_payment_tool_token", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Incorrect server response.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_response_mapping_error(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_response_mapping_error", bundle: R.hostingBundle, comment: "")
+      static func error_message_response_mapping_error(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_response_mapping_error", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_response_mapping_error"
+        }
+
+        return NSLocalizedString("error_message_response_mapping_error", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Insufficient funds on merchant balance.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_insufficent_account_balance(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_insufficent_account_balance", bundle: R.hostingBundle, comment: "")
+      static func error_message_insufficent_account_balance(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_insufficent_account_balance", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_insufficent_account_balance"
+        }
+
+        return NSLocalizedString("error_message_insufficent_account_balance", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Insufficient funds.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_insufficient_funds(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_insufficient_funds", bundle: R.hostingBundle, comment: "")
+      static func error_message_insufficient_funds(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_insufficient_funds", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_insufficient_funds"
+        }
+
+        return NSLocalizedString("error_message_insufficient_funds", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Invalid deadline.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invalid_deadline(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invalid_deadline", bundle: R.hostingBundle, comment: "")
+      static func error_message_invalid_deadline(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invalid_deadline", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invalid_deadline"
+        }
+
+        return NSLocalizedString("error_message_invalid_deadline", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Invalid payment data entered.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invalid_payment_tool(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invalid_payment_tool", bundle: R.hostingBundle, comment: "")
+      static func error_message_invalid_payment_tool(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invalid_payment_tool", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invalid_payment_tool"
+        }
+
+        return NSLocalizedString("error_message_invalid_payment_tool", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Invalid request data.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invalid_request(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invalid_request", bundle: R.hostingBundle, comment: "")
+      static func error_message_invalid_request(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invalid_request", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invalid_request"
+        }
+
+        return NSLocalizedString("error_message_invalid_request", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Invoice already fully paid-up
-      /// 
+      ///
       /// Locales: en, ru
-      static func unpaid_status_paid(_: Void = ()) -> String {
-        return NSLocalizedString("unpaid_status_paid", bundle: R.hostingBundle, comment: "")
+      static func unpaid_status_paid(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("unpaid_status_paid", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "unpaid_status_paid"
+        }
+
+        return NSLocalizedString("unpaid_status_paid", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Invoice cancelled
-      /// 
+      ///
       /// Locales: en, ru
-      static func unpaid_status_cancelled(_: Void = ()) -> String {
-        return NSLocalizedString("unpaid_status_cancelled", bundle: R.hostingBundle, comment: "")
+      static func unpaid_status_cancelled(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("unpaid_status_cancelled", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "unpaid_status_cancelled"
+        }
+
+        return NSLocalizedString("unpaid_status_cancelled", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Invoice cancelled.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invoice_cancelled(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invoice_cancelled", bundle: R.hostingBundle, comment: "")
+      static func error_message_invoice_cancelled(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invoice_cancelled", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invoice_cancelled"
+        }
+
+        return NSLocalizedString("error_message_invoice_cancelled", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Invoice is expired.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invoice_expired(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invoice_expired", bundle: R.hostingBundle, comment: "")
+      static func error_message_invoice_expired(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invoice_expired", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invoice_expired"
+        }
+
+        return NSLocalizedString("error_message_invoice_expired", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Invoice refunded
-      /// 
+      ///
       /// Locales: en, ru
-      static func unpaid_status_refunded(_: Void = ()) -> String {
-        return NSLocalizedString("unpaid_status_refunded", bundle: R.hostingBundle, comment: "")
+      static func unpaid_status_refunded(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("unpaid_status_refunded", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "unpaid_status_refunded"
+        }
+
+        return NSLocalizedString("unpaid_status_refunded", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Limit exceeded.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_limit_exceeded(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_limit_exceeded", bundle: R.hostingBundle, comment: "")
+      static func error_message_limit_exceeded(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_limit_exceeded", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_limit_exceeded"
+        }
+
+        return NSLocalizedString("error_message_limit_exceeded", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: MM/YY
-      /// 
+      ///
       /// Locales: en, ru
-      static func bank_card_date_placeholder(_: Void = ()) -> String {
-        return NSLocalizedString("bank_card_date_placeholder", bundle: R.hostingBundle, comment: "")
+      static func bank_card_date_placeholder(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("bank_card_date_placeholder", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "bank_card_date_placeholder"
+        }
+
+        return NSLocalizedString("bank_card_date_placeholder", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Merchant is blocked or operations are on hold.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invalid_shop_status(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invalid_shop_status", bundle: R.hostingBundle, comment: "")
+      static func error_message_invalid_shop_status(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invalid_shop_status", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invalid_shop_status"
+        }
+
+        return NSLocalizedString("error_message_invalid_shop_status", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Merchant with such identifier does not exist.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invalid_shop_id(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invalid_shop_id", bundle: R.hostingBundle, comment: "")
+      static func error_message_invalid_shop_id(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invalid_shop_id", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invalid_shop_id"
+        }
+
+        return NSLocalizedString("error_message_invalid_shop_id", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: No
-      /// 
+      ///
       /// Locales: en, ru
-      static func alert_button_nope(_: Void = ()) -> String {
-        return NSLocalizedString("alert_button_nope", bundle: R.hostingBundle, comment: "")
+      static func alert_button_nope(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("alert_button_nope", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "alert_button_nope"
+        }
+
+        return NSLocalizedString("alert_button_nope", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: No internet connection.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_no_internet(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_no_internet", bundle: R.hostingBundle, comment: "")
+      static func error_message_no_internet(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_no_internet", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_no_internet"
+        }
+
+        return NSLocalizedString("error_message_no_internet", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: No payment methods.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_no_payment_methods(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_no_payment_methods", bundle: R.hostingBundle, comment: "")
+      static func error_message_no_payment_methods(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_no_payment_methods", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_no_payment_methods"
+        }
+
+        return NSLocalizedString("error_message_no_payment_methods", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: OK
-      /// 
+      ///
       /// Locales: en, ru
-      static func alert_button_ok(_: Void = ()) -> String {
-        return NSLocalizedString("alert_button_ok", bundle: R.hostingBundle, comment: "")
+      static func alert_button_ok(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("alert_button_ok", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "alert_button_ok"
+        }
+
+        return NSLocalizedString("alert_button_ok", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: OK
-      /// 
+      ///
       /// Locales: en, ru
-      static func paid_action_done(_: Void = ()) -> String {
-        return NSLocalizedString("paid_action_done", bundle: R.hostingBundle, comment: "")
+      static func paid_action_done(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("paid_action_done", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "paid_action_done"
+        }
+
+        return NSLocalizedString("paid_action_done", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: ORDER DETAILS
-      /// 
+      ///
       /// Locales: en, ru
-      static func order_details(_: Void = ()) -> String {
-        return NSLocalizedString("order_details", bundle: R.hostingBundle, comment: "")
+      static func order_details(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("order_details", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "order_details"
+        }
+
+        return NSLocalizedString("order_details", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Order paid with card %@.
-      /// 
+      ///
       /// Locales: en, ru
-      static func paid_card_description(_ value1: String) -> String {
-        return String(format: NSLocalizedString("paid_card_description", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
+      static func paid_card_description(_ value1: String, preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          let format = NSLocalizedString("paid_card_description", bundle: hostingBundle, comment: "")
+          return String(format: format, locale: applicationLocale, value1)
+        }
+
+        guard let (locale, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "paid_card_description"
+        }
+
+        let format = NSLocalizedString("paid_card_description", bundle: bundle, comment: "")
+        return String(format: format, locale: locale, value1)
       }
-      
+
       /// en translation: Order paid with card %@ •• %@
-      /// 
+      ///
       /// Locales: en, ru
-      static func paid_card_with_last_digits_description(_ value1: String, _ value2: String) -> String {
-        return String(format: NSLocalizedString("paid_card_with_last_digits_description", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1, value2)
+      static func paid_card_with_last_digits_description(_ value1: String, _ value2: String, preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          let format = NSLocalizedString("paid_card_with_last_digits_description", bundle: hostingBundle, comment: "")
+          return String(format: format, locale: applicationLocale, value1, value2)
+        }
+
+        guard let (locale, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "paid_card_with_last_digits_description"
+        }
+
+        let format = NSLocalizedString("paid_card_with_last_digits_description", bundle: bundle, comment: "")
+        return String(format: format, locale: locale, value1, value2)
       }
-      
+
       /// en translation: Order paid.
-      /// 
+      ///
       /// Locales: en, ru
-      static func paid_description(_: Void = ()) -> String {
-        return NSLocalizedString("paid_description", bundle: R.hostingBundle, comment: "")
+      static func paid_description(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("paid_description", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "paid_description"
+        }
+
+        return NSLocalizedString("paid_description", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Participant is blocked or operations are on hold.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invalid_party_status(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invalid_party_status", bundle: R.hostingBundle, comment: "")
+      static func error_message_invalid_party_status(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invalid_party_status", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invalid_party_status"
+        }
+
+        return NSLocalizedString("error_message_invalid_party_status", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Pay %@
-      /// 
+      ///
       /// Locales: en, ru
-      static func bank_card_pay(_ value1: String) -> String {
-        return String(format: NSLocalizedString("bank_card_pay", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
+      static func bank_card_pay(_ value1: String, preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          let format = NSLocalizedString("bank_card_pay", bundle: hostingBundle, comment: "")
+          return String(format: format, locale: applicationLocale, value1)
+        }
+
+        guard let (locale, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "bank_card_pay"
+        }
+
+        let format = NSLocalizedString("bank_card_pay", bundle: bundle, comment: "")
+        return String(format: format, locale: locale, value1)
       }
-      
+
       /// en translation: Payment cancelled.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_payment_cancelled(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_payment_cancelled", bundle: R.hostingBundle, comment: "")
+      static func error_message_payment_cancelled(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_payment_cancelled", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_payment_cancelled"
+        }
+
+        return NSLocalizedString("error_message_payment_cancelled", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Payment failed.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_payment_failed(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_payment_failed", bundle: R.hostingBundle, comment: "")
+      static func error_message_payment_failed(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_payment_failed", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_payment_failed"
+        }
+
+        return NSLocalizedString("error_message_payment_failed", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Payment with bank card
-      /// 
+      ///
       /// Locales: en, ru
-      static func bank_card_header_title(_: Void = ()) -> String {
-        return NSLocalizedString("bank_card_header_title", bundle: R.hostingBundle, comment: "")
+      static func bank_card_header_title(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("bank_card_header_title", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "bank_card_header_title"
+        }
+
+        return NSLocalizedString("bank_card_header_title", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Preauthorization failed: can't verify confirmation code.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_preauthorization_failed(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_preauthorization_failed", bundle: R.hostingBundle, comment: "")
+      static func error_message_preauthorization_failed(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_preauthorization_failed", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_preauthorization_failed"
+        }
+
+        return NSLocalizedString("error_message_preauthorization_failed", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Receipt sent to email %@
-      /// 
+      ///
       /// Locales: en, ru
-      static func paid_email_description(_ value1: String) -> String {
-        return String(format: NSLocalizedString("paid_email_description", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
+      static func paid_email_description(_ value1: String, preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          let format = NSLocalizedString("paid_email_description", bundle: hostingBundle, comment: "")
+          return String(format: format, locale: applicationLocale, value1)
+        }
+
+        guard let (locale, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "paid_email_description"
+        }
+
+        let format = NSLocalizedString("paid_email_description", bundle: bundle, comment: "")
+        return String(format: format, locale: locale, value1)
       }
-      
+
       /// en translation: Request failed.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_request_failed(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_request_failed", bundle: R.hostingBundle, comment: "")
+      static func error_message_request_failed(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_request_failed", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_request_failed"
+        }
+
+        return NSLocalizedString("error_message_request_failed", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: SECURE PAYMENT WITH
-      /// 
+      ///
       /// Locales: en, ru
-      static func secure_payment(_: Void = ()) -> String {
-        return NSLocalizedString("secure_payment", bundle: R.hostingBundle, comment: "")
+      static func secure_payment(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("secure_payment", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "secure_payment"
+        }
+
+        return NSLocalizedString("secure_payment", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Secure connection to the server cannot be established.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_server_insecure_connection(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_server_insecure_connection", bundle: R.hostingBundle, comment: "")
+      static func error_message_server_insecure_connection(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_server_insecure_connection", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_server_insecure_connection"
+        }
+
+        return NSLocalizedString("error_message_server_insecure_connection", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Server is not available.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_server_unavailable(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_server_unavailable", bundle: R.hostingBundle, comment: "")
+      static func error_message_server_unavailable(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_server_unavailable", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_server_unavailable"
+        }
+
+        return NSLocalizedString("error_message_server_unavailable", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Server returned an error with unknown code %@.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_unknown_server_error(_ value1: String) -> String {
-        return String(format: NSLocalizedString("error_message_unknown_server_error", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
+      static func error_message_unknown_server_error(_ value1: String, preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          let format = NSLocalizedString("error_message_unknown_server_error", bundle: hostingBundle, comment: "")
+          return String(format: format, locale: applicationLocale, value1)
+        }
+
+        guard let (locale, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_unknown_server_error"
+        }
+
+        let format = NSLocalizedString("error_message_unknown_server_error", bundle: bundle, comment: "")
+        return String(format: format, locale: locale, value1)
       }
-      
+
       /// en translation: Specified payment method is not supported by your contract or system.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invalid_payment_resource(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invalid_payment_resource", bundle: R.hostingBundle, comment: "")
+      static func error_message_invalid_payment_resource(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invalid_payment_resource", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invalid_payment_resource"
+        }
+
+        return NSLocalizedString("error_message_invalid_payment_resource", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Successful payment!
-      /// 
+      ///
       /// Locales: en, ru
-      static func paid_title(_: Void = ()) -> String {
-        return NSLocalizedString("paid_title", bundle: R.hostingBundle, comment: "")
+      static func paid_title(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("paid_title", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "paid_title"
+        }
+
+        return NSLocalizedString("paid_title", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: The last payment launched for the specified invoice has not yet reached the final status.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_invoice_payment_pending(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_invoice_payment_pending", bundle: R.hostingBundle, comment: "")
+      static func error_message_invoice_payment_pending(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_invoice_payment_pending", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_invoice_payment_pending"
+        }
+
+        return NSLocalizedString("error_message_invoice_payment_pending", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Try again
-      /// 
+      ///
       /// Locales: en, ru
-      static func alert_button_retry(_: Void = ()) -> String {
-        return NSLocalizedString("alert_button_retry", bundle: R.hostingBundle, comment: "")
+      static func alert_button_retry(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("alert_button_retry", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "alert_button_retry"
+        }
+
+        return NSLocalizedString("alert_button_retry", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Try again
-      /// 
+      ///
       /// Locales: en, ru
-      static func unpaid_action_retry(_: Void = ()) -> String {
-        return NSLocalizedString("unpaid_action_retry", bundle: R.hostingBundle, comment: "")
+      static func unpaid_action_retry(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("unpaid_action_retry", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "unpaid_action_retry"
+        }
+
+        return NSLocalizedString("unpaid_action_retry", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Unexpected invoice status.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_unexpected_invoice_status(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_unexpected_invoice_status", bundle: R.hostingBundle, comment: "")
+      static func error_message_unexpected_invoice_status(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_unexpected_invoice_status", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_unexpected_invoice_status"
+        }
+
+        return NSLocalizedString("error_message_unexpected_invoice_status", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Unexpected server response received, HTTP code %d.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_unacceptable_status_code(_ value1: Int) -> String {
-        return String(format: NSLocalizedString("error_message_unacceptable_status_code", bundle: R.hostingBundle, comment: ""), locale: R.applicationLocale, value1)
+      static func error_message_unacceptable_status_code(_ value1: Int, preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          let format = NSLocalizedString("error_message_unacceptable_status_code", bundle: hostingBundle, comment: "")
+          return String(format: format, locale: applicationLocale, value1)
+        }
+
+        guard let (locale, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_unacceptable_status_code"
+        }
+
+        let format = NSLocalizedString("error_message_unacceptable_status_code", bundle: bundle, comment: "")
+        return String(format: format, locale: locale, value1)
       }
-      
+
       /// en translation: Unpaid
-      /// 
+      ///
       /// Locales: en, ru
-      static func unpaid_status_unpaid(_: Void = ()) -> String {
-        return NSLocalizedString("unpaid_status_unpaid", bundle: R.hostingBundle, comment: "")
+      static func unpaid_status_unpaid(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("unpaid_status_unpaid", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "unpaid_status_unpaid"
+        }
+
+        return NSLocalizedString("unpaid_status_unpaid", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Use another card
-      /// 
+      ///
       /// Locales: en, ru
-      static func unpaid_action_reenter_data(_: Void = ()) -> String {
-        return NSLocalizedString("unpaid_action_reenter_data", bundle: R.hostingBundle, comment: "")
+      static func unpaid_action_reenter_data(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("unpaid_action_reenter_data", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "unpaid_action_reenter_data"
+        }
+
+        return NSLocalizedString("unpaid_action_reenter_data", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: User interaction failed.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_user_interaction_failed(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_user_interaction_failed", bundle: R.hostingBundle, comment: "")
+      static func error_message_user_interaction_failed(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_user_interaction_failed", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_user_interaction_failed"
+        }
+
+        return NSLocalizedString("error_message_user_interaction_failed", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Yes
-      /// 
+      ///
       /// Locales: en, ru
-      static func alert_button_yes(_: Void = ()) -> String {
-        return NSLocalizedString("alert_button_yes", bundle: R.hostingBundle, comment: "")
+      static func alert_button_yes(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("alert_button_yes", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "alert_button_yes"
+        }
+
+        return NSLocalizedString("alert_button_yes", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Your payment has been rejected.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_payment_rejected(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_payment_rejected", bundle: R.hostingBundle, comment: "")
+      static func error_message_payment_rejected(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_payment_rejected", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_payment_rejected"
+        }
+
+        return NSLocalizedString("error_message_payment_rejected", bundle: bundle, comment: "")
       }
-      
+
       /// en translation: Your payment institution has rejected your payment.
-      /// 
+      ///
       /// Locales: en, ru
-      static func error_message_rejected_by_issuer(_: Void = ()) -> String {
-        return NSLocalizedString("error_message_rejected_by_issuer", bundle: R.hostingBundle, comment: "")
+      static func error_message_rejected_by_issuer(preferredLanguages: [String]? = nil) -> String {
+        guard let preferredLanguages = preferredLanguages else {
+          return NSLocalizedString("error_message_rejected_by_issuer", bundle: hostingBundle, comment: "")
+        }
+
+        guard let (_, bundle) = localeBundle(tableName: "Localizable", preferredLanguages: preferredLanguages) else {
+          return "error_message_rejected_by_issuer"
+        }
+
+        return NSLocalizedString("error_message_rejected_by_issuer", bundle: bundle, comment: "")
       }
-      
+
       fileprivate init() {}
     }
-    
+
     fileprivate init() {}
   }
-  
+
   fileprivate struct intern: Rswift.Validatable {
     fileprivate static func validate() throws {
       try _R.validate()
     }
-    
+
     fileprivate init() {}
   }
-  
+
   fileprivate class Class {}
-  
+
   fileprivate init() {}
 }
 
 struct _R: Rswift.Validatable {
   static func validate() throws {
-    try storyboard.validate()
+    #if os(iOS) || os(tvOS)
     try nib.validate()
+    #endif
+    #if os(iOS) || os(tvOS)
+    try storyboard.validate()
+    #endif
   }
-  
+
+  #if os(iOS) || os(tvOS)
   struct nib: Rswift.Validatable {
     static func validate() throws {
       try _LogotypesView.validate()
       try _PaymentMethodsTableFooterView.validate()
       try _PaymentMethodsTableHeaderView.validate()
     }
-    
+
     struct _InvoiceSummaryView: Rswift.NibResourceType {
       let bundle = R.hostingBundle
       let name = "InvoiceSummaryView"
-      
+
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
-      
+
       fileprivate init() {}
     }
-    
+
     struct _LogotypesView: Rswift.NibResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "LogotypesView"
-      
+
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
-      
+
       static func validate() throws {
         if UIKit.UIImage(named: "BottomLogos/3ds_pci_dss", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'BottomLogos/3ds_pci_dss' is used in nib 'LogotypesView', but couldn't be loaded.") }
         if UIKit.UIImage(named: "BottomLogos/lock", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'BottomLogos/lock' is used in nib 'LogotypesView', but couldn't be loaded.") }
         if UIKit.UIImage(named: "BottomLogos/rbk_money", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'BottomLogos/rbk_money' is used in nib 'LogotypesView', but couldn't be loaded.") }
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, *) {
         }
       }
-      
+
       fileprivate init() {}
     }
-    
+
     struct _PaymentMethodCell: Rswift.NibResourceType, Rswift.ReuseIdentifierType {
       typealias ReusableType = PaymentMethodCell
-      
+
       let bundle = R.hostingBundle
       let identifier = "PaymentMethodCell"
       let name = "PaymentMethodCell"
-      
+
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> PaymentMethodCell? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? PaymentMethodCell
       }
-      
+
       fileprivate init() {}
     }
-    
+
     struct _PaymentMethodsTableFooterView: Rswift.NibResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "PaymentMethodsTableFooterView"
-      
+
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
-      
+
       static func validate() throws {
         if UIKit.UIImage(named: "Common/rounded_bottom_corners", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Common/rounded_bottom_corners' is used in nib 'PaymentMethodsTableFooterView', but couldn't be loaded.") }
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, *) {
         }
       }
-      
+
       fileprivate init() {}
     }
-    
+
     struct _PaymentMethodsTableHeaderView: Rswift.NibResourceType, Rswift.Validatable {
       let bundle = R.hostingBundle
       let name = "PaymentMethodsTableHeaderView"
-      
+
       func firstView(owner ownerOrNil: AnyObject?, options optionsOrNil: [UINib.OptionsKey : Any]? = nil) -> UIKit.UIView? {
         return instantiate(withOwner: ownerOrNil, options: optionsOrNil)[0] as? UIKit.UIView
       }
-      
+
       static func validate() throws {
         if UIKit.UIImage(named: "Common/rounded_top_corners", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Common/rounded_top_corners' is used in nib 'PaymentMethodsTableHeaderView', but couldn't be loaded.") }
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, *) {
         }
       }
-      
+
       fileprivate init() {}
     }
-    
+
     fileprivate init() {}
   }
-  
+  #endif
+
+  #if os(iOS) || os(tvOS)
   struct storyboard: Rswift.Validatable {
     static func validate() throws {
+      #if os(iOS) || os(tvOS)
       try applePay.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
       try bankCard.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
       try paidInvoice.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
       try paymentMethod.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
       try paymentProgress.validate()
+      #endif
+      #if os(iOS) || os(tvOS)
       try unpaidInvoice.validate()
+      #endif
     }
-    
+
+    #if os(iOS) || os(tvOS)
     struct applePay: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
       typealias InitialController = ApplePayViewController
-      
+
       let bundle = R.hostingBundle
       let initial = StoryboardViewControllerResource<ApplePayViewController>(identifier: "Initial")
       let name = "ApplePay"
-      
+
       func initial(_: Void = ()) -> ApplePayViewController? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: initial)
       }
-      
+
       static func validate() throws {
         if UIKit.UIImage(named: "BankCard/email", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'BankCard/email' is used in storyboard 'ApplePay', but couldn't be loaded.") }
         if UIKit.UIImage(named: "Common/close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Common/close' is used in storyboard 'ApplePay', but couldn't be loaded.") }
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, *) {
         }
         if _R.storyboard.applePay().initial() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'initial' could not be loaded from storyboard 'ApplePay' as 'ApplePayViewController'.") }
       }
-      
+
       fileprivate init() {}
     }
-    
+    #endif
+
+    #if os(iOS) || os(tvOS)
     struct bankCard: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
       typealias InitialController = BankCardViewController
-      
+
       let bundle = R.hostingBundle
       let initial = StoryboardViewControllerResource<BankCardViewController>(identifier: "Initial")
       let name = "BankCard"
-      
+
       func initial(_: Void = ()) -> BankCardViewController? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: initial)
       }
-      
+
       static func validate() throws {
         if UIKit.UIImage(named: "BankCard/cardholder", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'BankCard/cardholder' is used in storyboard 'BankCard', but couldn't be loaded.") }
         if UIKit.UIImage(named: "BankCard/cvv", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'BankCard/cvv' is used in storyboard 'BankCard', but couldn't be loaded.") }
@@ -1461,101 +2315,111 @@ struct _R: Rswift.Validatable {
         if UIKit.UIImage(named: "BankCard/email", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'BankCard/email' is used in storyboard 'BankCard', but couldn't be loaded.") }
         if UIKit.UIImage(named: "BankCard/number", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'BankCard/number' is used in storyboard 'BankCard', but couldn't be loaded.") }
         if UIKit.UIImage(named: "Common/close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Common/close' is used in storyboard 'BankCard', but couldn't be loaded.") }
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, *) {
         }
         if _R.storyboard.bankCard().initial() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'initial' could not be loaded from storyboard 'BankCard' as 'BankCardViewController'.") }
       }
-      
+
       fileprivate init() {}
     }
-    
+    #endif
+
+    #if os(iOS) || os(tvOS)
     struct paidInvoice: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
       typealias InitialController = PaidInvoiceViewController
-      
+
       let bundle = R.hostingBundle
       let initial = StoryboardViewControllerResource<PaidInvoiceViewController>(identifier: "Initial")
       let name = "PaidInvoice"
-      
+
       func initial(_: Void = ()) -> PaidInvoiceViewController? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: initial)
       }
-      
+
       static func validate() throws {
         if UIKit.UIImage(named: "Common/close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Common/close' is used in storyboard 'PaidInvoice', but couldn't be loaded.") }
         if UIKit.UIImage(named: "Result/paid", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Result/paid' is used in storyboard 'PaidInvoice', but couldn't be loaded.") }
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, *) {
         }
         if _R.storyboard.paidInvoice().initial() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'initial' could not be loaded from storyboard 'PaidInvoice' as 'PaidInvoiceViewController'.") }
       }
-      
+
       fileprivate init() {}
     }
-    
+    #endif
+
+    #if os(iOS) || os(tvOS)
     struct paymentMethod: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
       typealias InitialController = PaymentMethodViewController
-      
+
       let bundle = R.hostingBundle
       let initial = StoryboardViewControllerResource<PaymentMethodViewController>(identifier: "Initial")
       let name = "PaymentMethod"
-      
+
       func initial(_: Void = ()) -> PaymentMethodViewController? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: initial)
       }
-      
+
       static func validate() throws {
         if UIKit.UIImage(named: "Common/close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Common/close' is used in storyboard 'PaymentMethod', but couldn't be loaded.") }
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, *) {
         }
         if _R.storyboard.paymentMethod().initial() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'initial' could not be loaded from storyboard 'PaymentMethod' as 'PaymentMethodViewController'.") }
       }
-      
+
       fileprivate init() {}
     }
-    
+    #endif
+
+    #if os(iOS) || os(tvOS)
     struct paymentProgress: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
       typealias InitialController = PaymentProgressViewController
-      
+
       let bundle = R.hostingBundle
       let initial = StoryboardViewControllerResource<PaymentProgressViewController>(identifier: "Initial")
       let name = "PaymentProgress"
-      
+
       func initial(_: Void = ()) -> PaymentProgressViewController? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: initial)
       }
-      
+
       static func validate() throws {
         if UIKit.UIImage(named: "Common/close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Common/close' is used in storyboard 'PaymentProgress', but couldn't be loaded.") }
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, *) {
         }
         if _R.storyboard.paymentProgress().initial() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'initial' could not be loaded from storyboard 'PaymentProgress' as 'PaymentProgressViewController'.") }
       }
-      
+
       fileprivate init() {}
     }
-    
+    #endif
+
+    #if os(iOS) || os(tvOS)
     struct unpaidInvoice: Rswift.StoryboardResourceWithInitialControllerType, Rswift.Validatable {
       typealias InitialController = UnpaidInvoiceViewController
-      
+
       let bundle = R.hostingBundle
       let initial = StoryboardViewControllerResource<UnpaidInvoiceViewController>(identifier: "Initial")
       let name = "UnpaidInvoice"
-      
+
       func initial(_: Void = ()) -> UnpaidInvoiceViewController? {
         return UIKit.UIStoryboard(resource: self).instantiateViewController(withResource: initial)
       }
-      
+
       static func validate() throws {
         if UIKit.UIImage(named: "Common/close", in: R.hostingBundle, compatibleWith: nil) == nil { throw Rswift.ValidationError(description: "[R.swift] Image named 'Common/close' is used in storyboard 'UnpaidInvoice', but couldn't be loaded.") }
-        if #available(iOS 11.0, *) {
+        if #available(iOS 11.0, tvOS 11.0, *) {
         }
         if _R.storyboard.unpaidInvoice().initial() == nil { throw Rswift.ValidationError(description:"[R.swift] ViewController with identifier 'initial' could not be loaded from storyboard 'UnpaidInvoice' as 'UnpaidInvoiceViewController'.") }
       }
-      
+
       fileprivate init() {}
     }
-    
+    #endif
+
     fileprivate init() {}
   }
-  
+  #endif
+
   fileprivate init() {}
 }

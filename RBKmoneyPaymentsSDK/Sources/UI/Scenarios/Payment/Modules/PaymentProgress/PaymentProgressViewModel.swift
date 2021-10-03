@@ -128,7 +128,7 @@ final class PaymentProgressViewModel: ModuleViewModel {
 
         return userInteractionFailedRelay
             .map { throw PaymentError(.userInteractionFailed, underlyingError: $0, parameters: parameters, payment: payment) }
-            .takeUntil(userInteractionFinishedRelay.take(1))
+            .take(until: userInteractionFinishedRelay.take(1))
     }
 
     private typealias ObtainInvoiceEvents = (PaymentProgressInputData, PaymentDTO) -> Observable<[InvoiceEventDTO]>
@@ -143,7 +143,7 @@ final class PaymentProgressViewModel: ModuleViewModel {
                 )
             }
             .retry(using: errorHandlerProvider)
-            .catchError {
+            .catch {
                 throw PaymentError(.cannotObtainInvoiceEvents, underlyingError: $0, parameters: data.parameters, payment: payment)
             }
     }
@@ -176,7 +176,7 @@ final class PaymentProgressViewModel: ModuleViewModel {
                         invoiceAccessToken: data.paymentInputData.invoiceAccessToken
                     )
 
-                    return obtainPayment.catchError {
+                    return obtainPayment.catch {
                         guard let networkError = $0 as? NetworkError, case .elementNotFound = networkError.code else {
                             throw $0
                         }
@@ -194,7 +194,7 @@ final class PaymentProgressViewModel: ModuleViewModel {
             return payment
                 .asObservable()
                 .retry(using: errorHandlerProvider)
-                .catchError {
+                .catch {
                     throw PaymentError(
                         .cannotCreatePayment,
                         underlyingError: $0,

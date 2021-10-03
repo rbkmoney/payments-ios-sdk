@@ -14,7 +14,7 @@
 
 import RxSwift
 
-protocol ModuleViewModel: class {
+protocol ModuleViewModel: AnyObject {
 
     associatedtype Input
 

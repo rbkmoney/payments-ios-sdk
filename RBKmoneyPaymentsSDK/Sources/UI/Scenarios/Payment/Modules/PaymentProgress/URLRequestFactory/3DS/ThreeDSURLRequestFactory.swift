@@ -25,7 +25,7 @@ final class ThreeDSURLRequestFactory {
 
         switch browserRequest {
         case let .get(uriTemplate):
-            let urlString = type(of: self).substitute(terminationURI: escapedTerminationURI, in: uriTemplate)
+            let urlString = Self.substitute(terminationURI: escapedTerminationURI, in: uriTemplate)
 
             guard let url = URL(string: urlString) else {
                 return nil
@@ -37,17 +37,17 @@ final class ThreeDSURLRequestFactory {
             return urlRequest
 
         case let .post(data):
-            let urlString = type(of: self).substitute(terminationURI: escapedTerminationURI, in: data.uriTemplate)
+            let urlString = Self.substitute(terminationURI: escapedTerminationURI, in: data.uriTemplate)
 
             guard let url = URL(string: urlString) else {
                 return nil
             }
 
             let parameters = data.items.map {
-                ($0.key, type(of: self).substitute(terminationURI: escapedTerminationURI, in: $0.template))
+                ($0.key, Self.substitute(terminationURI: escapedTerminationURI, in: $0.template))
             }
 
-            let queryString = type(of: self).queryString(for: parameters)
+            let queryString = Self.queryString(for: parameters)
 
             var urlRequest = URLRequest(url: url, timeoutInterval: 15)
             urlRequest.httpMethod = "POST"

@@ -57,7 +57,7 @@ extension PrimitiveSequence where Trait == CompletableTrait, Element == Swift.Ne
     }
 
     func catchErrorJustComplete() -> Completable {
-        return catchError { _ in
+        return self.catch { _ in
             return .empty()
         }
     }
@@ -70,7 +70,7 @@ extension PrimitiveSequence where Trait == CompletableTrait, Element == Swift.Ne
 extension PrimitiveSequence where Trait == MaybeTrait {
 
     func catchErrorJustComplete() -> Maybe<Element> {
-        return catchError { _ in
+        return self.catch { _ in
             return .empty()
         }
     }
