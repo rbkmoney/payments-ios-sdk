@@ -21,11 +21,12 @@ final class ThreeDSURLRequestFactory {
 
     // MARK: - Internal
     func urlRequest(for browserRequest: BrowserRequestDTO) -> URLRequest? {
-        let escapedTerminationURI = terminationURLString.escaped
+        let terminationURI = terminationURLString
+        let escapedTerminationURI = terminationURI.escaped
 
         switch browserRequest {
         case let .get(data):
-            let urlString = Self.substitute(terminationURI: escapedTerminationURI, in: data.uriTemplate)
+            let urlString = Self.processedString(from: data.uriTemplate, terminationURI: escapedTerminationURI)
 
             guard let url = URL(string: urlString) else {
                 return nil
@@ -37,17 +38,15 @@ final class ThreeDSURLRequestFactory {
             return urlRequest
 
         case let .post(data):
-            let urlString = Self.substitute(terminationURI: escapedTerminationURI, in: data.uriTemplate)
+            let urlString = Self.processedString(from: data.uriTemplate, terminationURI: escapedTerminationURI)
 
             guard let url = URL(string: urlString) else {
                 return nil
             }
 
-            let parameters = data.form.map {
-                ($0.key, Self.substitute(terminationURI: escapedTerminationURI, in: $0.template))
-            }
-
-            let queryString = Self.queryString(for: parameters)
+            let queryString = Self.queryString(
+                for: data.form.map { ($0.key, Self.processedString(from: $0.template, terminationURI: terminationURI)) }
+            )
 
             var urlRequest = URLRequest(url: url, timeoutInterval: 15)
             urlRequest.httpMethod = "POST"
@@ -63,11 +62,32 @@ final class ThreeDSURLRequestFactory {
     }
 
     // MARK: - Private
-    private static func substitute(terminationURI: String, in template: String) -> String {
-        return template
-            .replacingOccurrences(of: "{?termination_uri}", with: "?termination_uri=\(terminationURI)")
-            .replacingOccurrences(of: "{&termination_uri}", with: "&termination_uri=\(terminationURI)")
-            .replacingOccurrences(of: "{termination_uri}", with: "termination_uri=\(terminationURI)")
+    private static let templateProcessingItems: [(prefix: String, includePrefix: Bool, includeName: Bool)] = [
+        // {name} -> value
+        ("", false, false),
+        // {+name} -> value
+        ("+", false, false),
+        // {#name} -> #value
+        ("#", true, false),
+        // {.name} -> .value
+        (".", true, false),
+        // {/name} -> /value
+        ("/", true, false),
+        // {?name} -> ?name=value
+        ("?", true, true),
+        // {&name} -> &name=value
+        ("&", true, true),
+        // {;name} -> ;name=value
+        (";", true, true)
+    ]
+
+    private static func processedString(from template: String, terminationURI: String) -> String {
+        return templateProcessingItems.reduce(template) {
+            $0.replacingOccurrences(
+                of: "{\($1.prefix)termination_uri}",
+                with: "\($1.includePrefix ? $1.prefix : "")\($1.includeName ? "termination_uri=" : "")\(terminationURI)"
+            )
+        }
     }
 
     private static func queryString(for parameters: [(String, String)]) -> String {

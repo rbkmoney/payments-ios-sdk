@@ -125,11 +125,11 @@ extension PaymentProgressViewController: WKNavigationDelegate {
             return
         }
 
-        decisionHandler(.cancel)
-
         setWebViewHidden(true, animated: true)
 
         userInteractionFinishedRelay.accept(())
+
+        decisionHandler(.cancel)
     }
 
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
