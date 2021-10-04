@@ -14,9 +14,11 @@
 
 import Foundation
 
-enum CurrencyDTO: String, Codable {
+enum CurrencyDTO: String, CaseInsensitiveDecodable, Encodable {
 
     case rub = "RUB"
     case usd = "USD"
     case eur = "EUR"
+
+    case unknown
 }

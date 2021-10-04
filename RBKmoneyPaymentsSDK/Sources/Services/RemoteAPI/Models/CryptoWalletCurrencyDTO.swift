@@ -14,7 +14,7 @@
 
 import Foundation
 
-enum CryptoWalletCurrencyDTO: String, Codable {
+enum CryptoWalletCurrencyDTO: String, CaseInsensitiveDecodable, Encodable {
 
     case bitcoin
     case litecoin
@@ -22,4 +22,6 @@ enum CryptoWalletCurrencyDTO: String, Codable {
     case ripple
     case ethereum
     case zcash
+
+    case unknown
 }

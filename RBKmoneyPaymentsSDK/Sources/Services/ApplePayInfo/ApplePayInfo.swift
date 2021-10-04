@@ -85,6 +85,8 @@ private extension PaymentSystem {
             return nil
         case .uzcard:
             return nil
+        case .unknown:
+            return nil
         }
     }
 }

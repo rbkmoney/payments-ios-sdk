@@ -165,6 +165,8 @@ private extension PaymentSystem {
             return "DummyPay"
         case .uzcard:
             return "UZCÁRD"
+        case .unknown:
+            return ""
         }
     }
 }

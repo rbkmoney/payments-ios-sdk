@@ -192,6 +192,7 @@
 		C143798922C2636A00E59013 /* UnpaidInvoiceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143798322C2636A00E59013 /* UnpaidInvoiceViewController.swift */; };
 		C143798A22C2636A00E59013 /* UnpaidInvoiceDependenciesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143798422C2636A00E59013 /* UnpaidInvoiceDependenciesExtensions.swift */; };
 		C143798C22C2638B00E59013 /* UnpaidInvoiceInputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143798B22C2638B00E59013 /* UnpaidInvoiceInputData.swift */; };
+		C16B127F270AF8100066317B /* SafeDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16B127E270AF8100066317B /* SafeDecoding.swift */; };
 		C18F57F522CE6F7D0099AC1F /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F57F422CE6F7D0099AC1F /* ProductTableViewCell.swift */; };
 		C18F57F622CE774B0099AC1F /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F57F422CE6F7D0099AC1F /* ProductTableViewCell.swift */; };
 		C18F57F822CED5A90099AC1F /* ExampleProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F57F722CED5A90099AC1F /* ExampleProduct.swift */; };
@@ -479,6 +480,7 @@
 		C143798322C2636A00E59013 /* UnpaidInvoiceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidInvoiceViewController.swift; sourceTree = "<group>"; };
 		C143798422C2636A00E59013 /* UnpaidInvoiceDependenciesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidInvoiceDependenciesExtensions.swift; sourceTree = "<group>"; };
 		C143798B22C2638B00E59013 /* UnpaidInvoiceInputData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidInvoiceInputData.swift; sourceTree = "<group>"; };
+		C16B127E270AF8100066317B /* SafeDecoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeDecoding.swift; sourceTree = "<group>"; };
 		C18F57F422CE6F7D0099AC1F /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		C18F57F722CED5A90099AC1F /* ExampleProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleProduct.swift; sourceTree = "<group>"; };
 		C18F57FC22D276AC0099AC1F /* PaymentErrorMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentErrorMapper.swift; sourceTree = "<group>"; };
@@ -1454,6 +1456,7 @@
 				C1978A1F22A00A3100C7F966 /* ActivityTracker.swift */,
 				C1044FEC22AFBA3600A8065B /* TextAttributes.swift */,
 				C1228637264034CB0051F1F8 /* GenericJSON.swift */,
+				C16B127E270AF8100066317B /* SafeDecoding.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2306,6 +2309,7 @@
 				C1D024FC22BBA1540014AA80 /* PushFadeAnimator.swift in Sources */,
 				C143797822C2633300E59013 /* ApplePayAssembly.swift in Sources */,
 				C1044FCF22ADE36300A8065B /* PaymentParametersDTO.swift in Sources */,
+				C16B127F270AF8100066317B /* SafeDecoding.swift in Sources */,
 				C1044F8D22A997CD00A8065B /* UIImage+Extensions.swift in Sources */,
 				C1F4D18622B9D766005CFA6B /* PaymentProgressInputData.swift in Sources */,
 				C1044FE922AEA29700A8065B /* RefundDTO.swift in Sources */,

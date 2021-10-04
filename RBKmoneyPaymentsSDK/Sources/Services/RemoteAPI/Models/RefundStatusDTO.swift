@@ -14,9 +14,11 @@
 
 import Foundation
 
-enum RefundStatusDTO: String, Codable {
+enum RefundStatusDTO: String, CaseInsensitiveDecodable, Encodable {
 
     case pending
     case succeeded
     case failed
+
+    case unknown
 }

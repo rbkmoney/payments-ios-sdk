@@ -14,11 +14,13 @@
 
 import Foundation
 
-enum MobileCommerceOperatorDTO: String, Codable {
+enum MobileCommerceOperatorDTO: String, CaseInsensitiveDecodable, Encodable {
 
     case mts
     case beeline
     case megafone
     case tele2
     case yota
+
+    case unknown
 }

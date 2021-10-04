@@ -14,11 +14,13 @@
 
 import Foundation
 
-enum InvoiceStatusDTO: String, Codable {
+enum InvoiceStatusDTO: String, CaseInsensitiveDecodable, Encodable {
 
     case unpaid
     case cancelled
     case paid
     case fulfilled
     case refunded
+
+    case unknown
 }

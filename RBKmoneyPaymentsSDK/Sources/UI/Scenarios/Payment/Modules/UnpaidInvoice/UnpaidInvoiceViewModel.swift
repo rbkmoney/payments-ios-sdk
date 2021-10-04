@@ -122,7 +122,7 @@ private extension InvoiceStatusDTO {
 
     var status: UnpaidInvoiceViewModel.InvoiceStatus {
         switch self {
-        case .unpaid:
+        case .unpaid, .unknown:
             return .unpaid
         case .cancelled:
             return .cancelled

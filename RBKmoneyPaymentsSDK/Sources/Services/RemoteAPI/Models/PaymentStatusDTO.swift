@@ -14,7 +14,7 @@
 
 import Foundation
 
-enum PaymentStatusDTO: String, Codable {
+enum PaymentStatusDTO: String, CaseInsensitiveDecodable, Encodable {
 
     case pending
     case processed
@@ -22,4 +22,6 @@ enum PaymentStatusDTO: String, Codable {
     case cancelled
     case refunded
     case failed
+
+    case unknown
 }

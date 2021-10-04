@@ -14,7 +14,7 @@
 
 import Foundation
 
-enum PaymentTerminalProviderDTO: String, Codable {
+enum PaymentTerminalProviderDTO: String, CaseInsensitiveDecodable, Encodable {
 
     case euroset
     case alipay
@@ -23,4 +23,6 @@ enum PaymentTerminalProviderDTO: String, Codable {
     case qps
     case uzcard
     case rbs
+
+    case unknown
 }

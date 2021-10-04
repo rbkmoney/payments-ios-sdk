@@ -14,7 +14,9 @@
 
 import Foundation
 
-enum DigitalWalletProviderDTO: String, Codable {
+enum DigitalWalletProviderDTO: String, CaseInsensitiveDecodable, Encodable {
 
     case qiwi
+
+    case unknown
 }
