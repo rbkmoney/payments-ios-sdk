@@ -1,4 +1,4 @@
-// Copyright 2019 RBKmoney
+// Copyright 2021 RBKmoney
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -14,14 +14,11 @@
 
 import Foundation
 
-enum ThreeDSURLRequestFactoryAssembly {
+struct PaymentSessionInfoDTO: Codable {
 
-    // MARK: - Internal
-    static func makeRequestFactory(terminationURL: URL) -> ThreeDSURLRequestFactory {
-        let object = ThreeDSURLRequestFactory()
-
-        object.terminationURL = terminationURL
-
-        return object
+    enum CodingKeys: String, CodingKey {
+        case redirectURL = "redirectUrl"
     }
+
+    let redirectURL: URL?
 }
