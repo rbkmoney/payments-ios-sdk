@@ -133,10 +133,21 @@ extension PaymentProgressViewController: WKNavigationDelegate {
     }
 
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        userInteractionFailedRelay.accept(error)
+        handleFailure(with: error)
     }
 
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        handleFailure(with: error)
+    }
+
+    private func handleFailure(with error: Error) {
+        let error = error as NSError
+        let failingURLString = error.userInfo[NSURLErrorFailingURLStringErrorKey] as? String
+
+        guard failingURLString != urlRequestFactory.terminationURLString else {
+            return
+        }
+
         userInteractionFailedRelay.accept(error)
     }
 }
