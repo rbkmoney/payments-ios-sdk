@@ -24,7 +24,7 @@ final class DefaultAlertPresenter: AlertPresenter {
 
     // MARK: - Internal
     func presentAlert(content: AlertContent) -> Single<AlertContent.Button.Action> {
-        return createAlert(for: content).retryWhen { errors -> Observable<Void> in
+        return createAlert(for: content).retry { errors -> Observable<Void> in
             return errors.flatMap { error -> Observable<Void> in
                 guard error is Error else {
                     throw error
@@ -39,12 +39,12 @@ final class DefaultAlertPresenter: AlertPresenter {
         let worker = Single<AlertContent.Button.Action>.create { singleAction in
             guard let viewController = self.parentViewController else {
                 assertionFailure("Can't present alert, apparently parent view controller is already deallocated")
-                singleAction(.error(Error.internalInconsistency))
+                singleAction(.failure(Error.internalInconsistency))
                 return Disposables.create()
             }
 
             guard viewController.presentedViewController == nil else {
-                singleAction(.error(Error.doublePresentation))
+                singleAction(.failure(Error.doublePresentation))
                 return Disposables.create()
             }
 
@@ -63,7 +63,7 @@ final class DefaultAlertPresenter: AlertPresenter {
             }
         }
 
-        return worker.subscribeOn(MainScheduler.instance)
+        return worker.subscribe(on: MainScheduler.instance)
     }
 
     private enum Error: Swift.Error {

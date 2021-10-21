@@ -22,7 +22,7 @@ final class NetworkClient {
 
     // MARK: - Internal
     func performRequest<ResponseType: NetworkResponse>(_ request: NetworkRequest) -> Single<ResponseType> {
-        return taskResult(for: request).subscribeOn(scheduler)
+        return taskResult(for: request).subscribe(on: scheduler)
     }
 
     // MARK: - Private
@@ -35,7 +35,7 @@ final class NetworkClient {
 
                     switch mappedResponse {
                     case let .error(responseError):
-                        singleEvent(.error(responseError))
+                        singleEvent(.failure(responseError))
                     case let .success(responseValue):
                         singleEvent(.success(responseValue))
                     }
@@ -43,11 +43,9 @@ final class NetworkClient {
 
                 task.resume()
 
-                return Disposables.create {
-                    task.cancel()
-                }
+                return Disposables.create(with: task.cancel)
             } catch {
-                singleEvent(.error(error))
+                singleEvent(.failure(error))
 
                 return Disposables.create()
             }

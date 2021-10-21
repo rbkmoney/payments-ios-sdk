@@ -92,7 +92,7 @@ final class PaymentMethodViewModel: ModuleViewModel {
 
             return obtainInvoice
                 .retry(using: errorHandlerProvider)
-                .catchError { throw PaymentError(.cannotObtainInvoice, underlyingError: $0) }
+                .catch { throw PaymentError(.cannotObtainInvoice, underlyingError: $0) }
                 .map(invoiceMapper)
                 .flatMap { invoice -> Single<ModuleData> in
                     let obtainInvoicePaymentMethods = remoteAPI.obtainInvoicePaymentMethods(
@@ -102,7 +102,7 @@ final class PaymentMethodViewModel: ModuleViewModel {
 
                     return obtainInvoicePaymentMethods
                         .retry(using: errorHandlerProvider)
-                        .catchError { throw PaymentError(.cannotObtainInvoicePaymentMethods, underlyingError: $0, invoice: invoice) }
+                        .catch { throw PaymentError(.cannotObtainInvoicePaymentMethods, underlyingError: $0, invoice: invoice) }
                         .map { ModuleData(invoice: invoice, items: try methodsMapper(data, invoice, $0)) }
                 }
                 .asObservable()

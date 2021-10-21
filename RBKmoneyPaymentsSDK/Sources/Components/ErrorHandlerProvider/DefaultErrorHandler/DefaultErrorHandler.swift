@@ -33,7 +33,7 @@ final class DefaultErrorHandler: ErrorHandlerProvider {
                 }
 
                 if let handler = self.silentHandler(for: error) {
-                    return handler.catchError(self.commonHandler)
+                    return handler.catch(self.commonHandler)
                 }
 
                 return self.commonHandler(for: error)

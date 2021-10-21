@@ -19,14 +19,14 @@ extension ObservableType {
 
     /// Catches error and completes the sequence
     func catchErrorJustComplete() -> Observable<Element> {
-        return catchError { _ in
+        return self.catch { _ in
             return .empty()
         }
     }
 
     /// Asserts the observable sequence never emits error
     func catchErrorNever(file: StaticString = #file, line: UInt = #line) -> Observable<Element> {
-        return catchError { error in
+        return self.catch { error in
             assertionFailure("Unexpected error in observable sequence: \(error)", file: file, line: line)
             return .empty()
         }
@@ -63,27 +63,27 @@ extension ObservableType {
 extension ObservableType {
 
     func retry(using errorHandlerProvider: ErrorHandlerProvider) -> Observable<Element> {
-        return retryWhen(errorHandlerProvider.errorHandler)
+        return retry(when: errorHandlerProvider.errorHandler)
     }
 }
 
 extension PrimitiveSequence where Trait == CompletableTrait, Element == Never {
 
     func retry(using errorHandlerProvider: ErrorHandlerProvider) -> Completable {
-        return retryWhen(errorHandlerProvider.errorHandler)
+        return retry(when: errorHandlerProvider.errorHandler)
     }
 }
 
 extension PrimitiveSequence where Trait == MaybeTrait {
 
     func retry(using errorHandlerProvider: ErrorHandlerProvider) -> Maybe<Element> {
-        return retryWhen(errorHandlerProvider.errorHandler)
+        return retry(when: errorHandlerProvider.errorHandler)
     }
 }
 
 extension PrimitiveSequence where Trait == SingleTrait {
 
     func retry(using errorHandlerProvider: ErrorHandlerProvider) -> Single<Element> {
-        return retryWhen(errorHandlerProvider.errorHandler)
+        return retry(when: errorHandlerProvider.errorHandler)
     }
 }

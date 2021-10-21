@@ -9,8 +9,8 @@ project 'RBKmoneyPaymentsSDK.xcodeproj'
 
 target 'Example' do
   # Target uses framework as dependency, install other dependencies explicitly
-  pod 'RxSwift', '~> 5.0'
-  pod 'RxCocoa', '~> 5.0'
+  pod 'RxSwift', '~> 6.0'
+  pod 'RxCocoa', '~> 6.0'
   pod 'R.swift.Library', '~> 5.0'
 end
 
@@ -20,8 +20,8 @@ target 'Example+Pods' do
 end
 
 target 'RBKmoneyPaymentsSDK' do
-  pod 'RxSwift', '~> 5.0'
-  pod 'RxCocoa', '~> 5.0'
+  pod 'RxSwift', '~> 6.0'
+  pod 'RxCocoa', '~> 6.0'
   pod 'R.swift', '~> 5.0'
   pod 'SwiftLint'
 end
@@ -40,6 +40,14 @@ post_install do |installer|
   flags = debug_configuration.build_settings.fetch("OTHER_SWIFT_FLAGS", ['$(inherited)'])
   flags.push("-D", "FATAL_SYNCHRONIZATION")
   debug_configuration.build_settings["OTHER_SWIFT_FLAGS"] = flags
+
+  puts 'Post install: removing XCode complaints about lower deployment target than it supports'
+
+  targets.each do |target|
+    target.build_configurations.each do |config|
+      config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '11.0'
+    end
+  end
 
   project.save
 end

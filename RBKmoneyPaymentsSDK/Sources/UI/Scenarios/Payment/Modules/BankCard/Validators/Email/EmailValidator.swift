@@ -18,7 +18,7 @@ struct EmailValidator {
 
     // MARK: - Internal
     func validate(_ value: String) -> ValidationResult {
-        return type(of: self).emailPredicate.evaluate(with: value) ? .valid : .invalid
+        return Self.emailPredicate.evaluate(with: value) ? .valid : .invalid
     }
 
     // MARK: - Private

@@ -65,4 +65,8 @@ number_separator:
 
 nesting:
   type_level:
-    warning: 2
+    warning: 3
+
+large_tuple:
+  warning: 3
+  error: 4
