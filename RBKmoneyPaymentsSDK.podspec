@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name = "RBKmoneyPaymentsSDK"
-  s.version = "1.0.0"
+  s.version = "1.1.0"
   s.homepage = "https://github.com/rbkmoney/payments-ios-sdk"
   s.license = {
       :type => 'Apache License, Version 2.0',

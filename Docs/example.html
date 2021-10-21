@@ -17,9 +17,9 @@
     <header class="header">
       <p class="header-col header-col--primary">
         <a class="header-link" href="index.html">
-          RBKmoneyPaymentsSDK 1.0.0 Docs
+          RBKmoneyPaymentsSDK 1.1.0 Docs
         </a>
-         (100% documented)
+        
       </p>
     
     
@@ -75,6 +75,9 @@
             <a class="nav-group-name-link" href="Structs.html">Structures</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
+                <a class="nav-group-task-link" href="Structs/PaymentApplePayInputData.html">PaymentApplePayInputData</a>
+              </li>
+              <li class="nav-group-task">
                 <a class="nav-group-task-link" href="Structs/PaymentInputData.html">PaymentInputData</a>
               </li>
             </ul>
@@ -84,18 +87,18 @@
       <article class="main-content">
 
         <section class="section">
-          <div class="section-content">
+          <div class="section-content top-matter">
             
             <h1 id='example' class='heading'>Example</h1>
-<h2 id='' class='heading'>Порядок разворачивания проекта</h2>
+<h2 id='порядок-разворачивания-проекта' class='heading'>Порядок разворачивания проекта</h2>
 
-<p>В проекте используем Ruby гемы: <strong>CocoaPods</strong> (<a href="https://cocoapods.org">https://cocoapods.org</a>)</p>
+<p>В проекте используем Ruby гем <strong>CocoaPods</strong> (<a href="https://cocoapods.org">https://cocoapods.org</a>)</p>
 
-<p>Для управления версией Ruby используем <strong>rbenv</strong> (<a href="https://blog.metova.com/choosing-a-ruby-version-management-tool">https://blog.metova.com/choosing-a-ruby-version-management-tool</a>)</p>
+<p>Для управления версией Ruby используем <strong>rbenv</strong> (<a href="https://metova.com/choosing-a-ruby-version-management-tool-rbenv-vs-rvm/">https://metova.com/choosing-a-ruby-version-management-tool-rbenv-vs-rvm/</a>)</p>
 
 <p>Для управления гемами проекта используем <strong>bundler</strong> (<a href="http://bundler.io">http://bundler.io</a>)</p>
 
-<p>Для сборки проекта необходим актуальный <strong>iOS SDK / Xcode</strong> (iOS 12.2 SDK / Xcode 10.2.1 (10E1001) на момент создания этого документа)</p>
+<p>Для сборки проекта необходим актуальный <strong>Xcode</strong> (Xcode 12.5 (12E262) на момент создания/правки этого документа)</p>
 
 <ol>
 <li><p>Установить Homebrew + rbenv (если уже установлено, то пропускаем этот шаг)</p>
@@ -122,9 +125,9 @@ brew install rbenv
 </code></pre></li>
 <li><p>Открыть RBKmoneyPaymentsSDK.xcworkspace в Xcode</p></li>
 </ol>
-<h2 id='' class='heading'>Настройки</h2>
+<h2 id='настройки' class='heading'>Настройки</h2>
 
-<p>Различные идентификаторы вынесены в приватный xcconfig файл (Private.Example.Debug.xcconfig для debug конфигурации, Private.Example.Release.xcconfig для release конфигурации). Необходимо создать эти файлы и указать идентификаторы.</p>
+<p>Различные идентификаторы вынесены в приватный xcconfig файл (<code>Private.Example.Debug.xcconfig</code> для debug конфигурации, <code>Private.Example.Release.xcconfig</code> для release конфигурации). Необходимо создать эти файлы и указать идентификаторы.</p>
 
 <p>Содержимое файлов имеет следующий примерный вид:</p>
 <pre class="highlight plaintext"><code>  PRODUCT_BUNDLE_IDENTIFIER = &lt;your app bundle identifier&gt;
@@ -145,8 +148,8 @@ brew install rbenv
         └─ Private.Example.Release.xcconfig
 </code></pre>
 
-<p>Проект сам по себе уже полностью настроен на работу с Apple Pay согласно <a href="https://developer.apple.com/documentation/passkit/apple_pay/setting_up_apple_pay_requirements">документу</a>, но требуются внешние (по отношению к проекту) настройки - <a href="https://developer.apple.com/account/resources/certificates/">в панели разработчика Apple</a> и настройка Apple Pay на стороне сервера RBKmoney. После настройки необходимо указать APPLE_PAY_MERCHANT_IDENTIFIER в xcconfig файле. Если же Apple Pay не требуется или выполнение настроек не представляется возможным, то можно удалить все упоминания APPLE_PAY_MERCHANT_IDENTIFIER во всех файлах проекта (найти поиском).</p>
-<h2 id='' class='heading'>Сборка проекта, таргеты</h2>
+<p>Проект сам по себе уже полностью настроен на работу с Apple Pay согласно <a href="https://developer.apple.com/documentation/passkit/apple_pay/setting_up_apple_pay_requirements">документу</a>, но требуются внешние (по отношению к проекту) настройки - <a href="https://developer.apple.com/account/resources/certificates/">в панели разработчика Apple</a> и настройка Apple Pay на стороне сервера RBKmoney. После настройки необходимо указать <code>APPLE_PAY_MERCHANT_IDENTIFIER</code> в xcconfig файле. Если же Apple Pay не требуется или выполнение настроек не представляется возможным, то можно удалить все упоминания <code>APPLE_PAY_MERCHANT_IDENTIFIER</code> во всех файлах проекта (найти поиском).</p>
+<h2 id='сборка-проекта-таргеты' class='heading'>Сборка проекта, таргеты</h2>
 
 <p>Воркспейс содержит 3 таргета:</p>
 
@@ -165,8 +168,8 @@ brew install rbenv
       </article>
     </div>
     <section class="footer">
-      <p>&copy; 2019 <a class="link" href="https://rbk.money" target="_blank" rel="external">RBKmoney</a>. All rights reserved. (Last updated: 2019-07-18)</p>
-      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.10.0</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+      <p>&copy; 2021 <a class="link" href="https://rbk.money" target="_blank" rel="external">RBKmoney</a>. All rights reserved. (Last updated: 2021-10-04)</p>
+      <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.13.7</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
     </section>
   </body>
 </div>

@@ -2,7 +2,7 @@ PODS:
   - R.swift (5.4.0):
     - R.swift.Library (~> 5.3.0)
   - R.swift.Library (5.3.0)
-  - RBKmoneyPaymentsSDK (1.0.0):
+  - RBKmoneyPaymentsSDK (1.1.0):
     - R.swift.Library (~> 5.0)
     - RxCocoa (~> 6.0)
     - RxSwift (~> 6.0)
@@ -38,7 +38,7 @@ EXTERNAL SOURCES:
 SPEC CHECKSUMS:
   R.swift: c533450b0f7dc494e0993f5f1a1db925d84c3006
   R.swift.Library: 0fc583cb55a99e28901299cc451614cad1161962
-  RBKmoneyPaymentsSDK: 0a6571bdbe12e061ca2d64e8a351c046f224810e
+  RBKmoneyPaymentsSDK: ac76cb1bace30d27e68b2a9f8244ad05dcfcfcd2
   RxCocoa: 4baf94bb35f2c0ab31bc0cb9f1900155f646ba42
   RxRelay: e72dbfd157807478401ef1982e1c61c945c94b2f
   RxSwift: d356ab7bee873611322f134c5f9ef379fa183d8f
