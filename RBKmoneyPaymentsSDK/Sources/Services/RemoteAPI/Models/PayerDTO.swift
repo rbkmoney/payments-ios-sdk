@@ -29,16 +29,19 @@ extension PayerDTO {
             case identifier = "customerID"
             case paymentToolToken
             case paymentToolDetails
+            case paymentSessionInfo = "sessionInfo"
         }
 
         let identifier: String
         let paymentToolToken: String?
         let paymentToolDetails: PaymentToolDetailsDTO?
+        let paymentSessionInfo: PaymentSessionInfoDTO?
 
-        init(identifier: String) {
+        init(identifier: String, paymentSessionInfo: PaymentSessionInfoDTO?) {
             self.identifier = identifier
             self.paymentToolToken = nil
             self.paymentToolDetails = nil
+            self.paymentSessionInfo = paymentSessionInfo
         }
     }
 
@@ -50,6 +53,7 @@ extension PayerDTO {
             case paymentToolDetails
             case clientInfo
             case contactInfo
+            case paymentSessionInfo = "sessionInfo"
         }
 
         let paymentToolToken: String
@@ -57,13 +61,15 @@ extension PayerDTO {
         let paymentToolDetails: PaymentToolDetailsDTO?
         let clientInfo: ClientInfoDTO?
         let contactInfo: ContactInfoDTO
+        let paymentSessionInfo: PaymentSessionInfoDTO?
 
-        init(paymentToolToken: String, paymentSessionIdentifier: String, contactInfo: ContactInfoDTO) {
+        init(paymentToolToken: String, paymentSessionIdentifier: String, contactInfo: ContactInfoDTO, paymentSessionInfo: PaymentSessionInfoDTO?) {
             self.paymentToolToken = paymentToolToken
             self.paymentSessionIdentifier = paymentSessionIdentifier
             self.paymentToolDetails = nil
             self.clientInfo = nil
             self.contactInfo = contactInfo
+            self.paymentSessionInfo = paymentSessionInfo
         }
     }
 
@@ -74,18 +80,21 @@ extension PayerDTO {
             case parent = "recurrentParentPayment"
             case paymentToolToken
             case paymentToolDetails
+            case paymentSessionInfo = "sessionInfo"
         }
 
         let contactInfo: ContactInfoDTO
         let parent: RecurrentPaymentParentDTO
         let paymentToolToken: String?
         let paymentToolDetails: PaymentToolDetailsDTO?
+        let paymentSessionInfo: PaymentSessionInfoDTO?
 
-        init(contactInfo: ContactInfoDTO, parent: RecurrentPaymentParentDTO) {
+        init(contactInfo: ContactInfoDTO, parent: RecurrentPaymentParentDTO, paymentSessionInfo: PaymentSessionInfoDTO?) {
             self.contactInfo = contactInfo
             self.parent = parent
             self.paymentToolToken = nil
             self.paymentToolDetails = nil
+            self.paymentSessionInfo = paymentSessionInfo
         }
     }
 }

@@ -23,6 +23,7 @@ final class PaymentProgressViewModel: ModuleViewModel {
     lazy var remoteAPI: PaymentProgressRemoteAPI = deferred()
     lazy var errorHandlerProvider: ErrorHandlerProvider = deferred()
     lazy var externalIdentifierGenerator: PaymentProgressPaymentExternalIdentifierGenerator = deferred()
+    lazy var redirectURL: URL = deferred()
 
     // MARK: - ModuleViewModel
     struct Input {
@@ -150,7 +151,7 @@ final class PaymentProgressViewModel: ModuleViewModel {
 
     private typealias ObtainPayment = (PaymentProgressInputData) -> Observable<PaymentDTO>
 
-    private lazy var obtainPayment: ObtainPayment = { [remoteAPI, errorHandlerProvider, externalIdentifierGenerator] data in
+    private lazy var obtainPayment: ObtainPayment = { [remoteAPI, errorHandlerProvider, externalIdentifierGenerator, redirectURL] data in
         switch data.parameters.source {
         case let .payment(payment):
             return .just(payment)
@@ -159,7 +160,8 @@ final class PaymentProgressViewModel: ModuleViewModel {
                 let payer = PayerDTO.paymentResource(.init(
                     paymentToolToken: resource.paymentToolToken,
                     paymentSessionIdentifier: resource.paymentSessionIdentifier,
-                    contactInfo: ContactInfoDTO(email: email, phoneNumber: nil)
+                    contactInfo: ContactInfoDTO(email: email, phoneNumber: nil),
+                    paymentSessionInfo: PaymentSessionInfoDTO(redirectURL: redirectURL)
                 ))
                 return remoteAPI.createPayment(
                     paymentParameters: .init(externalIdentifier: externalIdentifier, flow: .instant, payer: payer),

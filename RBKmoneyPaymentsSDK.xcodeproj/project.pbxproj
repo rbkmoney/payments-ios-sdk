@@ -194,6 +194,7 @@
 		C143798A22C2636A00E59013 /* UnpaidInvoiceDependenciesExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143798422C2636A00E59013 /* UnpaidInvoiceDependenciesExtensions.swift */; };
 		C143798C22C2638B00E59013 /* UnpaidInvoiceInputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C143798B22C2638B00E59013 /* UnpaidInvoiceInputData.swift */; };
 		C16B127F270AF8100066317B /* SafeDecoding.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16B127E270AF8100066317B /* SafeDecoding.swift */; };
+		C16B128A270C58360066317B /* PaymentSessionInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = C16B1289270C58360066317B /* PaymentSessionInfoDTO.swift */; };
 		C18F57F522CE6F7D0099AC1F /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F57F422CE6F7D0099AC1F /* ProductTableViewCell.swift */; };
 		C18F57F622CE774B0099AC1F /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F57F422CE6F7D0099AC1F /* ProductTableViewCell.swift */; };
 		C18F57F822CED5A90099AC1F /* ExampleProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = C18F57F722CED5A90099AC1F /* ExampleProduct.swift */; };
@@ -483,6 +484,7 @@
 		C143798422C2636A00E59013 /* UnpaidInvoiceDependenciesExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidInvoiceDependenciesExtensions.swift; sourceTree = "<group>"; };
 		C143798B22C2638B00E59013 /* UnpaidInvoiceInputData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnpaidInvoiceInputData.swift; sourceTree = "<group>"; };
 		C16B127E270AF8100066317B /* SafeDecoding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeDecoding.swift; sourceTree = "<group>"; };
+		C16B1289270C58360066317B /* PaymentSessionInfoDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentSessionInfoDTO.swift; sourceTree = "<group>"; };
 		C18F57F422CE6F7D0099AC1F /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		C18F57F722CED5A90099AC1F /* ExampleProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExampleProduct.swift; sourceTree = "<group>"; };
 		C18F57FC22D276AC0099AC1F /* PaymentErrorMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentErrorMapper.swift; sourceTree = "<group>"; };
@@ -1100,6 +1102,7 @@
 				C1044FB322AAB99100A8065B /* PaymentResourceDTO.swift */,
 				C1044FB922AC530000A8065B /* PaymentToolDetailsDTO.swift */,
 				C1044FCE22ADE36300A8065B /* PaymentParametersDTO.swift */,
+				C16B1289270C58360066317B /* PaymentSessionInfoDTO.swift */,
 				C1044FD022ADE3A500A8065B /* PaymentFlowDTO.swift */,
 				C1044FD222ADE6A600A8065B /* PayerDTO.swift */,
 				C1044FD422ADE84400A8065B /* ContactInfoDTO.swift */,
@@ -2246,6 +2249,7 @@
 				C1A2791A22B3822600EB371F /* InvoiceDetailsFormatter.swift in Sources */,
 				C1978A1C22A0073300C7F966 /* ModuleView.swift in Sources */,
 				86469D7A22B2F1300096882E /* CardNumberValidatorAssembly.swift in Sources */,
+				C16B128A270C58360066317B /* PaymentSessionInfoDTO.swift in Sources */,
 				863A5A8922B263A50044D7C0 /* CardDetector.swift in Sources */,
 				8662425322B7BA8D006AE2B1 /* BankCardInputData.swift in Sources */,
 				C143797A22C2633300E59013 /* ApplePayDependencies.swift in Sources */,
