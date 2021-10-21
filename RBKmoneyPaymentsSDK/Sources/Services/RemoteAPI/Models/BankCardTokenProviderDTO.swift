@@ -14,9 +14,12 @@
 
 import Foundation
 
-enum BankCardTokenProviderDTO: String, Codable {
+enum BankCardTokenProviderDTO: String, CaseInsensitiveDecodable, Encodable {
 
     case applePay = "applepay"
     case googlePay = "googlepay"
     case samsungPay = "samsungpay"
+    case yandexPay = "yandexpay"
+
+    case unknown
 }

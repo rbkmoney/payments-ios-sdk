@@ -46,6 +46,8 @@ private extension CurrencyDTO {
             return "$"
         case .eur:
             return "€"
+        case .unknown:
+            return ""
         }
     }
 }

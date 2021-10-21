@@ -16,16 +16,49 @@ import Foundation
 
 enum PayerDTO {
 
-    typealias CustomerIdentifier = String
+    case customer(Customer)
+    case paymentResource(PaymentResource)
+    case recurrentPayment(RecurrentPayment)
+}
 
-    struct PaymentResource {
+extension PayerDTO {
+
+    struct Customer: Codable {
+
+        enum CodingKeys: String, CodingKey {
+            case identifier = "customerID"
+            case paymentToolToken
+            case paymentToolDetails
+        }
+
+        let identifier: String
+        let paymentToolToken: String?
+        let paymentToolDetails: PaymentToolDetailsDTO?
+
+        init(identifier: String) {
+            self.identifier = identifier
+            self.paymentToolToken = nil
+            self.paymentToolDetails = nil
+        }
+    }
+
+    struct PaymentResource: Codable {
+
+        enum CodingKeys: String, CodingKey {
+            case paymentToolToken
+            case paymentSessionIdentifier = "paymentSession"
+            case paymentToolDetails
+            case clientInfo
+            case contactInfo
+        }
+
         let paymentToolToken: String
-        let paymentSessionIdentifier: String?
+        let paymentSessionIdentifier: String
         let paymentToolDetails: PaymentToolDetailsDTO?
         let clientInfo: ClientInfoDTO?
         let contactInfo: ContactInfoDTO
 
-        init(paymentToolToken: String, paymentSessionIdentifier: String?, contactInfo: ContactInfoDTO) {
+        init(paymentToolToken: String, paymentSessionIdentifier: String, contactInfo: ContactInfoDTO) {
             self.paymentToolToken = paymentToolToken
             self.paymentSessionIdentifier = paymentSessionIdentifier
             self.paymentToolDetails = nil
@@ -34,14 +67,27 @@ enum PayerDTO {
         }
     }
 
-    struct RecurrentPayment {
+    struct RecurrentPayment: Codable {
+
+        enum CodingKeys: String, CodingKey {
+            case contactInfo
+            case parent = "recurrentParentPayment"
+            case paymentToolToken
+            case paymentToolDetails
+        }
+
         let contactInfo: ContactInfoDTO
         let parent: RecurrentPaymentParentDTO
-    }
+        let paymentToolToken: String?
+        let paymentToolDetails: PaymentToolDetailsDTO?
 
-    case customer(CustomerIdentifier)
-    case paymentResource(PaymentResource)
-    case recurrentPayment(RecurrentPayment)
+        init(contactInfo: ContactInfoDTO, parent: RecurrentPaymentParentDTO) {
+            self.contactInfo = contactInfo
+            self.parent = parent
+            self.paymentToolToken = nil
+            self.paymentToolDetails = nil
+        }
+    }
 }
 
 extension PayerDTO: Codable {
@@ -49,59 +95,34 @@ extension PayerDTO: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let type = try container.decode(PayerType.self, forKey: .type)
+        let singleValueContainer = try decoder.singleValueContainer()
 
         switch type {
         case .customer:
-            let identifier = try container.decode(CustomerIdentifier.self, forKey: .customerIdentifier)
-            self = .customer(identifier)
+            self = .customer(try singleValueContainer.decode(Customer.self))
         case .paymentResource:
-            let resource = PaymentResource(
-                paymentToolToken: try container.decode(String.self, forKey: .paymentToolToken),
-                paymentSessionIdentifier: try container.decodeIfPresent(String.self, forKey: .paymentSessionIdentifier),
-                paymentToolDetails: try container.decodeIfPresent(PaymentToolDetailsDTO.self, forKey: .paymentToolDetails),
-                clientInfo: try container.decodeIfPresent(ClientInfoDTO.self, forKey: .clientInfo),
-                contactInfo: try container.decode(ContactInfoDTO.self, forKey: .contactInfo)
-            )
-            self = .paymentResource(resource)
+            self = .paymentResource(try singleValueContainer.decode(PaymentResource.self))
         case .recurrentPayment:
-            let payment = RecurrentPayment(
-                contactInfo: try container.decode(ContactInfoDTO.self, forKey: .contactInfo),
-                parent: try container.decode(RecurrentPaymentParentDTO.self, forKey: .recurrentPaymentParent)
-            )
-            self = .recurrentPayment(payment)
+            self = .recurrentPayment(try singleValueContainer.decode(RecurrentPayment.self))
         }
     }
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(payerType, forKey: .type)
 
         switch self {
-        case let .customer(identifier):
-            try container.encode(PayerType.customer, forKey: .type)
-            try container.encode(identifier, forKey: .customerIdentifier)
-        case let .paymentResource(resource):
-            try container.encode(PayerType.paymentResource, forKey: .type)
-            try container.encode(resource.paymentToolToken, forKey: .paymentToolToken)
-            try container.encodeIfPresent(resource.paymentSessionIdentifier, forKey: .paymentSessionIdentifier)
-            try container.encodeIfPresent(resource.paymentToolDetails, forKey: .paymentToolDetails)
-            try container.encodeIfPresent(resource.clientInfo, forKey: .clientInfo)
-            try container.encode(resource.contactInfo, forKey: .contactInfo)
-        case let .recurrentPayment(payment):
-            try container.encode(PayerType.recurrentPayment, forKey: .type)
-            try container.encode(payment.contactInfo, forKey: .contactInfo)
-            try container.encode(payment.parent, forKey: .recurrentPaymentParent)
+        case let .customer(customer):
+            try customer.encode(to: encoder)
+        case let .paymentResource(paymentResource):
+            try paymentResource.encode(to: encoder)
+        case let .recurrentPayment(recurrentPayment):
+            try recurrentPayment.encode(to: encoder)
         }
     }
 
     private enum CodingKeys: String, CodingKey {
         case type = "payerType"
-        case customerIdentifier = "customerID"
-        case paymentToolToken
-        case paymentSessionIdentifier = "paymentSession"
-        case paymentToolDetails
-        case clientInfo
-        case contactInfo
-        case recurrentPaymentParent = "recurrentParentPayment"
     }
 
     private enum PayerType: String, Codable {
@@ -109,20 +130,15 @@ extension PayerDTO: Codable {
         case paymentResource = "PaymentResourcePayer"
         case recurrentPayment = "RecurrentPayer"
     }
-}
 
-fileprivate extension PayerDTO.PaymentResource {
-
-    init(paymentToolToken: String,
-         paymentSessionIdentifier: String?,
-         paymentToolDetails: PaymentToolDetailsDTO?,
-         clientInfo: ClientInfoDTO?,
-         contactInfo: ContactInfoDTO) {
-
-        self.paymentToolToken = paymentToolToken
-        self.paymentSessionIdentifier = paymentSessionIdentifier
-        self.paymentToolDetails = paymentToolDetails
-        self.clientInfo = clientInfo
-        self.contactInfo = contactInfo
+    private var payerType: PayerType {
+        switch self {
+        case .customer:
+            return .customer
+        case .paymentResource:
+            return .paymentResource
+        case .recurrentPayment:
+            return .recurrentPayment
+        }
     }
 }

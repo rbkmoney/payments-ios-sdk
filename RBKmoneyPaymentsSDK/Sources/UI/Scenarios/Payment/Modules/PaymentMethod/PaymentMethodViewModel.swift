@@ -139,10 +139,10 @@ final class PaymentMethodViewModel: ModuleViewModel {
         // 4. Device supports ApplePay with provided payment systems
         if data.paymentInputData.allowedPaymentMethods.contains(.applePay) && data.paymentInputData.applePayMerchantIdentifier != nil {
             let paymentSystems = methods.flatMap { item -> [PaymentSystem] in
-                guard case let .bankCard(paymentSystems, .some(tokenProviders)) = item, tokenProviders.contains(.applePay) else {
+                guard case let .bankCard(bankCard) = item, let tokenProviders = bankCard.tokenProviders, tokenProviders.contains(.applePay) else {
                     return []
                 }
-                return paymentSystems
+                return bankCard.paymentSystems
             }
             if paymentSystems.isEmpty == false && applePayInfoProvider.applePayAvailability(for: paymentSystems) != .unavailable {
                 result.append(Item(method: .applePay, paymentSystems: Set(paymentSystems)))
@@ -154,10 +154,10 @@ final class PaymentMethodViewModel: ModuleViewModel {
         // 2. Server supports non-zero count of payment systems
         if data.paymentInputData.allowedPaymentMethods.contains(.bankCard) {
             let paymentSystems = methods.flatMap { item -> [PaymentSystem] in
-                guard case let .bankCard(paymentSystems, .none) = item else {
+                guard case let .bankCard(bankCard) = item, bankCard.tokenProviders == nil else {
                     return []
                 }
-                return paymentSystems
+                return bankCard.paymentSystems
             }
             if paymentSystems.isEmpty == false {
                 result.append(Item(method: .bankCard, paymentSystems: Set(paymentSystems)))

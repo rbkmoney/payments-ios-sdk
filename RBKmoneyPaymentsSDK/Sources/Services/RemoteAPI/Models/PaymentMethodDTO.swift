@@ -16,17 +16,35 @@ import Foundation
 
 enum PaymentMethodDTO {
 
-    enum PaymentTerminalProvider: String, Codable {
-        case euroset
+    case bankCard(BankCard)
+    case paymentTerminal(PaymentTerminal)
+    case digitalWallet(DigitalWallet)
+    case cryptoWallet(CryptoWallet)
+    case mobileCommerce(MobileCommerce)
+}
+
+extension PaymentMethodDTO {
+
+    struct BankCard: Codable {
+        let paymentSystems: [BankCardPaymentSystemDTO]
+        let tokenProviders: [BankCardTokenProviderDTO]?
     }
 
-    enum DigitalWalletProvider: String, Codable {
-        case qiwi
+    struct PaymentTerminal: Codable {
+        let providers: [PaymentTerminalProviderDTO]
     }
 
-    case bankCard([BankCardPaymentSystemDTO], [BankCardTokenProviderDTO]?)
-    case paymentTerminal([PaymentTerminalProvider])
-    case digitalWallet([DigitalWalletProvider])
+    struct DigitalWallet: Codable {
+        let providers: [DigitalWalletProviderDTO]
+    }
+
+    struct CryptoWallet: Codable {
+        let cryptoCurrencies: [CryptoWalletCurrencyDTO]
+    }
+
+    struct MobileCommerce: Codable {
+        let operators: [MobileCommerceOperatorDTO]
+    }
 }
 
 extension PaymentMethodDTO: Codable {
@@ -34,48 +52,64 @@ extension PaymentMethodDTO: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let type = try container.decode(PaymentMethodType.self, forKey: .type)
+        let singleValueContainer = try decoder.singleValueContainer()
 
         switch type {
         case .bankCard:
-            let paymentSystems = try container.decode([BankCardPaymentSystemDTO].self, forKey: .paymentSystems)
-            let tokenProviders = try container.decodeIfPresent([BankCardTokenProviderDTO].self, forKey: .tokenProviders)
-            self = .bankCard(paymentSystems, tokenProviders)
+            self = .bankCard(try singleValueContainer.decode(BankCard.self))
         case .paymentTerminal:
-            let providers = try container.decode([PaymentTerminalProvider].self, forKey: .providers)
-            self = .paymentTerminal(providers)
+            self = .paymentTerminal(try singleValueContainer.decode(PaymentTerminal.self))
         case .digitalWallet:
-            let providers = try container.decode([DigitalWalletProvider].self, forKey: .providers)
-            self = .digitalWallet(providers)
+            self = .digitalWallet(try singleValueContainer.decode(DigitalWallet.self))
+        case .cryptoWallet:
+            self = .cryptoWallet(try singleValueContainer.decode(CryptoWallet.self))
+        case .mobileCommerce:
+            self = .mobileCommerce(try singleValueContainer.decode(MobileCommerce.self))
         }
     }
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(paymentMethodType, forKey: .type)
 
         switch self {
-        case let .bankCard(paymentSystems, tokenProviders):
-            try container.encode(PaymentMethodType.bankCard, forKey: .type)
-            try container.encode(paymentSystems, forKey: .paymentSystems)
-            try container.encodeIfPresent(tokenProviders, forKey: .tokenProviders)
-        case let .paymentTerminal(providers):
-            try container.encode(PaymentMethodType.paymentTerminal, forKey: .type)
-            try container.encode(providers, forKey: .providers)
-        case let .digitalWallet(providers):
-            try container.encode(PaymentMethodType.digitalWallet, forKey: .type)
-            try container.encode(providers, forKey: .providers)
+        case let .bankCard(bankCard):
+            try bankCard.encode(to: encoder)
+        case let .paymentTerminal(paymentTerminal):
+            try paymentTerminal.encode(to: encoder)
+        case let .digitalWallet(digitalWallet):
+            try digitalWallet.encode(to: encoder)
+        case let .cryptoWallet(cryptoWallet):
+            try cryptoWallet.encode(to: encoder)
+        case let .mobileCommerce(mobileCommerce):
+            try mobileCommerce.encode(to: encoder)
         }
     }
 
     private enum CodingKeys: String, CodingKey {
         case type = "method"
-        case paymentSystems
-        case tokenProviders
-        case providers
     }
 
     private enum PaymentMethodType: String, Codable {
         case bankCard = "BankCard"
         case paymentTerminal = "PaymentTerminal"
         case digitalWallet = "DigitalWallet"
+        case cryptoWallet = "CryptoWallet"
+        case mobileCommerce = "MobileCommerce"
+    }
+
+    private var paymentMethodType: PaymentMethodType {
+        switch self {
+        case .bankCard:
+            return .bankCard
+        case .paymentTerminal:
+            return .paymentTerminal
+        case .digitalWallet:
+            return .digitalWallet
+        case .cryptoWallet:
+            return .cryptoWallet
+        case .mobileCommerce:
+            return .mobileCommerce
+        }
     }
 }

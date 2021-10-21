@@ -16,36 +16,79 @@ import Foundation
 
 enum InvoiceChangeDTO {
 
-    struct PaymentStatusChangedData {
+    case invoiceCreated(InvoiceCreated)
+    case invoiceStatusChanged(InvoiceStatusChanged)
+    case paymentStarted(PaymentStarted)
+    case paymentStatusChanged(PaymentStatusChanged)
+    case paymentInteractionRequested(PaymentInteractionRequested)
+    case refundStarted(RefundStarted)
+    case refundStatusChanged(RefundStatusChanged)
+}
+
+extension InvoiceChangeDTO {
+
+    struct InvoiceCreated: Codable {
+        let invoice: InvoiceDTO
+    }
+
+    struct InvoiceStatusChanged: Codable {
+        let status: InvoiceStatusDTO
+        let reason: String?
+    }
+
+    struct PaymentStarted: Codable {
+        let payment: PaymentDTO
+    }
+
+    struct PaymentStatusChanged: Codable {
+
+        enum CodingKeys: String, CodingKey {
+            case status
+            case error
+            case paymentIdentifier = "paymentID"
+        }
+
         let status: PaymentStatusDTO
         let error: ServerErrorDTO?
         let paymentIdentifier: String
     }
 
-    struct PaymentInteractionRequestedData {
+    struct PaymentInteractionRequested: Codable {
+
+        enum CodingKeys: String, CodingKey {
+            case userInteraction
+            case paymentIdentifier = "paymentID"
+        }
+
         let userInteraction: UserInteractionDTO
         let paymentIdentifier: String
     }
 
-    struct RefundStartedData {
+    struct RefundStarted: Codable {
+
+        enum CodingKeys: String, CodingKey {
+            case refund
+            case paymentIdentifier = "paymentID"
+        }
+
         let refund: RefundDTO
         let paymentIdentifier: String
     }
 
-    struct RefundStatusChangedData {
+    struct RefundStatusChanged: Codable {
+
+        enum CodingKeys: String, CodingKey {
+            case paymentIdentifier = "paymentID"
+            case refundIdentifier = "refundID"
+            case status
+            case error
+        }
+
         let paymentIdentifier: String
         let refundIdentifier: String
         let status: RefundStatusDTO
         let error: ServerErrorDTO?
     }
-
-    case invoiceCreated(InvoiceDTO)
-    case invoiceStatusChanged(InvoiceStatusDTO)
-    case paymentStarted(PaymentDTO)
-    case paymentStatusChanged(PaymentStatusChangedData)
-    case paymentInteractionRequested(PaymentInteractionRequestedData)
-    case refundStarted(RefundStartedData)
-    case refundStatusChanged(RefundStatusChangedData)
 }
 
 extension InvoiceChangeDTO: Codable {
@@ -53,92 +96,50 @@ extension InvoiceChangeDTO: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let type = try container.decode(ChangeType.self, forKey: .type)
+        let singleValueContainer = try decoder.singleValueContainer()
 
         switch type {
         case .invoiceCreated:
-            let invoice = try container.decode(InvoiceDTO.self, forKey: .invoice)
-            self = .invoiceCreated(invoice)
+            self = .invoiceCreated(try singleValueContainer.decode(InvoiceCreated.self))
         case .invoiceStatusChanged:
-            let status = try container.decode(InvoiceStatusDTO.self, forKey: .status)
-            self = .invoiceStatusChanged(status)
+            self = .invoiceStatusChanged(try singleValueContainer.decode(InvoiceStatusChanged.self))
         case .paymentStarted:
-            let payment = try container.decode(PaymentDTO.self, forKey: .payment)
-            self = .paymentStarted(payment)
+            self = .paymentStarted(try singleValueContainer.decode(PaymentStarted.self))
         case .paymentStatusChanged:
-            let data = PaymentStatusChangedData(
-                status: try container.decode(PaymentStatusDTO.self, forKey: .status),
-                error: try container.decodeIfPresent(ServerErrorDTO.self, forKey: .error),
-                paymentIdentifier: try container.decode(String.self, forKey: .paymentIdentifier)
-            )
-            self = .paymentStatusChanged(data)
+            self = .paymentStatusChanged(try singleValueContainer.decode(PaymentStatusChanged.self))
         case .paymentInteractionRequested:
-            let data = PaymentInteractionRequestedData(
-                userInteraction: try container.decode(UserInteractionDTO.self, forKey: .userInteraction),
-                paymentIdentifier: try container.decode(String.self, forKey: .paymentIdentifier)
-            )
-            self = .paymentInteractionRequested(data)
+            self = .paymentInteractionRequested(try singleValueContainer.decode(PaymentInteractionRequested.self))
         case .refundStarted:
-            let data = RefundStartedData(
-                refund: try container.decode(RefundDTO.self, forKey: .refund),
-                paymentIdentifier: try container.decode(String.self, forKey: .paymentIdentifier)
-            )
-            self = .refundStarted(data)
+            self = .refundStarted(try singleValueContainer.decode(RefundStarted.self))
         case .refundStatusChanged:
-            let data = RefundStatusChangedData(
-                paymentIdentifier: try container.decode(String.self, forKey: .paymentIdentifier),
-                refundIdentifier: try container.decode(String.self, forKey: .refundIdentifier),
-                status: try container.decode(RefundStatusDTO.self, forKey: .status),
-                error: try container.decodeIfPresent(ServerErrorDTO.self, forKey: .error)
-            )
-            self = .refundStatusChanged(data)
+            self = .refundStatusChanged(try singleValueContainer.decode(RefundStatusChanged.self))
         }
     }
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(changeType, forKey: .type)
 
         switch self {
-        case let .invoiceCreated(invoice):
-            try container.encode(ChangeType.invoiceCreated, forKey: .type)
-            try container.encode(invoice, forKey: .invoice)
-        case let .invoiceStatusChanged(status):
-            try container.encode(ChangeType.invoiceStatusChanged, forKey: .type)
-            try container.encode(status, forKey: .status)
-        case let .paymentStarted(payment):
-            try container.encode(ChangeType.paymentStarted, forKey: .type)
-            try container.encode(payment, forKey: .payment)
-        case let .paymentStatusChanged(data):
-            try container.encode(ChangeType.paymentStatusChanged, forKey: .type)
-            try container.encode(data.status, forKey: .status)
-            try container.encodeIfPresent(data.error, forKey: .error)
-            try container.encode(data.paymentIdentifier, forKey: .paymentIdentifier)
-        case let .paymentInteractionRequested(data):
-            try container.encode(ChangeType.paymentInteractionRequested, forKey: .type)
-            try container.encode(data.userInteraction, forKey: .userInteraction)
-            try container.encode(data.paymentIdentifier, forKey: .paymentIdentifier)
-        case let .refundStarted(data):
-            try container.encode(ChangeType.refundStarted, forKey: .type)
-            try container.encode(data.refund, forKey: .refund)
-            try container.encode(data.paymentIdentifier, forKey: .paymentIdentifier)
-        case let .refundStatusChanged(data):
-            try container.encode(ChangeType.refundStatusChanged, forKey: .type)
-            try container.encode(data.paymentIdentifier, forKey: .paymentIdentifier)
-            try container.encode(data.refundIdentifier, forKey: .refundIdentifier)
-            try container.encode(data.status, forKey: .status)
-            try container.encodeIfPresent(data.error, forKey: .error)
+        case let .invoiceCreated(invoiceCreated):
+            try invoiceCreated.encode(to: encoder)
+        case let .invoiceStatusChanged(invoiceStatusChanged):
+            try invoiceStatusChanged.encode(to: encoder)
+        case let .paymentStarted(paymentStarted):
+            try paymentStarted.encode(to: encoder)
+        case let .paymentStatusChanged(paymentStatusChanged):
+            try paymentStatusChanged.encode(to: encoder)
+        case let .paymentInteractionRequested(paymentInteractionRequested):
+            try paymentInteractionRequested.encode(to: encoder)
+        case let .refundStarted(refundStarted):
+            try refundStarted.encode(to: encoder)
+        case let .refundStatusChanged(refundStatusChanged):
+            try refundStatusChanged.encode(to: encoder)
         }
     }
 
     private enum CodingKeys: String, CodingKey {
         case type = "changeType"
-        case invoice
-        case status
-        case payment
-        case paymentIdentifier = "paymentID"
-        case userInteraction
-        case refund
-        case refundIdentifier = "refundID"
-        case error
     }
 
     private enum ChangeType: String, Codable {
@@ -149,5 +150,24 @@ extension InvoiceChangeDTO: Codable {
         case paymentInteractionRequested = "PaymentInteractionRequested"
         case refundStarted = "RefundStarted"
         case refundStatusChanged = "RefundStatusChanged"
+    }
+
+    private var changeType: ChangeType {
+        switch self {
+        case .invoiceCreated:
+            return .invoiceCreated
+        case .invoiceStatusChanged:
+            return .invoiceStatusChanged
+        case .paymentStarted:
+            return .paymentStarted
+        case .paymentStatusChanged:
+            return .paymentStatusChanged
+        case .paymentInteractionRequested:
+            return .paymentInteractionRequested
+        case .refundStarted:
+            return .refundStarted
+        case .refundStatusChanged:
+            return .refundStatusChanged
+        }
     }
 }

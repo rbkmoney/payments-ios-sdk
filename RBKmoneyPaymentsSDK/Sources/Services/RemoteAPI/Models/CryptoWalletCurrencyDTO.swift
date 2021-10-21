@@ -14,10 +14,14 @@
 
 import Foundation
 
-extension JSONEncoder.DateEncodingStrategy {
+enum CryptoWalletCurrencyDTO: String, CaseInsensitiveDecodable, Encodable {
 
-    static let customISO8601 = custom {
-        let string = Formatter.iso8601Full.string(from: $0)
-        try string.encode(to: $1)
-    }
+    case bitcoin
+    case litecoin
+    case bitcoinCash
+    case ripple
+    case ethereum
+    case zcash
+
+    case unknown
 }

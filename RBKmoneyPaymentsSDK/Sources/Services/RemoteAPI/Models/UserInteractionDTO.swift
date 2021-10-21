@@ -16,13 +16,38 @@ import Foundation
 
 enum UserInteractionDTO {
 
-    struct ReceiptData {
+    case paymentTerminalReceipt(PaymentTerminalReceipt)
+    case redirect(Redirect)
+    case cryptoCurrencyTransferRequest(CryptoCurrencyTransferRequest)
+    case qrCodeDisplayRequest(QRCodeDisplayRequest)
+}
+
+extension UserInteractionDTO {
+
+    struct PaymentTerminalReceipt: Codable {
+
+        enum CodingKeys: String, CodingKey {
+            case shortPaymentIdentifier = "shortPaymentID"
+            case dueDate
+        }
+
         let shortPaymentIdentifier: String
         let dueDate: Date
     }
 
-    case paymentTerminalReceipt(ReceiptData)
-    case redirect(BrowserRequestDTO)
+    struct Redirect: Codable {
+        let request: BrowserRequestDTO
+    }
+
+    struct CryptoCurrencyTransferRequest: Codable {
+        let cryptoAddress: String
+        let symbolicCode: String
+        let cryptoAmount: CryptoAmountDTO
+    }
+
+    struct QRCodeDisplayRequest: Codable {
+        let qrCode: String
+    }
 }
 
 extension UserInteractionDTO: Codable {
@@ -30,43 +55,57 @@ extension UserInteractionDTO: Codable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         let type = try container.decode(InteractionType.self, forKey: .type)
+        let singleValueContainer = try decoder.singleValueContainer()
 
         switch type {
         case .paymentTerminalReceipt:
-            let data = ReceiptData(
-                shortPaymentIdentifier: try container.decode(String.self, forKey: .shortPaymentIdentifier),
-                dueDate: try container.decode(Date.self, forKey: .dueDate)
-            )
-            self = .paymentTerminalReceipt(data)
+            self = .paymentTerminalReceipt(try singleValueContainer.decode(PaymentTerminalReceipt.self))
         case .redirect:
-            let request = try container.decode(BrowserRequestDTO.self, forKey: .request)
-            self = .redirect(request)
+            self = .redirect(try singleValueContainer.decode(Redirect.self))
+        case .cryptoCurrencyTransferRequest:
+            self = .cryptoCurrencyTransferRequest(try singleValueContainer.decode(CryptoCurrencyTransferRequest.self))
+        case .qrCodeDisplayRequest:
+            self = .qrCodeDisplayRequest(try singleValueContainer.decode(QRCodeDisplayRequest.self))
         }
     }
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(interactionType, forKey: .type)
 
         switch self {
-        case let .paymentTerminalReceipt(data):
-            try container.encode(InteractionType.paymentTerminalReceipt, forKey: .type)
-            try container.encode(data.shortPaymentIdentifier, forKey: .shortPaymentIdentifier)
-            try container.encode(data.dueDate, forKey: .dueDate)
-        case let .redirect(request):
-            try container.encode(InteractionType.redirect, forKey: .type)
-            try container.encode(request, forKey: .request)
+        case let .paymentTerminalReceipt(paymentTerminalReceipt):
+            try paymentTerminalReceipt.encode(to: encoder)
+        case let .redirect(redirect):
+            try redirect.encode(to: encoder)
+        case let .cryptoCurrencyTransferRequest(cryptoCurrencyTransferRequest):
+            try cryptoCurrencyTransferRequest.encode(to: encoder)
+        case let .qrCodeDisplayRequest(qrCodeDisplayRequest):
+            try qrCodeDisplayRequest.encode(to: encoder)
         }
     }
 
     private enum CodingKeys: String, CodingKey {
         case type = "interactionType"
-        case shortPaymentIdentifier = "shortPaymentID"
-        case dueDate
-        case request
     }
 
     private enum InteractionType: String, Codable {
         case paymentTerminalReceipt = "PaymentTerminalReceipt"
         case redirect = "Redirect"
+        case cryptoCurrencyTransferRequest = "CryptoCurrencyTransferRequest"
+        case qrCodeDisplayRequest = "QrCodeDisplayRequest"
+    }
+
+    private var interactionType: InteractionType {
+        switch self {
+        case .paymentTerminalReceipt:
+            return .paymentTerminalReceipt
+        case .redirect:
+            return .redirect
+        case .cryptoCurrencyTransferRequest:
+            return .cryptoCurrencyTransferRequest
+        case .qrCodeDisplayRequest:
+            return .qrCodeDisplayRequest
+        }
     }
 }

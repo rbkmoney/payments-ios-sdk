@@ -14,7 +14,7 @@
 
 import Foundation
 
-enum BankCardPaymentSystemDTO: String, Codable, Hashable {
+enum BankCardPaymentSystemDTO: String, CaseInsensitiveDecodable, Encodable {
 
     case visa
     case mastercard
@@ -28,4 +28,10 @@ enum BankCardPaymentSystemDTO: String, Codable, Hashable {
     case unionpay
     case jcb
     case nspkmir
+    case elo
+    case rupay
+    case dummy
+    case uzcard
+
+    case unknown
 }

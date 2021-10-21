@@ -16,14 +16,33 @@ import Foundation
 
 enum PaymentToolSourceDTO {
 
-    struct CardData {
+    case card(Card)
+    case tokenizedCard(TokenizedCard)
+    case digitalWallet(DigitalWallet)
+    case paymentTerminal(PaymentTerminal)
+    case cryptoWallet(CryptoWallet)
+    case mobileCommerce(MobileCommerce)
+}
+
+extension PaymentToolSourceDTO {
+
+    struct Card: Encodable {
+
+        enum CodingKeys: String, CodingKey {
+            case number = "cardNumber"
+            case expiration = "expDate"
+            case cvv
+            case cardholder = "cardHolder"
+        }
+
         let number: String
         let expiration: String
         let cvv: String?
         let cardholder: String?
     }
 
-    enum TokenizedCardData {
+    enum TokenizedCard {
+
         struct ApplePay {
             let merchantIdentifier: String
             let paymentData: Data
@@ -35,137 +54,316 @@ enum PaymentToolSourceDTO {
 
         struct GooglePay {
             let gatewayMerchantIdentifier: String
-            let paymentToken: Data
+            let cardNetwork: String?
+            let cardDetails: String?
+            let cardImageURI: String?
+            let cardDescription: String?
+            let cardClass: String
+            let tokenizationType: String
+            let token: String
         }
 
-        struct SamsungPay {
+        struct SamsungPay: Encodable {
+
+            enum CodingKeys: String, CodingKey {
+                case serviceIdentifier = "serviceID"
+                case referenceIdentifier = "referenceID"
+            }
+
             let serviceIdentifier: String
             let referenceIdentifier: String
         }
 
+        typealias YandexPay = GooglePay
+
         case applePay(ApplePay)
         case googlePay(GooglePay)
         case samsungPay(SamsungPay)
+        case yandexPay(YandexPay)
     }
 
-    enum DigitalWalletData {
-        struct QIWI {
+    enum DigitalWallet {
+
+        struct QIWI: Encodable {
             let phoneNumber: String
+            let accessToken: String?
         }
 
         case qiwi(QIWI)
     }
 
-    enum PaymentTerminalProvider: String, Codable {
-        case euroset
+    struct PaymentTerminal: Encodable {
+        let provider: PaymentTerminalProviderDTO
     }
 
-    case cardData(CardData)
-    case tokenizedCardData(TokenizedCardData)
-    case digitalWalletData(DigitalWalletData)
-    case paymentTerminalData(PaymentTerminalProvider)
+    struct CryptoWallet: Encodable {
+        let cryptoCurrency: CryptoWalletCurrencyDTO
+    }
+
+    struct MobileCommerce: Encodable {
+
+        struct Phone: Encodable {
+
+            enum CodingKeys: String, CodingKey {
+                case countryCode = "cc"
+                case subscriberNumber = "ctn"
+            }
+
+            let countryCode: String
+            let subscriberNumber: String
+        }
+
+        let mobilePhone: Phone
+    }
+}
+
+extension PaymentToolSourceDTO.TokenizedCard.ApplePay: Encodable {
+
+    func encode(to encoder: Encoder) throws {
+        let value = EncodedApplePay(
+            merchantIdentifier: merchantIdentifier,
+            paymentToken: .init(
+                token: .init(
+                    paymentData: .init(
+                        data: paymentData
+                    ),
+                    paymentMethod: .init(
+                        displayName: paymentMethodDisplayName,
+                        network: paymentMethodNetwork,
+                        type: paymentMethodType
+                    ),
+                    transactionIdentifier: transactionIdentifier
+                )
+            )
+        )
+        try value.encode(to: encoder)
+    }
+
+    // swiftlint:disable nesting
+    private struct EncodedApplePay: Encodable {
+
+        enum CodingKeys: String, CodingKey {
+            case merchantIdentifier = "merchantID"
+            case paymentToken
+        }
+
+        struct PaymentToken: Encodable {
+
+            struct Token: Encodable {
+
+                struct Method: Encodable {
+                    let displayName: String?
+                    let network: String?
+                    let type: String
+                }
+
+                struct PaymentData: Encodable {
+                    let data: Data
+
+                    func encode(to encoder: Encoder) throws {
+                        let json = try JSONDecoder().decode(GenericJSON.self, from: data)
+                        try json.encode(to: encoder)
+                    }
+                }
+
+                let paymentData: PaymentData
+                let paymentMethod: Method
+                let transactionIdentifier: String
+            }
+
+            let token: Token
+        }
+
+        let merchantIdentifier: String
+        let paymentToken: PaymentToken
+    }
+    // swiftlint:enable nesting
+}
+
+extension PaymentToolSourceDTO.TokenizedCard.GooglePay: Encodable {
+
+    func encode(to encoder: Encoder) throws {
+        let value = EncodedGooglePay(
+            gatewayMerchantIdentifier: gatewayMerchantIdentifier,
+            paymentToken: .init(
+                cardInfo: .init(
+                    cardNetwork: cardNetwork,
+                    cardDetails: cardDetails,
+                    cardImageURI: cardImageURI,
+                    cardDescription: cardDescription,
+                    cardClass: cardClass
+                ),
+                paymentMethodToken: .init(
+                    tokenizationType: tokenizationType,
+                    token: token
+                )
+            )
+        )
+        try value.encode(to: encoder)
+    }
+
+    // swiftlint:disable nesting
+    private struct EncodedGooglePay: Encodable {
+
+        enum CodingKeys: String, CodingKey {
+            case gatewayMerchantIdentifier = "gatewayMerchantID"
+            case paymentToken
+        }
+
+        struct PaymentToken: Encodable {
+
+            struct CardInfo: Encodable {
+
+                enum CodingKeys: String, CodingKey {
+                    case cardNetwork
+                    case cardDetails
+                    case cardImageURI = "cardImageUri"
+                    case cardDescription
+                    case cardClass
+                }
+
+                let cardNetwork: String?
+                let cardDetails: String?
+                let cardImageURI: String?
+                let cardDescription: String?
+                let cardClass: String
+            }
+
+            struct PaymentMethodToken: Encodable {
+                let tokenizationType: String
+                let token: String
+            }
+
+            let cardInfo: CardInfo
+            let paymentMethodToken: PaymentMethodToken
+        }
+
+        let gatewayMerchantIdentifier: String
+        let paymentToken: PaymentToken
+    }
+    // swiftlint:enable nesting
+}
+
+extension PaymentToolSourceDTO.TokenizedCard: Encodable {
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(provider, forKey: .provider)
+
+        switch self {
+        case let .applePay(applePay):
+            try applePay.encode(to: encoder)
+        case let .googlePay(googlePay):
+            try googlePay.encode(to: encoder)
+        case let .samsungPay(samsungPay):
+            try samsungPay.encode(to: encoder)
+        case let .yandexPay(yandexPay):
+            try yandexPay.encode(to: encoder)
+        }
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case provider
+    }
+
+    private enum Provider: String, Codable {
+        case applePay = "ApplePay"
+        case googlePay = "GooglePay"
+        case samsungPay = "SamsungPay"
+        case yandexPay = "YandexPay"
+    }
+
+    private var provider: Provider {
+        switch self {
+        case .applePay:
+            return .applePay
+        case .googlePay:
+            return .googlePay
+        case .samsungPay:
+            return .samsungPay
+        case .yandexPay:
+            return .yandexPay
+        }
+    }
+}
+
+extension PaymentToolSourceDTO.DigitalWallet: Encodable {
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(digitalWalletType, forKey: .type)
+
+        switch self {
+        case let .qiwi(qiwi):
+            try qiwi.encode(to: encoder)
+        }
+    }
+
+    private enum CodingKeys: String, CodingKey {
+        case type = "digitalWalletType"
+    }
+
+    private enum DigitalWalletType: String, Codable {
+        case qiwi = "DigitalWalletQIWI"
+    }
+
+    private var digitalWalletType: DigitalWalletType {
+        switch self {
+        case .qiwi:
+            return .qiwi
+        }
+    }
 }
 
 extension PaymentToolSourceDTO: Encodable {
 
     func encode(to encoder: Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(paymentToolType, forKey: .type)
 
         switch self {
-        case let .cardData(card):
-            try container.encode(PaymentToolType.cardData, forKey: .type)
-            try container.encode(card.number, forKey: .cardNumber)
-            try container.encode(card.expiration, forKey: .cardExpiration)
-            try container.encodeIfPresent(card.cvv, forKey: .cvv)
-            try container.encodeIfPresent(card.cardholder, forKey: .cardholder)
-        case let .tokenizedCardData(provider):
-            try container.encode(PaymentToolType.tokenizedCardData, forKey: .type)
-            switch provider {
-            case let .applePay(card):
-                try container.encode(TokenizedCardDataProvider.applePay, forKey: .provider)
-                try container.encode(card.merchantIdentifier, forKey: .merchantIdentifier)
-                try container.encode(ApplePayPaymentToken(data: card), forKey: .paymentToken)
-            case let .googlePay(card):
-                try container.encode(TokenizedCardDataProvider.googlePay, forKey: .provider)
-                try container.encode(card.gatewayMerchantIdentifier, forKey: .gatewayMerchantIdentifier)
-                try container.encode(card.paymentToken, forKey: .paymentToken)
-            case let .samsungPay(card):
-                try container.encode(TokenizedCardDataProvider.samsungPay, forKey: .provider)
-                try container.encode(card.serviceIdentifier, forKey: .serviceIdentifier)
-                try container.encode(card.referenceIdentifier, forKey: .referenceIdentifier)
-            }
-        case let .digitalWalletData(provider):
-            try container.encode(PaymentToolType.digitalWalletData, forKey: .type)
-            switch provider {
-            case let .qiwi(data):
-                try container.encode(DigitalWalletType.qiwi, forKey: .digitalWalletType)
-                try container.encode(data.phoneNumber, forKey: .phoneNumber)
-            }
-        case let .paymentTerminalData(provider):
-            try container.encode(PaymentToolType.paymentTerminalData, forKey: .type)
-            try container.encode(provider, forKey: .provider)
+        case let .card(card):
+            try card.encode(to: encoder)
+        case let .paymentTerminal(paymentTerminal):
+            try paymentTerminal.encode(to: encoder)
+        case let .digitalWallet(digitalWallet):
+            try digitalWallet.encode(to: encoder)
+        case let .tokenizedCard(tokenizedCard):
+            try tokenizedCard.encode(to: encoder)
+        case let .cryptoWallet(cryptoWallet):
+            try cryptoWallet.encode(to: encoder)
+        case let .mobileCommerce(mobileCommerce):
+            try mobileCommerce.encode(to: encoder)
         }
     }
 
     private enum CodingKeys: String, CodingKey {
         case type = "paymentToolType"
-        case cardNumber
-        case cardExpiration = "expDate"
-        case cvv
-        case cardholder = "cardHolder"
-        case provider
-        case digitalWalletType
-        case merchantIdentifier = "merchantID"
-        case gatewayMerchantIdentifier = "gatewayMerchantID"
-        case paymentToken
-        case serviceIdentifier = "serviceID"
-        case referenceIdentifier = "referenceID"
-        case phoneNumber
     }
 
     private enum PaymentToolType: String, Codable {
-        case cardData = "CardData"
-        case paymentTerminalData = "PaymentTerminalData"
-        case digitalWalletData = "DigitalWalletData"
-        case tokenizedCardData = "TokenizedCardData"
+        case card = "CardData"
+        case paymentTerminal = "PaymentTerminalData"
+        case digitalWallet = "DigitalWalletData"
+        case tokenizedCard = "TokenizedCardData"
+        case cryptoWallet = "CryptoWalletData"
+        case mobileCommerce = "MobileCommerceData"
     }
 
-    private enum TokenizedCardDataProvider: String, Codable {
-        case applePay = "ApplePay"
-        case googlePay = "GooglePay"
-        case samsungPay = "SamsungPay"
-    }
-
-    private enum DigitalWalletType: String, Codable {
-        case qiwi = "DigitalWalletQIWI"
-    }
-}
-
-private struct ApplePayPaymentToken: Encodable {
-
-    struct Token: Encodable {
-        struct Method: Encodable {
-            let displayName: String?
-            let network: String?
-            let type: String
+    private var paymentToolType: PaymentToolType {
+        switch self {
+        case .card:
+            return .card
+        case .paymentTerminal:
+            return .paymentTerminal
+        case .digitalWallet:
+            return .digitalWallet
+        case .tokenizedCard:
+            return .tokenizedCard
+        case .cryptoWallet:
+            return .cryptoWallet
+        case .mobileCommerce:
+            return .mobileCommerce
         }
-
-        let paymentData: Data
-        let paymentMethod: Method
-        let transactionIdentifier: String
-    }
-
-    let token: Token
-
-    init(data: PaymentToolSourceDTO.TokenizedCardData.ApplePay) {
-        token = Token(
-            paymentData: data.paymentData,
-            paymentMethod: Token.Method(
-                displayName: data.paymentMethodDisplayName,
-                network: data.paymentMethodNetwork,
-                type: data.paymentMethodType
-            ),
-            transactionIdentifier: data.transactionIdentifier
-        )
     }
 }

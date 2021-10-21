@@ -24,8 +24,8 @@ final class ThreeDSURLRequestFactory {
         let escapedTerminationURI = terminationURLString.escaped
 
         switch browserRequest {
-        case let .get(uriTemplate):
-            let urlString = Self.substitute(terminationURI: escapedTerminationURI, in: uriTemplate)
+        case let .get(data):
+            let urlString = Self.substitute(terminationURI: escapedTerminationURI, in: data.uriTemplate)
 
             guard let url = URL(string: urlString) else {
                 return nil
@@ -43,7 +43,7 @@ final class ThreeDSURLRequestFactory {
                 return nil
             }
 
-            let parameters = data.items.map {
+            let parameters = data.form.map {
                 ($0.key, Self.substitute(terminationURI: escapedTerminationURI, in: $0.template))
             }
 
@@ -63,7 +63,7 @@ final class ThreeDSURLRequestFactory {
     }
 
     // MARK: - Private
-    private static func substitute(terminationURI: String, in template: BrowserRequestDTO.URITemplate) -> String {
+    private static func substitute(terminationURI: String, in template: String) -> String {
         return template
             .replacingOccurrences(of: "{?termination_uri}", with: "?termination_uri=\(terminationURI)")
             .replacingOccurrences(of: "{&termination_uri}", with: "&termination_uri=\(terminationURI)")

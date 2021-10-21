@@ -14,10 +14,15 @@
 
 import Foundation
 
-extension JSONEncoder.DateEncodingStrategy {
+enum PaymentTerminalProviderDTO: String, CaseInsensitiveDecodable, Encodable {
 
-    static let customISO8601 = custom {
-        let string = Formatter.iso8601Full.string(from: $0)
-        try string.encode(to: $1)
-    }
+    case euroset
+    case alipay
+    case wechat
+    case zotapay
+    case qps
+    case uzcard
+    case rbs
+
+    case unknown
 }

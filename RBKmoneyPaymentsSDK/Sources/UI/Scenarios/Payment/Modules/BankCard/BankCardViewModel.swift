@@ -303,8 +303,8 @@ final class BankCardViewModel: ModuleViewModel {
                 return .empty()
             }
 
-            let cardData = PaymentToolSourceDTO.CardData(number: number, expiration: expiration, cvv: cvv, cardholder: cardholder)
-            return .just((.cardData(cardData), email))
+            let card = PaymentToolSourceDTO.Card(number: number, expiration: expiration, cvv: cvv, cardholder: cardholder)
+            return .just((.card(card), email))
         }
 
     private let activityTracker = ActivityTracker()

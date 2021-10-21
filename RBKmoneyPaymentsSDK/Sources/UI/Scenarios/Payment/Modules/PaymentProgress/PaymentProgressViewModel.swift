@@ -229,9 +229,9 @@ private enum ActionMapper {
             .flatMap {
                 try $0.changes.compactMap { change -> PaymentProgressViewModel.ModuleAction? in
                     switch change {
-                    case let .invoiceStatusChanged(status) where status == .paid:
+                    case let .invoiceStatusChanged(data) where data.status == .paid:
                         return .finishPayment(parameters.invoice, payment, parameters.paymentMethod)
-                    case let .invoiceStatusChanged(status) where status == .cancelled:
+                    case let .invoiceStatusChanged(data) where data.status == .cancelled:
                         throw PaymentError(.invoiceCancelled, underlyingError: nil, parameters: parameters, payment: payment)
                     case let .paymentStatusChanged(data) where data.paymentIdentifier == payment.identifier && data.status == .cancelled:
                         let error = data.error.map { NetworkError(.serverError($0)) }

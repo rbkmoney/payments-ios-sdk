@@ -93,11 +93,11 @@ final class PaymentProgressViewController: UIViewController, ModuleView {
     private var startUserInteraction: Binder<UserInteractionDTO> {
         return Binder(self) { this, userInteraction in
             switch userInteraction {
-            case .paymentTerminalReceipt:
+            case .paymentTerminalReceipt, .cryptoCurrencyTransferRequest, .qrCodeDisplayRequest:
                 assertionFailure("Unsupported user interaction requested.")
-            case let .redirect(browserRequest):
-                guard let urlRequest = this.urlRequestFactory.urlRequest(for: browserRequest) else {
-                    assertionFailure("Unable to create URLRequest for BrowserRequestDTO \(browserRequest)")
+            case let .redirect(redirect):
+                guard let urlRequest = this.urlRequestFactory.urlRequest(for: redirect.request) else {
+                    assertionFailure("Unable to create URLRequest for BrowserRequestDTO \(redirect.request)")
                     return
                 }
 
