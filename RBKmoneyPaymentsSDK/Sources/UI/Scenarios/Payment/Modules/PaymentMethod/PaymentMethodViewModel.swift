@@ -134,10 +134,10 @@ final class PaymentMethodViewModel: ModuleViewModel {
 
         // ApplePay
         // 1. Host application has requested ApplePay method
-        // 2. Host application has provided MerchantIdentifier
+        // 2. Host application has provided PaymentApplePayInputData
         // 3. Server supports ApplePay tokenized card data with non-zero count of payment systems
         // 4. Device supports ApplePay with provided payment systems
-        if data.paymentInputData.allowedPaymentMethods.contains(.applePay) && data.paymentInputData.applePayMerchantIdentifier != nil {
+        if data.paymentInputData.allowedPaymentMethods.contains(.applePay) && data.paymentInputData.applePayInputData != nil {
             let paymentSystems = methods.flatMap { item -> [PaymentSystem] in
                 guard case let .bankCard(bankCard) = item, let tokenProviders = bankCard.tokenProviders, tokenProviders.contains(.applePay) else {
                     return []

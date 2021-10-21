@@ -27,7 +27,6 @@ final class ApplePayAssembly: ViewControllerAssembly<ApplePayViewController, App
             $0.inputData = inputData
             $0.remoteAPI = RemoteAPIAssembly.makeRemoteAPI()
             $0.emailValidator = EmailValidatorAssembly.makeValidator()
-            $0.locale = Locale.current
             $0.errorHandlerProvider = DefaultErrorHandlerAssembly.makeErrorHandler(parentViewController: viewController)
         }
 

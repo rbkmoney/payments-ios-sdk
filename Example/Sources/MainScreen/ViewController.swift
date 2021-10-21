@@ -58,7 +58,7 @@ final class ViewController: UIViewController {
             shopName: item.shopName,
             payerEmail: item.payerEmail,
             allowedPaymentMethods: item.allowedPaymentMethods,
-            applePayMerchantIdentifier: item.applePayMerchantIdentifier
+            applePayInputData: item.applePayMerchantIdentifier.map { .init(merchantIdentifier: $0, countryCode: "RU") }
         )
 
         let viewController = PaymentRootViewControllerAssembly.makeViewController(

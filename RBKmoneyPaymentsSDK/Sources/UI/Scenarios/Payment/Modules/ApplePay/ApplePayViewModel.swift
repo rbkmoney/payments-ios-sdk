@@ -23,7 +23,6 @@ final class ApplePayViewModel: ModuleViewModel {
     lazy var inputData: ApplePayInputData = deferred()
     lazy var remoteAPI: ApplePayRemoteAPI = deferred()
     lazy var emailValidator: Validator = deferred()
-    lazy var locale: Locale = deferred()
     lazy var errorHandlerProvider: ErrorHandlerProvider = deferred()
 
     // MARK: - ModuleViewModel
@@ -135,26 +134,22 @@ final class ApplePayViewModel: ModuleViewModel {
         .withLatestFrom(emailRelay)
         .validate(with: emailValidator)
 
-    private lazy var requestMapper = { [locale] (inputData: ApplePayInputData) -> ApplePayRequestData? in
-        guard let merchantIdentifier = inputData.paymentInputData.applePayMerchantIdentifier else {
-            assertionFailure("Missing Apple Pay merchant identifier")
-            return nil
-        }
-        guard let countryCode = locale.regionCode else {
-            assertionFailure("Failed to get current region code")
+    private lazy var requestMapper = { (inputData: ApplePayInputData) -> ApplePayRequestData? in
+        guard let data = inputData.paymentInputData.applePayInputData else {
+            assertionFailure("Missing ApplePayInputData")
             return nil
         }
         return ApplePayRequestData(
             invoice: inputData.parameters.invoice,
             paymentSystems: Array(inputData.parameters.paymentSystems),
-            merchantIdentifier: merchantIdentifier,
-            countryCode: countryCode,
+            merchantIdentifier: data.merchantIdentifier,
+            countryCode: data.countryCode,
             shopName: inputData.paymentInputData.shopName
         )
     }
 
     private lazy var paymentToolWithEmail = paymentTokenRelay
-        .withLatestFrom(inputDataObservable.compactMap { $0.paymentInputData.applePayMerchantIdentifier }) { ($0, $1) }
+        .withLatestFrom(inputDataObservable.compactMap { $0.paymentInputData.applePayInputData?.merchantIdentifier }) { ($0, $1) }
         .withLatestFrom(emailRelay) { ($0.0, $0.1, $1) }
         .flatMap { token, merchantIdentifier, email -> Observable<(PaymentToolSourceDTO, String)> in
             guard let email = email else {

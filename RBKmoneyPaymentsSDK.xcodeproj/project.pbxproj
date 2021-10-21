@@ -36,6 +36,7 @@
 		86A4BA7222A70A08001EBC55 /* BankCardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86A4BA7122A70A08001EBC55 /* BankCardTextField.swift */; };
 		9538DBA7C42E7A7CA426D20A /* Pods_RBKmoneyPaymentsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CE46F2CB8A32BF34E9CA66C /* Pods_RBKmoneyPaymentsSDK.framework */; };
 		ABD106EABB3BEE73FC8C281C /* Pods_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 85FEB77B1E2E0424FE95BFC7 /* Pods_Example.framework */; };
+		C10087512626FC860093A3DA /* PaymentApplePayInputData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C10087502626FC860093A3DA /* PaymentApplePayInputData.swift */; };
 		C1044EB022A3BD4500A8065B /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EAF22A3BD4500A8065B /* Router.swift */; };
 		C1044EB222A3BE8E00A8065B /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EB122A3BE8E00A8065B /* Route.swift */; };
 		C1044EB422A3D2DD00A8065B /* AnyRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1044EB322A3D2DD00A8065B /* AnyRouter.swift */; };
@@ -330,6 +331,7 @@
 		A4B3690927CCB6184B15299D /* Pods-Example+Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Example+Pods.release.xcconfig"; path = "Target Support Files/Pods-Example+Pods/Pods-Example+Pods.release.xcconfig"; sourceTree = "<group>"; };
 		AEBE8FE10ECA6ECA364316BD /* Pods-RBKmoneyPaymentsSDK.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RBKmoneyPaymentsSDK.release.xcconfig"; path = "Target Support Files/Pods-RBKmoneyPaymentsSDK/Pods-RBKmoneyPaymentsSDK.release.xcconfig"; sourceTree = "<group>"; };
 		BD7861F13A319A27B54FC839 /* Pods_Example_Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Example_Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C10087502626FC860093A3DA /* PaymentApplePayInputData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentApplePayInputData.swift; sourceTree = "<group>"; };
 		C1044EAF22A3BD4500A8065B /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		C1044EB122A3BE8E00A8065B /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		C1044EB322A3D2DD00A8065B /* AnyRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyRouter.swift; sourceTree = "<group>"; };
@@ -874,6 +876,7 @@
 			isa = PBXGroup;
 			children = (
 				C1044EFA22A5DC7900A8065B /* PaymentInputData.swift */,
+				C10087502626FC860093A3DA /* PaymentApplePayInputData.swift */,
 				C1044EFE22A5DEFA00A8065B /* PaymentMethod.swift */,
 				C104500622B2931300A8065B /* PaymentSystem.swift */,
 			);
@@ -2121,6 +2124,7 @@
 				C1044F0B22A5EB9C00A8065B /* PaymentMethodDependenciesExtensions.swift in Sources */,
 				869CEDFC22A6B26300EDF3B8 /* BankCardAssembly.swift in Sources */,
 				869CEDFD22A6B26300EDF3B8 /* BankCardViewModel.swift in Sources */,
+				C10087512626FC860093A3DA /* PaymentApplePayInputData.swift in Sources */,
 				C1044EE722A5C55D00A8065B /* FontsPalette.swift in Sources */,
 				C1F4D17F22B9D6FB005CFA6B /* PaymentProgressViewModel.swift in Sources */,
 				86469D6722B2E6690096882E /* BankCardCardNumberFormatterAssembly.swift in Sources */,
